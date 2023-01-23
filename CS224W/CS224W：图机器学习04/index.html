@@ -1,0 +1,1589 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://zhang-each.github.io/My-CS-notebook/CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A004/">
+      
+      
+        <link rel="prev" href="../CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A003/">
+      
+      
+        <link rel="next" href="../CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A005/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.6">
+    
+    
+      
+        <title>04.图神经网络基础 - 小角龙的学习记录</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.558e4712.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.2505c338.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Hiragino+Sans+GB:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Hiragino Sans GB";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/timeago.css">
+    
+      <link rel="stylesheet" href="../../from_oi_wiki/css/extra.css?v=13">
+    
+      <link rel="stylesheet" href="../../css/status.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#cs224w图机器学习4" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="小角龙的学习记录" class="md-header__button md-logo" aria-label="小角龙的学习记录" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            小角龙的学习记录
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              04.图神经网络基础
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/zhang-each/My-CS-notebook/" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Zhang-Each/My-CS-notebook
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        🏡 主页
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../CS231N/" class="md-tabs__link md-tabs__link--active">
+        🐰 深度学习
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../%E6%9D%82%E8%B0%88%E4%B8%8E%E6%80%BB%E7%BB%93/" class="md-tabs__link">
+        杂谈与总结
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="小角龙的学习记录" class="md-nav__button md-logo" aria-label="小角龙的学习记录" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    小角龙的学习记录
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/zhang-each/My-CS-notebook/" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Zhang-Each/My-CS-notebook
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      
+        
+          
+            
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../..">🏡 主页</a>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="🏡 主页" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          🏡 主页
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../CS231N/">🐰 深度学习</a>
+          
+            <label for="__nav_2">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="🐰 深度学习" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          🐰 深度学习
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2" type="checkbox" id="__nav_2_2" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_2" tabindex="0" aria-expanded="false">
+          CS231N-神经网络与深度学习
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="CS231N-神经网络与深度学习" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          CS231N-神经网络与深度学习
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B01%EF%BC%9AkNN%E5%92%8C%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB%E5%99%A8/" class="md-nav__link">
+        01.kNN和线性分类器
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B02%EF%BC%9A%E5%A4%9A%E5%B1%82%E5%85%A8%E8%BF%9E%E6%8E%A5%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%92%8C%E4%BC%98%E5%8C%96%E5%99%A8/" class="md-nav__link">
+        02.多层全连接神经网络和优化器
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B03%EF%BC%9ANormalization%E5%92%8CDropOut/" class="md-nav__link">
+        03.Normalization和DropOut
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B04%EF%BC%9A%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9CCNN/" class="md-nav__link">
+        04.卷积神经网络CNN
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B05%EF%BC%9ARNN%26LSTM%E4%B8%8E%E5%9B%BE%E7%89%87%E6%8F%8F%E8%BF%B0/" class="md-nav__link">
+        05.RNN&LSTM与图片描述
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B06%EF%BC%9ATransformer%E4%B8%8E%E5%9B%BE%E7%89%87%E6%8F%8F%E8%BF%B0/" class="md-nav__link">
+        06.Transformer与图片描述
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B07%EF%BC%9A%E6%A8%A1%E5%9E%8B%E5%8F%AF%E8%A7%86%E5%8C%96%EF%BC%8C%E5%9B%BE%E5%83%8F%E6%AC%BA%E8%AF%88%E5%92%8CGAN/" class="md-nav__link">
+        07.模型可视化，图像欺诈和GAN
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B08%EF%BC%9A%E8%87%AA%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%E4%B8%8E%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/" class="md-nav__link">
+        08.自监督学习与课程总结
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_3" type="checkbox" id="__nav_2_3" checked>
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../">CS224W-图机器学习与图神经网络</a>
+          
+            <label for="__nav_2_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="CS224W-图机器学习与图神经网络" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          CS224W-图机器学习与图神经网络
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A001/" class="md-nav__link">
+        01.导论，传统的图学习方法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A002/" class="md-nav__link">
+        02.节点嵌入和PageRank
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A003/" class="md-nav__link">
+        03.消息传递机制
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          04.图神经网络基础
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        04.图神经网络基础
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#gnn图神经网络" class="md-nav__link">
+    GNN图神经网络
+  </a>
+  
+    <nav class="md-nav" aria-label="GNN图神经网络">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#深度学习基础" class="md-nav__link">
+    深度学习基础
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#图深度学习" class="md-nav__link">
+    图深度学习
+  </a>
+  
+    <nav class="md-nav" aria-label="图深度学习">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#问题的定义" class="md-nav__link">
+    问题的定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#图卷积神经网络的结构" class="md-nav__link">
+    图卷积神经网络的结构
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#如何训练gnn" class="md-nav__link">
+    如何训练GNN
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#图神经网络模型的pipeline" class="md-nav__link">
+    图神经网络模型的Pipeline
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gnn概览" class="md-nav__link">
+    GNN概览
+  </a>
+  
+    <nav class="md-nav" aria-label="GNN概览">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gnn的层结构" class="md-nav__link">
+    GNN的层结构
+  </a>
+  
+    <nav class="md-nav" aria-label="GNN的层结构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gcn" class="md-nav__link">
+    GCN
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#graphsage" class="md-nav__link">
+    GraphSAGE
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gat与注意力机制" class="md-nav__link">
+    GAT与注意力机制
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#通用的gnn层设计" class="md-nav__link">
+    通用的GNN层设计
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gnn的层级架构" class="md-nav__link">
+    GNN的层级架构
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gnn的图处理" class="md-nav__link">
+    GNN的图处理
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A005/" class="md-nav__link">
+        05.图神经网络的训练和应用，表示能力分析
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A006/" class="md-nav__link">
+        06.知识图谱，知识图谱推理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A007/" class="md-nav__link">
+        07.频繁子图挖掘
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A008/" class="md-nav__link">
+        08.社区检测
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A009/" class="md-nav__link">
+        09.图生成模型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A010/" class="md-nav__link">
+        10.图神经网络前沿话题
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../%E6%9D%82%E8%B0%88%E4%B8%8E%E6%80%BB%E7%BB%93/">杂谈与总结</a>
+          
+            <label for="__nav_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="杂谈与总结" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          杂谈与总结
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%9D%82%E8%B0%88%E4%B8%8E%E6%80%BB%E7%BB%93/2022%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/" class="md-nav__link">
+        2022年度总结
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#gnn图神经网络" class="md-nav__link">
+    GNN图神经网络
+  </a>
+  
+    <nav class="md-nav" aria-label="GNN图神经网络">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#深度学习基础" class="md-nav__link">
+    深度学习基础
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#图深度学习" class="md-nav__link">
+    图深度学习
+  </a>
+  
+    <nav class="md-nav" aria-label="图深度学习">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#问题的定义" class="md-nav__link">
+    问题的定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#图卷积神经网络的结构" class="md-nav__link">
+    图卷积神经网络的结构
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#如何训练gnn" class="md-nav__link">
+    如何训练GNN
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#图神经网络模型的pipeline" class="md-nav__link">
+    图神经网络模型的Pipeline
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gnn概览" class="md-nav__link">
+    GNN概览
+  </a>
+  
+    <nav class="md-nav" aria-label="GNN概览">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gnn的层结构" class="md-nav__link">
+    GNN的层结构
+  </a>
+  
+    <nav class="md-nav" aria-label="GNN的层结构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gcn" class="md-nav__link">
+    GCN
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#graphsage" class="md-nav__link">
+    GraphSAGE
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gat与注意力机制" class="md-nav__link">
+    GAT与注意力机制
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#通用的gnn层设计" class="md-nav__link">
+    通用的GNN层设计
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gnn的层级架构" class="md-nav__link">
+    GNN的层级架构
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gnn的图处理" class="md-nav__link">
+    GNN的图处理
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+
+<h1 id="cs224w图机器学习4">CS224W：图机器学习4<a class="headerlink" href="#cs224w图机器学习4" title="Permanent link">&para;</a></h1>
+<h2 id="gnn图神经网络">GNN图神经网络<a class="headerlink" href="#gnn图神经网络" title="Permanent link">&para;</a></h2>
+<p>​       前面几节内容主要介绍了节点嵌入的概念，也就是说我们可以将一个图中的节点映射到一个的d维向量上，而这种映射方式使得相似的节点对应的向量更接近，但主要的问题还是，我们如何学习出一个映射函数f，而图嵌入的两个核心组件是编码器和相似度函数，之前也介绍了比较naive的shallow编码器，而图神经网络GNN提供了一种基于深度学习的节点嵌入方法。</p>
+<p><img src="static/image-20210327151643315.png" alt="image-20210327151643315" style="zoom:33%;" /></p>
+<ul>
+<li>相比于图片和文本，网络结构要更复杂并且缺少规律性，而且往往是动态的</li>
+</ul>
+<h3 id="深度学习基础">深度学习基础<a class="headerlink" href="#深度学习基础" title="Permanent link">&para;</a></h3>
+<ul>
+<li>介绍了监督学习、损失函数、机器学习中的优化、梯度向量等基本概念，不过这些内容已经反复接触过了，因此也就不再专门整理记录</li>
+<li>随机梯度下降：</li>
+<li>一般的梯度下降需要求出整个损失函数的梯度，并结合设置好的学习率进行参数的更新，但是这样做的计算复杂度太高了</li>
+<li>随机梯度下降就是每一次选择一个**小批量(minibatch)的数据集B**对其求梯度并进行参数的更新</li>
+<li>深度学习中的函数往往更为复杂，并且在反向传播进行参数更新的过程中需要用链式法则来求梯度，但总的来讲，不管是传统的监督机器学习还是深度学习，我们的优化目标都是：</li>
+</ul>
+<div class="arithmatex">\[
+\min \mathcal L(y,f(x))
+\]</div>
+<h3 id="图深度学习">图深度学习<a class="headerlink" href="#图深度学习" title="Permanent link">&para;</a></h3>
+<h4 id="问题的定义">问题的定义<a class="headerlink" href="#问题的定义" title="Permanent link">&para;</a></h4>
+<ul>
+<li>我们把要研究的图记为G，图中所有节点构成集合V，A是图的接邻矩阵</li>
+<li>用X表示图节点的特征矩阵，每个节点具有m维的特征，节点的特征可以根据图的实际情况来选取</li>
+<li>一种很naive的方法是**将图G的接邻矩阵和特征矩阵进行合并**，然后放到一个深度神经网络中进行学习，但是这样一来就会有<span class="arithmatex">\(O(|V|)\)</span>数量级的参数，并且对于不同大小的图需要重新设计网络结构，这样的处理方式也使得结果对节点的顺序非常敏感</li>
+</ul>
+<p><img src="static/image-20210327161451806.png" alt="image-20210327161451806" style="zoom:33%;" /></p>
+<h4 id="图卷积神经网络的结构">图卷积神经网络的结构<a class="headerlink" href="#图卷积神经网络的结构" title="Permanent link">&para;</a></h4>
+<p>​       联想到CNN通过**卷积**的方式**来提取和融合邻近像素点的特征**，图结构中也可以聚合节点的邻近节点的特征，但是相比于图像，图结构往往不具有一个固定的子结构或者滑动窗口可以用来定义图中的卷积，并且是permutation invariant的，我们可以**使用局部的邻近节点的特征来生成图节点的嵌入向量**。</p>
+<ul>
+<li>每个节点生成了一张**计算图**，来表示其特征融合的过程</li>
+</ul>
+<p><img alt="image-20210627185542095" src="../static/image-20210627185542095.png" /></p>
+<ul>
+<li>
+<p>这种神经网络可以是任意深度，每一层有节点的嵌入：</p>
+</li>
+<li>
+<p>第0层**只用输入的特征表示节点的嵌入向量**</p>
+</li>
+<li>第k层使用从k个away之前**得到的信息来进行节点嵌入** </li>
+</ul>
+<p><img src="static/image-20210327163538836.png" alt="image-20210327163538836" style="zoom:33%;" /></p>
+<ul>
+<li>
+<p>上述结构只是一种最基本的框架，最主要的区别在于图中的box对应的内容，也就是信息聚合的方式和之后的一系列处理</p>
+</li>
+<li>
+<p>常见的方法：对得到的信息**求平均**并放到神经网络中</p>
+</li>
+</ul>
+<p>$$
+  h_v^{(l+1)}=\sigma (W_l\sum_{u\in N(v)}\frac{h_u<sup _l_="(l)">{(l)}}{|N(v)|}+B_lh_v</sup>),\quad h_v^0=X_v
+  $$</p>
+<ul>
+<li>这里的<span class="arithmatex">\(\sigma\)</span>是一个非线性的激活函数</li>
+<li>
+<p>在得到了嵌入向量之后可以**使用损失函数和随机梯度下降的方式来训练权重参数W和B**</p>
+</li>
+<li>
+<p>我们可以将上面的表达式进行**向量化**来提高计算的效率，用对角矩阵D来表示<span class="arithmatex">\(D_{v,v}=|N(v)|\)</span>，这样一来就有<span class="arithmatex">\(D^{-1}_{v,v}=\frac 1 {N(v)}\)</span> 并且令<span class="arithmatex">\(H^{(l)}=[h_1^{(l)},\dots,h_{|V|}^{(l)}]^T\)</span>,这样一来上面的式子就可以表示为：</p>
+</li>
+</ul>
+<p>$$
+  H<sup -1="-1">{(l+1)}=\sigma(D</sup>A H<sup>{(l)}W_l</sup>T+H<sup>{(l)}B_l</sup>T)
+  $$</p>
+<ul>
+<li>self translation + neighborhood aggregation两个部分组成</li>
+</ul>
+<h4 id="如何训练gnn">如何训练GNN<a class="headerlink" href="#如何训练gnn" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p>监督学习的训练方式：定义一个loss函数并进行优化，<strong>相似的节点会有相近的嵌入向量</strong>，因此我们可以定义：
+  $$
+  \mathcal L=\sum_{z_u,z_v}\mathrm{CE}(y_{u,v},\mathrm {DEC}(z_u,z_v))
+  $$</p>
+</li>
+<li>
+<p>CE表示交叉熵，y是表示两个节点相似的标签，DEC是解码器，比如可以使用内积来定义</p>
+</li>
+<li>
+<p>相似度的定义可以用前面提到的任何方法，包括随机游走，矩阵分解等等</p>
+</li>
+<li>
+<p>无监督学习的训练方式：没有节点的标签，可以使用图的结构作为监督</p>
+</li>
+<li>
+<p>对于一个节点分类的问题，可以用监督学习的方式直接训练模型，使用交叉熵loss表示如下：
+  $$
+  \mathcal L=\sum_{v\in V}y_v\log (\sigma(z_v^T\theta))+(1-y_v)\log (1-\sigma(z_v^T\theta))
+  $$</p>
+</li>
+<li>
+<p>这里的y表示节点的标签，而z表示嵌入向量，<span class="arithmatex">\(\theta\)</span>表示分类的权重</p>
+</li>
+<li>
+<p>但是最终，我们学习到的一系列参数和模型是需要在新的图和新的节点上测试效果的，因此需要使模型**拥有更好的泛化能力** </p>
+</li>
+</ul>
+<h3 id="图神经网络模型的pipeline">图神经网络模型的Pipeline<a class="headerlink" href="#图神经网络模型的pipeline" title="Permanent link">&para;</a></h3>
+<ul>
+<li>定义一个邻居节点聚合的方式</li>
+<li>定义一个基于嵌入向量的损失函数</li>
+<li>使用一系列节点进行训练</li>
+<li>生成节点的嵌入，用于实际的任务中</li>
+</ul>
+<h3 id="gnn概览">GNN概览<a class="headerlink" href="#gnn概览" title="Permanent link">&para;</a></h3>
+<p>​       GNN由一系列GNN层线性组合构成，而GNN层包含了message和aggregation等多层次的信息，当我们训练一个GNN的时候可以从监督学习的视角出发进行训练，也可以从非监督学习的视角出发进行训练</p>
+<p><img alt="image-20210627204447626" src="../static/image-20210627204447626.png" /></p>
+<h4 id="gnn的层结构">GNN的层结构<a class="headerlink" href="#gnn的层结构" title="Permanent link">&para;</a></h4>
+<p>​       GNN单独的层结构将多个向量组合成一个单独的向量，需要经过两个步骤的处理，分别是message和aggregation，将输入的节点嵌入向量转化成输出的节点嵌入向量</p>
+<ul>
+<li>
+<p>message步骤：每个节点都会创建一个消息发送给附近的一系列节点，这样一来就有
+  $$
+  m_u<sup _l_="(l)">{(l)}=\mathrm{MSG}</sup>(h_u^{(l-1)})
+  $$</p>
+</li>
+<li>
+<p>aggregation步骤：每个节点会收集从其他节点发来的消息并进行一定的处理，比如求和，求均值或者最大值等等
+  $$
+  h_v<sup _l_="(l)">{(l)}=\mathrm{ACG}</sup>(m_u^{(l)},u\in N(v))
+  $$</p>
+</li>
+<li>
+<p>但是只有aggregation的话每一层的节点输出的嵌入向量都不包含其自身从上一层携带回来的特征，因此可以将message步骤和aggregation步骤得到的结果进行合并作为最终的输出结果</p>
+</li>
+<li>
+<p>并且可以在两个过程中使用一些非线性的激活函数</p>
+</li>
+</ul>
+<div class="arithmatex">\[
+h_v^{(l)}=\mathrm{CONCAT}(\mathrm {ACG}^{(l)}(m_u^{(l)},u\in N(v)), m_v^{(l)})
+\]</div>
+<h5 id="gcn">GCN<a class="headerlink" href="#gcn" title="Permanent link">&para;</a></h5>
+<p>​       对于**图卷积网络**GCN的层结构，上面已经介绍过了它每一层的嵌入向量更新方式
+$$
+h_v^{(l+1)}=\sigma (\sum_{u\in N(v)}W_l\frac{h_u^{(l)}}{|N(v)|})
+$$</p>
+<ul>
+<li>这个公式里面其实分成message和aggregation两个部分，其中求和就是aggregation，而<span class="arithmatex">\(W_l\frac{h_u^{(l)}}{|N(v)|}\)</span>就是每个节点产生并广播到所有邻居节点的message</li>
+</ul>
+<h5 id="graphsage">GraphSAGE<a class="headerlink" href="#graphsage" title="Permanent link">&para;</a></h5>
+<p>​       GraphSAGE是另一种架构的图神经网络，其核心思想是使用一个可微分的函数将邻居节点传递过来的信息应设成一个单独的vector每一层的更新方式是：
+$$
+h_v^{(l)}=\sigma (W_l\times\mathrm{CONCAT}(B_lh_V^{(l-1)}, \mathrm{ACG}(h_u^{(l-1)},u \in N(v))))
+$$</p>
+<ul>
+<li>这种架构的Message是每个邻居节点发过来的嵌入向量，通过ACG函数进行aggregation，之后再和当前节点本身的</li>
+<li>其中聚合函数ACG有多种不同的选择方式，比如使用均值函数，或者进行池化(最大池化，最小池化等等)，也可以使用LSTM来进行邻近节点的reshuffled</li>
+<li>可以在每一层都可以进行一个l2标准化，即<span class="arithmatex">\(h_v^{(l)}=\frac {h_v^{(l)}}{||h_v^{(l)}||_2}\)</span> ，使用了标准化操作之后就会使得所有嵌入向量的L2范数统一，可以给性能带来比较大的提升。</li>
+</ul>
+<h5 id="gat与注意力机制">GAT与注意力机制<a class="headerlink" href="#gat与注意力机制" title="Permanent link">&para;</a></h5>
+<p>​       GAT是Graph Attention Network，即在图神经网络中加入了**注意力机制**，我们可以使用<span class="arithmatex">\(\alpha_{vu}\)</span>来表示节点v的邻居节点u的重要程度，这样的网络可以使网络在计算时将注意力集中到一些比较重要的节点上面去。
+$$
+h_v^{(l)}=\sigma(\sum_{u\in N(v)}\alpha_{vu}W<sup _l-1_="(l-1)">{(l)}h_u</sup>)
+$$</p>
+<ul>
+<li>
+<p>一种<span class="arithmatex">\(\alpha_{vu}\)</span>的计算方式：</p>
+</li>
+<li>
+<p>首先定义一个计算重要性系数的函数a并计算两个**相邻节点的重要程度**
+    $$
+    e_{vu}=a(W<sup _l-1_="(l-1)">{(l)}h_u</sup>,W<sup _l-1_="(l-1)">{(l)}h_v</sup>)
+    $$
+    <img src="static/image-20210627201034572.png" alt="image-20210627201034572" style="zoom:33%;" /></p>
+</li>
+<li>
+<p>然后使用softmax来计算出权重<span class="arithmatex">\(\alpha_{vu}\)</span>
+    $$
+    \alpha_{vu}=\mathrm {softmax}(e_{vu})=\frac {\exp (e_{vu})}{\sum_{u\in N(v)} \exp({e_
+    {vu}})}
+    $$
+    <img src="static/image-20210627201156561.png" alt="image-20210627201156561" style="zoom:33%;" /></p>
+</li>
+<li>
+<p>这里的a函数往往是先进行嵌入向量的连接再通过一个线性函数进行运算然后输出结果</p>
+</li>
+<li>
+<p>多端注意力机制：创建多个注意力分数并进行连接</p>
+</li>
+</ul>
+<div class="arithmatex">\[
+h_v^{(l)}[i]=\sigma(\sum_{u\in N(v)}\alpha_{vu}^iW^{(l)}h_u^{(l-1)})
+\]</div>
+<ul>
+<li>注意力机制的优点：</li>
+<li>最主要的优点是允许对不同的邻居节点采取不同的权重来突出一些重要的邻居</li>
+<li>并且注意力权重的计算可以**并行**，提高了计算的效率</li>
+<li>提高了存储的效率</li>
+</ul>
+<h4 id="通用的gnn层设计">通用的GNN层设计<a class="headerlink" href="#通用的gnn层设计" title="Permanent link">&para;</a></h4>
+<p><img src="static/image-20210627201832138.png" alt="image-20210627201832138" style="zoom: 33%;" /></p>
+<ul>
+<li>批标准化：可以是的神经网络的训练更加稳定，做法就是求出每一层输出结果的平均值和方差，然后进行标准化处理，可以防止过大或者过小的数据出现而导致梯度消失或者梯度爆炸等问题</li>
+<li>Dropout：用来避免神经网络过你和，在训练的时候，以一定概率将一些神经元设置成0(即中途退出了计算)，在测试的时候使用所有的神经元参与到计算中</li>
+<li>在GNN中一般在**线性层**使用dropout</li>
+<li>激活：使用一些非线性的激活函数，将特征非线性化，常见的非线性激活函数有sigmoid，ReLU等等</li>
+</ul>
+<h4 id="gnn的层级架构">GNN的层级架构<a class="headerlink" href="#gnn的层级架构" title="Permanent link">&para;</a></h4>
+<p>​       上面主要介绍的是GNN单层的设计方式和基本的idea以及一些常用的神经网络tricks，但是在设计好了若干层神经网络之后，还需要用一定的规则将其组合起来，在GNN中往往就是将多个层级进行线性的组合，有的时候也会用的skip connection机制。</p>
+<ul>
+<li>
+<p><strong>过平滑问题</strong>：是指所有的节点嵌入向量最终收敛到了同一个值上，这是一个非常糟糕的现象，因为我们希望不同的节点的嵌入向量是不同的，否则无法区别出不同的节点</p>
+</li>
+<li>
+<p>接受域Receptive Field：是决定一个节点的嵌入向量的节点集合，在一个K层的GNN中，每个节点的接受域包含了相距K-hop的邻居</p>
+</li>
+<li>
+<p>可以用**接受域来解释过平滑问题**出现的原因</p>
+</li>
+</ul>
+<p><img alt="image-20210627203154480" src="../static/image-20210627203154480.png" /></p>
+<ul>
+<li>随着GNN的层数增加，每个节点的接受域也在不断扩大，这就会导致两个节点的接受域的重合度越来越高，而接受域可以决定一个节点的嵌入向量，因此随着层数增加嵌入向量也会越来越相似，最终就会导致过平滑问题的出现</li>
+<li>
+<p>如何解决过平滑的问题？</p>
+<ul>
+<li>在添加GNN层的时候慎重考虑，不像CNN之类的网络结构，GNN有的时候添加太多层可能不会起作用</li>
+<li>因此需要先分析解决问题必要的接受域的大小，然后再将GNN层数设定为一个稍大于所需接受域的值，不能设置的太大，否则就会出现上述过平滑的问题</li>
+<li>可以减少GNN的层数(即使用shallow GNN)，但是在每一层的box中增加多个线性层，也可以增加一些不传递消息的层，比如预处理层和后处理层</li>
+</ul>
+</li>
+<li>
+<p>改变GNN层的连接方式：增加skip connection</p>
+</li>
+<li>
+<p>有的时候位于更底层的GNN层产生的嵌入向量更能区分不同的节点，我们可以方法底层在最后的嵌入向量中的作用效果，方法就是在GNN中添加一些shortcuts，也叫做skip connection</p>
+</li>
+</ul>
+<p><img src="static/image-20210329234801758.png" alt="image-20210329234801758" style="zoom:33%;" /></p>
+<ul>
+<li>为什么skip connection 可以work？因为skip机制创建了一个混合模型，通过skip，比较底层的一些计算结果直接跳过了中间一些层的计算直接作用到了更高的层次中，这样一来就使得深的GNN和浅的GNN的计算结果进行了混合</li>
+<li>有skip connection机制的GCN的更新方式是：</li>
+</ul>
+<p>$$
+  h_v^{(l+1)}=\sigma (W_l\sum_{u\in N(v)}\frac{h_u^{(l)}}{|N(v)|})\rightarrow h_v^{(l+1)}=\sigma (W_l\sum_{u\in N(v)}\frac{h_u<sup _l_="(l)">{(l)}}{|N(v)|}+h_v</sup>)
+  $$</p>
+<h4 id="gnn的图处理">GNN的图处理<a class="headerlink" href="#gnn的图处理" title="Permanent link">&para;</a></h4>
+<ul>
+<li>输入的图不一定就是最优的计算图，因为输入的图可能缺少特征，太稀疏或者太稠密，也有可能因为规模太大而无法在GPU上进行计算，因此可以对输入的图进行一定的处理，比如</li>
+<li>图中的特征太少的时候可以**增加特征**，比如：<ul>
+<li>给图中的节点增加唯一ID标识，使用one-hot向量来表示特征</li>
+</ul>
+</li>
+<li>图太稀疏可以增加虚拟的节点或者边</li>
+<li>图太稠密的时候可以在消息传递的过程中进行邻居采样</li>
+<li>图的规模太大的时候可以分割成若干个子图分别进行嵌入</li>
+</ul>
+<p><img alt="image-20210627203641020" src="../static/image-20210627203641020.png" /></p>
+<p><span id="busuanzi_container_page_pv">本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span></p>
+
+  <hr>
+<div class="md-source-file">
+  <small>
+    
+      最后更新:
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-01-23T10:40:25+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-01-23</span>
+      
+        <br>
+        创建日期:
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-01-23T10:40:25+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-01-23</span>
+      
+    
+  </small>
+</div>
+
+
+
+
+<div id="__comments">
+    
+    <script src="https://giscus.app/client.js"
+        data-repo="Zhang-Each/My-CS-Notebook"
+        data-repo-id="R_kgDOI0dr4w"
+        data-category="General"
+        data-category-id="DIC_kwDOI0dr484CTvIK"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="1"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="zh-CN"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+        </script>
+    <h3>颜色主题调整</h3>
+    <div class="tx-switch">
+    <button class="button1" data-md-color-primary="red" style="background-color:red">red</button>
+    <button class="button1" data-md-color-primary="pink" style="background-color:pink;color:black">pink</button>
+    <button class="button1" data-md-color-primary="purple" style="background-color:purple">purple</button>
+    <button class="button1" data-md-color-primary="indigo" style="background-color:indigo">indigo</button>
+    <button class="button1" data-md-color-primary="blue" style="background-color:blue">blue</button>
+    <button class="button1" data-md-color-primary="cyan" style="background-color:cyan;color:black">cyan</button>
+    <button class="button1" data-md-color-primary="teal" style="background-color:teal">teal</button>
+    <button class="button1" data-md-color-primary="green" style="background-color:green">green</button>
+    <button class="button1" data-md-color-primary="lime" style="background-color:lime;color:black">lime</button>
+    <button class="button1" data-md-color-primary="orange" style="background-color:orange;color:black">orange</button>
+    <button class="button1" data-md-color-primary="brown" style="background-color:brown;border-radius=3px">brown</button>
+    <button class="button1" data-md-color-primary="grey" style="background-color:grey">grey</button>
+    <button class="button1" data-md-color-primary="black" style="background-color:black">black</button>
+    <button class="button1" data-md-color-primary="white" style="background-color:white;color:black">white</button>
+    </div>
+    
+    <script>
+    var buttons = document.querySelectorAll("button[data-md-color-primary]")
+    buttons.forEach(function(button) {
+            button.addEventListener("click", function() {
+            var attr = this.getAttribute("data-md-color-primary")
+            document.body.setAttribute("data-md-color-primary", attr)
+            localStorage.setItem("data-md-color-primary",attr);
+            })
+    })
+    </script>
+    
+    <h2 ><!-- 评论 -->评论区~</h2>
+    
+    有用的话请给我个star或者follow我的账号!! 非常感谢!!
+    
+    </br>
+    
+    快来跟我聊天~
+    
+    </div>
+    
+    <script src="https://giscus.app/client.js"
+        data-repo="Zhang-Each/Notebook-Comments"
+        data-repo-id="R_kgDOI0dlNg"
+        data-category="General"
+        data-category-id="DIC_kwDOI0dlNs4CTvH-"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="1"
+        data-input-position="top"
+        data-theme="preferred_color_scheme"
+        data-lang="zh-CN"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+    </script>
+    
+    <!-- Synchronize Giscus theme with palette -->
+    <script>
+    var giscus = document.querySelector("script[src*=giscus]")
+    
+    /* Set palette on initial load */
+    // var palette = __md_get("__palette")
+    // if (palette && typeof palette.color === "object") {
+    //     var theme = palette.color.scheme === "slate" ? "dark" : "light"
+    //     giscus.setAttribute("data-theme", theme) 
+    // }
+    
+    /* Register event handlers after documented loaded */
+    // document.addEventListener("DOMContentLoaded", function() {
+    //     var ref = document.querySelector("[data-md-component=palette]")
+    //     ref.addEventListener("change", function() {
+    //     var palette = __md_get("__palette")
+    //     if (palette && typeof palette.color === "object") {
+    //         var theme = palette.color.scheme === "slate" ? "dark" : "light"
+    
+    //         /* Instruct Giscus to change theme */
+    //         var frame = document.querySelector(".giscus-frame")
+    //         frame.contentWindow.postMessage(
+    //         { giscus: { setConfig: { theme } } },
+    //         "https://giscus.app"
+    //         )
+    //     }
+    //     })
+    // })
+    </script>
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            回到页面顶部
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      本页面的全部内容在 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh">CC BY-SA 4.0</a> 和 <a href="https://github.com/zTrix/sata-license">SATA</a> 协议之条款下提供，附加条款亦可能应用。<br /><span id="busuanzi_container_site_uv">本站访客总人数<span id="busuanzi_value_site_uv"></span>人次，</span><span id="busuanzi_container_site_pv">本站总访问人数<span id="busuanzi_value_site_pv"></span>次。</span>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "content.code.annotate", "navigation.tracking", "navigation.indexes", "navigation.top", "toc.follow"], "search": "../../assets/javascripts/workers/search.e5c33ebb.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.51d95adb.min.js"></script>
+      
+        <script src="../../js/timeago.min.js"></script>
+      
+        <script src="../../js/timeago_mkdocs_material.js"></script>
+      
+        <script src="../../from_oi_wiki/js/extra.js"></script>
+      
+        <script src="../../js/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js"></script>
+      
+        <script src="../../js/tablesort.js"></script>
+      
+        <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+      
+    
+  </body>
+</html>

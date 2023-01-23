@@ -1,0 +1,1285 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://zhang-each.github.io/My-CS-notebook/CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A010/">
+      
+      
+        <link rel="prev" href="../CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A009/">
+      
+      
+        <link rel="next" href="../../%E6%9D%82%E8%B0%88%E4%B8%8E%E6%80%BB%E7%BB%93/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.6">
+    
+    
+      
+        <title>10.图神经网络前沿话题 - 小角龙的学习记录</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.558e4712.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.2505c338.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Hiragino+Sans+GB:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Hiragino Sans GB";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/timeago.css">
+    
+      <link rel="stylesheet" href="../../from_oi_wiki/css/extra.css?v=13">
+    
+      <link rel="stylesheet" href="../../css/status.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#cs224w图机器学习10" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="小角龙的学习记录" class="md-header__button md-logo" aria-label="小角龙的学习记录" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            小角龙的学习记录
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              10.图神经网络前沿话题
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/zhang-each/My-CS-notebook/" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Zhang-Each/My-CS-notebook
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        🏡 主页
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../CS231N/" class="md-tabs__link md-tabs__link--active">
+        🐰 深度学习
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../%E6%9D%82%E8%B0%88%E4%B8%8E%E6%80%BB%E7%BB%93/" class="md-tabs__link">
+        杂谈与总结
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="小角龙的学习记录" class="md-nav__button md-logo" aria-label="小角龙的学习记录" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    小角龙的学习记录
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/zhang-each/My-CS-notebook/" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Zhang-Each/My-CS-notebook
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      
+        
+          
+            
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../..">🏡 主页</a>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="🏡 主页" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          🏡 主页
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../CS231N/">🐰 深度学习</a>
+          
+            <label for="__nav_2">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="🐰 深度学习" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          🐰 深度学习
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2" type="checkbox" id="__nav_2_2" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_2" tabindex="0" aria-expanded="false">
+          CS231N-神经网络与深度学习
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="CS231N-神经网络与深度学习" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          CS231N-神经网络与深度学习
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B01%EF%BC%9AkNN%E5%92%8C%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB%E5%99%A8/" class="md-nav__link">
+        01.kNN和线性分类器
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B02%EF%BC%9A%E5%A4%9A%E5%B1%82%E5%85%A8%E8%BF%9E%E6%8E%A5%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%92%8C%E4%BC%98%E5%8C%96%E5%99%A8/" class="md-nav__link">
+        02.多层全连接神经网络和优化器
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B03%EF%BC%9ANormalization%E5%92%8CDropOut/" class="md-nav__link">
+        03.Normalization和DropOut
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B04%EF%BC%9A%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9CCNN/" class="md-nav__link">
+        04.卷积神经网络CNN
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B05%EF%BC%9ARNN%26LSTM%E4%B8%8E%E5%9B%BE%E7%89%87%E6%8F%8F%E8%BF%B0/" class="md-nav__link">
+        05.RNN&LSTM与图片描述
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B06%EF%BC%9ATransformer%E4%B8%8E%E5%9B%BE%E7%89%87%E6%8F%8F%E8%BF%B0/" class="md-nav__link">
+        06.Transformer与图片描述
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B07%EF%BC%9A%E6%A8%A1%E5%9E%8B%E5%8F%AF%E8%A7%86%E5%8C%96%EF%BC%8C%E5%9B%BE%E5%83%8F%E6%AC%BA%E8%AF%88%E5%92%8CGAN/" class="md-nav__link">
+        07.模型可视化，图像欺诈和GAN
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B08%EF%BC%9A%E8%87%AA%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%E4%B8%8E%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/" class="md-nav__link">
+        08.自监督学习与课程总结
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_3" type="checkbox" id="__nav_2_3" checked>
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../">CS224W-图机器学习与图神经网络</a>
+          
+            <label for="__nav_2_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="CS224W-图机器学习与图神经网络" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          CS224W-图机器学习与图神经网络
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A001/" class="md-nav__link">
+        01.导论，传统的图学习方法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A002/" class="md-nav__link">
+        02.节点嵌入和PageRank
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A003/" class="md-nav__link">
+        03.消息传递机制
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A004/" class="md-nav__link">
+        04.图神经网络基础
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A005/" class="md-nav__link">
+        05.图神经网络的训练和应用，表示能力分析
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A006/" class="md-nav__link">
+        06.知识图谱，知识图谱推理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A007/" class="md-nav__link">
+        07.频繁子图挖掘
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A008/" class="md-nav__link">
+        08.社区检测
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A009/" class="md-nav__link">
+        09.图生成模型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          10.图神经网络前沿话题
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        10.图神经网络前沿话题
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#gnn前沿话题" class="md-nav__link">
+    GNN前沿话题
+  </a>
+  
+    <nav class="md-nav" aria-label="GNN前沿话题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gnn的局限性" class="md-nav__link">
+    GNN的局限性
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#position-aware-gnn" class="md-nav__link">
+    Position-aware GNN
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#identity-aware-gnn" class="md-nav__link">
+    Identity-aware GNN
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gnn的鲁棒性" class="md-nav__link">
+    GNN的鲁棒性
+  </a>
+  
+    <nav class="md-nav" aria-label="GNN的鲁棒性">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#问题的描述" class="md-nav__link">
+    问题的描述
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#问题的形式化" class="md-nav__link">
+    问题的形式化
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#实验结果和结论" class="md-nav__link">
+    实验结果和结论
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../%E6%9D%82%E8%B0%88%E4%B8%8E%E6%80%BB%E7%BB%93/">杂谈与总结</a>
+          
+            <label for="__nav_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="杂谈与总结" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          杂谈与总结
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%9D%82%E8%B0%88%E4%B8%8E%E6%80%BB%E7%BB%93/2022%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/" class="md-nav__link">
+        2022年度总结
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#gnn前沿话题" class="md-nav__link">
+    GNN前沿话题
+  </a>
+  
+    <nav class="md-nav" aria-label="GNN前沿话题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gnn的局限性" class="md-nav__link">
+    GNN的局限性
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#position-aware-gnn" class="md-nav__link">
+    Position-aware GNN
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#identity-aware-gnn" class="md-nav__link">
+    Identity-aware GNN
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gnn的鲁棒性" class="md-nav__link">
+    GNN的鲁棒性
+  </a>
+  
+    <nav class="md-nav" aria-label="GNN的鲁棒性">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#问题的描述" class="md-nav__link">
+    问题的描述
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#问题的形式化" class="md-nav__link">
+    问题的形式化
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#实验结果和结论" class="md-nav__link">
+    实验结果和结论
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+
+<h1 id="cs224w图机器学习10">CS224W：图机器学习10<a class="headerlink" href="#cs224w图机器学习10" title="Permanent link">&para;</a></h1>
+<h2 id="gnn前沿话题">GNN前沿话题<a class="headerlink" href="#gnn前沿话题" title="Permanent link">&para;</a></h2>
+<p>​       本章内容继续回到图神经网络，来讨论一些GNN的高级话题，同时也是整个课程的结束部分。</p>
+<h3 id="gnn的局限性">GNN的局限性<a class="headerlink" href="#gnn的局限性" title="Permanent link">&para;</a></h3>
+<p>​       一个完美的GNN应该建立一个邻居结构到节点嵌入的单射，也就是一个邻居结构对应一个特定的单射，因此一个图中结构相同的节点的嵌入是一样的，结构不同的点的嵌入是不一样的</p>
+<p>​       而问题就在于，就算是两个邻居结构相同的点，我们有的时候可能也希望它们的嵌入表示不同，这类任务被称为是Position-aware tasks，因此就算是一个完美的GNN也会在网格图等场景下失效。此外，基于消息传递机制的GNN不能学习出回路的长度，这就导致两个结构不同的节点学到的嵌入表示也可能是相同的(前面已经说过)</p>
+<p><img alt="image-20210716154851199" src="../static/image-20210716154851199.png" /></p>
+<p>解决这两个问题的办法分别是：</p>
+<ul>
+<li>问题1的解决方法是基于节点的position来生成节点的嵌入，经典案例是:Position-aware GNNs</li>
+<li>问题2的解决方法是使用更好的消息传递方式，比如 Identity-aware GNNs</li>
+</ul>
+<p>对于这些问题，一个很naive的解决方式是使用one-hot编码，但是这种方式的可扩展性很差，因为嵌入的维度是<span class="arithmatex">\(O(N)\)</span>级别的</p>
+<h3 id="position-aware-gnn">Position-aware GNN<a class="headerlink" href="#position-aware-gnn" title="Permanent link">&para;</a></h3>
+<p>​       图中往往有两类任务，一类是基于结构的，一类是基于位置的，基于结构的任务需要考虑的关键是节点的结构，而基于位置的任务需要考虑的关键是节点在图中的“位置”，其区别就在于邻居结构是一种相对位置。GNN往往在基于结构的任务中表现比较好而在基于位置的任务中表现不好。</p>
+<p><img src="static/image-20210716162439159.png" alt="image-20210716162439159" style="zoom:67%;" /></p>
+<p>​       一个常见的解决方法是选用锚点，然后用相对于锚点的距离来对点进行分类，在这个过程中锚点充当了一个坐标轴，当然锚点可以有多个，更多的锚点就好像使用了更多的坐标轴去刻画点的位置。同时可以用这种方法对图中的节点进行位置编码。</p>
+<p><img alt="image-20210716205139207" src="../static/image-20210716205139207.png" /></p>
+<p>​       要解决Position-aware的任务我们就必须使用跟position有关的信息，而是使用这些位置信息的方法有：</p>
+<ul>
+<li>Naive的方法：使用位置编码作为额外的节点特征，值得注意的是位置编码向量的每一个维度是可以任意排序的，因为每个锚点的选取顺序不影响节点的位置特征</li>
+<li>Rigorous的方法：使用一个神经网络来维护位置编码的任意排序中存在的不变信息</li>
+</ul>
+<h3 id="identity-aware-gnn">Identity-aware GNN<a class="headerlink" href="#identity-aware-gnn" title="Permanent link">&para;</a></h3>
+<p>​       我们已经知道GNN在Position-aware的任务中表现不好，那么GNN在Structure-aware的任务中表现如何呢？事实上表现依然不好，在多个层级(节点，边和图)的Structure-aware中依然表现不好，不同的输入仍然可能导致相同的计算图，这就无法区分不同的Structure</p>
+<p>​       一种解决办法是，我们可以给每一个需要embedding的节点标上一个颜色，这样一来生成的计算图中也会有带颜色的节点，就可以区分出不同的节点，并且这种颜色不会随着节点顺序的变化而变化。</p>
+<p><img alt="image-20210716232103712" src="../static/image-20210716232103712.png" /></p>
+<p>有了颜色之后，我们可以用颜色来区分计算图，这样一来之前会failure的例子也可以work了，这种方法在图分类任务中也可以使用。</p>
+<p>​       而Identity-aware GNN正是使用了这种染色机制，并且使用了**异构的消息传递**，不同的节点之间的消息传递方式不同。一个ID-GNN中不同颜色之间消息传递的方式不同。因此ID-GNN可以挖掘出图中的环的信息，可以通过计算图来计算各种长度的环的个数。</p>
+<p><img alt="image-20210717143652472" src="../static/image-20210717143652472.png" /></p>
+<p>ID-GNN的一个简化版本是ID-GNN-Fast，这种模型会统计计算图中各种长度的环的个数，并将其作为一个额外的节点特征，而ID-GNN实际上是一个“插件”，可以被添加到任意一种基于消息传递机制的GNN中，并被实验证明是非常有效的。</p>
+<h3 id="gnn的鲁棒性">GNN的鲁棒性<a class="headerlink" href="#gnn的鲁棒性" title="Permanent link">&para;</a></h3>
+<p>​       神经网络已经在很多领域取得了一定的应用，但一个很现实的问题是，这些模型真的能被用到现实生活中吗？事实上神经网络容易遭到对抗攻击，比如CNN</p>
+<p><img alt="image-20210717154702575" src="../static/image-20210717154702575.png" /></p>
+<p>​       深度模型往往缺少鲁棒性，很容易被一些伪造的样本攻击导致性能极度下降，那么图神经网络的鲁棒性究竟如何呢？为了研究这个问题，我们假定问题是半监督的节点分类(只有少量的)，而模型是GCN</p>
+<h4 id="问题的描述">问题的描述<a class="headerlink" href="#问题的描述" title="Permanent link">&para;</a></h4>
+<p>​       我们可以将节点分为目标节点t和可攻击节点集合S，攻击的方式可以分为直接攻击和间接攻击。</p>
+<ul>
+<li>直接攻击是指，可以攻击的节点就是目标节点的情况。间接攻击是可以攻击的节点不是目标节点的情况</li>
+<li>攻击的方式主要有两种，可以直接给目标节点改变特征，也可以增减攻击节点的边</li>
+</ul>
+<h4 id="问题的形式化">问题的形式化<a class="headerlink" href="#问题的形式化" title="Permanent link">&para;</a></h4>
+<p>​       我们可以用形式化的数学语言来描述GNN对抗攻击这个问题，我们的目标是在尽可能少地改变图结构的情况下，尽可能改变目标节点预测的结果，这是因为如果把图改动的太离谱了，很容易就会被发现这是伪造的数据，因此要尽可能减少对图的修改。</p>
+<p>​       我们假设图的邻接矩阵是<span class="arithmatex">\(A\)</span>，图节点的特征矩阵是<span class="arithmatex">\(X\)</span>，改变后的邻接矩阵和特征矩阵分别是<span class="arithmatex">\(A',X'\)</span>，且要求<span class="arithmatex">\((A',X')\approx (A,X)\)</span>，并且假设需要预测的节点是v，从原始的图中GCN已经学习到了模型参数为：</p>
+<div class="arithmatex">\[
+\boldsymbol{\theta}^{*}=\operatorname{argmin}_{\boldsymbol{\theta}} \mathcal{L}_{\text {train }}(\boldsymbol{\theta} ; \boldsymbol{A}, \boldsymbol{X})
+\]</div>
+<p>原始的label预测结果为：</p>
+<div class="arithmatex">\[
+c_{v}^{*}=\operatorname{argmax}_{c} f_{\theta^{*}}(A, X)_{v, c}
+\]</div>
+<p>而GCN在新的伪造图上学习到的模型为：</p>
+<div class="arithmatex">\[
+\boldsymbol{\theta}^{* \prime}=\operatorname{argmin}_{\boldsymbol{\theta}} \mathcal{L}_{\text {train }}\left(\boldsymbol{\theta} ; \boldsymbol{A}^{\prime}, \boldsymbol{X}^{\prime}\right)
+\]</div>
+<p>而新图上节点v的预测结果是</p>
+<div class="arithmatex">\[
+C_{v}^{* \prime}=\operatorname{argmax}_{c} f_{\theta^{* \prime}}\left(A^{\prime}, X^{\prime}\right)_{v, c}
+\]</div>
+<p>我们的目标是<span class="arithmatex">\(C_{v}\not= C_{v}^{*}\)</span>，为了让两个结果相差的尽可能大，我们可以把目标函数定义为：</p>
+<div class="arithmatex">\[
+\Delta(v,A',X')=\log f_{\boldsymbol{\theta}^{* \prime}}\left(\boldsymbol{A}^{\prime}, \boldsymbol{X}^{\prime}\right)_{v, c_{v}^{* \prime}}-\log f_{\boldsymbol{\theta}^{* \prime}}\left(\boldsymbol{A}^{\prime}, \boldsymbol{X}^{\prime}\right)_{v, c_{v}^{*}}
+\]</div>
+<p>接下来就需要针对这个目标进行优化，然而邻接矩阵<span class="arithmatex">\(A'\)</span>是一个离散的对象，不能使用基于梯度的优化方法，因此我们需要采用一定的优化策略选择好参数<span class="arithmatex">\(A',X'\)</span>之后重新训练一个GCN来验证结果的好坏，现有的方法都是对这个优化目标的近似解，具体的这门课上也没有深入讲下去，需要阅读相关论文来深入学习。</p>
+<h4 id="实验结果和结论">实验结果和结论<a class="headerlink" href="#实验结果和结论" title="Permanent link">&para;</a></h4>
+<p>​       Slides里面举了一篇KDD18的论文作为例子，这篇论文中采用了直接攻击，间接攻击和不攻击三种策略，并在直接攻击中使用了随机攻击作为对照，得到的实验结果是：</p>
+<p><img src="static/image-20210717184653740.png" alt="image-20210717184653740" style="zoom:50%;" /></p>
+<p>​       我们发现GCN对抗直接攻击的能力比较差(对直接对抗攻击不鲁棒)，但是可以应付间接攻击和随机攻击。</p>
+<p><span id="busuanzi_container_page_pv">本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span></p>
+
+  <hr>
+<div class="md-source-file">
+  <small>
+    
+      最后更新:
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-01-23T10:40:25+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-01-23</span>
+      
+        <br>
+        创建日期:
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-01-23T10:40:25+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-01-23</span>
+      
+    
+  </small>
+</div>
+
+
+
+
+<div id="__comments">
+    
+    <script src="https://giscus.app/client.js"
+        data-repo="Zhang-Each/My-CS-Notebook"
+        data-repo-id="R_kgDOI0dr4w"
+        data-category="General"
+        data-category-id="DIC_kwDOI0dr484CTvIK"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="1"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="zh-CN"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+        </script>
+    <h3>颜色主题调整</h3>
+    <div class="tx-switch">
+    <button class="button1" data-md-color-primary="red" style="background-color:red">red</button>
+    <button class="button1" data-md-color-primary="pink" style="background-color:pink;color:black">pink</button>
+    <button class="button1" data-md-color-primary="purple" style="background-color:purple">purple</button>
+    <button class="button1" data-md-color-primary="indigo" style="background-color:indigo">indigo</button>
+    <button class="button1" data-md-color-primary="blue" style="background-color:blue">blue</button>
+    <button class="button1" data-md-color-primary="cyan" style="background-color:cyan;color:black">cyan</button>
+    <button class="button1" data-md-color-primary="teal" style="background-color:teal">teal</button>
+    <button class="button1" data-md-color-primary="green" style="background-color:green">green</button>
+    <button class="button1" data-md-color-primary="lime" style="background-color:lime;color:black">lime</button>
+    <button class="button1" data-md-color-primary="orange" style="background-color:orange;color:black">orange</button>
+    <button class="button1" data-md-color-primary="brown" style="background-color:brown;border-radius=3px">brown</button>
+    <button class="button1" data-md-color-primary="grey" style="background-color:grey">grey</button>
+    <button class="button1" data-md-color-primary="black" style="background-color:black">black</button>
+    <button class="button1" data-md-color-primary="white" style="background-color:white;color:black">white</button>
+    </div>
+    
+    <script>
+    var buttons = document.querySelectorAll("button[data-md-color-primary]")
+    buttons.forEach(function(button) {
+            button.addEventListener("click", function() {
+            var attr = this.getAttribute("data-md-color-primary")
+            document.body.setAttribute("data-md-color-primary", attr)
+            localStorage.setItem("data-md-color-primary",attr);
+            })
+    })
+    </script>
+    
+    <h2 ><!-- 评论 -->评论区~</h2>
+    
+    有用的话请给我个star或者follow我的账号!! 非常感谢!!
+    
+    </br>
+    
+    快来跟我聊天~
+    
+    </div>
+    
+    <script src="https://giscus.app/client.js"
+        data-repo="Zhang-Each/Notebook-Comments"
+        data-repo-id="R_kgDOI0dlNg"
+        data-category="General"
+        data-category-id="DIC_kwDOI0dlNs4CTvH-"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="1"
+        data-input-position="top"
+        data-theme="preferred_color_scheme"
+        data-lang="zh-CN"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+    </script>
+    
+    <!-- Synchronize Giscus theme with palette -->
+    <script>
+    var giscus = document.querySelector("script[src*=giscus]")
+    
+    /* Set palette on initial load */
+    // var palette = __md_get("__palette")
+    // if (palette && typeof palette.color === "object") {
+    //     var theme = palette.color.scheme === "slate" ? "dark" : "light"
+    //     giscus.setAttribute("data-theme", theme) 
+    // }
+    
+    /* Register event handlers after documented loaded */
+    // document.addEventListener("DOMContentLoaded", function() {
+    //     var ref = document.querySelector("[data-md-component=palette]")
+    //     ref.addEventListener("change", function() {
+    //     var palette = __md_get("__palette")
+    //     if (palette && typeof palette.color === "object") {
+    //         var theme = palette.color.scheme === "slate" ? "dark" : "light"
+    
+    //         /* Instruct Giscus to change theme */
+    //         var frame = document.querySelector(".giscus-frame")
+    //         frame.contentWindow.postMessage(
+    //         { giscus: { setConfig: { theme } } },
+    //         "https://giscus.app"
+    //         )
+    //     }
+    //     })
+    // })
+    </script>
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            回到页面顶部
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      本页面的全部内容在 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh">CC BY-SA 4.0</a> 和 <a href="https://github.com/zTrix/sata-license">SATA</a> 协议之条款下提供，附加条款亦可能应用。<br /><span id="busuanzi_container_site_uv">本站访客总人数<span id="busuanzi_value_site_uv"></span>人次，</span><span id="busuanzi_container_site_pv">本站总访问人数<span id="busuanzi_value_site_pv"></span>次。</span>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "content.code.annotate", "navigation.tracking", "navigation.indexes", "navigation.top", "toc.follow"], "search": "../../assets/javascripts/workers/search.e5c33ebb.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.51d95adb.min.js"></script>
+      
+        <script src="../../js/timeago.min.js"></script>
+      
+        <script src="../../js/timeago_mkdocs_material.js"></script>
+      
+        <script src="../../from_oi_wiki/js/extra.js"></script>
+      
+        <script src="../../js/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js"></script>
+      
+        <script src="../../js/tablesort.js"></script>
+      
+        <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+      
+    
+  </body>
+</html>

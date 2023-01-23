@@ -1,0 +1,1338 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://zhang-each.github.io/My-CS-notebook/CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B08%EF%BC%9A%E8%87%AA%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%E4%B8%8E%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/">
+      
+      
+        <link rel="prev" href="../Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B07%EF%BC%9A%E6%A8%A1%E5%9E%8B%E5%8F%AF%E8%A7%86%E5%8C%96%EF%BC%8C%E5%9B%BE%E5%83%8F%E6%AC%BA%E8%AF%88%E5%92%8CGAN/">
+      
+      
+        <link rel="next" href="../../CS224W/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.6">
+    
+    
+      
+        <title>08.自监督学习与课程总结 - 小角龙的学习记录</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.558e4712.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.2505c338.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Hiragino+Sans+GB:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Hiragino Sans GB";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/timeago.css">
+    
+      <link rel="stylesheet" href="../../from_oi_wiki/css/extra.css?v=13">
+    
+      <link rel="stylesheet" href="../../css/status.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#stanford-cs231n-assignment札记8自监督学习与课程总结" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="小角龙的学习记录" class="md-header__button md-logo" aria-label="小角龙的学习记录" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            小角龙的学习记录
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              08.自监督学习与课程总结
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/zhang-each/My-CS-notebook/" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Zhang-Each/My-CS-notebook
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        🏡 主页
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../" class="md-tabs__link md-tabs__link--active">
+        🐰 深度学习
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../%E6%9D%82%E8%B0%88%E4%B8%8E%E6%80%BB%E7%BB%93/" class="md-tabs__link">
+        杂谈与总结
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="小角龙的学习记录" class="md-nav__button md-logo" aria-label="小角龙的学习记录" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    小角龙的学习记录
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/zhang-each/My-CS-notebook/" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Zhang-Each/My-CS-notebook
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      
+        
+          
+            
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../..">🏡 主页</a>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="🏡 主页" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          🏡 主页
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../">🐰 深度学习</a>
+          
+            <label for="__nav_2">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="🐰 深度学习" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          🐰 深度学习
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2" type="checkbox" id="__nav_2_2" checked>
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_2" tabindex="0" aria-expanded="true">
+          CS231N-神经网络与深度学习
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="CS231N-神经网络与深度学习" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          CS231N-神经网络与深度学习
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B01%EF%BC%9AkNN%E5%92%8C%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB%E5%99%A8/" class="md-nav__link">
+        01.kNN和线性分类器
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B02%EF%BC%9A%E5%A4%9A%E5%B1%82%E5%85%A8%E8%BF%9E%E6%8E%A5%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%92%8C%E4%BC%98%E5%8C%96%E5%99%A8/" class="md-nav__link">
+        02.多层全连接神经网络和优化器
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B03%EF%BC%9ANormalization%E5%92%8CDropOut/" class="md-nav__link">
+        03.Normalization和DropOut
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B04%EF%BC%9A%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9CCNN/" class="md-nav__link">
+        04.卷积神经网络CNN
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B05%EF%BC%9ARNN%26LSTM%E4%B8%8E%E5%9B%BE%E7%89%87%E6%8F%8F%E8%BF%B0/" class="md-nav__link">
+        05.RNN&LSTM与图片描述
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B06%EF%BC%9ATransformer%E4%B8%8E%E5%9B%BE%E7%89%87%E6%8F%8F%E8%BF%B0/" class="md-nav__link">
+        06.Transformer与图片描述
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B07%EF%BC%9A%E6%A8%A1%E5%9E%8B%E5%8F%AF%E8%A7%86%E5%8C%96%EF%BC%8C%E5%9B%BE%E5%83%8F%E6%AC%BA%E8%AF%88%E5%92%8CGAN/" class="md-nav__link">
+        07.模型可视化，图像欺诈和GAN
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          08.自监督学习与课程总结
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        08.自监督学习与课程总结
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#自监督学习self-supervised-learning" class="md-nav__link">
+    自监督学习Self-Supervised Learning
+  </a>
+  
+    <nav class="md-nav" aria-label="自监督学习Self-Supervised Learning">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#自监督学习的概念" class="md-nav__link">
+    自监督学习的概念
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#对比学习contrastive-learning" class="md-nav__link">
+    对比学习Contrastive Learning
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#模型的实现" class="md-nav__link">
+    模型的实现
+  </a>
+  
+    <nav class="md-nav" aria-label="模型的实现">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#数据增强" class="md-nav__link">
+    数据增强
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#定义损失函数" class="md-nav__link">
+    定义损失函数
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#课程总结" class="md-nav__link">
+    课程总结
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_3" type="checkbox" id="__nav_2_3" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../CS224W/">CS224W-图机器学习与图神经网络</a>
+          
+            <label for="__nav_2_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="CS224W-图机器学习与图神经网络" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          CS224W-图机器学习与图神经网络
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A001/" class="md-nav__link">
+        01.导论，传统的图学习方法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A002/" class="md-nav__link">
+        02.节点嵌入和PageRank
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A003/" class="md-nav__link">
+        03.消息传递机制
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A004/" class="md-nav__link">
+        04.图神经网络基础
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A005/" class="md-nav__link">
+        05.图神经网络的训练和应用，表示能力分析
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A006/" class="md-nav__link">
+        06.知识图谱，知识图谱推理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A007/" class="md-nav__link">
+        07.频繁子图挖掘
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A008/" class="md-nav__link">
+        08.社区检测
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A009/" class="md-nav__link">
+        09.图生成模型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A010/" class="md-nav__link">
+        10.图神经网络前沿话题
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../%E6%9D%82%E8%B0%88%E4%B8%8E%E6%80%BB%E7%BB%93/">杂谈与总结</a>
+          
+            <label for="__nav_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="杂谈与总结" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          杂谈与总结
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%9D%82%E8%B0%88%E4%B8%8E%E6%80%BB%E7%BB%93/2022%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/" class="md-nav__link">
+        2022年度总结
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#自监督学习self-supervised-learning" class="md-nav__link">
+    自监督学习Self-Supervised Learning
+  </a>
+  
+    <nav class="md-nav" aria-label="自监督学习Self-Supervised Learning">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#自监督学习的概念" class="md-nav__link">
+    自监督学习的概念
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#对比学习contrastive-learning" class="md-nav__link">
+    对比学习Contrastive Learning
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#模型的实现" class="md-nav__link">
+    模型的实现
+  </a>
+  
+    <nav class="md-nav" aria-label="模型的实现">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#数据增强" class="md-nav__link">
+    数据增强
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#定义损失函数" class="md-nav__link">
+    定义损失函数
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#课程总结" class="md-nav__link">
+    课程总结
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+
+<h1 id="stanford-cs231n-assignment札记8自监督学习与课程总结">Stanford-CS231N-Assignment札记8：自监督学习与课程总结<a class="headerlink" href="#stanford-cs231n-assignment札记8自监督学习与课程总结" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>Stanford2021年春季课程CS231N:Convolutional Neural Networks for Visual Recognition的一些作业笔记，这门课的作业围绕视觉相关的任务，需要从底层手动实现一大批经典机器学习算法和神经网络模型，本文是作业的第八部分，包含了自监督学习和整个课程的总结</p>
+</blockquote>
+<h2 id="自监督学习self-supervised-learning">自监督学习Self-Supervised Learning<a class="headerlink" href="#自监督学习self-supervised-learning" title="Permanent link">&para;</a></h2>
+<h3 id="自监督学习的概念">自监督学习的概念<a class="headerlink" href="#自监督学习的概念" title="Permanent link">&para;</a></h3>
+<p>自监督学习(<strong>Self-supervised Learning</strong>)是这几年机器学习和深度学习领域非常火热的一个研究方向，这种学习方式可以**在数据没有标注的情况下学到好的数据表示**，并且这种方式取得了巨大的成功，因为实际场景中，很多数据集都是没有标注或者难以标注的(要花费大量的成本)，而自监督学习可以在数据没有标注的情况下就学到足够好的数据表示，并可以将其用到下游任务中。</p>
+<p>另一个问题是，什么样的表示才是一个好的表示，一般我们认为能够尽可能提取数据中的重要特征并将其编码到向量空间中的才是好的表示，同时具有相似特征的数据，它们的表示向量也应该相似，比如两张图片中如果表示的是同一个物体，那么他们的表示向量应该比较接近，否则两张图的表示向量应该会有很大的差别，</p>
+<h3 id="对比学习contrastive-learning">对比学习Contrastive Learning<a class="headerlink" href="#对比学习contrastive-learning" title="Permanent link">&para;</a></h3>
+<p>对比学习就是一种常见的自监督学习方式，这个作业中需要实现的其实就是一个经典的对比学习算法<code>SimCLR</code>，对比学习的一个基本想法是，给相似的数据学习出相似的表示，而不相似的数据学习出不相似的表示，也就是说**数据的特征是通过对比得到的**。</p>
+<p>那么我们怎么得到两张相似的图片和两张不相似的图片呢？自监督学习使用的数据是没有标注的，因此我们不能用label来确定数据之间是否相似，而对于图像来说，答案就是可以用图像的各种变换**自己生成两张相似的图像**，称为一个positive pair，然后以这两张图像是高度相似的为先验知识来进行训练，训练过程中，我们希望得到这两张图尽可能相似的表示，这个过程可以用下面的这张图来表示：</p>
+<p><img src="static/image-20211112211310533.png" alt="image-20211112211310533" style="zoom:33%;" /></p>
+<h2 id="模型的实现">模型的实现<a class="headerlink" href="#模型的实现" title="Permanent link">&para;</a></h2>
+<p>作业中使用了已经预训练过的CNN模型来帮助完成任务，有论文研究表明，使用预训练过的模型进行对比学习的效果要好于从头开始训练。</p>
+<h3 id="数据增强">数据增强<a class="headerlink" href="#数据增强" title="Permanent link">&para;</a></h3>
+<p>首先我们要实现的就是一个数据增强的模块，我们通过输入一张图片，并将其进行一定的随机变换得到两张相似但是不完全相同的图片，这里可以使用<code>torchvision.transform</code>中的API来对图片进行各种各样的处理操作，具体的有：</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">compute_train_transform</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">123456</span><span class="p">):</span>
+    <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+    <span class="n">torch</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+    <span class="c1"># Transformation that applies color jitter with brightness=0.4, contrast=0.4, saturation=0.4, and hue=0.1</span>
+    <span class="n">color_jitter</span> <span class="o">=</span> <span class="n">transforms</span><span class="o">.</span><span class="n">ColorJitter</span><span class="p">(</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+
+    <span class="n">train_transform</span> <span class="o">=</span> <span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">([</span>
+        <span class="c1"># Step 1: Randomly resize and crop to 32x32.</span>
+        <span class="n">transforms</span><span class="o">.</span><span class="n">RandomResizedCrop</span><span class="p">(</span><span class="mi">32</span><span class="p">),</span>
+        <span class="c1"># Step 2: Horizontally flip the image with probability 0.5</span>
+        <span class="n">transforms</span><span class="o">.</span><span class="n">RandomHorizontalFlip</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">0.5</span><span class="p">),</span>
+        <span class="c1"># Step 3: With a probability of 0.8, apply color jitter</span>
+        <span class="c1"># (you can use &quot;color_jitter&quot; defined above.</span>
+        <span class="n">transforms</span><span class="o">.</span><span class="n">RandomApply</span><span class="p">([</span><span class="n">color_jitter</span><span class="p">],</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.8</span><span class="p">),</span>
+        <span class="c1"># Step 4: With a probability of 0.2, convert the image to grayscale</span>
+        <span class="n">transforms</span><span class="o">.</span><span class="n">RandomGrayscale</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">0.2</span><span class="p">),</span>
+        <span class="n">transforms</span><span class="o">.</span><span class="n">ToTensor</span><span class="p">(),</span>
+        <span class="n">transforms</span><span class="o">.</span><span class="n">Normalize</span><span class="p">([</span><span class="mf">0.4914</span><span class="p">,</span> <span class="mf">0.4822</span><span class="p">,</span> <span class="mf">0.4465</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.2023</span><span class="p">,</span> <span class="mf">0.1994</span><span class="p">,</span> <span class="mf">0.2010</span><span class="p">])</span>
+    <span class="p">])</span>
+    <span class="k">return</span> <span class="n">train_transform</span>
+</code></pre></div>
+<ul>
+<li>根据作业的要求，我们要按照顺序并以一定的概率对一张图片分别进行调整大小，随机的水平翻转，随机的颜色变换，随机的灰度化等操作。</li>
+</ul>
+<h3 id="定义损失函数">定义损失函数<a class="headerlink" href="#定义损失函数" title="Permanent link">&para;</a></h3>
+<p>另一个重要的问题就是我们如何定义训练时候的损失函数，在对比学习中我们的一条数据实际上是两个相似的图像，因此我们要计算他们之间的相似度，并且让相似度最小化，这样才能达成我们的训练目标。因此我们需要定义两个图像表示之间的相似度，进而继续定义出训练时候的损失函数，而SimCLR中，对相似度和损失函数的定义是：
+$$
+\mathrm{sim}(z_i, z_j) = \frac{z_i \cdot z_j}{|| z_i || || z_j ||}
+$$</p>
+<div class="arithmatex">\[
+l \; (i, j) = -\log \frac{\exp (\;\text{sim}(z_i, z_j)\; / \;\tau) }{\sum_{k=1}^{2N} \mathbb{1}_{k \neq i} \exp (\;\text{sim} (z_i, z_k) \;/ \;\tau) }
+\]</div>
+<p>这里采用的相似度函数其实就是余弦相似度，而损失函数则进一步和一个批次N组数据中的其他2N张图片都进行了对比，起到突出当前一组图片是最相似的这个目的。因此一个小批量数据的总体loss函数就被定义成了
+$$
+L = \frac{1}{2N} \sum_{k=1}^N [ \; l(k, \;k+N) + l(k+N, \;k)\;]
+$$
+下面我们就来实现整个loss的计算过程：</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">sim</span><span class="p">(</span><span class="n">z_i</span><span class="p">,</span> <span class="n">z_j</span><span class="p">):</span>
+
+    <span class="n">norm_dot_product</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">z_i</span><span class="p">,</span> <span class="n">z_j</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">z_i</span><span class="p">)</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">z_j</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">norm_dot_product</span>
+
+<span class="k">def</span> <span class="nf">simclr_loss_naive</span><span class="p">(</span><span class="n">out_left</span><span class="p">,</span> <span class="n">out_right</span><span class="p">,</span> <span class="n">tau</span><span class="p">):</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="n">out_left</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># total number of training examples</span>
+
+    <span class="c1"># Concatenate out_left and out_right into a 2*N x D tensor.</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">out_left</span><span class="p">,</span> <span class="n">out_right</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># [2*N, D]</span>
+
+    <span class="n">total_loss</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>  <span class="c1"># loop through each positive pair (k, k+N)</span>
+        <span class="n">z_k</span><span class="p">,</span> <span class="n">z_k_N</span> <span class="o">=</span> <span class="n">out</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">out</span><span class="p">[</span><span class="n">k</span> <span class="o">+</span> <span class="n">N</span><span class="p">]</span>
+        <span class="n">exp_sum1</span><span class="p">,</span> <span class="n">exp_sum2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">N</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">k</span><span class="p">:</span>
+                <span class="n">exp_sum1</span> <span class="o">+=</span> <span class="n">torch</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">sim</span><span class="p">(</span><span class="n">z_k</span><span class="p">,</span> <span class="n">out</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">/</span> <span class="n">tau</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">k</span> <span class="o">+</span> <span class="n">N</span><span class="p">:</span>
+                <span class="n">exp_sum2</span> <span class="o">+=</span> <span class="n">torch</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">sim</span><span class="p">(</span><span class="n">z_k_N</span><span class="p">,</span> <span class="n">out</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">/</span> <span class="n">tau</span><span class="p">)</span>
+        <span class="n">total_loss</span> <span class="o">+=</span> <span class="o">-</span><span class="n">torch</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">sim</span><span class="p">(</span><span class="n">z_k</span><span class="p">,</span> <span class="n">z_k_N</span><span class="p">)</span> <span class="o">/</span> <span class="n">tau</span><span class="p">)</span> <span class="o">/</span> <span class="n">exp_sum1</span><span class="p">)</span>
+        <span class="n">total_loss</span> <span class="o">+=</span> <span class="o">-</span><span class="n">torch</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">sim</span><span class="p">(</span><span class="n">z_k_N</span><span class="p">,</span> <span class="n">z_k</span><span class="p">)</span> <span class="o">/</span> <span class="n">tau</span><span class="p">)</span> <span class="o">/</span> <span class="n">exp_sum2</span><span class="p">)</span>
+
+    <span class="c1"># In the end, we need to divide the total loss by 2N, the number of samples in the batch.</span>
+    <span class="n">total_loss</span> <span class="o">=</span> <span class="n">total_loss</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">N</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">total_loss</span>
+
+
+<span class="k">def</span> <span class="nf">sim_positive_pairs</span><span class="p">(</span><span class="n">out_left</span><span class="p">,</span> <span class="n">out_right</span><span class="p">):</span>
+    <span class="n">pos_pairs</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="n">left_norm</span> <span class="o">=</span> <span class="n">out_left</span> <span class="o">/</span> <span class="n">torch</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">out_left</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdim</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">right_norm</span> <span class="o">=</span> <span class="n">out_right</span> <span class="o">/</span> <span class="n">torch</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">out_right</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdim</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">mul</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">mm</span><span class="p">(</span><span class="n">left_norm</span><span class="p">,</span> <span class="n">right_norm</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+    <span class="n">pos_pairs</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">mul</span><span class="p">)</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">pos_pairs</span>
+
+
+<span class="k">def</span> <span class="nf">compute_sim_matrix</span><span class="p">(</span><span class="n">out</span><span class="p">):</span>
+
+    <span class="n">out_norm</span> <span class="o">=</span> <span class="n">out</span> <span class="o">/</span> <span class="n">torch</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdim</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">sim_matrix</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">mm</span><span class="p">(</span><span class="n">out_norm</span><span class="p">,</span> <span class="n">out_norm</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">sim_matrix</span>
+
+
+<span class="k">def</span> <span class="nf">simclr_loss_vectorized</span><span class="p">(</span><span class="n">out_left</span><span class="p">,</span> <span class="n">out_right</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s1">&#39;cuda&#39;</span><span class="p">):</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="n">out_left</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="c1"># Concatenate out_left and out_right into a 2*N x D tensor.</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">out_left</span><span class="p">,</span> <span class="n">out_right</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># [2*N, D]</span>
+    <span class="c1"># Compute similarity matrix between all pairs of augmented examples in the batch.</span>
+    <span class="n">sim_matrix</span> <span class="o">=</span> <span class="n">compute_sim_matrix</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>  <span class="c1"># [2*N, 2*N]</span>
+    <span class="c1"># Step 1: Use sim_matrix to compute the denominator value for all augmented samples.</span>
+    <span class="c1"># Hint: Compute e^{sim / tau} and store into exponential, which should have shape 2N x 2N.</span>
+    <span class="n">exponential</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">sim_matrix</span> <span class="o">/</span> <span class="n">tau</span><span class="p">)</span>
+
+    <span class="c1"># This binary mask zeros out terms where k=i.</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">exponential</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span> <span class="o">-</span> <span class="n">torch</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">N</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">))</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span><span class="o">.</span><span class="n">bool</span><span class="p">()</span>
+
+    <span class="c1"># We apply the binary mask.</span>
+    <span class="n">exponential</span> <span class="o">=</span> <span class="n">exponential</span><span class="o">.</span><span class="n">masked_select</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">N</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># [2*N, 2*N-1]</span>
+
+    <span class="c1"># Hint: Compute the denominator values for all augmented samples. This should be a 2N x 1 vector.</span>
+    <span class="n">denom</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">exponential</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdim</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Step 2: Compute similarity between positive pairs.</span>
+    <span class="c1"># You can do this in two ways: </span>
+    <span class="c1"># Option 1: Extract the corresponding indices from sim_matrix. </span>
+    <span class="c1"># Option 2: Use sim_positive_pairs().</span>
+
+    <span class="n">sim_pairs</span> <span class="o">=</span> <span class="n">sim_positive_pairs</span><span class="p">(</span><span class="n">out_left</span><span class="p">,</span> <span class="n">out_right</span><span class="p">)</span>
+    <span class="n">sim_pairs</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">sim_pairs</span><span class="p">,</span> <span class="n">sim_pairs</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1"># Step 3: Compute the numerator value for all augmented samples.</span>
+    <span class="n">numerator</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">sim_pairs</span> <span class="o">/</span> <span class="n">tau</span><span class="p">)</span>
+    <span class="c1"># Step 4: Now that you have the numerator and denominator for all augmented samples, compute the total loss.</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="o">-</span><span class="n">torch</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">numerator</span> <span class="o">/</span> <span class="n">denom</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">loss</span>
+</code></pre></div>
+<p>后面的内容因为需要GPU，当时做的时候到这一步就没有再做下去，反正测试点都已经通过，就暂时先到这里结束了吧。</p>
+<h2 id="课程总结">课程总结<a class="headerlink" href="#课程总结" title="Permanent link">&para;</a></h2>
+<p>到这里这门课程的学习基本也就结束了，CS231N无疑是入门深度学习和神经网络的最佳课程没有之一，不过我学这门课的时候并没有听他的lecture而是直接从作业入手，虽然自以为有了一点点的深度学习和机器学习的基础，但是真的做起这些有难度的作业来还是感受到了很大的困难，不过最后还是做完了，这些作业不仅从头开始实现了常见神经网络模型，这些作业串联起来也是一部简单的深度学习发展史，从传统的统计机器学习开始，到MLP，CNN，RNN，Transformer，从最传统的有监督学习，到使用各种trick防止过拟合增强模型的鲁棒性，再到生成模型，对抗训练和自监督学习，作业一步步为我们呈现了深度学习的发展历程，我们在完成作业的同时，也可以感受到深度学习作为一个data-driven的研究领域的研究思潮的变迁。</p>
+<p><span id="busuanzi_container_page_pv">本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span></p>
+
+  <hr>
+<div class="md-source-file">
+  <small>
+    
+      最后更新:
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-01-23T10:40:25+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-01-23</span>
+      
+        <br>
+        创建日期:
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-01-23T10:40:25+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-01-23</span>
+      
+    
+  </small>
+</div>
+
+
+
+
+<div id="__comments">
+    
+    <script src="https://giscus.app/client.js"
+        data-repo="Zhang-Each/My-CS-Notebook"
+        data-repo-id="R_kgDOI0dr4w"
+        data-category="General"
+        data-category-id="DIC_kwDOI0dr484CTvIK"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="1"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="zh-CN"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+        </script>
+    <h3>颜色主题调整</h3>
+    <div class="tx-switch">
+    <button class="button1" data-md-color-primary="red" style="background-color:red">red</button>
+    <button class="button1" data-md-color-primary="pink" style="background-color:pink;color:black">pink</button>
+    <button class="button1" data-md-color-primary="purple" style="background-color:purple">purple</button>
+    <button class="button1" data-md-color-primary="indigo" style="background-color:indigo">indigo</button>
+    <button class="button1" data-md-color-primary="blue" style="background-color:blue">blue</button>
+    <button class="button1" data-md-color-primary="cyan" style="background-color:cyan;color:black">cyan</button>
+    <button class="button1" data-md-color-primary="teal" style="background-color:teal">teal</button>
+    <button class="button1" data-md-color-primary="green" style="background-color:green">green</button>
+    <button class="button1" data-md-color-primary="lime" style="background-color:lime;color:black">lime</button>
+    <button class="button1" data-md-color-primary="orange" style="background-color:orange;color:black">orange</button>
+    <button class="button1" data-md-color-primary="brown" style="background-color:brown;border-radius=3px">brown</button>
+    <button class="button1" data-md-color-primary="grey" style="background-color:grey">grey</button>
+    <button class="button1" data-md-color-primary="black" style="background-color:black">black</button>
+    <button class="button1" data-md-color-primary="white" style="background-color:white;color:black">white</button>
+    </div>
+    
+    <script>
+    var buttons = document.querySelectorAll("button[data-md-color-primary]")
+    buttons.forEach(function(button) {
+            button.addEventListener("click", function() {
+            var attr = this.getAttribute("data-md-color-primary")
+            document.body.setAttribute("data-md-color-primary", attr)
+            localStorage.setItem("data-md-color-primary",attr);
+            })
+    })
+    </script>
+    
+    <h2 ><!-- 评论 -->评论区~</h2>
+    
+    有用的话请给我个star或者follow我的账号!! 非常感谢!!
+    
+    </br>
+    
+    快来跟我聊天~
+    
+    </div>
+    
+    <script src="https://giscus.app/client.js"
+        data-repo="Zhang-Each/Notebook-Comments"
+        data-repo-id="R_kgDOI0dlNg"
+        data-category="General"
+        data-category-id="DIC_kwDOI0dlNs4CTvH-"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="1"
+        data-input-position="top"
+        data-theme="preferred_color_scheme"
+        data-lang="zh-CN"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+    </script>
+    
+    <!-- Synchronize Giscus theme with palette -->
+    <script>
+    var giscus = document.querySelector("script[src*=giscus]")
+    
+    /* Set palette on initial load */
+    // var palette = __md_get("__palette")
+    // if (palette && typeof palette.color === "object") {
+    //     var theme = palette.color.scheme === "slate" ? "dark" : "light"
+    //     giscus.setAttribute("data-theme", theme) 
+    // }
+    
+    /* Register event handlers after documented loaded */
+    // document.addEventListener("DOMContentLoaded", function() {
+    //     var ref = document.querySelector("[data-md-component=palette]")
+    //     ref.addEventListener("change", function() {
+    //     var palette = __md_get("__palette")
+    //     if (palette && typeof palette.color === "object") {
+    //         var theme = palette.color.scheme === "slate" ? "dark" : "light"
+    
+    //         /* Instruct Giscus to change theme */
+    //         var frame = document.querySelector(".giscus-frame")
+    //         frame.contentWindow.postMessage(
+    //         { giscus: { setConfig: { theme } } },
+    //         "https://giscus.app"
+    //         )
+    //     }
+    //     })
+    // })
+    </script>
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            回到页面顶部
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      本页面的全部内容在 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh">CC BY-SA 4.0</a> 和 <a href="https://github.com/zTrix/sata-license">SATA</a> 协议之条款下提供，附加条款亦可能应用。<br /><span id="busuanzi_container_site_uv">本站访客总人数<span id="busuanzi_value_site_uv"></span>人次，</span><span id="busuanzi_container_site_pv">本站总访问人数<span id="busuanzi_value_site_pv"></span>次。</span>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "content.code.annotate", "navigation.tracking", "navigation.indexes", "navigation.top", "toc.follow"], "search": "../../assets/javascripts/workers/search.e5c33ebb.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.51d95adb.min.js"></script>
+      
+        <script src="../../js/timeago.min.js"></script>
+      
+        <script src="../../js/timeago_mkdocs_material.js"></script>
+      
+        <script src="../../from_oi_wiki/js/extra.js"></script>
+      
+        <script src="../../js/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js"></script>
+      
+        <script src="../../js/tablesort.js"></script>
+      
+        <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+      
+    
+  </body>
+</html>

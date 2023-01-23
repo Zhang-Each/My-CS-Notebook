@@ -1,0 +1,1603 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://zhang-each.github.io/My-CS-notebook/CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B05%EF%BC%9ARNN%26LSTM%E4%B8%8E%E5%9B%BE%E7%89%87%E6%8F%8F%E8%BF%B0/">
+      
+      
+        <link rel="prev" href="../Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B04%EF%BC%9A%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9CCNN/">
+      
+      
+        <link rel="next" href="../Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B06%EF%BC%9ATransformer%E4%B8%8E%E5%9B%BE%E7%89%87%E6%8F%8F%E8%BF%B0/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.6">
+    
+    
+      
+        <title>05.RNN&LSTM与图片描述 - 小角龙的学习记录</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.558e4712.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.2505c338.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Hiragino+Sans+GB:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Hiragino Sans GB";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/timeago.css">
+    
+      <link rel="stylesheet" href="../../from_oi_wiki/css/extra.css?v=13">
+    
+      <link rel="stylesheet" href="../../css/status.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#stanford-cs231n-assignment5rnnlstm与图片描述" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="小角龙的学习记录" class="md-header__button md-logo" aria-label="小角龙的学习记录" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            小角龙的学习记录
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              05.RNN&LSTM与图片描述
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/zhang-each/My-CS-notebook/" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Zhang-Each/My-CS-notebook
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        🏡 主页
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../" class="md-tabs__link md-tabs__link--active">
+        🐰 深度学习
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../%E6%9D%82%E8%B0%88%E4%B8%8E%E6%80%BB%E7%BB%93/" class="md-tabs__link">
+        杂谈与总结
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="小角龙的学习记录" class="md-nav__button md-logo" aria-label="小角龙的学习记录" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    小角龙的学习记录
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/zhang-each/My-CS-notebook/" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Zhang-Each/My-CS-notebook
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      
+        
+          
+            
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../..">🏡 主页</a>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="🏡 主页" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          🏡 主页
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../">🐰 深度学习</a>
+          
+            <label for="__nav_2">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="🐰 深度学习" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          🐰 深度学习
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2" type="checkbox" id="__nav_2_2" checked>
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_2" tabindex="0" aria-expanded="true">
+          CS231N-神经网络与深度学习
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="CS231N-神经网络与深度学习" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          CS231N-神经网络与深度学习
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B01%EF%BC%9AkNN%E5%92%8C%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB%E5%99%A8/" class="md-nav__link">
+        01.kNN和线性分类器
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B02%EF%BC%9A%E5%A4%9A%E5%B1%82%E5%85%A8%E8%BF%9E%E6%8E%A5%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%92%8C%E4%BC%98%E5%8C%96%E5%99%A8/" class="md-nav__link">
+        02.多层全连接神经网络和优化器
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B03%EF%BC%9ANormalization%E5%92%8CDropOut/" class="md-nav__link">
+        03.Normalization和DropOut
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B04%EF%BC%9A%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9CCNN/" class="md-nav__link">
+        04.卷积神经网络CNN
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          05.RNN&LSTM与图片描述
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        05.RNN&LSTM与图片描述
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#image-captioning" class="md-nav__link">
+    Image Captioning
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rnn" class="md-nav__link">
+    RNN
+  </a>
+  
+    <nav class="md-nav" aria-label="RNN">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rnn的结构" class="md-nav__link">
+    RNN的结构
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rnn的前向传播及实现" class="md-nav__link">
+    RNN的前向传播及实现
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rnn的反向传播及实现" class="md-nav__link">
+    RNN的反向传播及实现
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rnn的缺点" class="md-nav__link">
+    RNN的缺点
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lstm" class="md-nav__link">
+    LSTM
+  </a>
+  
+    <nav class="md-nav" aria-label="LSTM">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lstm的基本架构" class="md-nav__link">
+    LSTM的基本架构
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lstm的计算过程" class="md-nav__link">
+    LSTM的计算过程
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lstm的前向传播实现" class="md-nav__link">
+    LSTM的前向传播实现
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lstm的反向传播的实现" class="md-nav__link">
+    LSTM的反向传播的实现
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#captioningrnn的实现" class="md-nav__link">
+    CaptioningRNN的实现
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B06%EF%BC%9ATransformer%E4%B8%8E%E5%9B%BE%E7%89%87%E6%8F%8F%E8%BF%B0/" class="md-nav__link">
+        06.Transformer与图片描述
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B07%EF%BC%9A%E6%A8%A1%E5%9E%8B%E5%8F%AF%E8%A7%86%E5%8C%96%EF%BC%8C%E5%9B%BE%E5%83%8F%E6%AC%BA%E8%AF%88%E5%92%8CGAN/" class="md-nav__link">
+        07.模型可视化，图像欺诈和GAN
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B08%EF%BC%9A%E8%87%AA%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%E4%B8%8E%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/" class="md-nav__link">
+        08.自监督学习与课程总结
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_3" type="checkbox" id="__nav_2_3" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../CS224W/">CS224W-图机器学习与图神经网络</a>
+          
+            <label for="__nav_2_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="CS224W-图机器学习与图神经网络" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          CS224W-图机器学习与图神经网络
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A001/" class="md-nav__link">
+        01.导论，传统的图学习方法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A002/" class="md-nav__link">
+        02.节点嵌入和PageRank
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A003/" class="md-nav__link">
+        03.消息传递机制
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A004/" class="md-nav__link">
+        04.图神经网络基础
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A005/" class="md-nav__link">
+        05.图神经网络的训练和应用，表示能力分析
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A006/" class="md-nav__link">
+        06.知识图谱，知识图谱推理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A007/" class="md-nav__link">
+        07.频繁子图挖掘
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A008/" class="md-nav__link">
+        08.社区检测
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A009/" class="md-nav__link">
+        09.图生成模型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A010/" class="md-nav__link">
+        10.图神经网络前沿话题
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../%E6%9D%82%E8%B0%88%E4%B8%8E%E6%80%BB%E7%BB%93/">杂谈与总结</a>
+          
+            <label for="__nav_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="杂谈与总结" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          杂谈与总结
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%9D%82%E8%B0%88%E4%B8%8E%E6%80%BB%E7%BB%93/2022%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/" class="md-nav__link">
+        2022年度总结
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#image-captioning" class="md-nav__link">
+    Image Captioning
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rnn" class="md-nav__link">
+    RNN
+  </a>
+  
+    <nav class="md-nav" aria-label="RNN">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rnn的结构" class="md-nav__link">
+    RNN的结构
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rnn的前向传播及实现" class="md-nav__link">
+    RNN的前向传播及实现
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rnn的反向传播及实现" class="md-nav__link">
+    RNN的反向传播及实现
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rnn的缺点" class="md-nav__link">
+    RNN的缺点
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lstm" class="md-nav__link">
+    LSTM
+  </a>
+  
+    <nav class="md-nav" aria-label="LSTM">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lstm的基本架构" class="md-nav__link">
+    LSTM的基本架构
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lstm的计算过程" class="md-nav__link">
+    LSTM的计算过程
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lstm的前向传播实现" class="md-nav__link">
+    LSTM的前向传播实现
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lstm的反向传播的实现" class="md-nav__link">
+    LSTM的反向传播的实现
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#captioningrnn的实现" class="md-nav__link">
+    CaptioningRNN的实现
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+
+<h1 id="stanford-cs231n-assignment5rnnlstm与图片描述">Stanford-CS231N-Assignment5：RNN/LSTM与图片描述<a class="headerlink" href="#stanford-cs231n-assignment5rnnlstm与图片描述" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>Stanford2021年春季课程CS231N:Convolutional Neural Networks for Visual Recognition的一些作业笔记，这门课的作业围绕视觉相关的任务，需要从底层手动实现一大批经典机器学习算法和神经网络模型，本文是作业的第五部分，包含了RNN/LSTM的实现和在Image Captioning任务上的应用</p>
+</blockquote>
+<h2 id="image-captioning">Image Captioning<a class="headerlink" href="#image-captioning" title="Permanent link">&para;</a></h2>
+<p>Image Captioning是一个经典的多模态任务，需要结合CV和NLP的知识共同完成，这类任务也可以叫图片描述，看图写话，即给定一张图像，我们要生成符合这张图像的描述性话语，这就涉及到一个问题，那就是如何在训练过程中，同时利用图像和文本的信息得到合适的模型，因此Image Captioning任务需要将CV和NLP的知识相结合。</p>
+<p><img src="static/image-20211108000150712.png" alt="image-20211108000150712" style="zoom:25%;" /></p>
+<p>本实验中使用的数据集是著名的COCO数据集，同时使用了预训练好的VGG模型进行降维之后的图像表示向量作为图像的特征，文本处理部分则需要我们自己实现RNN/LSTM</p>
+<h2 id="rnn">RNN<a class="headerlink" href="#rnn" title="Permanent link">&para;</a></h2>
+<h3 id="rnn的结构">RNN的结构<a class="headerlink" href="#rnn的结构" title="Permanent link">&para;</a></h3>
+<ul>
+<li>RNN指的是循环神经网络，是一种设计出来用于**处理序列化数据(比如自然语言，时序数据)的神经网络**，RNN可以保留一定的上下文信息并将序列前面的信息不断向后面传递。</li>
+<li>RNN的架构如下图所示，主要包含一个输入层，一个隐层和一个输出层，隐层单元的隐状态<span class="arithmatex">\(h_t\)</span>也会不断向下一个隐层单元传递。</li>
+</ul>
+<p><img src="static/image-20211107234559502.png" alt="image-20211107234559502" style="zoom: 33%;" /></p>
+<ul>
+<li>RNN的隐状态更新公式可以表示为：</li>
+</ul>
+<div class="arithmatex">\[
+h_t=\sigma(W_xx_{t}+W_hh_{t-1}+b)
+\]</div>
+<ul>
+<li>这里的**可学习参数**包括<span class="arithmatex">\(W_x,W_h,b\)</span>，分别是两个权重矩阵和一个bias向量，而激活函数通常使用双曲正切tanh函数，而最终的输出结果的计算方式是：</li>
+</ul>
+<div class="arithmatex">\[
+y_t=\mathrm{softmax}(W_sh_t)
+\]</div>
+<h3 id="rnn的前向传播及实现">RNN的前向传播及实现<a class="headerlink" href="#rnn的前向传播及实现" title="Permanent link">&para;</a></h3>
+<ul>
+<li>从RNN的架构可以看出，我们输入RNN的数据是一个序列<span class="arithmatex">\(X=(x_1,x_2,\dots,x_T)\)</span>，这个序列需要在RNN中按照顺序逐渐前向传播，最终得到一个隐状态的序列<span class="arithmatex">\(H=(h_1,h_2,\dots,h_T)\)</span>，而每一个单元内的前向传播过程可以用函数<code>rnn_step_forward</code>来描述</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">rnn_step_forward</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">prev_h</span><span class="p">,</span> <span class="n">Wx</span><span class="p">,</span> <span class="n">Wh</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="n">next_h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">prev_h</span><span class="p">,</span> <span class="n">Wh</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">Wx</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
+    <span class="n">cache</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">prev_h</span><span class="p">,</span> <span class="n">Wx</span><span class="p">,</span> <span class="n">Wh</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">next_h</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">next_h</span><span class="p">,</span> <span class="n">cache</span>
+</code></pre></div>
+<ul>
+<li>而整个序列的前向传播需要使用一个循环来完成，因此**RNN的训练不能并行化**，这也是RNN的一个重大缺点。我们使用一个函数来描述整个序列在RNN中的前向传播过程：</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">rnn_forward</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">h0</span><span class="p">,</span> <span class="n">Wx</span><span class="p">,</span> <span class="n">Wh</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="n">h</span><span class="p">,</span> <span class="n">cache</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="p">[]</span>
+    <span class="n">N</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">D</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">N</span><span class="p">,</span> <span class="n">H</span> <span class="o">=</span> <span class="n">h0</span><span class="o">.</span><span class="n">shape</span>
+    <span class="c1"># 最终生成的一个隐状态</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">H</span><span class="p">))</span>
+    <span class="n">next_h</span> <span class="o">=</span> <span class="n">h0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
+        <span class="n">x_step</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">D</span><span class="p">)</span>
+        <span class="n">next_h</span><span class="p">,</span> <span class="n">cache_step</span> <span class="o">=</span> <span class="n">rnn_step_forward</span><span class="p">(</span><span class="n">x_step</span><span class="p">,</span> <span class="n">next_h</span><span class="p">,</span> <span class="n">Wx</span><span class="p">,</span> <span class="n">Wh</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+        <span class="n">h</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">next_h</span>
+        <span class="c1"># cache用来保存每个单元中的有效信息，用于反向传播过程中的导数计算</span>
+        <span class="n">cache</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cache_step</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">h</span><span class="p">,</span> <span class="n">cache</span>
+</code></pre></div>
+<ul>
+<li>RNN的前向传播总体来说比较简单。</li>
+</ul>
+<h3 id="rnn的反向传播及实现">RNN的反向传播及实现<a class="headerlink" href="#rnn的反向传播及实现" title="Permanent link">&para;</a></h3>
+<ul>
+<li>RNN的反向传播和CNN等传统神经网络不同，是一种**“时间”上的反向传播**，也就是说在计算梯度并更新参数的时候，不仅要考虑从最上层的loss函数中传递下来的梯度，<strong>也要考虑从后面一个隐层单元(从前向传播的时间来看要更迟，所以被称为时间反向传播)传递下来的梯度</strong></li>
+<li>而对于各个参数，其梯度的计算方式如下(注意tanh函数导数的特殊性)：</li>
+</ul>
+<div class="arithmatex">\[
+s_t=W_xx_{t}+W_hh_{t-1}+b,\quad h_t=\tanh(s_t)
+\]</div>
+<div class="arithmatex">\[
+\frac{\partial h_t}{\partial s_t}=1-\tanh^2(s_t)
+\]</div>
+<div class="arithmatex">\[
+\frac{\partial s_t}{\partial W_x}=x_t^T
+\]</div>
+<div class="arithmatex">\[
+\frac{\partial s_t}{\partial W_h}=h_{t-1}^T
+\]</div>
+<div class="arithmatex">\[
+\frac{\partial s_t}{\partial x_t}=W_x^T
+\]</div>
+<div class="arithmatex">\[
+\frac{\partial s_t}{\partial h_{t-1}}=W_h^T
+\]</div>
+<ul>
+<li>根据这些公式和梯度的链式法则，我们可以写出一个隐层单元中的反向传播过程，用一个函数<code>rnn_step_backward</code>来表示</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">rnn_step_backward</span><span class="p">(</span><span class="n">dnext_h</span><span class="p">,</span> <span class="n">cache</span><span class="p">):</span>
+    <span class="n">dx</span><span class="p">,</span> <span class="n">dprev_h</span><span class="p">,</span> <span class="n">dWx</span><span class="p">,</span> <span class="n">dWh</span><span class="p">,</span> <span class="n">db</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">prev_h</span><span class="p">,</span> <span class="n">Wx</span><span class="p">,</span> <span class="n">Wh</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">next_h</span> <span class="o">=</span> <span class="n">cache</span>
+    <span class="n">ds</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">next_h</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">dnext_h</span>  <span class="c1"># ds的大小是N*H</span>
+    <span class="n">db</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">dWh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">prev_h</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">ds</span><span class="p">)</span>
+    <span class="n">dWx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">ds</span><span class="p">)</span>
+    <span class="n">dprev_h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="n">Wh</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+    <span class="n">dx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="n">Wx</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dprev_h</span><span class="p">,</span> <span class="n">dWx</span><span class="p">,</span> <span class="n">dWh</span><span class="p">,</span> <span class="n">db</span>
+</code></pre></div>
+<ul>
+<li>而RNN整体的反向传播也需要一个序列来完成，同时考虑从输出层的loss函数传递下来的梯度和从后一个隐藏单元传递下来的梯度，并使用函数<code>rnn_step_backward</code>来完成单个隐状态的更新。</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">rnn_backward</span><span class="p">(</span><span class="n">dh</span><span class="p">,</span> <span class="n">cache</span><span class="p">):</span>
+    <span class="n">N</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">H</span> <span class="o">=</span> <span class="n">dh</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">D</span> <span class="o">=</span> <span class="n">cache</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">dx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">D</span><span class="p">))</span>
+    <span class="n">dh0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="n">H</span><span class="p">))</span>
+    <span class="n">dWx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">D</span><span class="p">,</span> <span class="n">H</span><span class="p">))</span>
+    <span class="n">dWh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">H</span><span class="p">,</span> <span class="n">H</span><span class="p">))</span>
+    <span class="n">db</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">H</span><span class="p">,</span> <span class="p">))</span>
+    <span class="n">dh_prev</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="n">H</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">T</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="c1"># 这一步特别重要，将两个方向传递过来的梯度融合</span>
+        <span class="n">dh_step</span> <span class="o">=</span> <span class="n">dh</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">+</span> <span class="n">dh_prev</span>
+        <span class="n">dx_step</span><span class="p">,</span> <span class="n">dh_prev</span><span class="p">,</span> <span class="n">dwx</span><span class="p">,</span> <span class="n">dwh</span><span class="p">,</span> <span class="n">db_step</span> <span class="o">=</span> <span class="n">rnn_step_backward</span><span class="p">(</span><span class="n">dh_step</span><span class="p">,</span> <span class="n">cache</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">dx</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">dx_step</span>
+        <span class="n">dh0</span> <span class="o">=</span> <span class="n">dh_prev</span>
+        <span class="n">dWx</span> <span class="o">+=</span> <span class="n">dwx</span>
+        <span class="n">dWh</span> <span class="o">+=</span> <span class="n">dwh</span>
+        <span class="n">db</span> <span class="o">+=</span> <span class="n">db_step</span>
+    <span class="k">return</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dh0</span><span class="p">,</span> <span class="n">dWx</span><span class="p">,</span> <span class="n">dWh</span><span class="p">,</span> <span class="n">db</span>
+</code></pre></div>
+<h3 id="rnn的缺点">RNN的缺点<a class="headerlink" href="#rnn的缺点" title="Permanent link">&para;</a></h3>
+<ul>
+<li>从上面的代码实现中可以看出，RNN一个很大的缺点就是对于一个序列必须串行化训练，不能并行训练，造成训练的速度非常缓慢，同时RNN也存在梯度爆炸和梯度消失的问题，对于**长距离的依赖关系也缺乏学习的能力**，这些问题的具体分析可以在CS224N的相关笔记中看到</li>
+<li>拥有门控单元的RNN可以在一定程度上解决这个问题，比如LSTM</li>
+</ul>
+<h2 id="lstm">LSTM<a class="headerlink" href="#lstm" title="Permanent link">&para;</a></h2>
+<h3 id="lstm的基本架构">LSTM的基本架构<a class="headerlink" href="#lstm的基本架构" title="Permanent link">&para;</a></h3>
+<ul>
+<li>LSTM是<code>Long Short Term Memory</code>(长短期记忆模型)，是一种加入了门控单元的RNN，具有更长的“记忆能力”，可以捕捉到序列化输入中的**长距离依赖关系**(比如一个文本中距离很远的两个单词的某种特定关系)</li>
+<li>LSTM的组成单元是在RNN的组成单元的基础上加上了若干个控制单元(也叫做门)对整个单元进行控制，有输入门，输出门，遗忘门等等，同时又有一系列<code>memory cell</code>作为“<strong>长期记忆单元</strong>”，这些cell也要传递到下一个隐层中，用于保存当前输入的长期记忆，其基本组成单元的架构如下图所示：</li>
+</ul>
+<p><img alt="image-20211107234908560" src="../static/image-20211107234908560.png" /></p>
+<h3 id="lstm的计算过程">LSTM的计算过程<a class="headerlink" href="#lstm的计算过程" title="Permanent link">&para;</a></h3>
+<ul>
+<li>三个门控单元的结果计算</li>
+</ul>
+<div class="arithmatex">\[
+i,f,o=\mathrm{sigmoid}(W_hh_{t-1}+W_xx_t)\quad \text{Three gates}
+\]</div>
+<ul>
+<li>生成新的记忆单元</li>
+</ul>
+<div class="arithmatex">\[
+g=\tanh(W_hh_{t-1}+W_xx_t))
+\]</div>
+<ul>
+<li>按照门控单元的内容来控制输出结果，生成新的</li>
+</ul>
+<div class="arithmatex">\[
+c_{t} =f \odot c_{t-1}+i \odot g
+\]</div>
+<ul>
+<li>生成最终的隐状态：</li>
+</ul>
+<div class="arithmatex">\[
+h_{t} =o \odot \tanh \left(c_{t}\right)
+\]</div>
+<ul>
+<li>这里的三个**门控单元和记忆单元**分别起到如下作用：</li>
+<li>记忆单元：暂时生成一个当前输入内容的记忆</li>
+<li>输入门：评估**当前的序列输入<span class="arithmatex">\(x_t\)</span>的重要程度**，将其加权反映到最终记忆单元中</li>
+<li>遗忘门：评估**上一个单元输入的记忆单元的重要程度**，将其加权反映到最终记忆单元中</li>
+<li>输出门：将最终的记忆单元和隐状态区分开，因为最终记忆单元中的很多序列信息是**没有必要暴露到隐藏状态**中的，输出门就是来评估**有多少信息可以从最终记忆单元传递到隐状态中**</li>
+<li>整个计算过程可以用一张图来表示：</li>
+</ul>
+<p><img alt="image-20211107234925330" src="../static/image-20211107234925330.png" /></p>
+<h3 id="lstm的前向传播实现">LSTM的前向传播实现<a class="headerlink" href="#lstm的前向传播实现" title="Permanent link">&para;</a></h3>
+<p>我们发现跟RNN相比，LSTM还多了三个门控单元和一个记忆单元需要处理，并且这些组件的值都需要用输入的<span class="arithmatex">\(x_t\)</span>和<span class="arithmatex">\(h_{t-1}\)</span>用类似的方法计算，非常麻烦，因此CS231N的assignment3里面采取了这样的trick来解决计算太麻烦的问题：
+- 将用来处理<span class="arithmatex">\(x_t,h_{t-1}\)</span>的权重矩阵的列数扩大四倍，再将结果<span class="arithmatex">\(A\)</span>按照列进行四等分，分别用sigmoid和tanh函数处理之后生成三个门<span class="arithmatex">\(i，f，o\)</span>以及新的记忆单元<span class="arithmatex">\(g\)</span>，然后按公式分别计算并合并
+- 求梯度的时候分别求出<span class="arithmatex">\(i，f，o\)</span>和<span class="arithmatex">\(g\)</span>的梯度然后合并成<span class="arithmatex">\(A\)</span>的梯度</p>
+<p>因此LSTM单元的前向传播可以用下面这个函数<code>lstm_step_forward</code>来实现：</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">lstm_step_forward</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">prev_h</span><span class="p">,</span> <span class="n">prev_c</span><span class="p">,</span> <span class="n">Wx</span><span class="p">,</span> <span class="n">Wh</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="n">next_h</span><span class="p">,</span> <span class="n">next_c</span><span class="p">,</span> <span class="n">cache</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+    <span class="n">N</span><span class="p">,</span> <span class="n">H</span> <span class="o">=</span> <span class="n">prev_h</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">Wx</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">prev_h</span><span class="p">,</span> <span class="n">Wh</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="c1"># 分割成四等份，每一份的size都是N * H</span>
+    <span class="n">ai</span><span class="p">,</span> <span class="n">af</span><span class="p">,</span> <span class="n">ao</span><span class="p">,</span> <span class="n">ag</span> <span class="o">=</span> <span class="n">A</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">:</span> <span class="n">H</span><span class="p">],</span> <span class="n">A</span><span class="p">[:,</span> <span class="n">H</span><span class="p">:</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">H</span><span class="p">],</span> <span class="n">A</span><span class="p">[:,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">H</span><span class="p">:</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">H</span><span class="p">],</span> <span class="n">A</span><span class="p">[:,</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">H</span><span class="p">:</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">H</span><span class="p">]</span>
+    <span class="n">i</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">o</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">ai</span><span class="p">),</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">af</span><span class="p">),</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">ao</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">ag</span><span class="p">)</span>
+    <span class="c1"># 按公式一步步进行计算</span>
+    <span class="n">next_c</span> <span class="o">=</span> <span class="n">f</span> <span class="o">*</span> <span class="n">prev_c</span> <span class="o">+</span> <span class="n">i</span> <span class="o">*</span> <span class="n">g</span>
+    <span class="n">next_h</span> <span class="o">=</span> <span class="n">o</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">next_c</span><span class="p">)</span>
+    <span class="n">cache</span> <span class="o">=</span> <span class="p">(</span><span class="n">next_c</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">o</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">prev_c</span><span class="p">,</span> <span class="n">prev_h</span><span class="p">,</span> <span class="n">Wh</span><span class="p">,</span> <span class="n">Wx</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">next_h</span><span class="p">,</span> <span class="n">next_c</span><span class="p">,</span> <span class="n">cache</span>
+</code></pre></div>
+<ul>
+<li>而LSTM整体的前向传播和普通的RNN没有什么区别，这里就不重复了。</li>
+</ul>
+<h3 id="lstm的反向传播的实现">LSTM的反向传播的实现<a class="headerlink" href="#lstm的反向传播的实现" title="Permanent link">&para;</a></h3>
+<p>LSTM的反向传播过程中，依然遵循RNN的反向传播的基本形式，即时间反向传播，在计算梯度的时候需要考虑后一个隐状态传递回来的梯度，并且需要对<span class="arithmatex">\(i,o,f,g\)</span>分别求梯度然后拼成一个完整的A的梯度，再对A下属的几个参数矩阵进行求导进行反向传播，最终实现LSTM反向传播的代码如下(这里的公式推导和RNN没有本质区别，难点在于把四个梯度矩阵拼接成一个，其他地方的导数还是很好求的)：</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">lstm_step_backward</span><span class="p">(</span><span class="n">dnext_h</span><span class="p">,</span> <span class="n">dnext_c</span><span class="p">,</span> <span class="n">cache</span><span class="p">):</span>
+    <span class="n">next_c</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">o</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">prev_c</span><span class="p">,</span> <span class="n">prev_h</span><span class="p">,</span> <span class="n">Wh</span><span class="p">,</span> <span class="n">Wx</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">cache</span>
+    <span class="n">dnext_c</span> <span class="o">+=</span> <span class="n">dnext_h</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">next_c</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">o</span>
+    <span class="n">dprev_c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">dnext_c</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+    <span class="c1"># 分别求出四部分的梯度然后进行合并</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">dnext_c</span> <span class="o">*</span> <span class="n">prev_c</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">f</span><span class="p">)</span> <span class="o">*</span> <span class="n">f</span>
+    <span class="n">di</span> <span class="o">=</span> <span class="n">dnext_c</span> <span class="o">*</span> <span class="n">g</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">i</span><span class="p">)</span> <span class="o">*</span> <span class="n">i</span>
+    <span class="n">dg</span> <span class="o">=</span> <span class="n">dnext_c</span> <span class="o">*</span> <span class="n">i</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">g</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">do</span> <span class="o">=</span> <span class="n">dnext_h</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">next_c</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">o</span><span class="p">)</span> <span class="o">*</span> <span class="n">o</span>
+    <span class="n">dA</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">di</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">do</span><span class="p">,</span> <span class="n">dg</span><span class="p">))</span>  <span class="c1"># 得到一个 N * 4H的梯度矩阵</span>
+    <span class="n">dWx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">dA</span><span class="p">)</span>
+    <span class="n">dx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">dA</span><span class="p">,</span> <span class="n">Wx</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+    <span class="n">dWh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">prev_h</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">dA</span><span class="p">)</span>
+    <span class="n">dprev_h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">dA</span><span class="p">,</span> <span class="n">Wh</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+    <span class="n">db</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dA</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dprev_h</span><span class="p">,</span> <span class="n">dprev_c</span><span class="p">,</span> <span class="n">dWx</span><span class="p">,</span> <span class="n">dWh</span><span class="p">,</span> <span class="n">db</span>
+</code></pre></div>
+<ul>
+<li>LSTM的整个序列的反向传播和RNN也类似，这里就不放基本重复的代码了，至此我们完成了RNN和LSTM的基本单元的前向传播和反向传播的底层代码的实现。</li>
+</ul>
+<h2 id="captioningrnn的实现">CaptioningRNN的实现<a class="headerlink" href="#captioningrnn的实现" title="Permanent link">&para;</a></h2>
+<p>事实上我们遵循和前面MLP/CNN一样的范式，在<code>__init__</code>中定义所有的参数，并在<code>loss</code>中实现神经网络的前向传播和反向传播，具体的实现代码如下：</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">CaptioningRNN</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A CaptioningRNN produces captions from image features using a recurrent</span>
+<span class="sd">    neural network.</span>
+
+<span class="sd">    The RNN receives input vectors of size D, has a vocab size of V, works on</span>
+<span class="sd">    sequences of length T, has an RNN hidden dimension of H, uses word vectors</span>
+<span class="sd">    of dimension W, and operates on minibatches of size N.</span>
+
+<span class="sd">    Note that we don&#39;t use any regularization for the CaptioningRNN.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">word_to_idx</span><span class="p">,</span>
+        <span class="n">input_dim</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span>
+        <span class="n">wordvec_dim</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span>
+        <span class="n">hidden_dim</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span>
+        <span class="n">cell_type</span><span class="o">=</span><span class="s2">&quot;rnn&quot;</span><span class="p">,</span>
+        <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">if</span> <span class="n">cell_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">{</span><span class="s2">&quot;rnn&quot;</span><span class="p">,</span> <span class="s2">&quot;lstm&quot;</span><span class="p">}:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Invalid cell_type &quot;</span><span class="si">%s</span><span class="s1">&quot;&#39;</span> <span class="o">%</span> <span class="n">cell_type</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">cell_type</span> <span class="o">=</span> <span class="n">cell_type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span> <span class="o">=</span> <span class="n">dtype</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">word_to_idx</span> <span class="o">=</span> <span class="n">word_to_idx</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">idx_to_word</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="n">w</span> <span class="k">for</span> <span class="n">w</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">word_to_idx</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="n">vocab_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">word_to_idx</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_null</span> <span class="o">=</span> <span class="n">word_to_idx</span><span class="p">[</span><span class="s2">&quot;&lt;NULL&gt;&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_start</span> <span class="o">=</span> <span class="n">word_to_idx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;&lt;START&gt;&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_end</span> <span class="o">=</span> <span class="n">word_to_idx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;&lt;END&gt;&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+        <span class="c1"># Initialize word vectors</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;W_embed&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">vocab_size</span><span class="p">,</span> <span class="n">wordvec_dim</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;W_embed&quot;</span><span class="p">]</span> <span class="o">/=</span> <span class="mi">100</span>
+
+        <span class="c1"># Initialize CNN -&gt; hidden state projection parameters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;W_proj&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">input_dim</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;W_proj&quot;</span><span class="p">]</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">input_dim</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;b_proj&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">)</span>
+
+        <span class="c1"># Initialize parameters for the RNN</span>
+        <span class="n">dim_mul</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;lstm&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;rnn&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}[</span><span class="n">cell_type</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;Wx&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">wordvec_dim</span><span class="p">,</span> <span class="n">dim_mul</span> <span class="o">*</span> <span class="n">hidden_dim</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;Wx&quot;</span><span class="p">]</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">wordvec_dim</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;Wh&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">dim_mul</span> <span class="o">*</span> <span class="n">hidden_dim</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;Wh&quot;</span><span class="p">]</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">dim_mul</span> <span class="o">*</span> <span class="n">hidden_dim</span><span class="p">)</span>
+
+        <span class="c1"># Initialize output to vocab weights</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;W_vocab&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;W_vocab&quot;</span><span class="p">]</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;b_vocab&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">vocab_size</span><span class="p">)</span>
+
+        <span class="c1"># Cast parameters to correct dtype</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">loss</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">captions</span><span class="p">):</span>
+        <span class="c1"># Cut captions into two pieces: captions_in has everything but the last word</span>
+        <span class="c1"># and will be input to the RNN; captions_out has everything but the first</span>
+        <span class="c1"># word and this is what we will expect the RNN to generate. These are offset</span>
+        <span class="c1"># by one relative to each other because the RNN should produce word (t+1)</span>
+        <span class="c1"># after receiving word t. The first element of captions_in will be the START</span>
+        <span class="c1"># token, and the first element of captions_out will be the first word.</span>
+        <span class="n">captions_in</span> <span class="o">=</span> <span class="n">captions</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">captions_out</span> <span class="o">=</span> <span class="n">captions</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:]</span>
+
+        <span class="c1"># You&#39;ll need this</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">captions_out</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_null</span>
+
+        <span class="c1"># Weight and bias for the affine transform from image features to initial</span>
+        <span class="c1"># hidden state</span>
+        <span class="n">W_proj</span><span class="p">,</span> <span class="n">b_proj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;W_proj&quot;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;b_proj&quot;</span><span class="p">]</span>
+
+        <span class="c1"># Word embedding matrix</span>
+        <span class="n">W_embed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;W_embed&quot;</span><span class="p">]</span>
+
+        <span class="c1"># Input-to-hidden, hidden-to-hidden, and biases for the RNN</span>
+        <span class="n">Wx</span><span class="p">,</span> <span class="n">Wh</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;Wx&quot;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;Wh&quot;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">]</span>
+
+        <span class="c1"># Weight and bias for the hidden-to-vocab transformation.</span>
+        <span class="n">W_vocab</span><span class="p">,</span> <span class="n">b_vocab</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;W_vocab&quot;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;b_vocab&quot;</span><span class="p">]</span>
+
+        <span class="c1"># 前向传播部分</span>
+        <span class="c1"># 第一步，得到初始化的参数h</span>
+        <span class="n">initial_h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">W_proj</span><span class="p">)</span> <span class="o">+</span> <span class="n">b_proj</span>
+        <span class="c1"># 第二步，得到初始化的词嵌入向量</span>
+        <span class="n">embeddings</span><span class="p">,</span> <span class="n">cache_embed</span> <span class="o">=</span> <span class="n">word_embedding_forward</span><span class="p">(</span><span class="n">captions_in</span><span class="p">,</span> <span class="n">W_embed</span><span class="p">)</span>
+        <span class="c1"># 第三步，使用RNN/LSTM</span>
+        <span class="n">cache_rnn</span><span class="p">,</span> <span class="n">cache_lstm</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cell_type</span> <span class="o">==</span> <span class="s2">&quot;rnn&quot;</span><span class="p">:</span>
+            <span class="n">h</span><span class="p">,</span> <span class="n">cache_rnn</span> <span class="o">=</span> <span class="n">rnn_forward</span><span class="p">(</span><span class="n">embeddings</span><span class="p">,</span> <span class="n">initial_h</span><span class="p">,</span> <span class="n">Wx</span><span class="p">,</span> <span class="n">Wh</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">h</span><span class="p">,</span> <span class="n">cache_lstm</span> <span class="o">=</span> <span class="n">lstm_forward</span><span class="p">(</span><span class="n">embeddings</span><span class="p">,</span> <span class="n">initial_h</span><span class="p">,</span> <span class="n">Wx</span><span class="p">,</span> <span class="n">Wh</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+        <span class="c1"># 第四步，计算scores</span>
+        <span class="n">scores</span><span class="p">,</span> <span class="n">cache_scores</span> <span class="o">=</span> <span class="n">temporal_affine_forward</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">W_vocab</span><span class="p">,</span> <span class="n">b_vocab</span><span class="p">)</span>
+        <span class="c1"># 第五步，计算loss</span>
+        <span class="n">loss</span><span class="p">,</span> <span class="n">dscores</span> <span class="o">=</span> <span class="n">temporal_softmax_loss</span><span class="p">(</span><span class="n">scores</span><span class="p">,</span> <span class="n">captions_out</span><span class="p">,</span> <span class="n">mask</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="c1"># 反向传播部分</span>
+        <span class="n">dh</span><span class="p">,</span> <span class="n">dW_v</span><span class="p">,</span> <span class="n">db_v</span> <span class="o">=</span> <span class="n">temporal_affine_backward</span><span class="p">(</span><span class="n">dscores</span><span class="p">,</span> <span class="n">cache_scores</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cell_type</span> <span class="o">==</span> <span class="s2">&quot;rnn&quot;</span><span class="p">:</span>
+            <span class="n">dx</span><span class="p">,</span> <span class="n">dh0</span><span class="p">,</span> <span class="n">dWx</span><span class="p">,</span> <span class="n">dWh</span><span class="p">,</span> <span class="n">db</span> <span class="o">=</span> <span class="n">rnn_backward</span><span class="p">(</span><span class="n">dh</span><span class="p">,</span> <span class="n">cache_rnn</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">dx</span><span class="p">,</span> <span class="n">dh0</span><span class="p">,</span> <span class="n">dWx</span><span class="p">,</span> <span class="n">dWh</span><span class="p">,</span> <span class="n">db</span> <span class="o">=</span> <span class="n">lstm_backward</span><span class="p">(</span><span class="n">dh</span><span class="p">,</span> <span class="n">cache_lstm</span><span class="p">)</span>
+        <span class="n">grads</span><span class="p">[</span><span class="s1">&#39;W_embed&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">word_embedding_backward</span><span class="p">(</span><span class="n">dx</span><span class="p">,</span> <span class="n">cache_embed</span><span class="p">)</span>
+        <span class="n">grads</span><span class="p">[</span><span class="s1">&#39;W_proj&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">features</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">dh0</span><span class="p">)</span>
+        <span class="n">grads</span><span class="p">[</span><span class="s1">&#39;b_proj&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dh0</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">grads</span><span class="p">[</span><span class="s1">&#39;Wx&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dWx</span>
+        <span class="n">grads</span><span class="p">[</span><span class="s1">&#39;Wh&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dWh</span>
+        <span class="n">grads</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">db</span>
+        <span class="n">grads</span><span class="p">[</span><span class="s1">&#39;W_vocab&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dW_v</span>
+        <span class="n">grads</span><span class="p">[</span><span class="s1">&#39;b_vocab&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">db_v</span>
+        <span class="k">return</span> <span class="n">loss</span><span class="p">,</span> <span class="n">grads</span>
+</code></pre></div>
+<p>训练的结果如下图所示，模型可以进行一些简单的看图说话功能：</p>
+<p><img src="static/image-20211108000253181.png" alt="image-20211108000253181" style="zoom:33%;" /></p>
+<p><img src="static/image-20211108000355327.png" alt="image-20211108000355327" style="zoom: 25%;" /></p>
+<p><span id="busuanzi_container_page_pv">本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span></p>
+
+  <hr>
+<div class="md-source-file">
+  <small>
+    
+      最后更新:
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-01-23T10:40:25+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-01-23</span>
+      
+        <br>
+        创建日期:
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-01-23T10:40:25+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-01-23</span>
+      
+    
+  </small>
+</div>
+
+
+
+
+<div id="__comments">
+    
+    <script src="https://giscus.app/client.js"
+        data-repo="Zhang-Each/My-CS-Notebook"
+        data-repo-id="R_kgDOI0dr4w"
+        data-category="General"
+        data-category-id="DIC_kwDOI0dr484CTvIK"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="1"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="zh-CN"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+        </script>
+    <h3>颜色主题调整</h3>
+    <div class="tx-switch">
+    <button class="button1" data-md-color-primary="red" style="background-color:red">red</button>
+    <button class="button1" data-md-color-primary="pink" style="background-color:pink;color:black">pink</button>
+    <button class="button1" data-md-color-primary="purple" style="background-color:purple">purple</button>
+    <button class="button1" data-md-color-primary="indigo" style="background-color:indigo">indigo</button>
+    <button class="button1" data-md-color-primary="blue" style="background-color:blue">blue</button>
+    <button class="button1" data-md-color-primary="cyan" style="background-color:cyan;color:black">cyan</button>
+    <button class="button1" data-md-color-primary="teal" style="background-color:teal">teal</button>
+    <button class="button1" data-md-color-primary="green" style="background-color:green">green</button>
+    <button class="button1" data-md-color-primary="lime" style="background-color:lime;color:black">lime</button>
+    <button class="button1" data-md-color-primary="orange" style="background-color:orange;color:black">orange</button>
+    <button class="button1" data-md-color-primary="brown" style="background-color:brown;border-radius=3px">brown</button>
+    <button class="button1" data-md-color-primary="grey" style="background-color:grey">grey</button>
+    <button class="button1" data-md-color-primary="black" style="background-color:black">black</button>
+    <button class="button1" data-md-color-primary="white" style="background-color:white;color:black">white</button>
+    </div>
+    
+    <script>
+    var buttons = document.querySelectorAll("button[data-md-color-primary]")
+    buttons.forEach(function(button) {
+            button.addEventListener("click", function() {
+            var attr = this.getAttribute("data-md-color-primary")
+            document.body.setAttribute("data-md-color-primary", attr)
+            localStorage.setItem("data-md-color-primary",attr);
+            })
+    })
+    </script>
+    
+    <h2 ><!-- 评论 -->评论区~</h2>
+    
+    有用的话请给我个star或者follow我的账号!! 非常感谢!!
+    
+    </br>
+    
+    快来跟我聊天~
+    
+    </div>
+    
+    <script src="https://giscus.app/client.js"
+        data-repo="Zhang-Each/Notebook-Comments"
+        data-repo-id="R_kgDOI0dlNg"
+        data-category="General"
+        data-category-id="DIC_kwDOI0dlNs4CTvH-"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="1"
+        data-input-position="top"
+        data-theme="preferred_color_scheme"
+        data-lang="zh-CN"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+    </script>
+    
+    <!-- Synchronize Giscus theme with palette -->
+    <script>
+    var giscus = document.querySelector("script[src*=giscus]")
+    
+    /* Set palette on initial load */
+    // var palette = __md_get("__palette")
+    // if (palette && typeof palette.color === "object") {
+    //     var theme = palette.color.scheme === "slate" ? "dark" : "light"
+    //     giscus.setAttribute("data-theme", theme) 
+    // }
+    
+    /* Register event handlers after documented loaded */
+    // document.addEventListener("DOMContentLoaded", function() {
+    //     var ref = document.querySelector("[data-md-component=palette]")
+    //     ref.addEventListener("change", function() {
+    //     var palette = __md_get("__palette")
+    //     if (palette && typeof palette.color === "object") {
+    //         var theme = palette.color.scheme === "slate" ? "dark" : "light"
+    
+    //         /* Instruct Giscus to change theme */
+    //         var frame = document.querySelector(".giscus-frame")
+    //         frame.contentWindow.postMessage(
+    //         { giscus: { setConfig: { theme } } },
+    //         "https://giscus.app"
+    //         )
+    //     }
+    //     })
+    // })
+    </script>
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            回到页面顶部
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      本页面的全部内容在 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh">CC BY-SA 4.0</a> 和 <a href="https://github.com/zTrix/sata-license">SATA</a> 协议之条款下提供，附加条款亦可能应用。<br /><span id="busuanzi_container_site_uv">本站访客总人数<span id="busuanzi_value_site_uv"></span>人次，</span><span id="busuanzi_container_site_pv">本站总访问人数<span id="busuanzi_value_site_pv"></span>次。</span>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "content.code.annotate", "navigation.tracking", "navigation.indexes", "navigation.top", "toc.follow"], "search": "../../assets/javascripts/workers/search.e5c33ebb.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.51d95adb.min.js"></script>
+      
+        <script src="../../js/timeago.min.js"></script>
+      
+        <script src="../../js/timeago_mkdocs_material.js"></script>
+      
+        <script src="../../from_oi_wiki/js/extra.js"></script>
+      
+        <script src="../../js/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js"></script>
+      
+        <script src="../../js/tablesort.js"></script>
+      
+        <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+      
+    
+  </body>
+</html>
