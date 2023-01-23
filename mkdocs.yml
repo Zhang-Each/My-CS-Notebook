@@ -1,19 +1,38 @@
 nav:
   - 🏡 主页: # 主页/
     - index.md
-  - 深度学习:
-    - 深度学习/index.md
-    - CS231N神经网络与深度学习:
-      - 01.kNN和线性分类器: 深度学习/Stanford-CS231N-Assignment札记1：kNN和线性分类器.md
-      - 02.多层全连接神经网络和优化器: 深度学习/Stanford-CS231N-Assignment札记2：多层全连接神经网络和优化器.md
+  - 🐰 深度学习:
+    - CS231N/index.md
+    - CS231N-神经网络与深度学习:
+      - 01.kNN和线性分类器: CS231N/Stanford-CS231N-Assignment札记1：kNN和线性分类器.md
+      - 02.多层全连接神经网络和优化器: CS231N/Stanford-CS231N-Assignment札记2：多层全连接神经网络和优化器.md
+      - 03.Normalization和DropOut: CS231N/Stanford-CS231N-Assignment札记3：Normalization和DropOut.md
+      - 04.卷积神经网络CNN: CS231N/Stanford-CS231N-Assignment札记4：卷积神经网络CNN.md
+      - 05.RNN&LSTM与图片描述: CS231N/Stanford-CS231N-Assignment札记5：RNN&LSTM与图片描述.md
+      - 06.Transformer与图片描述: CS231N/Stanford-CS231N-Assignment札记6：Transformer与图片描述.md
+      - 07.模型可视化，图像欺诈和GAN: CS231N/Stanford-CS231N-Assignment札记7：模型可视化，图像欺诈和GAN.md
+      - 08.自监督学习与课程总结: CS231N/Stanford-CS231N-Assignment札记8：自监督学习与课程总结.md
+    - CS224W-图机器学习与图神经网络:
+      - CS224W/index.md
+      - 01.导论，传统的图学习方法 : CS224W/CS224W：图机器学习01.md
+      - 02.节点嵌入和PageRank : CS224W/CS224W：图机器学习02.md
+      - 03.消息传递机制 : CS224W/CS224W：图机器学习03.md
+      - 04.图神经网络基础 : CS224W/CS224W：图机器学习04.md
+      - 05.图神经网络的训练和应用，表示能力分析 : CS224W/CS224W：图机器学习05.md
+      - 06.知识图谱，知识图谱推理 : CS224W/CS224W：图机器学习06.md
+      - 07.频繁子图挖掘 : CS224W/CS224W：图机器学习07.md
+      - 08.社区检测 : CS224W/CS224W：图机器学习08.md
+      - 09.图生成模型 : CS224W/CS224W：图机器学习09.md
+      - 10.图神经网络前沿话题 : CS224W/CS224W：图机器学习10.md
+
   - 杂谈与总结:
     - 杂谈与总结/index.md
     - 2022年度总结: 杂谈与总结/2022年度总结.md
 
 site_name: 小角龙的学习记录
-site_url: https://zhang-each.github.io/CS-notebook/
-repo_name: Zhang-Each/CS-notebook
-repo_url: https://github.com/zhang-each/CS-notebook/
+site_url: https://zhang-each.github.io/My-CS-notebook/
+repo_name: Zhang-Each/My-CS-notebook
+repo_url: https://github.com/zhang-each/My-CS-notebook/
 
 theme:
   name: material
@@ -80,7 +99,7 @@ markdown_extensions:
   - pymdownx.tasklist:
       custom_checkbox: true
   - pymdownx.tilde
-copyright: '本页面的全部内容在 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh">CC BY-SA 4.0</a> 和 <a href="https://github.com/zTrix/sata-license">SATA</a> 协议之条款下提供，附加条款亦可能应用。<span id="busuanzi_container_site_uv">本站访客总人数<span id="busuanzi_value_site_uv"></span>人次</span>'
+copyright: '本页面的全部内容在 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh">CC BY-SA 4.0</a> 和 <a href="https://github.com/zTrix/sata-license">SATA</a> 协议之条款下提供，附加条款亦可能应用。<br /><span id="busuanzi_container_site_uv">本站访客总人数<span id="busuanzi_value_site_uv"></span>人次，</span><span id="busuanzi_container_site_pv">本站总访问人数<span id="busuanzi_value_site_pv"></span>次。</span>'
 
 extra_css:
   - 'from_oi_wiki/css/extra.css?v=13'

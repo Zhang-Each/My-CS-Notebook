@@ -318,9 +318,11 @@ $$
 \frac{\partial  y_i}{\partial s_i}=\hat y_i(1- y_i) = y_i- y_i^2
 $$
 实际上就是比两个下标不相等的时候多了一个$\hat y_i$，又因为$s=XW$，所以
+
 $$
 \frac{\partial L}{\partial W_{j}}=-\frac 1N\sum_{i=1}^Nx_i^T(\hat y_i-y_i)+2\lambda W_j
 $$
+
 因此最终SoftMax函数的损失函数和梯度计算的实现代码如下：
 
 ```python
