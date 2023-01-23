@@ -1209,9 +1209,9 @@
 <p>我们可以将上面的表达式进行**向量化**来提高计算的效率，用对角矩阵D来表示<span class="arithmatex">\(D_{v,v}=|N(v)|\)</span>，这样一来就有<span class="arithmatex">\(D^{-1}_{v,v}=\frac 1 {N(v)}\)</span> 并且令<span class="arithmatex">\(H^{(l)}=[h_1^{(l)},\dots,h_{|V|}^{(l)}]^T\)</span>,这样一来上面的式子就可以表示为：</p>
 </li>
 </ul>
-<p>$$
-  H<sup -1="-1">{(l+1)}=\sigma(D</sup>A H<sup>{(l)}W_l</sup>T+H<sup>{(l)}B_l</sup>T)
-  $$</p>
+<div class="arithmatex">\[
+  H^{(l+1)}=\sigma(D^{-1}A H^{(l)}W_l^T+H^{(l)}B_l^T)
+\]</div>
 <ul>
 <li>self translation + neighborhood aggregation两个部分组成</li>
 </ul>
@@ -1404,7 +1404,7 @@ h_v^{(l)}[i]=\sigma(\sum_{u\in N(v)}\alpha_{vu}^iW^{(l)}h_u^{(l-1)})
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-01-23T10:40:25+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-01-23</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-01-23T15:13:19+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-01-23</span>
       
         <br>
         创建日期:
