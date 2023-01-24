@@ -6,6 +6,51 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://zhang-each.github.io/My-CS-notebook/CS224N/</loc>
+         <lastmod>2023-01-24</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://zhang-each.github.io/My-CS-notebook/CS224N/NLP01-Introduction%26WordVector/</loc>
+         <lastmod>2023-01-24</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://zhang-each.github.io/My-CS-notebook/CS224N/NLP02-Word2Vec/</loc>
+         <lastmod>2023-01-24</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://zhang-each.github.io/My-CS-notebook/CS224N/NLP03-DependenceParsing/</loc>
+         <lastmod>2023-01-24</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://zhang-each.github.io/My-CS-notebook/CS224N/NLP04-LM%26RNN%26LSTM/</loc>
+         <lastmod>2023-01-24</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://zhang-each.github.io/My-CS-notebook/CS224N/NLP05-Seq2Seq/</loc>
+         <lastmod>2023-01-24</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://zhang-each.github.io/My-CS-notebook/CS224N/Stanford-CS224N-Assignment1%262/</loc>
+         <lastmod>2023-01-24</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://zhang-each.github.io/My-CS-notebook/CS224N/Stanford-CS224N-Assignment3/</loc>
+         <lastmod>2023-01-24</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://zhang-each.github.io/My-CS-notebook/CS224N/Stanford-CS224N-Assignment4/</loc>
+         <lastmod>2023-01-24</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://zhang-each.github.io/My-CS-notebook/CS224W/</loc>
          <lastmod>2023-01-24</lastmod>
          <changefreq>daily</changefreq>

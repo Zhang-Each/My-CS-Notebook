@@ -1,0 +1,1916 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://zhang-each.github.io/My-CS-notebook/CS224N/Stanford-CS224N-Assignment1%262/">
+      
+      
+        <link rel="prev" href="../NLP05-Seq2Seq/">
+      
+      
+        <link rel="next" href="../Stanford-CS224N-Assignment3/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.6">
+    
+    
+      
+        <title>Assignment1&2 - 小角龙的学习记录</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.558e4712.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.2505c338.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Hiragino+Sans+GB:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Hiragino Sans GB";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../from_oi_wiki/css/extra.css?v=13">
+    
+      <link rel="stylesheet" href="../../css/status.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#stanford-cs224n-assignment12札记词向量的推导和实现" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="小角龙的学习记录" class="md-header__button md-logo" aria-label="小角龙的学习记录" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            小角龙的学习记录
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Assignment1&2
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/zhang-each/My-CS-notebook/" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Zhang-Each/My-CS-notebook
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        🏡 主页
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../CS231N/" class="md-tabs__link md-tabs__link--active">
+        🐰 深度学习
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../%E6%9D%82%E8%B0%88%E4%B8%8E%E6%80%BB%E7%BB%93/" class="md-tabs__link">
+        🐷 杂谈与总结
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="小角龙的学习记录" class="md-nav__button md-logo" aria-label="小角龙的学习记录" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    小角龙的学习记录
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/zhang-each/My-CS-notebook/" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Zhang-Each/My-CS-notebook
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      
+        
+          
+            
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../..">🏡 主页</a>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="🏡 主页" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          🏡 主页
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../CS231N/">🐰 深度学习</a>
+          
+            <label for="__nav_2">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="🐰 深度学习" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          🐰 深度学习
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2" type="checkbox" id="__nav_2_2" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_2" tabindex="0" aria-expanded="false">
+          CS231N-神经网络与深度学习
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="CS231N-神经网络与深度学习" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          CS231N-神经网络与深度学习
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B01%EF%BC%9AkNN%E5%92%8C%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB%E5%99%A8/" class="md-nav__link">
+        01.kNN和线性分类器
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B02%EF%BC%9A%E5%A4%9A%E5%B1%82%E5%85%A8%E8%BF%9E%E6%8E%A5%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%92%8C%E4%BC%98%E5%8C%96%E5%99%A8/" class="md-nav__link">
+        02.多层全连接神经网络和优化器
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B03%EF%BC%9ANormalization%E5%92%8CDropOut/" class="md-nav__link">
+        03.Normalization和DropOut
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B04%EF%BC%9A%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9CCNN/" class="md-nav__link">
+        04.卷积神经网络CNN
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B05%EF%BC%9ARNN%26LSTM%E4%B8%8E%E5%9B%BE%E7%89%87%E6%8F%8F%E8%BF%B0/" class="md-nav__link">
+        05.RNN&LSTM与图片描述
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B06%EF%BC%9ATransformer%E4%B8%8E%E5%9B%BE%E7%89%87%E6%8F%8F%E8%BF%B0/" class="md-nav__link">
+        06.Transformer与图片描述
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B07%EF%BC%9A%E6%A8%A1%E5%9E%8B%E5%8F%AF%E8%A7%86%E5%8C%96%EF%BC%8C%E5%9B%BE%E5%83%8F%E6%AC%BA%E8%AF%88%E5%92%8CGAN/" class="md-nav__link">
+        07.模型可视化，图像欺诈和GAN
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B08%EF%BC%9A%E8%87%AA%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%E4%B8%8E%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/" class="md-nav__link">
+        08.自监督学习与课程总结
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_3" type="checkbox" id="__nav_2_3" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../CS224W/">CS224W-图机器学习与图神经网络</a>
+          
+            <label for="__nav_2_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="CS224W-图机器学习与图神经网络" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          CS224W-图机器学习与图神经网络
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A001/" class="md-nav__link">
+        01.导论，传统的图学习方法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A002/" class="md-nav__link">
+        02.节点嵌入和PageRank
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A003/" class="md-nav__link">
+        03.消息传递机制
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A004/" class="md-nav__link">
+        04.图神经网络基础
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A005/" class="md-nav__link">
+        05.图神经网络的训练和应用，表示能力分析
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A006/" class="md-nav__link">
+        06.知识图谱，知识图谱推理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A007/" class="md-nav__link">
+        07.频繁子图挖掘
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A008/" class="md-nav__link">
+        08.社区检测
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A009/" class="md-nav__link">
+        09.图生成模型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A010/" class="md-nav__link">
+        10.图神经网络前沿话题
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_4" type="checkbox" id="__nav_2_4" checked>
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../">CS224N-基于深度学习的自然语言处理</a>
+          
+            <label for="__nav_2_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="CS224N-基于深度学习的自然语言处理" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          CS224N-基于深度学习的自然语言处理
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../NLP01-Introduction%26WordVector/" class="md-nav__link">
+        01-Introduction&WordVector
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../NLP02-Word2Vec/" class="md-nav__link">
+        02-Word2Vec
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../NLP03-DependenceParsing/" class="md-nav__link">
+        03-DependenceParsing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../NLP04-LM%26RNN%26LSTM/" class="md-nav__link">
+        04-LM&RNN&LSTM
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../NLP05-Seq2Seq/" class="md-nav__link">
+        05-Seq2Seq
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Assignment1&2
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Assignment1&2
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#assignment1word-vectors" class="md-nav__link">
+    Assignment1：Word Vectors
+  </a>
+  
+    <nav class="md-nav" aria-label="Assignment1：Word Vectors">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#基于计数的词向量" class="md-nav__link">
+    基于计数的词向量
+  </a>
+  
+    <nav class="md-nav" aria-label="基于计数的词向量">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#计算不同的单词的出现情况" class="md-nav__link">
+    计算不同的单词的出现情况
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#构建co-occurence矩阵" class="md-nav__link">
+    构建Co-occurence矩阵
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#进行svd分解" class="md-nav__link">
+    进行SVD分解
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#对词向量进行可视化" class="md-nav__link">
+    对词向量进行可视化
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#基于预测的词向量" class="md-nav__link">
+    基于预测的词向量
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assignment2word2vec" class="md-nav__link">
+    Assignment2：Word2Vec
+  </a>
+  
+    <nav class="md-nav" aria-label="Assignment2：Word2Vec">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#naive-softmax形式" class="md-nav__link">
+    Naive-Softmax形式
+  </a>
+  
+    <nav class="md-nav" aria-label="Naive-Softmax形式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#损失函数和交叉熵的等价性证明" class="md-nav__link">
+    损失函数和交叉熵的等价性证明
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#梯度的计算" class="md-nav__link">
+    梯度的计算
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#负采样形式" class="md-nav__link">
+    负采样形式
+  </a>
+  
+    <nav class="md-nav" aria-label="负采样形式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sigmoid函数" class="md-nav__link">
+    sigmoid函数
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#损失函数与梯度计算" class="md-nav__link">
+    损失函数与梯度计算
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#考虑重复情况" class="md-nav__link">
+    考虑重复情况
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#滑动窗口" class="md-nav__link">
+    滑动窗口
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#代码实现" class="md-nav__link">
+    代码实现
+  </a>
+  
+    <nav class="md-nav" aria-label="代码实现">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#softmax的loss和梯度" class="md-nav__link">
+    Softmax的Loss和梯度
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#负采样的loss和梯度" class="md-nav__link">
+    负采样的Loss和梯度
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#包装成skip-gram模型" class="md-nav__link">
+    包装成skip-gram模型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#训练和结果" class="md-nav__link">
+    训练和结果
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Stanford-CS224N-Assignment3/" class="md-nav__link">
+        Assignment3
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Stanford-CS224N-Assignment4/" class="md-nav__link">
+        Assignment4
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../%E6%9D%82%E8%B0%88%E4%B8%8E%E6%80%BB%E7%BB%93/">🐷 杂谈与总结</a>
+          
+            <label for="__nav_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="🐷 杂谈与总结" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          🐷 杂谈与总结
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%9D%82%E8%B0%88%E4%B8%8E%E6%80%BB%E7%BB%93/2022%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/" class="md-nav__link">
+        2022年度总结
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#assignment1word-vectors" class="md-nav__link">
+    Assignment1：Word Vectors
+  </a>
+  
+    <nav class="md-nav" aria-label="Assignment1：Word Vectors">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#基于计数的词向量" class="md-nav__link">
+    基于计数的词向量
+  </a>
+  
+    <nav class="md-nav" aria-label="基于计数的词向量">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#计算不同的单词的出现情况" class="md-nav__link">
+    计算不同的单词的出现情况
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#构建co-occurence矩阵" class="md-nav__link">
+    构建Co-occurence矩阵
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#进行svd分解" class="md-nav__link">
+    进行SVD分解
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#对词向量进行可视化" class="md-nav__link">
+    对词向量进行可视化
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#基于预测的词向量" class="md-nav__link">
+    基于预测的词向量
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assignment2word2vec" class="md-nav__link">
+    Assignment2：Word2Vec
+  </a>
+  
+    <nav class="md-nav" aria-label="Assignment2：Word2Vec">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#naive-softmax形式" class="md-nav__link">
+    Naive-Softmax形式
+  </a>
+  
+    <nav class="md-nav" aria-label="Naive-Softmax形式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#损失函数和交叉熵的等价性证明" class="md-nav__link">
+    损失函数和交叉熵的等价性证明
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#梯度的计算" class="md-nav__link">
+    梯度的计算
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#负采样形式" class="md-nav__link">
+    负采样形式
+  </a>
+  
+    <nav class="md-nav" aria-label="负采样形式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sigmoid函数" class="md-nav__link">
+    sigmoid函数
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#损失函数与梯度计算" class="md-nav__link">
+    损失函数与梯度计算
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#考虑重复情况" class="md-nav__link">
+    考虑重复情况
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#滑动窗口" class="md-nav__link">
+    滑动窗口
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#代码实现" class="md-nav__link">
+    代码实现
+  </a>
+  
+    <nav class="md-nav" aria-label="代码实现">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#softmax的loss和梯度" class="md-nav__link">
+    Softmax的Loss和梯度
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#负采样的loss和梯度" class="md-nav__link">
+    负采样的Loss和梯度
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#包装成skip-gram模型" class="md-nav__link">
+    包装成skip-gram模型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#训练和结果" class="md-nav__link">
+    训练和结果
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+
+<h1 id="stanford-cs224n-assignment12札记词向量的推导和实现">Stanford-CS224N-Assignment1&amp;2札记：词向量的推导和实现<a class="headerlink" href="#stanford-cs224n-assignment12札记词向量的推导和实现" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>做Stanford CS224N Deep Learning for NLP课程的作业的一些笔记，第一部分是Assignment1和Assignment2，这两个作业和起来完成了从滑动窗口和同现矩阵开始到Word2Vec模型的公式推导和代码实现，并在简单的数据集上进行了实验，以下是具体的实现步骤</p>
+</blockquote>
+<h2 id="assignment1word-vectors">Assignment1：Word Vectors<a class="headerlink" href="#assignment1word-vectors" title="Permanent link">&para;</a></h2>
+<p>这是CS224N的作业1，主要对词向量进行了一定的探索，属于非常基础的编程作业。</p>
+<h3 id="基于计数的词向量">基于计数的词向量<a class="headerlink" href="#基于计数的词向量" title="Permanent link">&para;</a></h3>
+<p>基于计数的词向量通过构建共现矩阵并进行SVD分解来提取单词的特征，下面是具体的步骤。</p>
+<h4 id="计算不同的单词的出现情况">计算不同的单词的出现情况<a class="headerlink" href="#计算不同的单词的出现情况" title="Permanent link">&para;</a></h4>
+<p>首先我们需要统计语料库中不同的单词的出现情况，每种单词只能计算一次，并且要另外考虑两个token <code>&lt;start&gt;,&lt;end&gt;</code>分别表示句子的开头和结尾。说白了就是用set来统计不同单词的数量。</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">distinct_words</span><span class="p">(</span><span class="n">corpus</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Determine a list of distinct words for the corpus.</span>
+<span class="sd">        Params:</span>
+<span class="sd">            corpus (list of list of strings): corpus of documents</span>
+<span class="sd">        Return:</span>
+<span class="sd">            corpus_words (list of strings): sorted list of distinct words across the corpus</span>
+<span class="sd">            num_corpus_words (integer): number of distinct words across the corpus</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">corpus_words</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&lt;END&gt;&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;START&gt;&#39;</span><span class="p">]</span>
+    <span class="n">num_corpus_words</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+
+    <span class="c1"># ------------------</span>
+    <span class="c1"># Write your implementation here.</span>
+    <span class="n">word_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">corpus</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">i</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">j</span> <span class="o">!=</span> <span class="s1">&#39;&lt;END&gt;&#39;</span> <span class="ow">and</span> <span class="n">j</span> <span class="o">!=</span> <span class="s1">&#39;&lt;START&gt;&#39;</span><span class="p">:</span>
+                <span class="n">word_set</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+    <span class="n">corpus_words</span> <span class="o">+=</span> <span class="nb">list</span><span class="p">(</span><span class="n">word_set</span><span class="p">)</span>
+    <span class="n">num_corpus_words</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">corpus_words</span><span class="p">)</span>
+    <span class="c1"># ------------------</span>
+
+    <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">corpus_words</span><span class="p">),</span> <span class="n">num_corpus_words</span>
+</code></pre></div>
+<h4 id="构建co-occurence矩阵">构建Co-occurence矩阵<a class="headerlink" href="#构建co-occurence矩阵" title="Permanent link">&para;</a></h4>
+<p>首先探究词向量的第一步是构建语料库的共现矩阵，同时要构建一个单词-索引的映射关系，用**数字形式的索引**来表示单词，并将单词共同出现的情况统计到矩阵中，形成如下图所示的矩阵：</p>
+<p><img alt="image-20211017204701251" src="../static/image-20211017204701251.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">compute_co_occurrence_matrix</span><span class="p">(</span><span class="n">corpus</span><span class="p">,</span> <span class="n">window_size</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">words</span><span class="p">,</span> <span class="n">num_words</span> <span class="o">=</span> <span class="n">distinct_words</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">num_words</span><span class="p">,</span> <span class="n">num_words</span><span class="p">))</span>
+    <span class="n">word2ind</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1"># ------------------</span>
+    <span class="c1"># Write your implementation here.</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_words</span><span class="p">):</span>
+        <span class="n">word2ind</span><span class="p">[</span><span class="n">words</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">i</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">corpus</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">i</span><span class="p">)):</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="n">window_size</span><span class="p">,</span> <span class="n">window_size</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">j</span> <span class="o">+</span> <span class="n">k</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">j</span> <span class="o">+</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="ow">and</span> <span class="n">k</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">M</span><span class="p">[</span><span class="n">word2ind</span><span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="n">j</span><span class="p">]]][</span><span class="n">word2ind</span><span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="n">k</span><span class="p">]]]</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="n">M</span><span class="p">[</span><span class="n">word2ind</span><span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="n">k</span><span class="p">]]][</span><span class="n">word2ind</span><span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="n">j</span><span class="p">]]]</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="c1"># ------------------</span>
+
+    <span class="k">return</span> <span class="n">M</span><span class="p">,</span> <span class="n">word2ind</span>
+</code></pre></div>
+<h4 id="进行svd分解">进行SVD分解<a class="headerlink" href="#进行svd分解" title="Permanent link">&para;</a></h4>
+<p>然后将得到的共生矩阵进行SVD分解得到每个单词的表示向量(至于可解释性这里先不考虑)，SVD分解的示意图如下：</p>
+<p><img alt="image-20211017205005816" src="../static/image-20211017205005816.png" /></p>
+<ul>
+<li>这里的SVD直接调用scipy库函数就可以</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">reduce_to_k_dim</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+    <span class="n">n_iters</span> <span class="o">=</span> <span class="mi">10</span>     <span class="c1"># Use this parameter in your call to `TruncatedSVD`</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Running Truncated SVD over </span><span class="si">%i</span><span class="s2"> words...&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">M</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+
+        <span class="c1"># ------------------</span>
+        <span class="c1"># Write your implementation here.</span>
+    <span class="n">svd</span> <span class="o">=</span> <span class="n">TruncatedSVD</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="n">k</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="n">n_iters</span><span class="p">)</span>
+    <span class="n">svd</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+    <span class="n">M_reduced</span> <span class="o">=</span> <span class="n">svd</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+        <span class="c1"># ------------------</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Done.&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">M_reduced</span>
+</code></pre></div>
+<h4 id="对词向量进行可视化">对词向量进行可视化<a class="headerlink" href="#对词向量进行可视化" title="Permanent link">&para;</a></h4>
+<p>调用matplotlib对生成的词向量进行可视化，为了方便这里已经采用了二维的词向量，最终得到的词向量在二维平面中的可视化结果如下：</p>
+<p><img alt="image-20211017205635225" src="../static/image-20211017205635225.png" /></p>
+<ul>
+<li>分析可以发现类似的单词容易相聚在一起，即他们的词向量是相似的，比如油和能源，石油和工业，都是有一定内在逻辑联系的。</li>
+</ul>
+<h3 id="基于预测的词向量">基于预测的词向量<a class="headerlink" href="#基于预测的词向量" title="Permanent link">&para;</a></h3>
+<p>基于预测的词向量相比于基于计数的词向量更能够学到单词之间的逻辑联系，因为基于计数的方法只统计了指定中心单词的滑动窗口范围内出现的单词情况，而**没有具体考虑这个窗口内的单词相对于中心词的距离**，基于预测的词向量则是用中心单词来预测附近各个位置上可能出现的单词的概率分布(也可以用两遍出现的单词来预测中间词出现的情况)，这里我们依然选择了和上面一样的几个单词，并使用PCA对已经训练好的GLOVE词向量进行降维和可视化，得到的结果是：</p>
+<p><img alt="image-20211017212233547" src="../static/image-20211017212233547.png" /></p>
+<ul>
+<li>可以发现单词之间的相对位置和上面用共现矩阵+SVD分解得到的结果基本保持一致</li>
+<li>下面有一些探索单词相似性的任务，这里就不多说了，直接快进到第二部分推导和实现Word2Vec</li>
+</ul>
+<h2 id="assignment2word2vec">Assignment2：Word2Vec<a class="headerlink" href="#assignment2word2vec" title="Permanent link">&para;</a></h2>
+<p>Assignment2的主要目标是实现一个skip-gram形式的Word2Vec，skip-gram实际上就是要用中心词来预测滑动窗口内各个位置上的上下文单词，即：</p>
+<p><img alt="image-20211018123723707" src="../static/image-20211018123723707.png" /></p>
+<p>同时Word2Vec根据损失函数和目标的不同可以分成Naive-Softmax和负采样两种不同的实现方式</p>
+<h3 id="naive-softmax形式">Naive-Softmax形式<a class="headerlink" href="#naive-softmax形式" title="Permanent link">&para;</a></h3>
+<p>我们给每个单词定义了两个词向量，记作<span class="arithmatex">\(<span class="arithmatex">\(u_c, v_c\)</span>\)</span>，分别用来表示这个单词作为上下文和中心词时候的词向量，并用向量的点积和softmax定义指定中心词c的条件下单词o出现在上下文的概率分布，即：</p>
+<div class="arithmatex">\[
+P(O=o \mid C=c)=\frac{\exp \left(\boldsymbol{u}_{o}^{\top} \boldsymbol{v}_{c}\right)}{\sum_{w \in \operatorname{Vocab}} \exp \left(\boldsymbol{u}_{w}^{\top} \boldsymbol{v}_{c}\right)}
+\]</div>
+<p>我们将词向量按列进行排序构成两个矩阵U和V，这些矩阵的每一列都对应了一个词向量，并且定义损失函数：</p>
+<div class="arithmatex">\[
+\boldsymbol{J}_{\text {naive-softmax }}\left(\boldsymbol{v}_{c}, o, \boldsymbol{U}\right)=-\log P(O=o \mid C=c)
+\]</div>
+<p>这个形式的损失函数被称为Naive-Softmax形式的损失函数，我们用<span class="arithmatex">\(<span class="arithmatex">\(y, \hat y\)</span>\)</span>分别表示正确的结果和模型预测出的结果，其中正确的结果是一个**one-hot向量**，因为出现的单词是确定的，而预测出的结果是一个概率分布，概率大小表示每个单词在当前位置上出现的概率，两个向量的维度都和词汇表的大小一样。我们可以证明<span class="arithmatex">\(<span class="arithmatex">\(y, \hat y\)</span>\)</span>的交叉熵和Naive-Softmax损失函数是等价的。</p>
+<h4 id="损失函数和交叉熵的等价性证明">损失函数和交叉熵的等价性证明<a class="headerlink" href="#损失函数和交叉熵的等价性证明" title="Permanent link">&para;</a></h4>
+<p>根据交叉熵和<span class="arithmatex">\(<span class="arithmatex">\(y, \hat y\)</span>\)</span>的定义，我们可以推算出：</p>
+<div class="arithmatex">\[
+-\sum_{w \in V o c a b} y_{w} \log \left(\hat{y}_{w}\right)=-\log \left(\hat{y}_{o}\right)=-\log P(O=o,C=c)
+\]</div>
+<h4 id="梯度的计算">梯度的计算<a class="headerlink" href="#梯度的计算" title="Permanent link">&para;</a></h4>
+<p>在这个作业中我们需要手动实现Word2Vec算法的所有步骤，因此也需要进行梯度的计算和更新，首先我们来推导Naive-Softmax损失函数对于U，V的梯度。</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\frac{\partial J(v_c,o,U)}{\partial v_c}&amp;=\frac{\partial \log\sum_{w\in Vocab}\exp(u_w^Tv_c)}{\partial v_c}-u_o\\
+&amp;=\frac{\partial \sum_{w\in Vocab}u_w\exp(u_w^Tv_c)}{\partial \sum_{w\in Vocab}\exp(u_w^Tv_c)}-u_o\\
+&amp;=\sum_{w\in Vocab}u_w\hat y_w-u_o\\&amp;=(\hat y- y)U^T
+\end{aligned}
+\]</div>
+<p>而对于<span class="arithmatex">\(<span class="arithmatex">\(u\)</span>\)</span> 我们需要分成两种情况，首先是<span class="arithmatex">\(<span class="arithmatex">\(u=u_o\)</span>\)</span>的情况</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\frac{\partial J(v_c,o,U)}{\partial u_o}&amp;=\frac{\exp(u_o^Tv_c)v_c}{\sum_{w\in Vocab}\exp(u_w^Tv_c)}-v_c=(P(o|c)-1)v_c=(\hat y_o-y_o)^Tv_c
+\end{aligned}
+\]</div>
+<p>接着是<span class="arithmatex">\(<span class="arithmatex">\(u\not= u_o\)</span>\)</span>的情况</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\frac{\partial J(v_c,o,U)}{\partial u_w}&amp;=\frac{\exp(u_w^Tv_c)v_c}{\sum_{w\in Vocab}\exp(u_w^Tv_c)}=P(w|c)v_c=(\hat y_w-y_w)^Tv_c
+\end{aligned}
+\]</div>
+<ul>
+<li>综合上面两种情况，我们可以得到：</li>
+</ul>
+<div class="arithmatex">\[
+\frac{\partial J(v_c,o,U)}{\partial U}=(\hat y-y)^Tv_c
+\]</div>
+<h3 id="负采样形式">负采样形式<a class="headerlink" href="#负采样形式" title="Permanent link">&para;</a></h3>
+<h4 id="sigmoid函数">sigmoid函数<a class="headerlink" href="#sigmoid函数" title="Permanent link">&para;</a></h4>
+<p>sigmoid损失函数是一种非常常见的激活函数，负采样中就使用了sigmoid函数作为激活函数，其形式是：</p>
+<div class="arithmatex">\[
+\sigma(x)=\frac{1}{1+e^{-x}}=\frac{e^x}{1+e^x}
+\]</div>
+<p>sigmoid一个非常重要的性质是其关于x的梯度可以表示成sigmoid函数本身的一些四则运算，即：</p>
+<div class="arithmatex">\[
+\sigma'(x)=\frac{e^x}{(1+e^x)^2}=\sigma(x)(1-\sigma(x))
+\]</div>
+<p>这样一来就有：</p>
+<div class="arithmatex">\[
+[\log \sigma(x)]'=\frac{\sigma'(x)}{\sigma(x)}=1-\sigma(x)
+\]</div>
+<ul>
+<li>这个性质在下面的梯度计算中非常有用</li>
+</ul>
+<h4 id="损失函数与梯度计算">损失函数与梯度计算<a class="headerlink" href="#损失函数与梯度计算" title="Permanent link">&para;</a></h4>
+<p>基于负采样的模型将训练的目标变成了让模型具有**分辨某个词是不是应该出现在某个位置的能力**，为了学习到这种分辨能力，<strong>采用了负样本和正样本形成对比</strong>，增强模型的表达能力，负样本就是在语料库中随机选择的一个单词，大部分时候放在指定中心词的上下文中是不能构成具有实际意义的句子的，模型通过将正负样本进行对比学习出对单词的表示能力。</p>
+<ul>
+<li>当然这是我个人的理解</li>
+</ul>
+<p>因此基于负采样的训练方式提出的损失函数是下面这种形式的：</p>
+<div class="arithmatex">\[
+\boldsymbol{J}_{\text {neg-sample }}\left(\boldsymbol{v}_{c}, o, \boldsymbol{U}\right)=-\log \left(\sigma\left(\boldsymbol{u}_{o}^{\top} \boldsymbol{v}_{c}\right)\right)-\sum_{k=1}^{K} \log \left(\sigma\left(-\boldsymbol{u}_{k}^{\top} \boldsymbol{v}_{c}\right)\right)
+\]</div>
+<p>这里的K是负样本的个数，从这个损失函数中我们也可以发现，负采样方法的计算量是比Softmax法小的，因为Softmax每次都需要计算整个Vocabulary的概率值，而负采样只需要关注K个采集到的负样本就可以了。</p>
+<p>下面来计算负样本的梯度：</p>
+<div class="arithmatex">\[
+\frac{\partial J}{\partial u_o}=\frac{\partial -\log(\sigma(u_o^Tv_c))}{\partial u_o}=(\sigma(u_o^Tv_c)-1)v_c
+\]</div>
+<div class="arithmatex">\[
+\frac{\partial J}{\partial u_w}=(1-\sigma(-u_w^Tv_c))v_c
+\]</div>
+<div class="arithmatex">\[
+\frac{\partial J}{\partial v_c}=\sum_{k=1}^K(1-\sigma(-u_w^Tv_c))u_k-(1-\sigma(u_o^Tv_c))u_o
+\]</div>
+<h4 id="考虑重复情况">考虑重复情况<a class="headerlink" href="#考虑重复情况" title="Permanent link">&para;</a></h4>
+<p>上面的梯度推导基于一个假设，那就是采集到的负样本是互不相同的，但是随机采样如果得到了相同的负样本的话，梯度的计算实际上会有所区别，因为重复的样本在分别计算梯度的时候也需要考虑进去(属于同一个单词，重复了M次，这部分梯度就要扩大M倍)</p>
+<h3 id="滑动窗口">滑动窗口<a class="headerlink" href="#滑动窗口" title="Permanent link">&para;</a></h3>
+<p>在推导完单个上下文单词和中心词的位置关系之后，我们需要考虑整个滑动窗口中的所有上下文单词，不过不管是Softmax还是负采样，都只需要将一次的结果累加若干次就可以，即：</p>
+<div class="arithmatex">\[
+J_{\text {skip-gram }}\left(\boldsymbol{v}_{c}, w_{t-m}, \ldots w_{t+m}, \boldsymbol{U}\right)=\sum_{-m \leq j \leq m \atop j \neq 0} \boldsymbol{J}\left(\boldsymbol{v}_{c}, w_{t+j}, \boldsymbol{U}\right)
+\]</div>
+<ul>
+<li>到此为止，Word2Vec中的skip-gram模型的公式就推导完成了</li>
+</ul>
+<h2 id="代码实现">代码实现<a class="headerlink" href="#代码实现" title="Permanent link">&para;</a></h2>
+<p>最后一步就是具体的代码实践了，事实上，大部分代码框架已经给出，我们只需要实现核心的几个函数就可以，写完之后发现实际的代码也就几十行，大部分都是对着上面的推导完成数值计算而已。</p>
+<p>要实现的代码中包含几个关键的变量，如<code>centerWordVec</code> 表示中心单词向量，<code>outsideVectors</code>表示上下文中的向量</p>
+<h3 id="softmax的loss和梯度">Softmax的Loss和梯度<a class="headerlink" href="#softmax的loss和梯度" title="Permanent link">&para;</a></h3>
+<ul>
+<li>按要求实现Softmax损失函数和梯度的计算</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">naiveSoftmaxLossAndGradient</span><span class="p">(</span>
+        <span class="n">centerWordVec</span><span class="p">,</span>
+        <span class="n">outsideWordIdx</span><span class="p">,</span>
+        <span class="n">outsideVectors</span><span class="p">,</span>
+        <span class="n">dataset</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Naive Softmax loss &amp; gradient function for word2vec models</span>
+
+<span class="sd">    Implement the naive softmax loss and gradients between a center word&#39;s </span>
+<span class="sd">    embedding and an outside word&#39;s embedding. This will be the building block</span>
+<span class="sd">    for our word2vec models. For those unfamiliar with numpy notation, note </span>
+<span class="sd">    that a numpy ndarray with a shape of (x, ) is a one-dimensional array, which</span>
+<span class="sd">    you can effectively treat as a vector with length x.</span>
+
+<span class="sd">    Arguments:</span>
+<span class="sd">    centerWordVec -- numpy ndarray, center word&#39;s embedding</span>
+<span class="sd">                    in shape (v_c, )</span>
+<span class="sd">    outsideWordIdx -- integer, the index of the outside word</span>
+<span class="sd">    outsideVectors -- outside vectors is</span>
+<span class="sd">                    in shape (n, v_c)</span>
+<span class="sd">                    for all words in vocab (transpose of U in the pdf handout)</span>
+<span class="sd">    dataset -- needed for negative sampling, unused here.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Please use the provided softmax function (imported earlier in this file)</span>
+    <span class="c1"># This numerically stable implementation helps you avoid issues pertaining</span>
+    <span class="c1"># to integer overflow.</span>
+    <span class="n">y_hat</span> <span class="o">=</span> <span class="n">softmax</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">outsideVectors</span><span class="p">,</span> <span class="n">centerWordVec</span><span class="p">))</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">y_hat</span><span class="p">[</span><span class="n">outsideWordIdx</span><span class="p">])</span>
+    <span class="n">y_hat</span><span class="p">[</span><span class="n">outsideWordIdx</span><span class="p">]</span> <span class="o">-=</span> <span class="mf">1.0</span>
+    <span class="n">gradCenterVec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">y_hat</span><span class="p">,</span> <span class="n">outsideVectors</span><span class="p">)</span>  <span class="c1"># (n, ) * (n, v_c) --&gt; (v_c, )</span>
+    <span class="n">gradOutsideVecs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">y_hat</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">centerWordVec</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">loss</span><span class="p">,</span> <span class="n">gradCenterVec</span><span class="p">,</span> <span class="n">gradOutsideVecs</span>
+</code></pre></div>
+<h3 id="负采样的loss和梯度">负采样的Loss和梯度<a class="headerlink" href="#负采样的loss和梯度" title="Permanent link">&para;</a></h3>
+<ul>
+<li>按照上面的推导实现负采样下的损失函数和梯度即可</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">negSamplingLossAndGradient</span><span class="p">(</span>
+        <span class="n">centerWordVec</span><span class="p">,</span>
+        <span class="n">outsideWordIdx</span><span class="p">,</span>
+        <span class="n">outsideVectors</span><span class="p">,</span>
+        <span class="n">dataset</span><span class="p">,</span>
+        <span class="n">K</span><span class="o">=</span><span class="mi">10</span>
+<span class="p">):</span>
+
+    <span class="c1"># Negative sampling of words is done for you. Do not modify this if you</span>
+    <span class="c1"># wish to match the autograder and receive points!</span>
+    <span class="n">negSampleWordIndices</span> <span class="o">=</span> <span class="n">getNegativeSamples</span><span class="p">(</span><span class="n">outsideWordIdx</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+    <span class="n">indices</span> <span class="o">=</span> <span class="p">[</span><span class="n">outsideWordIdx</span><span class="p">]</span> <span class="o">+</span> <span class="n">negSampleWordIndices</span>
+    <span class="n">gradCenterVec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">centerWordVec</span><span class="p">)</span>
+    <span class="n">gradOutsideVecs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">outsideVectors</span><span class="p">)</span>
+    <span class="c1"># loss function</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">outsideVectors</span><span class="p">[</span><span class="n">outsideWordIdx</span><span class="p">]</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">centerWordVec</span><span class="p">)))</span>
+    <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">negSampleWordIndices</span><span class="p">:</span>
+        <span class="n">loss</span> <span class="o">-=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">sigmoid</span><span class="p">(</span><span class="o">-</span><span class="n">outsideVectors</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">centerWordVec</span><span class="p">)))</span>
+    <span class="c1"># gradient</span>
+    <span class="n">gradCenterVec</span> <span class="o">-=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">centerWordVec</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">outsideVectors</span><span class="p">[</span><span class="n">outsideWordIdx</span><span class="p">])))</span> <span class="o">*</span> <span class="n">outsideVectors</span><span class="p">[</span><span class="n">outsideWordIdx</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">negSampleWordIndices</span><span class="p">:</span>
+        <span class="n">gradCenterVec</span> <span class="o">+=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">sigmoid</span><span class="p">(</span><span class="o">-</span><span class="n">centerWordVec</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">outsideVectors</span><span class="p">[</span><span class="n">k</span><span class="p">])))</span> <span class="o">*</span> <span class="n">outsideVectors</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+    <span class="n">gradOutsideVecs</span><span class="p">[</span><span class="n">outsideWordIdx</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span>
+            <span class="mi">1</span> <span class="o">-</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">centerWordVec</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">outsideVectors</span><span class="p">[</span><span class="n">outsideWordIdx</span><span class="p">])))</span> <span class="o">*</span> <span class="n">centerWordVec</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">negSampleWordIndices</span><span class="p">:</span>
+        <span class="n">gradOutsideVecs</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">+=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">sigmoid</span><span class="p">(</span><span class="o">-</span><span class="n">centerWordVec</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">outsideVectors</span><span class="p">[</span><span class="n">k</span><span class="p">])))</span> <span class="o">*</span> <span class="n">centerWordVec</span>
+    <span class="k">return</span> <span class="n">loss</span><span class="p">,</span> <span class="n">gradCenterVec</span><span class="p">,</span> <span class="n">gradOutsideVecs</span>
+</code></pre></div>
+<h3 id="包装成skip-gram模型">包装成skip-gram模型<a class="headerlink" href="#包装成skip-gram模型" title="Permanent link">&para;</a></h3>
+<p>这一步实际上就是对一个滑动窗口里的所有上下文单词都计算一次loss和梯度并将结果进行汇总，具体的代码如下：</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">skipgram</span><span class="p">(</span><span class="n">currentCenterWord</span><span class="p">,</span> <span class="n">windowSize</span><span class="p">,</span> <span class="n">outsideWords</span><span class="p">,</span> <span class="n">word2Ind</span><span class="p">,</span>
+             <span class="n">centerWordVectors</span><span class="p">,</span> <span class="n">outsideVectors</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span>
+             <span class="n">word2vecLossAndGradient</span><span class="o">=</span><span class="n">naiveSoftmaxLossAndGradient</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Skip-gram model in word2vec</span>
+
+<span class="sd">    Implement the skip-gram model in this function.</span>
+
+<span class="sd">    Arguments:</span>
+<span class="sd">    currentCenterWord -- a string of the current center word</span>
+<span class="sd">    windowSize -- integer, context window size</span>
+<span class="sd">    word2Ind -- a dictionary that maps words to their indices in</span>
+<span class="sd">              the word vector list</span>
+<span class="sd">    word2vecLossAndGradient -- the loss and gradient function for</span>
+<span class="sd">                               a prediction vector given the outsideWordIdx</span>
+<span class="sd">                               word vectors, could be one of the two</span>
+<span class="sd">                               loss functions you implemented above.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">loss</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">gradCenterVecs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">centerWordVectors</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="n">gradOutsideVectors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">outsideVectors</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+    <span class="n">currentCenterIdx</span> <span class="o">=</span> <span class="n">word2Ind</span><span class="p">[</span><span class="n">currentCenterWord</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">outsideWords</span><span class="p">:</span>
+        <span class="n">loss_w</span><span class="p">,</span> <span class="n">grad_cv</span><span class="p">,</span> <span class="n">grad_ov</span> <span class="o">=</span> <span class="n">word2vecLossAndGradient</span><span class="p">(</span>
+            <span class="n">centerWordVectors</span><span class="p">[</span><span class="n">currentCenterIdx</span><span class="p">],</span>
+            <span class="n">word2Ind</span><span class="p">[</span><span class="n">word</span><span class="p">],</span>
+            <span class="n">outsideVectors</span><span class="p">,</span>
+            <span class="n">dataset</span>
+        <span class="p">)</span>
+        <span class="n">loss</span> <span class="o">+=</span> <span class="n">loss_w</span>
+        <span class="n">gradCenterVecs</span><span class="p">[</span><span class="n">currentCenterIdx</span><span class="p">]</span> <span class="o">+=</span> <span class="n">grad_cv</span>
+        <span class="n">gradOutsideVectors</span> <span class="o">+=</span> <span class="n">grad_ov</span>
+    <span class="k">return</span> <span class="n">loss</span><span class="p">,</span> <span class="n">gradCenterVecs</span><span class="p">,</span> <span class="n">gradOutsideVectors</span>
+</code></pre></div>
+<h3 id="训练和结果">训练和结果<a class="headerlink" href="#训练和结果" title="Permanent link">&para;</a></h3>
+<p>上面的每一步系统中都给出了测试代码帮助我们完成coding工作，在实现了上面这些函数之后，我们还需要实现一个简单的SGD优化器，不过这个比较简单，只有两行代码，就不多说了，之后我们需要用作业提供的数据集和运行代码来进行训练，并将得到的结果进行二维平面上的可视化，最终在经历20000次迭代之后得到的结果是：</p>
+<p><img alt="image-20211018162013471" src="../static/image-20211018162013471.png" /></p>
+<ul>
+<li>可以发现训练的结果还行，很多意义相近的单词的词向量都比较相似并且聚到了一起</li>
+<li>到这里为止，CS224N的前两个作业就做完了，我们尝试了调用现有的词向量进行探索，也从头到尾自己实现了一个word2vec模型</li>
+</ul>
+
+  <hr>
+<div class="md-source-file">
+  <small>
+    
+      最后更新:
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年1月24日 13:22:07</span>
+      
+        <br>
+        创建日期:
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年1月24日 13:22:07</span>
+      
+    
+  </small>
+</div>
+
+
+
+
+<div id="__comments">
+    
+    <script src="https://giscus.app/client.js"
+        data-repo="Zhang-Each/My-CS-Notebook"
+        data-repo-id="R_kgDOI0dr4w"
+        data-category="General"
+        data-category-id="DIC_kwDOI0dr484CTvIK"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="1"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="zh-CN"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+        </script>
+    <h3>颜色主题调整</h3>
+    <div class="tx-switch">
+    <button class="button1" data-md-color-primary="red" style="background-color:red">red</button>
+    <button class="button1" data-md-color-primary="pink" style="background-color:pink;color:black">pink</button>
+    <button class="button1" data-md-color-primary="purple" style="background-color:purple">purple</button>
+    <button class="button1" data-md-color-primary="indigo" style="background-color:indigo">indigo</button>
+    <button class="button1" data-md-color-primary="blue" style="background-color:blue">blue</button>
+    <button class="button1" data-md-color-primary="cyan" style="background-color:cyan;color:black">cyan</button>
+    <button class="button1" data-md-color-primary="teal" style="background-color:teal">teal</button>
+    <button class="button1" data-md-color-primary="green" style="background-color:green">green</button>
+    <button class="button1" data-md-color-primary="lime" style="background-color:lime;color:black">lime</button>
+    <button class="button1" data-md-color-primary="orange" style="background-color:orange;color:black">orange</button>
+    <button class="button1" data-md-color-primary="brown" style="background-color:brown;border-radius=3px">brown</button>
+    <button class="button1" data-md-color-primary="grey" style="background-color:grey">grey</button>
+    <button class="button1" data-md-color-primary="black" style="background-color:black">black</button>
+    <button class="button1" data-md-color-primary="white" style="background-color:white;color:black">white</button>
+    </div>
+    
+    <script>
+    var buttons = document.querySelectorAll("button[data-md-color-primary]")
+    buttons.forEach(function(button) {
+            button.addEventListener("click", function() {
+            var attr = this.getAttribute("data-md-color-primary")
+            document.body.setAttribute("data-md-color-primary", attr)
+            localStorage.setItem("data-md-color-primary",attr);
+            })
+    })
+    </script>
+    
+    <h2 ><!-- 评论 -->评论区~</h2>
+    
+    有用的话请给我个star或者follow我的账号!! 非常感谢!!
+    
+    </br>
+    
+    快来跟我聊天~
+    
+    </div>
+    
+    <script src="https://giscus.app/client.js"
+        data-repo="Zhang-Each/Notebook-Comments"
+        data-repo-id="R_kgDOI0dlNg"
+        data-category="General"
+        data-category-id="DIC_kwDOI0dlNs4CTvH-"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="1"
+        data-input-position="top"
+        data-theme="preferred_color_scheme"
+        data-lang="zh-CN"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+    </script>
+    
+    <!-- Synchronize Giscus theme with palette -->
+    <script>
+    var giscus = document.querySelector("script[src*=giscus]")
+    
+    /* Set palette on initial load */
+    // var palette = __md_get("__palette")
+    // if (palette && typeof palette.color === "object") {
+    //     var theme = palette.color.scheme === "slate" ? "dark" : "light"
+    //     giscus.setAttribute("data-theme", theme) 
+    // }
+    
+    /* Register event handlers after documented loaded */
+    // document.addEventListener("DOMContentLoaded", function() {
+    //     var ref = document.querySelector("[data-md-component=palette]")
+    //     ref.addEventListener("change", function() {
+    //     var palette = __md_get("__palette")
+    //     if (palette && typeof palette.color === "object") {
+    //         var theme = palette.color.scheme === "slate" ? "dark" : "light"
+    
+    //         /* Instruct Giscus to change theme */
+    //         var frame = document.querySelector(".giscus-frame")
+    //         frame.contentWindow.postMessage(
+    //         { giscus: { setConfig: { theme } } },
+    //         "https://giscus.app"
+    //         )
+    //     }
+    //     })
+    // })
+    </script>
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            回到页面顶部
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      本页面的全部内容在 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh">CC BY-SA 4.0</a> 和 <a href="https://github.com/zTrix/sata-license">SATA</a> 协议之条款下提供，附加条款亦可能应用。<br /><span id="busuanzi_container_site_uv">本站访客总人数<span id="busuanzi_value_site_uv"></span>人次，</span><span id="busuanzi_container_site_pv">本站总访问次数<span id="busuanzi_value_site_pv"></span>次。</span>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "content.code.annotate", "navigation.tracking", "navigation.indexes", "navigation.top", "toc.follow"], "search": "../../assets/javascripts/workers/search.e5c33ebb.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.51d95adb.min.js"></script>
+      
+        <script src="../../from_oi_wiki/js/extra.js"></script>
+      
+        <script src="../../js/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js"></script>
+      
+        <script src="../../js/tablesort.js"></script>
+      
+        <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+      
+    
+  </body>
+</html>

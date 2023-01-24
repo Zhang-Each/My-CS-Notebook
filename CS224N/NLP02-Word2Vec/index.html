@@ -1,0 +1,1750 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://zhang-each.github.io/My-CS-notebook/CS224N/NLP02-Word2Vec/">
+      
+      
+        <link rel="prev" href="../NLP01-Introduction%26WordVector/">
+      
+      
+        <link rel="next" href="../NLP03-DependenceParsing/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.6">
+    
+    
+      
+        <title>02-Word2Vec - 小角龙的学习记录</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.558e4712.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.2505c338.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Hiragino+Sans+GB:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Hiragino Sans GB";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../from_oi_wiki/css/extra.css?v=13">
+    
+      <link rel="stylesheet" href="../../css/status.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#nlp02-word2vec" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="小角龙的学习记录" class="md-header__button md-logo" aria-label="小角龙的学习记录" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            小角龙的学习记录
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              02-Word2Vec
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/zhang-each/My-CS-notebook/" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Zhang-Each/My-CS-notebook
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        🏡 主页
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../CS231N/" class="md-tabs__link md-tabs__link--active">
+        🐰 深度学习
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../%E6%9D%82%E8%B0%88%E4%B8%8E%E6%80%BB%E7%BB%93/" class="md-tabs__link">
+        🐷 杂谈与总结
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="小角龙的学习记录" class="md-nav__button md-logo" aria-label="小角龙的学习记录" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    小角龙的学习记录
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/zhang-each/My-CS-notebook/" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Zhang-Each/My-CS-notebook
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      
+        
+          
+            
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../..">🏡 主页</a>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="🏡 主页" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          🏡 主页
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../CS231N/">🐰 深度学习</a>
+          
+            <label for="__nav_2">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="🐰 深度学习" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          🐰 深度学习
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2" type="checkbox" id="__nav_2_2" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_2" tabindex="0" aria-expanded="false">
+          CS231N-神经网络与深度学习
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="CS231N-神经网络与深度学习" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          CS231N-神经网络与深度学习
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B01%EF%BC%9AkNN%E5%92%8C%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB%E5%99%A8/" class="md-nav__link">
+        01.kNN和线性分类器
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B02%EF%BC%9A%E5%A4%9A%E5%B1%82%E5%85%A8%E8%BF%9E%E6%8E%A5%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%92%8C%E4%BC%98%E5%8C%96%E5%99%A8/" class="md-nav__link">
+        02.多层全连接神经网络和优化器
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B03%EF%BC%9ANormalization%E5%92%8CDropOut/" class="md-nav__link">
+        03.Normalization和DropOut
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B04%EF%BC%9A%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9CCNN/" class="md-nav__link">
+        04.卷积神经网络CNN
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B05%EF%BC%9ARNN%26LSTM%E4%B8%8E%E5%9B%BE%E7%89%87%E6%8F%8F%E8%BF%B0/" class="md-nav__link">
+        05.RNN&LSTM与图片描述
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B06%EF%BC%9ATransformer%E4%B8%8E%E5%9B%BE%E7%89%87%E6%8F%8F%E8%BF%B0/" class="md-nav__link">
+        06.Transformer与图片描述
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B07%EF%BC%9A%E6%A8%A1%E5%9E%8B%E5%8F%AF%E8%A7%86%E5%8C%96%EF%BC%8C%E5%9B%BE%E5%83%8F%E6%AC%BA%E8%AF%88%E5%92%8CGAN/" class="md-nav__link">
+        07.模型可视化，图像欺诈和GAN
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B08%EF%BC%9A%E8%87%AA%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%E4%B8%8E%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/" class="md-nav__link">
+        08.自监督学习与课程总结
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_3" type="checkbox" id="__nav_2_3" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../CS224W/">CS224W-图机器学习与图神经网络</a>
+          
+            <label for="__nav_2_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="CS224W-图机器学习与图神经网络" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          CS224W-图机器学习与图神经网络
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A001/" class="md-nav__link">
+        01.导论，传统的图学习方法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A002/" class="md-nav__link">
+        02.节点嵌入和PageRank
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A003/" class="md-nav__link">
+        03.消息传递机制
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A004/" class="md-nav__link">
+        04.图神经网络基础
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A005/" class="md-nav__link">
+        05.图神经网络的训练和应用，表示能力分析
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A006/" class="md-nav__link">
+        06.知识图谱，知识图谱推理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A007/" class="md-nav__link">
+        07.频繁子图挖掘
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A008/" class="md-nav__link">
+        08.社区检测
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A009/" class="md-nav__link">
+        09.图生成模型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A010/" class="md-nav__link">
+        10.图神经网络前沿话题
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_4" type="checkbox" id="__nav_2_4" checked>
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../">CS224N-基于深度学习的自然语言处理</a>
+          
+            <label for="__nav_2_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="CS224N-基于深度学习的自然语言处理" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          CS224N-基于深度学习的自然语言处理
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../NLP01-Introduction%26WordVector/" class="md-nav__link">
+        01-Introduction&WordVector
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          02-Word2Vec
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        02-Word2Vec
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#word2vec" class="md-nav__link">
+    Word2vec
+  </a>
+  
+    <nav class="md-nav" aria-label="Word2vec">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#基于迭代的模型" class="md-nav__link">
+    基于迭代的模型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#语言模型language-model" class="md-nav__link">
+    语言模型Language Model
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#连续词袋模型cbow" class="md-nav__link">
+    连续词袋模型(CBOW)
+  </a>
+  
+    <nav class="md-nav" aria-label="连续词袋模型(CBOW)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cbow模型的工作原理" class="md-nav__link">
+    CBOW模型的工作原理
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#损失函数与优化方式" class="md-nav__link">
+    损失函数与优化方式
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#skip-gram模型" class="md-nav__link">
+    Skip-gram模型
+  </a>
+  
+    <nav class="md-nav" aria-label="Skip-gram模型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#参数的求解和模型的优化" class="md-nav__link">
+    参数的求解和模型的优化
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#负采样negative-sampling" class="md-nav__link">
+    负采样Negative Sampling
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#全局词向量glove" class="md-nav__link">
+    全局词向量GloVe
+  </a>
+  
+    <nav class="md-nav" aria-label="全局词向量GloVe">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#已有的单词表示方法" class="md-nav__link">
+    已有的单词表示方法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#glove算法" class="md-nav__link">
+    GloVe算法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#结论" class="md-nav__link">
+    结论
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#词向量的评估" class="md-nav__link">
+    词向量的评估
+  </a>
+  
+    <nav class="md-nav" aria-label="词向量的评估">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#内部评估" class="md-nav__link">
+    内部评估
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#外部评估" class="md-nav__link">
+    外部评估
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../NLP03-DependenceParsing/" class="md-nav__link">
+        03-DependenceParsing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../NLP04-LM%26RNN%26LSTM/" class="md-nav__link">
+        04-LM&RNN&LSTM
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../NLP05-Seq2Seq/" class="md-nav__link">
+        05-Seq2Seq
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Stanford-CS224N-Assignment1%262/" class="md-nav__link">
+        Assignment1&2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Stanford-CS224N-Assignment3/" class="md-nav__link">
+        Assignment3
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Stanford-CS224N-Assignment4/" class="md-nav__link">
+        Assignment4
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../%E6%9D%82%E8%B0%88%E4%B8%8E%E6%80%BB%E7%BB%93/">🐷 杂谈与总结</a>
+          
+            <label for="__nav_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="🐷 杂谈与总结" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          🐷 杂谈与总结
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%9D%82%E8%B0%88%E4%B8%8E%E6%80%BB%E7%BB%93/2022%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/" class="md-nav__link">
+        2022年度总结
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#word2vec" class="md-nav__link">
+    Word2vec
+  </a>
+  
+    <nav class="md-nav" aria-label="Word2vec">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#基于迭代的模型" class="md-nav__link">
+    基于迭代的模型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#语言模型language-model" class="md-nav__link">
+    语言模型Language Model
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#连续词袋模型cbow" class="md-nav__link">
+    连续词袋模型(CBOW)
+  </a>
+  
+    <nav class="md-nav" aria-label="连续词袋模型(CBOW)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cbow模型的工作原理" class="md-nav__link">
+    CBOW模型的工作原理
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#损失函数与优化方式" class="md-nav__link">
+    损失函数与优化方式
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#skip-gram模型" class="md-nav__link">
+    Skip-gram模型
+  </a>
+  
+    <nav class="md-nav" aria-label="Skip-gram模型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#参数的求解和模型的优化" class="md-nav__link">
+    参数的求解和模型的优化
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#负采样negative-sampling" class="md-nav__link">
+    负采样Negative Sampling
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#全局词向量glove" class="md-nav__link">
+    全局词向量GloVe
+  </a>
+  
+    <nav class="md-nav" aria-label="全局词向量GloVe">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#已有的单词表示方法" class="md-nav__link">
+    已有的单词表示方法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#glove算法" class="md-nav__link">
+    GloVe算法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#结论" class="md-nav__link">
+    结论
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#词向量的评估" class="md-nav__link">
+    词向量的评估
+  </a>
+  
+    <nav class="md-nav" aria-label="词向量的评估">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#内部评估" class="md-nav__link">
+    内部评估
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#外部评估" class="md-nav__link">
+    外部评估
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+
+<h1 id="nlp02-word2vec">NLP02-word2vec<a class="headerlink" href="#nlp02-word2vec" title="Permanent link">&para;</a></h1>
+<h2 id="word2vec">Word2vec<a class="headerlink" href="#word2vec" title="Permanent link">&para;</a></h2>
+<h3 id="基于迭代的模型">基于迭代的模型<a class="headerlink" href="#基于迭代的模型" title="Permanent link">&para;</a></h3>
+<p>基于SVD的方法实际上考虑的都是单词的**全局特征**，因此计算代价和效果都不太好，因此我们可以尝试建立一个基于迭代的模型并根据单词在上下文中出现的概率来进行编码。</p>
+<p>另一种思路是设计一个参数是词向量的模型，然后针对一个目标进行模型的训练，在每一次的迭代中计算错误率或者loss函数并据此来更新模型的参数，也就是词向量，最后就可以得到一系列结果作为单词的嵌入向量。</p>
+<p>常见的方法包括**bag-of-words(CBOW)和skip-gram**，其中CBOW的目标是**根据上下文来预测中心的单词**，而**skip-gram则是根据中心单词来预测上下文中的各种单词出现的概率**。这两种方法统称为word2vec，是Google AI团队在<a href="https://papers.nips.cc/paper/2013/file/9aa42b31882ec039965f3c4923ce901b-Paper.pdf">《Distributed Representations of Words and Phrases and their Compositionality》</a> 等多篇论文中提出的词向量训练模型。</p>
+<p>而这些模型常用的训练方法有：</p>
+<ul>
+<li>
+<p>层级化(hierarchical)的softmax</p>
+</li>
+<li>
+<p>负采样negative sampling：判断两个单词是不是一对上下文与目标词，如果是一对，则是正样本，如果不是一对，则是负样本，而采样得到一个上下文词和一个目标词，生成一个正样本，用与正样本相同的上下文词，再在字典中随机选择一个单词，这就是负采样</p>
+</li>
+</ul>
+<h3 id="语言模型language-model">语言模型Language Model<a class="headerlink" href="#语言模型language-model" title="Permanent link">&para;</a></h3>
+<p>**语言模型**可以给一系列单词序列指定一个概率来判断它是不是可以作为一个完整的句子输出，一般完整性强的，语义通顺的句子被赋予的概率会更大，而无法组成句子的一系列单词可能就会计算出非常小的概率，语言模型用公式来表示就是要计算下面的概率：
+$$
+P\left(w_{1}, w_{2}, \cdots, w_{n}\right)
+$$
+如果我们假设每个单词在每个位置出现的概率是**独立**的话，这个表达式就会变成：
+$$
+P\left(w_{1}, w_{2}, \cdots, w_{n}\right)=\prod_{i=1}^nP(w_{i})
+$$
+但这显然是不可能的，因为单词的出现并不是不受约束的，而是和其周围的单词(也就是上下文)有一定的联系，这也是NLP中一个非常重要的观点，那就是</p>
+<blockquote>
+<p>分布式语义(Distributional semantics)：一个词语的**意思是由附近的单词决定的**，一个单词的上下文就是"附近的单词"，可以通过一个定长的滑动窗口来捕捉每个单词对应的上下文和语义。</p>
+</blockquote>
+<p>Bi-gram model认为单词出现的概率取决于它的上一个单词，即：
+$$
+P\left(w_{1}, w_{2}, \cdots, w_{n}\right)=\prod_{i=2}^nP(w_{i}|w_{i-1})
+$$
+但显然这也是一种非常的的模型，说白了就是一个一阶的马尔科夫链，只是一种非常理想化特殊化的模型，因此我们需要寻找更合适的语言模型。</p>
+<p>事实上上面提出的CBOW和Skip-gram也可以看成是一种简单的语言模型，我们通过训练一个语言模型的方式来训练出文档中出现的单词的词向量。</p>
+<h3 id="连续词袋模型cbow">连续词袋模型(CBOW)<a class="headerlink" href="#连续词袋模型cbow" title="Permanent link">&para;</a></h3>
+<p>连续词袋模型(Continuous Bag of Words Model)是一种根据上下文单词来预测中心单词的模型，对于每一个单词我们需要训练出两个向量u和v分别代表该单词作为中心单词和作为上下文单词的时候的嵌入向量(一种代表输出结果，一种代表输入)</p>
+<p>因此可以定义两个矩阵<span class="arithmatex">\(\mathcal{V} \in \mathbb{R}^{n \times|V|}\)</span> 和 <span class="arithmatex">\(\mathcal{U} \in \mathbb{R}^{|V| \times n}\)</span>，其中n代表了嵌入空间的维度，矩阵<span class="arithmatex">\(\mathcal{V}\)</span>的每一列代表了词汇表中一个单词**作为上下文单词时候的嵌入向量**，用<span class="arithmatex">\(v_i\)</span>表示，而矩阵<span class="arithmatex">\(\mathcal{U}\)</span>表示的是预测的结果，每一行代表了一个单词的嵌入向量，用<span class="arithmatex">\(u_j\)</span>表示。</p>
+<p>这里其实隐含了一个假设，那就是单词作为上下文和中心词的时候具有的特征是不一样的，因此要用不同的词向量来表示。</p>
+<h4 id="cbow模型的工作原理">CBOW模型的工作原理<a class="headerlink" href="#cbow模型的工作原理" title="Permanent link">&para;</a></h4>
+<ol>
+<li>
+<p>首先根据输入的句子生成一系列one-hot向量，假设要预测的位置是c，上下文的宽度各为m，则生成的一系列向量可以表示为：
+    <span class="arithmatex">\(<span class="arithmatex">\(\left(x^{(c-m)}, \ldots, x^{(c-1)}, x^{(c+1)}, \ldots, x^{(c+m)} \in \mathbb{R}^{|V|}\right)\)</span>\)</span></p>
+</li>
+<li>
+<p>计算得到上下文单词的嵌入向量： <span class="arithmatex">\(<span class="arithmatex">\(v_j=\mathcal{V}x^{(j)}\)</span>\)</span></p>
+</li>
+<li>
+<p>求出这些向量的均值：
+    <span class="arithmatex">\(<span class="arithmatex">\(\hat{v}=\frac{v_{c-m}+v_{c-m+1}+\ldots+v_{c+m}}{2 m} \in \mathbb{R}^{n}\)</span>\)</span></p>
+</li>
+<li>
+<p>生成一个**分数向量**<span class="arithmatex">\(z=\mathcal{U}\hat{v}\)</span>，当相似向量的点积较大时，会将相似的词推到一起，以获得较高的分数</p>
+</li>
+<li>
+<p>用softmax函数将分数向量转化成概率分布：<span class="arithmatex">\(\hat{y}=\mathrm{softmax}(z)\in \mathbb R^{|V|}\)</span></p>
+</li>
+<li>
+<p>根据概率分布<span class="arithmatex">\(\hat{y}\)</span>得到最终的结果<span class="arithmatex">\(y\)</span>(是一个one-hot向量的形式)，也就是最有可能出现在中心位置的单词</p>
+</li>
+</ol>
+<p>因此现在的问题就变成了，我们应该如何学习到两个最关键的矩阵<span class="arithmatex">\(\mathcal{V}\)</span>和<span class="arithmatex">\(\mathcal{U}\)</span>，这也是CBOW最关键的一个问题，这里可以采用**交叉熵**来定义一个目标函数：
+$$
+H(\hat{y}, y)=-\sum_{j=1}^{|V|} y_{j} \log \left(\hat{y}<em i="i">{j}\right)=-y</em> \log \left(\hat{y}_{i}\right)
+$$
+因为概率的**真实值<span class="arithmatex">\(y\)</span>是一个one-hot向量，只有一个维度是1其他的都是0**，因此可以进行这样的化简。</p>
+<h4 id="损失函数与优化方式">损失函数与优化方式<a class="headerlink" href="#损失函数与优化方式" title="Permanent link">&para;</a></h4>
+<p>我们可以定义如下形式的损失函数并进行优化：
+$$
+\begin{aligned}
+    \min J &amp;=-\log P\left(w_{c} \mid w_{c-m}, \ldots, w_{c-1}, w_{c+1}, \ldots, w_{c+m}\right) \
+    &amp;=-\log P\left(u_{c} \mid \hat{v}\right) \
+    &amp;=-\log \frac{\exp \left(u_{c}^{T} \hat{v}\right)}{\sum_{j=1}^{|V|} \exp \left(u_{j}^{T} \hat{v}\right)} \
+    &amp;=-u_{c}^{T} \hat{v}+\log \sum_{j=1}^{|V|} \exp \left(u_{j}^{T} \hat{v}\right)
+\end{aligned}
+$$
+事实上这里的loss function就是上面的交叉熵的进一步推导。我们可以采用**随机梯度下降**SGD的方式来进行模型的求解和参数的更新。</p>
+<h3 id="skip-gram模型">Skip-gram模型<a class="headerlink" href="#skip-gram模型" title="Permanent link">&para;</a></h3>
+<p>Skip-gram模型是一种给定中心单词来预测上下文中各个位置的不同单词出现概率的模型，模型的工作原理可以用如下几个步骤概括：</p>
+<ol>
+<li>生成中心单词的one-hot向量<span class="arithmatex">\(x\in \mathbb{R}^{|V|}\)</span>作为输入</li>
+<li>得到输入单词的嵌入向量<span class="arithmatex">\(v_c=\mathcal{V}x\)</span>并计算分数向量<span class="arithmatex">\(z=\mathcal{U}{v_c}\)</span></li>
+<li>
+<p>将分数向量用softmax转化成对应的概率分布<span class="arithmatex">\(\hat{y}=\mathrm{softmax}(z)\in \mathbb R^{|V|}\)</span>，则
+    <span class="arithmatex">\(<span class="arithmatex">\(\left(\hat{y}^{(c-m)}, \ldots, \hat{y}^{(c-1)}, \hat{y}^{(c+1)}, \ldots, \hat{y}^{(c+m)} \in \mathbb{R}^{|V|}\right)\)</span>\)</span>
+是预测出的对应位置中出现的单词的概率分布，每个概率向量的维度都和词汇表的大小一样</p>
+</li>
+<li>
+<p>根据概率分布生成对应的one-hot向量，作为最终的预测结果，这里就是将概率最大的那个维度对应的单词作为结果。</p>
+</li>
+</ol>
+<h4 id="参数的求解和模型的优化">参数的求解和模型的优化<a class="headerlink" href="#参数的求解和模型的优化" title="Permanent link">&para;</a></h4>
+<p>与CBOW类似，可以采用类似的方法来优化模型的参数，首先Skip-gram模型是通过中心单词c来预测上下文单词o的出现概率，这一过程可以表示为：
+$$
+P(o|c)=\frac{\exp(u_o^Tv_c)}{\sum_{w\in V}\exp(u_w^Tv_c)}
+$$
+而其损失函数可以表示为：
+$$
+J=-\sum_{w\in V}y_w\log (\hat y_w)=-\log P(O=o|C=c)=-u_o^Tv_c+\log (\sum_{w\in V}\exp(u_w^Tv_c))
+$$
+这样一来损失函数J对于词向量<span class="arithmatex">\(u,v\)</span>的导数分别可以用如下方式来计算，首先来看中心词向量v的导数：</p>
+<div class="arithmatex">\[
+\begin{aligned}
+        \frac{\partial J}{\partial v_{c}} &amp;=-\frac{\partial\left(u_{o}^{T} v_{c}\right)}{\partial v_{c}}+\frac{\partial\left(\log \left(\sum_{w} \exp \left(u_{w}^{T} v_{c}\right)\right)\right)}{\partial v_{c}} \\
+        &amp;=-u_{o}+\frac{1}{\sum_{w} \exp \left(u_{w}^{T} v_{c}\right)} \frac{\partial\left(\sum_{w} \exp \left(u_{w}^{T} v_{c}\right)\right)}{\partial v_{c}} \\
+        &amp;=-u_{o}+\sum_{w} \frac{\exp \left(u_{w}^{T} v_{c}\right) u_{w}}{\sum_{w} \exp \left(u_{w}^{T} v_{c}\right)} \\
+        &amp;=-u_{o}+\sum_{w} P(O=w \mid C=c) u_{w} \\
+        &amp;=-u_{o}+\sum_{w} \hat{y}_{w} u_{w} \\
+        &amp;=-u_{o}+u_{\text {new }} \\
+        &amp;=U^{T}(\hat{y}-y)
+    \end{aligned}
+\]</div>
+<p>我们首先要搞清楚真实的结果y是一个one-hot向量，所以上述步骤是可以成立的，而对于向量<span class="arithmatex">\(u_w\)</span>，则要分情况讨论，当w=o的时候，有</p>
+<div class="arithmatex">\[
+\begin{aligned}
+        \frac{\partial J}{\partial u_{w}} &amp;=-\frac{\partial\left(u_{o}^{T} v_{c}\right)}{\partial u_{w}}+\frac{\partial\left(\log \left(\exp \left(u_{w}^{T} v_{c}\right)\right)\right)}{\partial u_{w}} \\
+        &amp;=-v_{c}+\frac{1}{\sum_{w} \exp \left(u_{w}^{T} v_{c}\right)} \frac{\partial\left(\exp \left(u_{w}^{T} v_{c}\right)\right)}{\partial u_{w}} \\
+        &amp;=-v_{c}+\frac{\exp \left(u_{w}^{T} v_{c}\right) v_{c}}{\sum_{w} \exp \left(u_{w}^{T} v_{c}\right)} \\
+        &amp;=-v_{c}+p(O=w \mid C=c) v_{c} \\
+        &amp;=-v_{c}+\hat{y}_{w=o} v_{c}
+        \end{aligned}
+\]</div>
+<p>而当w是其他值的时候，有：</p>
+<div class="arithmatex">\[
+\frac{\partial J}{\partial u_{w}}=0+\sum_{w\not = o }P(O=w|C=c)v_c=\sum_{w\not= o}\hat y_{w}v_c
+\]</div>
+<p>考虑到真实结果y是一个one-hot向量，上面两个式子又可以合并为：</p>
+<div class="arithmatex">\[
+\frac{\partial J}{\partial U}=v_c^T(\hat y- y)
+\]</div>
+<ul>
+<li>上面的这些公式推导在CS224N的编程作业中可能会用到，当然作业中是用numpy手动实现梯度的计算，一般情况这些东西都用和<code>loss.backward()</code>和<code>optim.step()</code>来解决</li>
+<li>不过初学的时候推一推公式还是很有意思的，当然我现在已经忘记光了</li>
+</ul>
+<h3 id="负采样negative-sampling">负采样Negative Sampling<a class="headerlink" href="#负采样negative-sampling" title="Permanent link">&para;</a></h3>
+<p>上面提到的算法中，时间复杂度基本都是<span class="arithmatex">\(O(|V|)\)</span>的(比如softmax计算中，会消耗大量的算力)，也就是词汇表的大小，而这个规模往往是比较大的，因此我们可以想办法逼近这个值。</p>
+<p>在每一次的迭代中，不是遍历整个词汇表而是进行一些负采样操作，我们可以从一个噪声分布中"采样"，其概率与词汇表频率的顺序匹配。</p>
+<p>负采样可以理解为单词和短语及其构成的分布式表示，比如在skip-gram模型中，假设一对单词和上下文<span class="arithmatex">\((w,c)\)</span>，我们用<span class="arithmatex">\(P(D|w,c),D\in \left\{0,1\right\}\)</span>来表示**一对单词和上下文是否属于训练集中出现过的内容**，首先可以用sigmoid函数来定义这个概率：</p>
+<div class="arithmatex">\[
+P(D=1 \mid w, c, \theta)=\sigma\left(v_{c}^{T} v_{w}\right)=\frac{1}{1+e^{-v_{c}^{T} v_{w}}}
+\]</div>
+<p>这里的v就是上面提到的嵌入向量，然后我们可以构建一个新的目标函数来试图最大化一个单词和上下文对属于训练文本的概率，也就是采用**极大似然法来估计参数**，这里我们将需要求的参数<span class="arithmatex">\(\mathcal{V},\mathcal{U}\)</span>记作<span class="arithmatex">\(\theta\)</span>，则极大似然估计的目标可以表示为：</p>
+<div class="arithmatex">\[
+\begin{aligned}
+        \theta &amp;=\arg\max_{\theta} \prod_{(w, c) \in D} P(D=1 \mid w, c, \theta) \prod_{(w, c) \in \tilde{D}} P(D=0 \mid w, c, \theta) \\
+        &amp;=\arg\max_{\theta} \prod_{(w, c) \in D} P(D=1 \mid w, c, \theta) \prod_{(w, c) \in \tilde{D}}(1-P(D=1 \mid w, c, \theta)) \\
+        &amp;=\arg\max_{\theta} \sum_{(w, c) \in D} \log P(D=1 \mid w, c, \theta)+\sum_{(w, c) \in \tilde{D}} \log (1-P(D=1 \mid w, c, \theta)) \\
+        &amp;=\arg\max_{\theta} \sum_{(w, c) \in D} \log \frac{1}{1+\exp \left(-u_{w}^{T} v_{c}\right)}+\sum_{(w, c) \in \tilde{D}} \log \left(1-\frac{1}{1+\exp \left(-u_{w}^{T} v_{c}\right)}\right) \\
+        &amp;=\arg\max_{\theta} \sum_{(w, c) \in D} \log \frac{1}{1+\exp \left(-u_{w}^{T} v_{c}\right)}+\sum_{(w, c) \in \tilde{D}} \log \left(\frac{1}{1+\exp \left(u_{w}^{T} v_{c}\right)}\right)
+    \end{aligned}
+\]</div>
+<p>因此可以损失函数可以等价地采用如下形式，相对的，我们需要求的就是损失函数的最小值：</p>
+<div class="arithmatex">\[
+J=-\sum_{(w, c) \in D} \log \frac{1}{1+\exp \left(-u_{w}^{T} v_{c}\right)}-\sum_{(w, c) \in \tilde{D}} \log \frac{1}{1+\exp \left(u_{w}^{T} v_{c}\right)}
+\]</div>
+<p>这里的集合<span class="arithmatex">\(\tilde{D}\)</span> 表示负采样集合，也就是一系列**不属于训练文本的中心词和上下文的对构成的一个集合**，我们可以通过根据训练文本随机生成的方式来得到负采样集合。这样一来CBOW的损失函数就变成了：</p>
+<div class="arithmatex">\[
+J=-\log \sigma\left(u_{c}^{T} \cdot \hat{v}\right)-\sum_{k=1}^{K} \log \sigma\left(-\tilde{u}_{k}^{T} \cdot \hat{v}\right)
+\]</div>
+<p>而Skip-gram的新损失函数就变成了：</p>
+<div class="arithmatex">\[
+J=-\log \sigma\left(u_{o}^{T} \cdot v_{c}\right)-\sum_{k=1}^{K} \log \sigma\left(-\tilde{u}_{k}^{T} \cdot v_{c}\right)
+\]</div>
+<p>这里的<span class="arithmatex">\(\tilde{u_k}\)</span>是随机采样产生的K个不是当前中心词的上下文的单词，在skip-gram模型中，梯度可以表示为：</p>
+<div class="arithmatex">\[
+\begin{aligned}
+        \frac{\partial J_{neg}}{\partial v_{c}} &amp;=\left(\sigma\left(u_{o}^{T} v_{c}\right)-1\right) u_{o}+\sum_{k=1}^{K}\left(1-\sigma\left(-u_{k}^{T} v_{c}\right)\right) u_{k} \\
+        &amp;=\left(\sigma\left(u_{o}^{T} v_{c}\right)-1\right) u_{o}+\sum_{k=1}^{K} \sigma\left(u_{k}^{T} v_{c}\right) u_{k}
+        \end{aligned}
+\]</div>
+<p>而对于<span class="arithmatex">\(u_o\)</span>和负采样向量<span class="arithmatex">\(\tilde{u_k}\)</span>，其梯度是：</p>
+<div class="arithmatex">\[
+\frac{\partial J_{neg}}{\partial u_{o}}=\left(\sigma\left(u_{o}^{T} v_{c}\right)-1\right) v_{c}
+\]</div>
+<div class="arithmatex">\[
+\frac{\partial J_{neg}}{\partial u_{k}}=\sum_{k=1}^{K}\left(1-\sigma\left(-u_{k}^{T} v_{c}\right)\right) v_{c}=\sum_{k=1}^{K}\left(\sigma\left(u_{k}^{T} v_{c}\right)\right) v_{c}
+\]</div>
+<h2 id="全局词向量glove">全局词向量GloVe<a class="headerlink" href="#全局词向量glove" title="Permanent link">&para;</a></h2>
+<h3 id="已有的单词表示方法">已有的单词表示方法<a class="headerlink" href="#已有的单词表示方法" title="Permanent link">&para;</a></h3>
+<p>到现在为止已经介绍过的单词表示方法主要分为两种，一种是基于次数统计和矩阵分解的传统机器学习方法，这类方法可以获取**全局**的统计信息，并很好的捕捉单词之间的相似性，但是在单词类比之类的任务重表现较差，比较经典的有潜在语义分析(LSA)等等</p>
+<p>另一类是上面提到的基于\"浅窗口\"(shallow window based)的方法，比如CBOW和Skip-gram，通过局部的上下文来进行上下文或者中心单词的预测，这样的方法可以捕捉到复杂的语言模式和上下文信息，但是**对全局的统计信息知之甚少**，缺少\"大局观\"，这也是这些模型的缺点。</p>
+<p>而GloVe则使用一些全局的统计信息，比如共生矩阵，并使用最小二乘损失函数来预测一个单词出现在一段上下文中的概率，并且在单词类比的任务上取得了SOTA的效果。</p>
+<h3 id="glove算法">GloVe算法<a class="headerlink" href="#glove算法" title="Permanent link">&para;</a></h3>
+<p>首先用<span class="arithmatex">\(X\)</span>来表示训练集的共生矩阵，而<span class="arithmatex">\(X_{ij}\)</span>表示单词i的上下文中出现单词j的次数，用<span class="arithmatex">\(X_i\)</span>来表示矩阵中第i行的和则这样一来：</p>
+<div class="arithmatex">\[
+P_{ij}=P(w_j|w_i)=\frac{X_{ij}}{X_i}
+\]</div>
+<p>可以表示单词j在单词i的上下文中出现的概率。我们在Skip-gram中，用Softmax来计算单词j出现在i的上下文中的概率：</p>
+<div class="arithmatex">\[
+Q_{i j}=\frac{\exp \left(\vec{u}_{j}^{T} \vec{v}_{i}\right)}{\sum_{w=1}^{W} \exp \left(\vec{u}_{w}^{T} \vec{v}_{i}\right)}
+\]</div>
+<p>而训练的过程中用到的损失函数如下所示，又因为上下文的关系在样本中可能会多次出现，因此按照如下方式进行变形：</p>
+<div class="arithmatex">\[
+J=-\sum_{i \in \text { corpus }(i)} \sum_{j \in \text { context(i)}}{\log Q_{i j}}=\sum_{i=1}^W\sum_{j=1}^WX_{ij}\log Q_{i j}
+\]</div>
+<p>交叉熵损失的一个显著缺点是它要求分布Q被适当地标准化，因此可以换一种方式，也就是使用基于最小二乘的目标函数来进行优化求解，就可以不用进行标准化了：</p>
+<div class="arithmatex">\[
+\hat{J}=\sum_{i=1}^{W} \sum_{j=1}^{W} X_{i}\left(\hat{P}_{i j}-\hat{Q}_{i j}\right)^{2}=\sum_{i=1}^{W} \sum_{j=1}^{W} X_{i}\left(X_{ij}-\exp(\vec{u}_{j}^{T})\vec{v}_{i}\right)^2
+\]</div>
+<p>但是这样子的目标函数又带来了一个新的问题，那就是 <span class="arithmatex">\(X_{ij}\)</span> 往往是一个比较大的数字，这会对计算量造成很大的影响，一个有效的方法是取对数：</p>
+<div class="arithmatex">\[
+\begin{aligned}
+        \hat{J} &amp;=\sum_{i=1}^{W} \sum_{j=1}^{W} X_{i}\left(\log (\hat{P})_{i j}-\log \left(\hat{Q}_{i j}\right)\right)^{2} \\
+        &amp;=\sum_{i=1}^{W} \sum_{i=1}^{W} X_{i}\left(\vec{u}_{j}^{T} \vec{v}_{i}-\log X_{i j}\right)^{2}
+    \end{aligned}
+\]</div>
+<h3 id="结论">结论<a class="headerlink" href="#结论" title="Permanent link">&para;</a></h3>
+<p>GloVe模型通过只训练共生矩阵中的非零元素充分利用了训练样本的全局信息，并且提供了一个拥有比较有意义的子结构的向量空间，在单词类比的任务中表现优于传统的Word2Vec</p>
+<h2 id="词向量的评估">词向量的评估<a class="headerlink" href="#词向量的评估" title="Permanent link">&para;</a></h2>
+<p>目前已经学习了一系列将单词用词向量来表示的方法，接下来的这一部分主要探讨如何评估生成的词向量的质量的好坏。</p>
+<h3 id="内部评估">内部评估<a class="headerlink" href="#内部评估" title="Permanent link">&para;</a></h3>
+<p>内部评价(Intrinsic Evaluation)是对生成的一系列词嵌入向量，用一些子任务来验证嵌入向量的性能优劣，并且一般这样的子任务是比较容易完成的，这样可以快速反馈词向量训练的结果。</p>
+<h3 id="外部评估">外部评估<a class="headerlink" href="#外部评估" title="Permanent link">&para;</a></h3>
+<p>外部评估是用一些实际中的任务来评估当前训练获得的词向量的性能，但是在优化一个表现不佳的外部评估系统的时候我们无法确定是哪个特定的子系统产生的错误，这就激发了对内在评估的需求。</p>
+
+  <hr>
+<div class="md-source-file">
+  <small>
+    
+      最后更新:
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年1月24日 13:22:07</span>
+      
+        <br>
+        创建日期:
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年1月24日 13:22:07</span>
+      
+    
+  </small>
+</div>
+
+
+
+
+<div id="__comments">
+    
+    <script src="https://giscus.app/client.js"
+        data-repo="Zhang-Each/My-CS-Notebook"
+        data-repo-id="R_kgDOI0dr4w"
+        data-category="General"
+        data-category-id="DIC_kwDOI0dr484CTvIK"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="1"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="zh-CN"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+        </script>
+    <h3>颜色主题调整</h3>
+    <div class="tx-switch">
+    <button class="button1" data-md-color-primary="red" style="background-color:red">red</button>
+    <button class="button1" data-md-color-primary="pink" style="background-color:pink;color:black">pink</button>
+    <button class="button1" data-md-color-primary="purple" style="background-color:purple">purple</button>
+    <button class="button1" data-md-color-primary="indigo" style="background-color:indigo">indigo</button>
+    <button class="button1" data-md-color-primary="blue" style="background-color:blue">blue</button>
+    <button class="button1" data-md-color-primary="cyan" style="background-color:cyan;color:black">cyan</button>
+    <button class="button1" data-md-color-primary="teal" style="background-color:teal">teal</button>
+    <button class="button1" data-md-color-primary="green" style="background-color:green">green</button>
+    <button class="button1" data-md-color-primary="lime" style="background-color:lime;color:black">lime</button>
+    <button class="button1" data-md-color-primary="orange" style="background-color:orange;color:black">orange</button>
+    <button class="button1" data-md-color-primary="brown" style="background-color:brown;border-radius=3px">brown</button>
+    <button class="button1" data-md-color-primary="grey" style="background-color:grey">grey</button>
+    <button class="button1" data-md-color-primary="black" style="background-color:black">black</button>
+    <button class="button1" data-md-color-primary="white" style="background-color:white;color:black">white</button>
+    </div>
+    
+    <script>
+    var buttons = document.querySelectorAll("button[data-md-color-primary]")
+    buttons.forEach(function(button) {
+            button.addEventListener("click", function() {
+            var attr = this.getAttribute("data-md-color-primary")
+            document.body.setAttribute("data-md-color-primary", attr)
+            localStorage.setItem("data-md-color-primary",attr);
+            })
+    })
+    </script>
+    
+    <h2 ><!-- 评论 -->评论区~</h2>
+    
+    有用的话请给我个star或者follow我的账号!! 非常感谢!!
+    
+    </br>
+    
+    快来跟我聊天~
+    
+    </div>
+    
+    <script src="https://giscus.app/client.js"
+        data-repo="Zhang-Each/Notebook-Comments"
+        data-repo-id="R_kgDOI0dlNg"
+        data-category="General"
+        data-category-id="DIC_kwDOI0dlNs4CTvH-"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="1"
+        data-input-position="top"
+        data-theme="preferred_color_scheme"
+        data-lang="zh-CN"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+    </script>
+    
+    <!-- Synchronize Giscus theme with palette -->
+    <script>
+    var giscus = document.querySelector("script[src*=giscus]")
+    
+    /* Set palette on initial load */
+    // var palette = __md_get("__palette")
+    // if (palette && typeof palette.color === "object") {
+    //     var theme = palette.color.scheme === "slate" ? "dark" : "light"
+    //     giscus.setAttribute("data-theme", theme) 
+    // }
+    
+    /* Register event handlers after documented loaded */
+    // document.addEventListener("DOMContentLoaded", function() {
+    //     var ref = document.querySelector("[data-md-component=palette]")
+    //     ref.addEventListener("change", function() {
+    //     var palette = __md_get("__palette")
+    //     if (palette && typeof palette.color === "object") {
+    //         var theme = palette.color.scheme === "slate" ? "dark" : "light"
+    
+    //         /* Instruct Giscus to change theme */
+    //         var frame = document.querySelector(".giscus-frame")
+    //         frame.contentWindow.postMessage(
+    //         { giscus: { setConfig: { theme } } },
+    //         "https://giscus.app"
+    //         )
+    //     }
+    //     })
+    // })
+    </script>
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            回到页面顶部
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      本页面的全部内容在 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh">CC BY-SA 4.0</a> 和 <a href="https://github.com/zTrix/sata-license">SATA</a> 协议之条款下提供，附加条款亦可能应用。<br /><span id="busuanzi_container_site_uv">本站访客总人数<span id="busuanzi_value_site_uv"></span>人次，</span><span id="busuanzi_container_site_pv">本站总访问次数<span id="busuanzi_value_site_pv"></span>次。</span>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "content.code.annotate", "navigation.tracking", "navigation.indexes", "navigation.top", "toc.follow"], "search": "../../assets/javascripts/workers/search.e5c33ebb.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.51d95adb.min.js"></script>
+      
+        <script src="../../from_oi_wiki/js/extra.js"></script>
+      
+        <script src="../../js/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js"></script>
+      
+        <script src="../../js/tablesort.js"></script>
+      
+        <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+      
+    
+  </body>
+</html>
