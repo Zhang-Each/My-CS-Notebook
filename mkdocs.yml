@@ -119,5 +119,8 @@ plugins:
       separator: '[\s\u200b\-]'
   - git-revision-date-localized:
       enable_creation_date: true
-      type: timeago
+      type: datetime
+      timezone: Asia/Shanghai
+      locale: zh
+  - statistics
   # - statistics
