@@ -44,8 +44,6 @@
       
     
     
-      <link rel="stylesheet" href="../../css/timeago.css">
-    
       <link rel="stylesheet" href="../../from_oi_wiki/css/extra.css?v=13">
     
       <link rel="stylesheet" href="../../css/status.css">
@@ -1382,9 +1380,9 @@ h_v^{(l)}[i]=\sigma(\sum_{u\in N(v)}\alpha_{vu}^iW^{(l)}h_u^{(l-1)})
 <li>为什么skip connection 可以work？因为skip机制创建了一个混合模型，通过skip，比较底层的一些计算结果直接跳过了中间一些层的计算直接作用到了更高的层次中，这样一来就使得深的GNN和浅的GNN的计算结果进行了混合</li>
 <li>有skip connection机制的GCN的更新方式是：</li>
 </ul>
-<p>$$
-  h_v^{(l+1)}=\sigma (W_l\sum_{u\in N(v)}\frac{h_u^{(l)}}{|N(v)|})\rightarrow h_v^{(l+1)}=\sigma (W_l\sum_{u\in N(v)}\frac{h_u<sup _l_="(l)">{(l)}}{|N(v)|}+h_v</sup>)
-  $$</p>
+<div class="arithmatex">\[
+  h_v^{(l+1)}=\sigma (W_l\sum_{u\in N(v)}\frac{h_u^{(l)}}{|N(v)|})\rightarrow h_v^{(l+1)}=\sigma (W_l\sum_{u\in N(v)}\frac{h_u^{(l)}}{|N(v)|}+h_v^{(l)})
+\]</div>
 <h4 id="gnn的图处理">GNN的图处理<a class="headerlink" href="#gnn的图处理" title="Permanent link">&para;</a></h4>
 <ul>
 <li>输入的图不一定就是最优的计算图，因为输入的图可能缺少特征，太稀疏或者太稠密，也有可能因为规模太大而无法在GPU上进行计算，因此可以对输入的图进行一定的处理，比如</li>
@@ -1404,11 +1402,11 @@ h_v^{(l)}[i]=\sigma(\sum_{u\in N(v)}\alpha_{vu}^iW^{(l)}h_u^{(l-1)})
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-01-23T15:13:19+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-01-23</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年1月24日 10:52:06</span>
       
         <br>
         创建日期:
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-01-23T10:40:25+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-01-23</span>
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年1月23日 18:40:25</span>
       
     
   </small>
@@ -1565,10 +1563,6 @@ h_v^{(l)}[i]=\sigma(\sum_{u\in N(v)}\alpha_{vu}^iW^{(l)}h_u^{(l-1)})
     
     
       <script src="../../assets/javascripts/bundle.51d95adb.min.js"></script>
-      
-        <script src="../../js/timeago.min.js"></script>
-      
-        <script src="../../js/timeago_mkdocs_material.js"></script>
       
         <script src="../../from_oi_wiki/js/extra.js"></script>
       
