@@ -9,9 +9,10 @@
     - [面试复盘](interviews/overview.md) 回顾一下找暑期实习和秋招的面试历程~
 
 ???+ info inline "统计！"
-    <center>页面数：{{pages}} </center>
+    <center>笔记本总页数：{{pages}} </center>
     
-    <center>总字数：{{words}} </center>
+    <center>笔记本总字数：{{words}} </center>
+    
 
 ???+ Warning "施工中！" 
     <center>[![GitHub stars](https://img.shields.io/github/stars/xuan-insr/xuan-insr.github.io.svg?style=social&label=Stars)](https://github.com/xuan-insr/xuan-insr.github.io)</center>

@@ -24,8 +24,17 @@ nav:
       - 08.社区检测 : CS224W/CS224W：图机器学习08.md
       - 09.图生成模型 : CS224W/CS224W：图机器学习09.md
       - 10.图神经网络前沿话题 : CS224W/CS224W：图机器学习10.md
-
-  - 杂谈与总结:
+    - CS224N-基于深度学习的自然语言处理:
+      - CS224N/index.md
+      - 01-Introduction&WordVector: CS224N/NLP01-Introduction&WordVector.md
+      - 02-Word2Vec: CS224N/NLP02-Word2Vec.md
+      - 03-DependenceParsing: CS224N/NLP03-DependenceParsing.md
+      - 04-LM&RNN&LSTM: CS224N/NLP04-LM&RNN&LSTM.md
+      - 05-Seq2Seq: CS224N/NLP05-Seq2Seq.md
+      - Assignment1&2: CS224N/Stanford-CS224N-Assignment1&2.md
+      - Assignment3: CS224N/Stanford-CS224N-Assignment3.md
+      - Assignment4: CS224N/Stanford-CS224N-Assignment4.md
+  - 🐷 杂谈与总结:
     - 杂谈与总结/index.md
     - 2022年度总结: 杂谈与总结/2022年度总结.md
 
@@ -122,5 +131,4 @@ plugins:
       type: datetime
       timezone: Asia/Shanghai
       locale: zh
-  - statistics
   # - statistics
