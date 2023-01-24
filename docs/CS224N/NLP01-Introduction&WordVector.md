@@ -91,3 +91,6 @@ SVD方法还是存在一定的缺陷的，不管用什么方式生成矩阵X，�
 -   不考虑一些功能性的单词比如a，an，the，it等等
 
 -   使用一个倾斜的窗口，也就是在生成共生矩阵的时候考虑单词相距的距离
+
+
+<span id="busuanzi_container_page_pv">本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span>

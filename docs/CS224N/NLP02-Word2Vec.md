@@ -79,6 +79,7 @@ $$
 #### 损失函数与优化方式
 
 我们可以定义如下形式的损失函数并进行优化：
+
 $$
 \begin{aligned}
 	\min J &=-\log P\left(w_{c} \mid w_{c-m}, \ldots, w_{c-1}, w_{c+1}, \ldots, w_{c+m}\right) \\
@@ -87,6 +88,7 @@ $$
 	&=-u_{c}^{T} \hat{v}+\log \sum_{j=1}^{|V|} \exp \left(u_{j}^{T} \hat{v}\right)
 \end{aligned}
 $$
+
 事实上这里的loss function就是上面的交叉熵的进一步推导。我们可以采用**随机梯度下降**SGD的方式来进行模型的求解和参数的更新。
 
 
@@ -279,3 +281,6 @@ GloVe模型通过只训练共生矩阵中的非零元素充分利用了训练样
 ### 外部评估
 
 外部评估是用一些实际中的任务来评估当前训练获得的词向量的性能，但是在优化一个表现不佳的外部评估系统的时候我们无法确定是哪个特定的子系统产生的错误，这就激发了对内在评估的需求。
+
+
+<span id="busuanzi_container_page_pv">本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span>

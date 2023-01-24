@@ -42,3 +42,6 @@ NLP03-依赖性解析Dependency Parsing
 ![image](./pictures/nlp2.png){width="75%"}
 
 这里使用了$f(x)=x^3$作为非线性的激活函数，并将word，tag和label三种特征作为输入，在隐层进行矩阵计算而在输出层进行softmax
+
+
+<span id="busuanzi_container_page_pv">本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span>
