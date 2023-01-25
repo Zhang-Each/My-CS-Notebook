@@ -50,6 +50,25 @@ nav:
       - Assignment1&2: CS224N/Stanford-CS224N-Assignment1&2.md
       - Assignment3: CS224N/Stanford-CS224N-Assignment3.md
       - Assignment4: CS224N/Stanford-CS224N-Assignment4.md
+  - 🐒 操作系统:
+    - OS/index.md
+    - OS/操作系统0-Linux内核.md
+    - OS/操作系统1-导论.md
+    - OS/操作系统2-进程&线程.md
+    - OS/操作系统3-CPU调度&同步.md
+    - OS/操作系统4-同步和死锁.md
+    - OS/操作系统5-存储.md
+    - OS/操作系统6-文件.md
+    - OS/操作系统7-磁盘和IO.md
+  - 🐓 计算机网络:
+    - Networking/index.md
+    - 计算机网络1-OSI模型: Networking/计算机网络1-OSI模型.md
+    - 计算机网络2-物理层:  Networking/计算机网络2-物理层.md
+    - 计算机网络3-数据链路层&MAC: Networking/计算机网络3-数据链路层&MAC.md
+    - 计算机网络4-网络层: Networking/计算机网络4-网络层.md
+    - 计算机网络5-运输层: Networking/计算机网络5-运输层.md
+    - 计算机网络6-应用层: Networking/计算机网络6-应用层.md
+    - 计算机网络7-网络安全: Networking/计算机网络7-网络安全.md
   - 🐷 杂谈与总结:
     - 杂谈与总结/index.md
     - I. 2021年度总结: 杂谈与总结/2021年度总结.md
@@ -135,11 +154,11 @@ extra_css:
 
 extra_javascript:
   - 'from_oi_wiki/js/extra.js'
-  - js/mathjax.js # 支持数学公式，ref : https://squidfunk.github.io/mkdocs-material/reference/mathjax
+  # - js/mathjax.js # 支持数学公式，ref : https://squidfunk.github.io/mkdocs-material/reference/mathjax
   - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
   - https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js # 支持表格排序
-  - js/tablesort.js
+  # - js/tablesort.js
   - //busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js
 
 plugins:
