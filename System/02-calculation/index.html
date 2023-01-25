@@ -2170,7 +2170,7 @@
 <h2 id="21-数据表示浮点数无浮点数">2.1 数据表示：浮点数/无浮点数<a class="headerlink" href="#21-数据表示浮点数无浮点数" title="Permanent link">&para;</a></h2>
 <h3 id="211-二进制数的表示">2.1.1 二进制数的表示<a class="headerlink" href="#211-二进制数的表示" title="Permanent link">&para;</a></h3>
 <ul>
-<li>K进制的数的表示方式 <span class="arithmatex">\(N=/sum/limits_{i=m}/limits^{n-1}b_i/times K^i\)</span> 其中0-n-1是整数位，-1到m是小数位</li>
+<li>K进制的数的表示方式 <span class="arithmatex">\(N=\sum\limits_{i=m}\limits^{n-1}b_i\times K^i\)</span> 其中0-n-1是整数位，-1到m是小数位</li>
 <li>无符号数：n位二进制无符号数可以表示的值的范围是：0到<span class="arithmatex">\(2^n-1\)</span> </li>
 <li>
 <p>有符号数：把最高位用来表示数的正负，0表示正数，1表负数</p>
@@ -2431,7 +2431,7 @@
 <ul>
 <li>补码乘法</li>
 <li>
-<p><span class="arithmatex">\((A/times B)_{补}=A/times B_{补}\)</span> 已知AB的补码，可以把A转换成原码和B的补码进行计算</p>
+<p><span class="arithmatex">\((A\times B)_{补}=A\times B_{补}\)</span> 已知AB的补码，可以把A转换成原码和B的补码进行计算</p>
 </li>
 <li>
 <p>无符号数的补码之积等于积的补码</p>
@@ -2498,7 +2498,7 @@
 <p>二进制的浮点数的表示方式是 <code>1.xxxxxxxx * 2^yyyyyy</code> ，类似于十进制中的科学计数法，</p>
 </li>
 </ul>
-<p>用公式表示为<span class="arithmatex">\(x=(-1)^s/times 1.M/times 2^{E-127}\)</span> </p>
+<p>用公式表示为<span class="arithmatex">\(x=(-1)^s\times 1.M\times 2^{E-127}\)</span> </p>
 <ul>
 <li>E是阶码，一定是一个非负数，表示的范围是0-255(float中)，0-1023(double中)</li>
 <li>M也叫significand，E叫exponent </li>
@@ -2530,7 +2530,7 @@
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年1月25日 17:15:47</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年1月25日 22:23:51</span>
       
         <br>
         创建日期:
