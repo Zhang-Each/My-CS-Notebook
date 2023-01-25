@@ -50,6 +50,14 @@ nav:
       - Assignment1&2: CS224N/Stanford-CS224N-Assignment1&2.md
       - Assignment3: CS224N/Stanford-CS224N-Assignment3.md
       - Assignment4: CS224N/Stanford-CS224N-Assignment4.md
+  - 🐑 计算机系统:
+    - System/index.md
+    - System/00-intro.md
+    - System/01-mips.md
+    - System/02-calculation.md
+    - System/03-cpu.md
+    - System/04-memory.md
+    - System/05-io.md
   - 🐒 操作系统:
     - OS/index.md
     - OS/操作系统0-Linux内核.md
@@ -69,6 +77,9 @@ nav:
     - 计算机网络5-运输层: Networking/计算机网络5-运输层.md
     - 计算机网络6-应用层: Networking/计算机网络6-应用层.md
     - 计算机网络7-网络安全: Networking/计算机网络7-网络安全.md
+  - 🐶 数据库系统:
+    - DB/index.md
+    - 数据库系统复习笔记: DB/db.md
   - 🐷 杂谈与总结:
     - 杂谈与总结/index.md
     - I. 2021年度总结: 杂谈与总结/2021年度总结.md

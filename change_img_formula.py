@@ -1,7 +1,7 @@
 import os
 
 if __name__ == "__main__":
-    root_dir = "./docs/OS"
+    root_dir = "./docs/System"
     for file in os.listdir(root_dir):
         if ".md" not in file or "index" in file:
             continue
