@@ -1,0 +1,2707 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://zhang-each.github.io/My-CS-notebook/System/02-calculation/">
+      
+      
+        <link rel="prev" href="../01-mips/">
+      
+      
+        <link rel="next" href="../03-cpu/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.6">
+    
+    
+      
+        <title>2. Arithmetic for computer 计算机运算 - 小角龙的学习记录</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.558e4712.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.2505c338.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Hiragino+Sans+GB:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Hiragino Sans GB";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../from_oi_wiki/css/extra.css?v=13">
+    
+      <link rel="stylesheet" href="../../css/status.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#2--arithmetic-for-computer-计算机运算" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="小角龙的学习记录" class="md-header__button md-logo" aria-label="小角龙的学习记录" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            小角龙的学习记录
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              2.  Arithmetic for computer 计算机运算
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/zhang-each/My-CS-notebook/" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Zhang-Each/My-CS-notebook
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        🏡 主页
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../ML/" class="md-tabs__link">
+        🐯 统计机器学习
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../CS231N/" class="md-tabs__link">
+        🐰 深度学习
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../" class="md-tabs__link md-tabs__link--active">
+        🐑 计算机系统
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../OS/" class="md-tabs__link">
+        🐒 操作系统
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Networking/" class="md-tabs__link">
+        🐓 计算机网络
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../DB/" class="md-tabs__link">
+        🐶 数据库系统
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../%E6%9D%82%E8%B0%88%E4%B8%8E%E6%80%BB%E7%BB%93/" class="md-tabs__link">
+        🐷 杂谈与总结
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="小角龙的学习记录" class="md-nav__button md-logo" aria-label="小角龙的学习记录" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    小角龙的学习记录
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/zhang-each/My-CS-notebook/" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Zhang-Each/My-CS-notebook
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../..">🏡 主页</a>
+          
+            <label for="__nav_1">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="🏡 主页" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          🏡 主页
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/" class="md-nav__link">
+        关于我
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../ML/">🐯 统计机器学习</a>
+          
+            <label for="__nav_2">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="🐯 统计机器学习" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          🐯 统计机器学习
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A001%EF%BC%9A%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" class="md-nav__link">
+        01：机器学习中的基本概念
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A002%EF%BC%9A%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%AE%9A%E7%90%86/" class="md-nav__link">
+        02：贝叶斯定理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A003%EF%BC%9A%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/" class="md-nav__link">
+        03：线性模型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A004%EF%BC%9A%E6%84%9F%E7%9F%A5%E6%9C%BA/" class="md-nav__link">
+        04：感知机
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A005%EF%BC%9A%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BASVM/" class="md-nav__link">
+        05：支持向量机SVM
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A006%EF%BC%9AkNN/" class="md-nav__link">
+        06：kNN
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A007%EF%BC%9A%E5%86%B3%E7%AD%96%E6%A0%91DecisionTree/" class="md-nav__link">
+        07：决策树DecisionTree
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A008%EF%BC%9A%E8%81%9A%E7%B1%BBClustering/" class="md-nav__link">
+        08：聚类Clustering
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A009%EF%BC%9A%E6%8F%90%E5%8D%87Boosting%E4%B8%8EEnsemble/" class="md-nav__link">
+        09：提升Boosting与Ensemble
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A010%EF%BC%9AEM%E7%AE%97%E6%B3%95%E5%92%8CGMM/" class="md-nav__link">
+        10：EM算法和GMM
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A011%EF%BC%9A%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90PCA/" class="md-nav__link">
+        11：主成分分析PCA
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A012%EF%BC%9A%E7%BA%BF%E6%80%A7%E5%88%A4%E5%88%AB%E5%88%86%E6%9E%90LDA/" class="md-nav__link">
+        12：线性判别分析LDA
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A013%EF%BC%9A%E9%9A%90%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E6%A8%A1%E5%9E%8B/" class="md-nav__link">
+        13：隐马尔可夫模型
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../CS231N/">🐰 深度学习</a>
+          
+            <label for="__nav_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="🐰 深度学习" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          🐰 深度学习
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_3_2" type="checkbox" id="__nav_3_2" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3_2" tabindex="0" aria-expanded="false">
+          CS231N-神经网络与深度学习
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="CS231N-神经网络与深度学习" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          CS231N-神经网络与深度学习
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B01%EF%BC%9AkNN%E5%92%8C%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB%E5%99%A8/" class="md-nav__link">
+        01.kNN和线性分类器
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B02%EF%BC%9A%E5%A4%9A%E5%B1%82%E5%85%A8%E8%BF%9E%E6%8E%A5%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%92%8C%E4%BC%98%E5%8C%96%E5%99%A8/" class="md-nav__link">
+        02.多层全连接神经网络和优化器
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B03%EF%BC%9ANormalization%E5%92%8CDropOut/" class="md-nav__link">
+        03.Normalization和DropOut
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B04%EF%BC%9A%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9CCNN/" class="md-nav__link">
+        04.卷积神经网络CNN
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B05%EF%BC%9ARNN%26LSTM%E4%B8%8E%E5%9B%BE%E7%89%87%E6%8F%8F%E8%BF%B0/" class="md-nav__link">
+        05.RNN&LSTM与图片描述
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B06%EF%BC%9ATransformer%E4%B8%8E%E5%9B%BE%E7%89%87%E6%8F%8F%E8%BF%B0/" class="md-nav__link">
+        06.Transformer与图片描述
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B07%EF%BC%9A%E6%A8%A1%E5%9E%8B%E5%8F%AF%E8%A7%86%E5%8C%96%EF%BC%8C%E5%9B%BE%E5%83%8F%E6%AC%BA%E8%AF%88%E5%92%8CGAN/" class="md-nav__link">
+        07.模型可视化，图像欺诈和GAN
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B08%EF%BC%9A%E8%87%AA%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%E4%B8%8E%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/" class="md-nav__link">
+        08.自监督学习与课程总结
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_3_3" type="checkbox" id="__nav_3_3" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../CS224W/">CS224W-图机器学习与图神经网络</a>
+          
+            <label for="__nav_3_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="CS224W-图机器学习与图神经网络" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          CS224W-图机器学习与图神经网络
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A001/" class="md-nav__link">
+        01.导论，传统的图学习方法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A002/" class="md-nav__link">
+        02.节点嵌入和PageRank
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A003/" class="md-nav__link">
+        03.消息传递机制
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A004/" class="md-nav__link">
+        04.图神经网络基础
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A005/" class="md-nav__link">
+        05.图神经网络的训练和应用，表示能力分析
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A006/" class="md-nav__link">
+        06.知识图谱，知识图谱推理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A007/" class="md-nav__link">
+        07.频繁子图挖掘
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A008/" class="md-nav__link">
+        08.社区检测
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A009/" class="md-nav__link">
+        09.图生成模型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A010/" class="md-nav__link">
+        10.图神经网络前沿话题
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_3_4" type="checkbox" id="__nav_3_4" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../CS224N/">CS224N-基于深度学习的自然语言处理</a>
+          
+            <label for="__nav_3_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="CS224N-基于深度学习的自然语言处理" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_4">
+          <span class="md-nav__icon md-icon"></span>
+          CS224N-基于深度学习的自然语言处理
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224N/NLP01-Introduction%26WordVector/" class="md-nav__link">
+        01-Introduction&WordVector
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224N/NLP02-Word2Vec/" class="md-nav__link">
+        02-Word2Vec
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224N/NLP03-DependenceParsing/" class="md-nav__link">
+        03-DependenceParsing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224N/NLP04-LM%26RNN%26LSTM/" class="md-nav__link">
+        04-LM&RNN&LSTM
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224N/NLP05-Seq2Seq/" class="md-nav__link">
+        05-Seq2Seq
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224N/Stanford-CS224N-Assignment1%262/" class="md-nav__link">
+        Assignment1&2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224N/Stanford-CS224N-Assignment3/" class="md-nav__link">
+        Assignment3
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224N/Stanford-CS224N-Assignment4/" class="md-nav__link">
+        Assignment4
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../">🐑 计算机系统</a>
+          
+            <label for="__nav_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="🐑 计算机系统" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          🐑 计算机系统
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../00-intro/" class="md-nav__link">
+        0.计算机基本知识
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-mips/" class="md-nav__link">
+        1. MIPS 指令系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          2.  Arithmetic for computer 计算机运算
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        2.  Arithmetic for computer 计算机运算
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#21-数据表示浮点数无浮点数" class="md-nav__link">
+    2.1 数据表示：浮点数/无浮点数
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1 数据表示：浮点数/无浮点数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#211-二进制数的表示" class="md-nav__link">
+    2.1.1 二进制数的表示
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#212-各种二进制码" class="md-nav__link">
+    2.1.2 各种二进制码
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#22-汉字系统" class="md-nav__link">
+    2.2 汉字系统
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#23-addition--subtraction" class="md-nav__link">
+    2.3 Addition &amp; Subtraction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#24-multiplication--division" class="md-nav__link">
+    2.4 Multiplication &amp;&amp; Division
+  </a>
+  
+    <nav class="md-nav" aria-label="2.4 Multiplication &amp;&amp; Division">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#241-有符号数的乘法" class="md-nav__link">
+    2.4.1 有符号数的乘法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#242-二进制数的除法" class="md-nav__link">
+    2.4.2 二进制数的除法
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#25-float-浮点数的表示ieee754标准" class="md-nav__link">
+    2.5 Float 浮点数的表示——IEEE754标准
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-cpu/" class="md-nav__link">
+        3. CPU结构
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-memory/" class="md-nav__link">
+        4. 存储器
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-io/" class="md-nav__link">
+        5. I/O系统
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../OS/">🐒 操作系统</a>
+          
+            <label for="__nav_5">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="🐒 操作系统" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          🐒 操作系统
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F0-Linux%E5%86%85%E6%A0%B8/" class="md-nav__link">
+        操作系统0 Linux内核
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F1-%E5%AF%BC%E8%AE%BA/" class="md-nav__link">
+        操作系统1：导论和操作系统结构
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F2-%E8%BF%9B%E7%A8%8B%26%E7%BA%BF%E7%A8%8B/" class="md-nav__link">
+        操作系统2：进程/线程
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F3-CPU%E8%B0%83%E5%BA%A6%26%E5%90%8C%E6%AD%A5/" class="md-nav__link">
+        操作系统3：CPU调度
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F4-%E5%90%8C%E6%AD%A5%E5%92%8C%E6%AD%BB%E9%94%81/" class="md-nav__link">
+        操作系统4：同步和死锁
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F5-%E5%AD%98%E5%82%A8/" class="md-nav__link">
+        操作系统5：存储管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F6-%E6%96%87%E4%BB%B6/" class="md-nav__link">
+        操作系统6：文件
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F7-%E7%A3%81%E7%9B%98%E5%92%8CIO/" class="md-nav__link">
+        操作系统7：磁盘和I/O
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../Networking/">🐓 计算机网络</a>
+          
+            <label for="__nav_6">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="🐓 计算机网络" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          🐓 计算机网络
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Networking/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C1-OSI%E6%A8%A1%E5%9E%8B/" class="md-nav__link">
+        计算机网络1-OSI模型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Networking/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C2-%E7%89%A9%E7%90%86%E5%B1%82/" class="md-nav__link">
+        计算机网络2-物理层
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Networking/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C3-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%26MAC/" class="md-nav__link">
+        计算机网络3-数据链路层&MAC
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Networking/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C4-%E7%BD%91%E7%BB%9C%E5%B1%82/" class="md-nav__link">
+        计算机网络4-网络层
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Networking/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C5-%E8%BF%90%E8%BE%93%E5%B1%82/" class="md-nav__link">
+        计算机网络5-运输层
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Networking/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C6-%E5%BA%94%E7%94%A8%E5%B1%82/" class="md-nav__link">
+        计算机网络6-应用层
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Networking/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C7-%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" class="md-nav__link">
+        计算机网络7-网络安全
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../DB/">🐶 数据库系统</a>
+          
+            <label for="__nav_7">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="🐶 数据库系统" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          🐶 数据库系统
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../DB/db/" class="md-nav__link">
+        数据库系统复习笔记
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_8" type="checkbox" id="__nav_8" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../%E6%9D%82%E8%B0%88%E4%B8%8E%E6%80%BB%E7%BB%93/">🐷 杂谈与总结</a>
+          
+            <label for="__nav_8">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="🐷 杂谈与总结" data-md-level="1">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          🐷 杂谈与总结
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%9D%82%E8%B0%88%E4%B8%8E%E6%80%BB%E7%BB%93/2021%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/" class="md-nav__link">
+        I. 2021年度总结
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%9D%82%E8%B0%88%E4%B8%8E%E6%80%BB%E7%BB%93/%E6%9C%AC%E7%A7%91%E5%89%8D%E4%B8%89%E5%B9%B4%E7%9A%84%E6%80%BB%E7%BB%93/" class="md-nav__link">
+        II. 本科前三年的总结
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%9D%82%E8%B0%88%E4%B8%8E%E6%80%BB%E7%BB%93/%E5%AF%B9%E8%BD%AF%E5%B7%A5%E4%B8%93%E4%B8%9A%E7%9A%84%E8%AF%BE%E7%A8%8B%E8%AF%84%E4%BB%B7%E5%92%8C%E4%BF%AE%E6%94%B9%E6%84%8F%E8%A7%81/" class="md-nav__link">
+        III. 对软工专业的课程评价和修改意见
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%9D%82%E8%B0%88%E4%B8%8E%E6%80%BB%E7%BB%93/2022%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/" class="md-nav__link">
+        IV. 2022年度总结
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#21-数据表示浮点数无浮点数" class="md-nav__link">
+    2.1 数据表示：浮点数/无浮点数
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1 数据表示：浮点数/无浮点数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#211-二进制数的表示" class="md-nav__link">
+    2.1.1 二进制数的表示
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#212-各种二进制码" class="md-nav__link">
+    2.1.2 各种二进制码
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#22-汉字系统" class="md-nav__link">
+    2.2 汉字系统
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#23-addition--subtraction" class="md-nav__link">
+    2.3 Addition &amp; Subtraction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#24-multiplication--division" class="md-nav__link">
+    2.4 Multiplication &amp;&amp; Division
+  </a>
+  
+    <nav class="md-nav" aria-label="2.4 Multiplication &amp;&amp; Division">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#241-有符号数的乘法" class="md-nav__link">
+    2.4.1 有符号数的乘法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#242-二进制数的除法" class="md-nav__link">
+    2.4.2 二进制数的除法
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#25-float-浮点数的表示ieee754标准" class="md-nav__link">
+    2.5 Float 浮点数的表示——IEEE754标准
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+
+<h1 id="2--arithmetic-for-computer-计算机运算">2.  Arithmetic for computer 计算机运算<a class="headerlink" href="#2--arithmetic-for-computer-计算机运算" title="Permanent link">&para;</a></h1>
+<h2 id="21-数据表示浮点数无浮点数">2.1 数据表示：浮点数/无浮点数<a class="headerlink" href="#21-数据表示浮点数无浮点数" title="Permanent link">&para;</a></h2>
+<h3 id="211-二进制数的表示">2.1.1 二进制数的表示<a class="headerlink" href="#211-二进制数的表示" title="Permanent link">&para;</a></h3>
+<ul>
+<li>K进制的数的表示方式 <span class="arithmatex">\(N=/sum/limits_{i=m}/limits^{n-1}b_i/times K^i\)</span> 其中0-n-1是整数位，-1到m是小数位</li>
+<li>无符号数：n位二进制无符号数可以表示的值的范围是：0到<span class="arithmatex">\(2^n-1\)</span> </li>
+<li>
+<p>有符号数：把最高位用来表示数的正负，0表示正数，1表负数</p>
+<ul>
+<li>存在的问题：存在正0(0000 0000)和负0(1000 0000)两种0</li>
+</ul>
+</li>
+<li>
+<p>二进制数的一些操作</p>
+</li>
+<li>对应的十进制数的计算方式是：对于n位有符号的二进制数，最高位的权重是<span class="arithmatex">\(-2^{n-1}\)</span>,其余位的权重是<span class="arithmatex">\(2^{n-1}\)</span>,将权重相加就得到了对应的十进制数</li>
+<li>二进制的位扩展(sign extension)：把符号位扩展到高位的每一位 <ul>
+<li>比如4位的1010扩展成8位就是11111010</li>
+</ul>
+</li>
+<li>大小比较(MIPS指令)<ul>
+<li>有符号数之间的比较用slt和slti(和立即数比较)</li>
+<li>无符号数之间的比较用sltu和sltiu</li>
+</ul>
+</li>
+</ul>
+<h3 id="212-各种二进制码">2.1.2 各种二进制码<a class="headerlink" href="#212-各种二进制码" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>**有符号数**的三种🐎：原码，反码，补码和移码</p>
+</li>
+<li>
+<p>能用这些码表示的都按照有符号数来处理</p>
+</li>
+<li>原码：由符号位+绝对值组成，最高位是符号位0或1，其余位是原本数字的**绝对值**表示</li>
+<li>反码：由原码到补码的一种中间形式<ul>
+<li>正数的反码就是其本身</li>
+<li>负数的反码是**符号位不变**，其他位依次取反</li>
+</ul>
+</li>
+<li>
+<p><strong>Two's Complement</strong> 补码</p>
+<ul>
+<li>正数的补码还是本身，负数的补码**按位取反之后加1**，对于负的整数<span class="arithmatex">\([X]_{c}=2^{n+1}-|X|\)</span> </li>
+</ul>
+</li>
+<li>
+<p>overflow</p>
+<ul>
+<li>对于N位二进制数，如果数值小于<span class="arithmatex">\(-2^{N-1}\)</span>或者大于<span class="arithmatex">\(2^{N-1}-1\)</span>即为溢出</li>
+<li>无符号数不考虑溢出的情况</li>
+</ul>
+</li>
+<li>
+<p>移码(biased-code)的表示</p>
+<ul>
+<li>由符号位+绝对值组成，计算的方法是**补码的最高位取反**</li>
+<li>比如-128的补码是1000 0000，其对应的移码就是0000 0000</li>
+<li>127的补码是0111 1111，其移码就是1111 1111</li>
+</ul>
+</li>
+<li>
+<p>三种🐎的比较(8位数字的情况下)</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>原码</th>
+<th>补码</th>
+<th>移码</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>范围</td>
+<td>-127-127</td>
+<td>-128-127</td>
+<td>-128-127</td>
+</tr>
+<tr>
+<td>最小数</td>
+<td>1111 1111</td>
+<td>1000 0000</td>
+<td>1000 0000</td>
+</tr>
+<tr>
+<td>最大数(+127)</td>
+<td>0111 1111</td>
+<td>0000 0000</td>
+<td>1111 1111</td>
+</tr>
+<tr>
+<td>0</td>
+<td>0000 0000<br />1000 0000</td>
+<td>0000 0000</td>
+<td>1000 0000</td>
+</tr>
+<tr>
+<td>优点</td>
+<td>直观</td>
+<td>加减运算方便</td>
+<td>大小上数码完全一致</td>
+</tr>
+<tr>
+<td>缺点</td>
+<td>同号异号，运算麻烦</td>
+<td>大小比较需要单独处理</td>
+<td>符号位和别的码不同</td>
+</tr>
+</tbody>
+</table>
+<h2 id="22-汉字系统">2.2 汉字系统<a class="headerlink" href="#22-汉字系统" title="Permanent link">&para;</a></h2>
+<ul>
+<li>ASCII码：美国信息交换标准码</li>
+<li>标准的ASCII码只有7位，但是为了方便计算机处理，扩展成了1字节(8位)</li>
+<li>ASCII码中有128个字符，其中可打印字符96个，控制字符32个</li>
+<li>后来因为128个字符不够又扩展了新的128个</li>
+<li>常见的ASCII码：A位于65，a位于97</li>
+<li>汉字的表示</li>
+<li>GB2313区位码</li>
+<li>输入码：五笔，拼音等等</li>
+<li>字模码：<ul>
+<li>用8x8的点阵表示ASCII码</li>
+<li>用16x16的点阵表示汉字，可以用16个16位的二进制数来表示一个汉字</li>
+</ul>
+</li>
+</ul>
+<h2 id="23-addition--subtraction">2.3 Addition &amp; Subtraction<a class="headerlink" href="#23-addition--subtraction" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>加减法</p>
+</li>
+<li>
+<p>加法：原码直接相加，进位给下一位</p>
+</li>
+<li>减法：直接相减，或者将两个数的补码相加(此时得到的结果是补码)</li>
+<li>overflow，比如1111 1111+1111 1010 = 1 1111 1001，1000 0001 + 1111 1110 = 0111 1111</li>
+</ul>
+<p><img alt="image-20200527152421635" src="./static/image-20200527152421635.jpg" /></p>
+<ul>
+<li>MIPS中处理溢出的方式是**interrupt**，溢出指令的地址被**保存在寄存器中**，计算机跳到预定地址以为该异常调用适当的例程。中断的地址将被保存，以便在某些情况下程序可以在执行纠正代码后继续执行<ul>
+<li>其他的处理方式还有：在ALU中进行硬件检查；interrupt和EPC存储指令地址</li>
+</ul>
+</li>
+<li>符号数加法的MIPS代码</li>
+</ul>
+<p><img alt="image-20200527154035453" src="./static/image-20200527154035453.png" />
+  - 无符号数加法的MIPS代码
+    - 取相反数的运算方式：将数字和0进行nor运算</p>
+<p><img alt="image-20200527154102007" src="./static/image-20200527154102007.png" />
+- 加法器的设计</p>
+<ul>
+<li>
+<p>最简单的一位ALU：进行and或者or操作</p>
+<p><img alt="image-20200808160951428" src="../static/image-20200808160951428.jpg" /></p>
+</li>
+<li>
+<p>一些名词的简称</p>
+<ul>
+<li>OF: overflow 判断是否溢出，最高进位和次高进位的**异或** </li>
+<li>CF: CarryOut 进位的值</li>
+<li>ZF：zero，当结果为0的时候ZF=1，否则是0</li>
+<li>SF：符号位的判断，正0负1</li>
+<li>PF：奇偶校验</li>
+</ul>
+</li>
+<li>
+<p>半加器 half adder(不能和进位Carryout进行运算)</p>
+<ul>
+<li><code>sum = a xor b</code>, <code>carry = a or b</code> 其设计如下</li>
+</ul>
+<p><img alt="image-20200808161040759" src="../static/image-20200808161040759.jpg" /></p>
+</li>
+<li>
+<p>全加器 full adder</p>
+<ul>
+<li>运算规则,本位和<span class="arithmatex">\(Sum=A/oplus B/oplus Carry\)</span>，进位<span class="arithmatex">\(Carry=AB+BCarry+CarryA\)</span> </li>
+<li>二阶全加器的设计</li>
+</ul>
+</li>
+</ul>
+<p><img alt="image-20200527153732006" src="./static/image-20200527153732006.png" />
+  - 1 bit的ALU的设计：包含AND, OR , ADD三种指令</p>
+<div class="highlight"><pre><span></span><code>- 可以通过输入的值operation来控制输出结果，比如operation=0输出的就是and运算的结果
+- 第一个Carry in的值是0
+</code></pre></div>
+<p><img alt="image-20200527154253716" src="./static/image-20200527154253716.png" />
+  - 32-bit的ALU：实际上是32个1bit的ALU连接起来进行运算</p>
+<div class="highlight"><pre><span></span><code>- 如果是逻辑运算，就是32个1bit的ALU分别输出对应位上逻辑运算的结果，然后输出
+- 如果是算术运算，Carry In和Carry Out会在ALU之间按顺序传递下去，实现加法的进位
+</code></pre></div>
+<ul>
+<li>
+<p>1bit ALU的扩展：支持减法</p>
+<ul>
+<li>此时操作码还是3种，参数Binvert控制第二个运算数是否取反</li>
+</ul>
+<p><img alt="image-20200808171032402" src="../static/image-20200808171032402.jpg" /></p>
+<ul>
+<li>由于支持减法，因此ALU也可以支持大小的比较，比较大小的操作码为2</li>
+<li>加入一个Less输入作为大小判断时的输出</li>
+</ul>
+</li>
+<li>
+<p>32-bit的完全ALU</p>
+</li>
+</ul>
+<p><img alt="image-20200808183650715" src="./static/image-20200808183650715.png" />
+    - 还可以对32个result添加一个zero检查器</p>
+<ul>
+<li>
+<p>加法器的基本原理</p>
+<ul>
+<li>完全串行的进位方式，一次运算需要3个与门，2个或门，消耗2份的时间，完成32位全加法需要的时间是一次加法运算的的32倍</li>
+<li>并行计算的进位方式，进位的ci计算全部转换成第一位的a0,b0,c0的=，依次进行迭代</li>
+<li>先行进位(并行)用<span class="arithmatex">\(g_i=a_ib_i,p_i=a_i+b_i\)</span>来简化运算</li>
+<li>组内并行，组之间串行：4位一组</li>
+</ul>
+</li>
+<li>
+<p>ALU：算术逻辑单元</p>
+</li>
+<li>
+<p>一个最基本的ALU的结构图如下图所示</p>
+</li>
+</ul>
+<p><img alt="image-20200808183928282" src="./static/image-20200808183928282.png" />
+  - ALU控制线路：000对应and，001对应or，010对应add，110对应sub，111对应less than</p>
+<h2 id="24-multiplication--division">2.4 <strong>Multiplication</strong> &amp;&amp; Division<a class="headerlink" href="#24-multiplication--division" title="Permanent link">&para;</a></h2>
+<ul>
+<li>和十进制乘法一样，可以列竖式计算</li>
+<li>一一乘法口诀表：00得0，11得1，01得0，10得0</li>
+<li>
+<p>乘法得两个因数分别叫做multiplicand和multiplier</p>
+</li>
+<li>
+<p>乘法算法1</p>
+</li>
+<li>
+<p>Binary multiplication 列竖式计算，具体过程就和十进制一样</p>
+</li>
+<li>
+<p>逻辑图：乘数是32位，被乘数，积和ALU是64位
+<img alt="image-20200529102007327" src="./static/image-20200529102007327.png" /></p>
+<ul>
+<li>需要32次迭代，计算非常缓慢，需要64位加法器1个，64位寄存器2个，32位寄存器1个，移位2次</li>
+</ul>
+</li>
+</ul>
+<p><img alt="image-20200808191934189" src="./static/image-20200808191934189.png" />
+- 乘法算法2
+  - Don’t shift the multiplicand，Instead,<strong>shift</strong> <strong>the</strong> <strong>product</strong>，Shift the multiplier
+  - 逻辑图，积的寄存器的左半边才会进行change</p>
+<p><img alt="image-20200529102827830" src="./static/image-20200529102827830.png" />
+  - 2个64位的寄存器其中一个变成了32位</p>
+<p><img alt="image-20200808192241507" src="./static/image-20200808192241507.png" />
+- 乘法算法3
+  - 1个32位加法器，1个64位寄存器，1个32位寄存器，移位操作1次</p>
+<p><img alt="image-20200808193055418" src="./static/image-20200808193055418.png" /></p>
+<h3 id="241-有符号数的乘法">2.4.1 有符号数的乘法<a class="headerlink" href="#241-有符号数的乘法" title="Permanent link">&para;</a></h3>
+<ul>
+<li>补码乘法</li>
+<li>
+<p><span class="arithmatex">\((A/times B)_{补}=A/times B_{补}\)</span> 已知AB的补码，可以把A转换成原码和B的补码进行计算</p>
+</li>
+<li>
+<p>无符号数的补码之积等于积的补码</p>
+</li>
+<li>
+<p><strong>Booth 算法</strong>⭐⭐⭐</p>
+</li>
+<li>基本原理：用于**二进制补码的相乘**的运算，从最低位开始，只要这串数字为0就不执行任何操作，当遇到第一个1时执行一次减法，也就是减去被乘数和该位权值的积，对于后面的1不进行操作，再碰上0就加权值，如此往复</li>
+<li>两个因数都用补码的形式参加乘法运算，<strong>结果是积的补码</strong></li>
+<li>加速的原理<ul>
+<li>Booth算法会导致addition减少而shift增加，如果shift的效率更高就会使得运算加快</li>
+</ul>
+</li>
+<li>也就是需要判断连续的两位<ul>
+<li>10 减去1所在位置的权重</li>
+<li>00 不进行操作</li>
+<li>11 不进行操作</li>
+<li>01 加上0所在位置的权重</li>
+<li>为了方便，把第-1位当作0来使用</li>
+</ul>
+</li>
+</ul>
+<h3 id="242-二进制数的除法">2.4.2 二进制数的除法<a class="headerlink" href="#242-二进制数的除法" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>Dividend = quotient x divisor + remainder  被除数=商x除数+余数</p>
+</li>
+<li>
+<p>算法1</p>
+</li>
+<li>
+<p>需要64位加法器1个，64位寄存器2个，32位寄存器1个，移位操作两次</p>
+</li>
+</ul>
+<p><img alt="image-20200603141843168" src="./static/image-20200603141843168.png" />
+- 算法2</p>
+<ul>
+<li>需要32位加法器1个，64位寄存器1个，32位寄存器2个，移位操作两次</li>
+</ul>
+<p><img alt="image-20200603142121548" src="./static/image-20200603142121548.png" />
+- 算法3</p>
+<ul>
+<li>需要32位加法器1个，64位寄存器1个，32位寄存器1个，位移操作2次</li>
+</ul>
+<p><img alt="image-20200603142319359" src="./static/image-20200603142319359.png" /><br />
+- 有符号数的除法</p>
+<ul>
+<li>基本原则：计算商的时候把除数和被除数都当作正数，得出一个非负数的商，然后根据除数和被除数的符号确定商的符号，在根据关系计算余数<ul>
+<li>比如7/2=3余1，而-7/2=-3余-1，7/-2=-3余1，-7/-2=3余1</li>
+</ul>
+</li>
+<li>除数不能为0，负责会overflow</li>
+</ul>
+<h2 id="25-float-浮点数的表示ieee754标准">2.5 Float 浮点数的表示——IEEE754标准<a class="headerlink" href="#25-float-浮点数的表示ieee754标准" title="Permanent link">&para;</a></h2>
+<ul>
+<li>IEEE制定的舍入规则</li>
+<li>ceil 向上取整 </li>
+<li>floor向下取整</li>
+<li>int 抹去小数部分</li>
+<li>
+<p>三个特殊的数字 <code>NaN(Not a Number)</code>, 正负无穷大</p>
+</li>
+<li>
+<p>二进制的浮点数的表示方式是 <code>1.xxxxxxxx * 2^yyyyyy</code> ，类似于十进制中的科学计数法，</p>
+</li>
+</ul>
+<p>用公式表示为<span class="arithmatex">\(x=(-1)^s/times 1.M/times 2^{E-127}\)</span> </p>
+<ul>
+<li>E是阶码，一定是一个非负数，表示的范围是0-255(float中)，0-1023(double中)</li>
+<li>M也叫significand，E叫exponent </li>
+<li>浮点数的精度：用S+E+M的顺序来表示一个浮点数<ul>
+<li>单精度浮点数(float)中s占1位，E占8位，M占23位，一共32位</li>
+<li>双精度浮点数(double)中s占1位，E占11位，M占52位，一共64位</li>
+</ul>
+</li>
+<li>
+<p>浮点数进位的计算方式：</p>
+<ul>
+<li>先确定符号位S，将数字取绝对值</li>
+<li>将数字转换到1.多的范围里，然后确定E，获取尾数M的十进制表示</li>
+<li>将M转换成23位二进制，具体方法是不断*2，如果结果超过，取整数部分作为每一位上的结果</li>
+<li><strong>注意尾数需要四舍五入，也就是计算24位，如果24位是1就在前23位向上进1</strong> </li>
+</ul>
+</li>
+<li>
+<p>浮点数的加减法</p>
+</li>
+<li>把十进制的全部转换成二进制浮点数的原码</li>
+<li>将小数点对齐，进行加法运算</li>
+<li>说了半天其实真的算起来加减乘除都要靠转化成十进制来计算</li>
+</ul>
+<p><span id="busuanzi_container_page_pv">本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span></p>
+
+  <hr>
+<div class="md-source-file">
+  <small>
+    
+      最后更新:
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年1月25日 17:15:47</span>
+      
+        <br>
+        创建日期:
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年1月25日 17:15:47</span>
+      
+    
+  </small>
+</div>
+
+
+
+
+<div id="__comments">
+    
+    <script src="https://giscus.app/client.js"
+        data-repo="Zhang-Each/My-CS-Notebook"
+        data-repo-id="R_kgDOI0dr4w"
+        data-category="General"
+        data-category-id="DIC_kwDOI0dr484CTvIK"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="1"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="zh-CN"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+        </script>
+    <h3>颜色主题调整</h3>
+    <div class="tx-switch">
+    <button class="button1" data-md-color-primary="red" style="background-color:red">red</button>
+    <button class="button1" data-md-color-primary="pink" style="background-color:pink;color:black">pink</button>
+    <button class="button1" data-md-color-primary="purple" style="background-color:purple">purple</button>
+    <button class="button1" data-md-color-primary="indigo" style="background-color:indigo">indigo</button>
+    <button class="button1" data-md-color-primary="blue" style="background-color:blue">blue</button>
+    <button class="button1" data-md-color-primary="cyan" style="background-color:cyan;color:black">cyan</button>
+    <button class="button1" data-md-color-primary="teal" style="background-color:teal">teal</button>
+    <button class="button1" data-md-color-primary="green" style="background-color:green">green</button>
+    <button class="button1" data-md-color-primary="lime" style="background-color:lime;color:black">lime</button>
+    <button class="button1" data-md-color-primary="orange" style="background-color:orange;color:black">orange</button>
+    <button class="button1" data-md-color-primary="brown" style="background-color:brown;border-radius=3px">brown</button>
+    <button class="button1" data-md-color-primary="grey" style="background-color:grey">grey</button>
+    <button class="button1" data-md-color-primary="black" style="background-color:black">black</button>
+    <button class="button1" data-md-color-primary="white" style="background-color:white;color:black">white</button>
+    </div>
+    
+    <script>
+    var buttons = document.querySelectorAll("button[data-md-color-primary]")
+    buttons.forEach(function(button) {
+            button.addEventListener("click", function() {
+            var attr = this.getAttribute("data-md-color-primary")
+            document.body.setAttribute("data-md-color-primary", attr)
+            localStorage.setItem("data-md-color-primary",attr);
+            })
+    })
+    </script>
+    
+    <h2 ><!-- 评论 -->评论区~</h2>
+    
+    有用的话请给我个star或者follow我的账号!! 非常感谢!!
+    
+    </br>
+    
+    快来跟我聊天~
+    
+    </div>
+    
+    <script src="https://giscus.app/client.js"
+        data-repo="Zhang-Each/Notebook-Comments"
+        data-repo-id="R_kgDOI0dlNg"
+        data-category="General"
+        data-category-id="DIC_kwDOI0dlNs4CTvH-"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="1"
+        data-input-position="top"
+        data-theme="preferred_color_scheme"
+        data-lang="zh-CN"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+    </script>
+    
+    <!-- Synchronize Giscus theme with palette -->
+    <script>
+    var giscus = document.querySelector("script[src*=giscus]")
+    
+    /* Set palette on initial load */
+    // var palette = __md_get("__palette")
+    // if (palette && typeof palette.color === "object") {
+    //     var theme = palette.color.scheme === "slate" ? "dark" : "light"
+    //     giscus.setAttribute("data-theme", theme) 
+    // }
+    
+    /* Register event handlers after documented loaded */
+    // document.addEventListener("DOMContentLoaded", function() {
+    //     var ref = document.querySelector("[data-md-component=palette]")
+    //     ref.addEventListener("change", function() {
+    //     var palette = __md_get("__palette")
+    //     if (palette && typeof palette.color === "object") {
+    //         var theme = palette.color.scheme === "slate" ? "dark" : "light"
+    
+    //         /* Instruct Giscus to change theme */
+    //         var frame = document.querySelector(".giscus-frame")
+    //         frame.contentWindow.postMessage(
+    //         { giscus: { setConfig: { theme } } },
+    //         "https://giscus.app"
+    //         )
+    //     }
+    //     })
+    // })
+    </script>
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            回到页面顶部
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      本页面的全部内容在 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh">CC BY-SA 4.0</a> 和 <a href="https://github.com/zTrix/sata-license">SATA</a> 协议之条款下提供，附加条款亦可能应用。<br /><span id="busuanzi_container_site_uv">本站访客总人数<span id="busuanzi_value_site_uv"></span>人次，</span><span id="busuanzi_container_site_pv">本站总访问次数<span id="busuanzi_value_site_pv"></span>次。</span>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "content.code.annotate", "navigation.tracking", "navigation.indexes", "navigation.top", "toc.follow"], "search": "../../assets/javascripts/workers/search.e5c33ebb.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.51d95adb.min.js"></script>
+      
+        <script src="../../from_oi_wiki/js/extra.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js"></script>
+      
+        <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+      
+    
+  </body>
+</html>

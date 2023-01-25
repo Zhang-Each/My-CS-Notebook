@@ -1,0 +1,2830 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://zhang-each.github.io/My-CS-notebook/System/01-mips/">
+      
+      
+        <link rel="prev" href="../00-intro/">
+      
+      
+        <link rel="next" href="../02-calculation/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.6">
+    
+    
+      
+        <title>1. MIPS 指令系统 - 小角龙的学习记录</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.558e4712.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.2505c338.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Hiragino+Sans+GB:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Hiragino Sans GB";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../from_oi_wiki/css/extra.css?v=13">
+    
+      <link rel="stylesheet" href="../../css/status.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-mips-指令系统" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="小角龙的学习记录" class="md-header__button md-logo" aria-label="小角龙的学习记录" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            小角龙的学习记录
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              1. MIPS 指令系统
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/zhang-each/My-CS-notebook/" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Zhang-Each/My-CS-notebook
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        🏡 主页
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../ML/" class="md-tabs__link">
+        🐯 统计机器学习
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../CS231N/" class="md-tabs__link">
+        🐰 深度学习
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../" class="md-tabs__link md-tabs__link--active">
+        🐑 计算机系统
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../OS/" class="md-tabs__link">
+        🐒 操作系统
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Networking/" class="md-tabs__link">
+        🐓 计算机网络
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../DB/" class="md-tabs__link">
+        🐶 数据库系统
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../%E6%9D%82%E8%B0%88%E4%B8%8E%E6%80%BB%E7%BB%93/" class="md-tabs__link">
+        🐷 杂谈与总结
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="小角龙的学习记录" class="md-nav__button md-logo" aria-label="小角龙的学习记录" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    小角龙的学习记录
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/zhang-each/My-CS-notebook/" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Zhang-Each/My-CS-notebook
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../..">🏡 主页</a>
+          
+            <label for="__nav_1">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="🏡 主页" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          🏡 主页
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/" class="md-nav__link">
+        关于我
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../ML/">🐯 统计机器学习</a>
+          
+            <label for="__nav_2">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="🐯 统计机器学习" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          🐯 统计机器学习
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A001%EF%BC%9A%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" class="md-nav__link">
+        01：机器学习中的基本概念
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A002%EF%BC%9A%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%AE%9A%E7%90%86/" class="md-nav__link">
+        02：贝叶斯定理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A003%EF%BC%9A%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/" class="md-nav__link">
+        03：线性模型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A004%EF%BC%9A%E6%84%9F%E7%9F%A5%E6%9C%BA/" class="md-nav__link">
+        04：感知机
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A005%EF%BC%9A%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BASVM/" class="md-nav__link">
+        05：支持向量机SVM
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A006%EF%BC%9AkNN/" class="md-nav__link">
+        06：kNN
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A007%EF%BC%9A%E5%86%B3%E7%AD%96%E6%A0%91DecisionTree/" class="md-nav__link">
+        07：决策树DecisionTree
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A008%EF%BC%9A%E8%81%9A%E7%B1%BBClustering/" class="md-nav__link">
+        08：聚类Clustering
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A009%EF%BC%9A%E6%8F%90%E5%8D%87Boosting%E4%B8%8EEnsemble/" class="md-nav__link">
+        09：提升Boosting与Ensemble
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A010%EF%BC%9AEM%E7%AE%97%E6%B3%95%E5%92%8CGMM/" class="md-nav__link">
+        10：EM算法和GMM
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A011%EF%BC%9A%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90PCA/" class="md-nav__link">
+        11：主成分分析PCA
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A012%EF%BC%9A%E7%BA%BF%E6%80%A7%E5%88%A4%E5%88%AB%E5%88%86%E6%9E%90LDA/" class="md-nav__link">
+        12：线性判别分析LDA
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A013%EF%BC%9A%E9%9A%90%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E6%A8%A1%E5%9E%8B/" class="md-nav__link">
+        13：隐马尔可夫模型
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../CS231N/">🐰 深度学习</a>
+          
+            <label for="__nav_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="🐰 深度学习" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          🐰 深度学习
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_3_2" type="checkbox" id="__nav_3_2" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3_2" tabindex="0" aria-expanded="false">
+          CS231N-神经网络与深度学习
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="CS231N-神经网络与深度学习" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          CS231N-神经网络与深度学习
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B01%EF%BC%9AkNN%E5%92%8C%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB%E5%99%A8/" class="md-nav__link">
+        01.kNN和线性分类器
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B02%EF%BC%9A%E5%A4%9A%E5%B1%82%E5%85%A8%E8%BF%9E%E6%8E%A5%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%92%8C%E4%BC%98%E5%8C%96%E5%99%A8/" class="md-nav__link">
+        02.多层全连接神经网络和优化器
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B03%EF%BC%9ANormalization%E5%92%8CDropOut/" class="md-nav__link">
+        03.Normalization和DropOut
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B04%EF%BC%9A%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9CCNN/" class="md-nav__link">
+        04.卷积神经网络CNN
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B05%EF%BC%9ARNN%26LSTM%E4%B8%8E%E5%9B%BE%E7%89%87%E6%8F%8F%E8%BF%B0/" class="md-nav__link">
+        05.RNN&LSTM与图片描述
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B06%EF%BC%9ATransformer%E4%B8%8E%E5%9B%BE%E7%89%87%E6%8F%8F%E8%BF%B0/" class="md-nav__link">
+        06.Transformer与图片描述
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B07%EF%BC%9A%E6%A8%A1%E5%9E%8B%E5%8F%AF%E8%A7%86%E5%8C%96%EF%BC%8C%E5%9B%BE%E5%83%8F%E6%AC%BA%E8%AF%88%E5%92%8CGAN/" class="md-nav__link">
+        07.模型可视化，图像欺诈和GAN
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B08%EF%BC%9A%E8%87%AA%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%E4%B8%8E%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/" class="md-nav__link">
+        08.自监督学习与课程总结
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_3_3" type="checkbox" id="__nav_3_3" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../CS224W/">CS224W-图机器学习与图神经网络</a>
+          
+            <label for="__nav_3_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="CS224W-图机器学习与图神经网络" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          CS224W-图机器学习与图神经网络
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A001/" class="md-nav__link">
+        01.导论，传统的图学习方法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A002/" class="md-nav__link">
+        02.节点嵌入和PageRank
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A003/" class="md-nav__link">
+        03.消息传递机制
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A004/" class="md-nav__link">
+        04.图神经网络基础
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A005/" class="md-nav__link">
+        05.图神经网络的训练和应用，表示能力分析
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A006/" class="md-nav__link">
+        06.知识图谱，知识图谱推理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A007/" class="md-nav__link">
+        07.频繁子图挖掘
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A008/" class="md-nav__link">
+        08.社区检测
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A009/" class="md-nav__link">
+        09.图生成模型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A010/" class="md-nav__link">
+        10.图神经网络前沿话题
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_3_4" type="checkbox" id="__nav_3_4" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../CS224N/">CS224N-基于深度学习的自然语言处理</a>
+          
+            <label for="__nav_3_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="CS224N-基于深度学习的自然语言处理" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_4">
+          <span class="md-nav__icon md-icon"></span>
+          CS224N-基于深度学习的自然语言处理
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224N/NLP01-Introduction%26WordVector/" class="md-nav__link">
+        01-Introduction&WordVector
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224N/NLP02-Word2Vec/" class="md-nav__link">
+        02-Word2Vec
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224N/NLP03-DependenceParsing/" class="md-nav__link">
+        03-DependenceParsing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224N/NLP04-LM%26RNN%26LSTM/" class="md-nav__link">
+        04-LM&RNN&LSTM
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224N/NLP05-Seq2Seq/" class="md-nav__link">
+        05-Seq2Seq
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224N/Stanford-CS224N-Assignment1%262/" class="md-nav__link">
+        Assignment1&2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224N/Stanford-CS224N-Assignment3/" class="md-nav__link">
+        Assignment3
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224N/Stanford-CS224N-Assignment4/" class="md-nav__link">
+        Assignment4
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../">🐑 计算机系统</a>
+          
+            <label for="__nav_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="🐑 计算机系统" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          🐑 计算机系统
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../00-intro/" class="md-nav__link">
+        0.计算机基本知识
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          1. MIPS 指令系统
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        1. MIPS 指令系统
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#11-基本的mips指令" class="md-nav__link">
+    1.1 基本的MIPS指令
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-条件判断指令" class="md-nav__link">
+    1.2 条件判断指令
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-procedure-instructions-过程调用指令" class="md-nav__link">
+    1.3 Procedure Instructions 过程调用指令
+  </a>
+  
+    <nav class="md-nav" aria-label="1.3 Procedure Instructions 过程调用指令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#131-caller-saved和callee-saved寄存器" class="md-nav__link">
+    1.3.1 caller-saved和callee-saved寄存器
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#132-案例1编写一个简单的函数调用" class="md-nav__link">
+    1.3.2 案例1：编写一个简单的函数调用
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#133-案例2循环调用-nested-procedure" class="md-nav__link">
+    1.3.3 案例2：循环调用 Nested Procedure
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14--character-instruction-字符指令" class="md-nav__link">
+    1.4  Character Instruction 字符指令
+  </a>
+  
+    <nav class="md-nav" aria-label="1.4  Character Instruction 字符指令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#案例-strcpy的mips实现" class="md-nav__link">
+    案例 strcpy的MIPS实现
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-寻址模式" class="md-nav__link">
+    1.5 寻址模式
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-mips指令总结" class="md-nav__link">
+    1.6 MIPS指令总结
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#extra文件的一些背景知识" class="md-nav__link">
+    Extra：文件的一些背景知识
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-mips-需要补充的内容" class="md-nav__link">
+    1.7 MIPS 需要补充的内容
+  </a>
+  
+    <nav class="md-nav" aria-label="1.7 MIPS 需要补充的内容">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#171-伪指令" class="md-nav__link">
+    1.7.1 伪指令
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#172-系统调用" class="md-nav__link">
+    1.7.2 系统调用
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#案例1实现一个swap函数" class="md-nav__link">
+    案例1：实现一个swap函数
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#案例2指针和数组的区别" class="md-nav__link">
+    案例2：指针和数组的区别
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-calculation/" class="md-nav__link">
+        2.  Arithmetic for computer 计算机运算
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-cpu/" class="md-nav__link">
+        3. CPU结构
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-memory/" class="md-nav__link">
+        4. 存储器
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-io/" class="md-nav__link">
+        5. I/O系统
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../OS/">🐒 操作系统</a>
+          
+            <label for="__nav_5">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="🐒 操作系统" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          🐒 操作系统
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F0-Linux%E5%86%85%E6%A0%B8/" class="md-nav__link">
+        操作系统0 Linux内核
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F1-%E5%AF%BC%E8%AE%BA/" class="md-nav__link">
+        操作系统1：导论和操作系统结构
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F2-%E8%BF%9B%E7%A8%8B%26%E7%BA%BF%E7%A8%8B/" class="md-nav__link">
+        操作系统2：进程/线程
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F3-CPU%E8%B0%83%E5%BA%A6%26%E5%90%8C%E6%AD%A5/" class="md-nav__link">
+        操作系统3：CPU调度
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F4-%E5%90%8C%E6%AD%A5%E5%92%8C%E6%AD%BB%E9%94%81/" class="md-nav__link">
+        操作系统4：同步和死锁
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F5-%E5%AD%98%E5%82%A8/" class="md-nav__link">
+        操作系统5：存储管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F6-%E6%96%87%E4%BB%B6/" class="md-nav__link">
+        操作系统6：文件
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F7-%E7%A3%81%E7%9B%98%E5%92%8CIO/" class="md-nav__link">
+        操作系统7：磁盘和I/O
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../Networking/">🐓 计算机网络</a>
+          
+            <label for="__nav_6">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="🐓 计算机网络" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          🐓 计算机网络
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Networking/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C1-OSI%E6%A8%A1%E5%9E%8B/" class="md-nav__link">
+        计算机网络1-OSI模型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Networking/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C2-%E7%89%A9%E7%90%86%E5%B1%82/" class="md-nav__link">
+        计算机网络2-物理层
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Networking/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C3-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%26MAC/" class="md-nav__link">
+        计算机网络3-数据链路层&MAC
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Networking/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C4-%E7%BD%91%E7%BB%9C%E5%B1%82/" class="md-nav__link">
+        计算机网络4-网络层
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Networking/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C5-%E8%BF%90%E8%BE%93%E5%B1%82/" class="md-nav__link">
+        计算机网络5-运输层
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Networking/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C6-%E5%BA%94%E7%94%A8%E5%B1%82/" class="md-nav__link">
+        计算机网络6-应用层
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Networking/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C7-%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" class="md-nav__link">
+        计算机网络7-网络安全
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../DB/">🐶 数据库系统</a>
+          
+            <label for="__nav_7">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="🐶 数据库系统" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          🐶 数据库系统
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../DB/db/" class="md-nav__link">
+        数据库系统复习笔记
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_8" type="checkbox" id="__nav_8" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../%E6%9D%82%E8%B0%88%E4%B8%8E%E6%80%BB%E7%BB%93/">🐷 杂谈与总结</a>
+          
+            <label for="__nav_8">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="🐷 杂谈与总结" data-md-level="1">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          🐷 杂谈与总结
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%9D%82%E8%B0%88%E4%B8%8E%E6%80%BB%E7%BB%93/2021%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/" class="md-nav__link">
+        I. 2021年度总结
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%9D%82%E8%B0%88%E4%B8%8E%E6%80%BB%E7%BB%93/%E6%9C%AC%E7%A7%91%E5%89%8D%E4%B8%89%E5%B9%B4%E7%9A%84%E6%80%BB%E7%BB%93/" class="md-nav__link">
+        II. 本科前三年的总结
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%9D%82%E8%B0%88%E4%B8%8E%E6%80%BB%E7%BB%93/%E5%AF%B9%E8%BD%AF%E5%B7%A5%E4%B8%93%E4%B8%9A%E7%9A%84%E8%AF%BE%E7%A8%8B%E8%AF%84%E4%BB%B7%E5%92%8C%E4%BF%AE%E6%94%B9%E6%84%8F%E8%A7%81/" class="md-nav__link">
+        III. 对软工专业的课程评价和修改意见
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%9D%82%E8%B0%88%E4%B8%8E%E6%80%BB%E7%BB%93/2022%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/" class="md-nav__link">
+        IV. 2022年度总结
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#11-基本的mips指令" class="md-nav__link">
+    1.1 基本的MIPS指令
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-条件判断指令" class="md-nav__link">
+    1.2 条件判断指令
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-procedure-instructions-过程调用指令" class="md-nav__link">
+    1.3 Procedure Instructions 过程调用指令
+  </a>
+  
+    <nav class="md-nav" aria-label="1.3 Procedure Instructions 过程调用指令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#131-caller-saved和callee-saved寄存器" class="md-nav__link">
+    1.3.1 caller-saved和callee-saved寄存器
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#132-案例1编写一个简单的函数调用" class="md-nav__link">
+    1.3.2 案例1：编写一个简单的函数调用
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#133-案例2循环调用-nested-procedure" class="md-nav__link">
+    1.3.3 案例2：循环调用 Nested Procedure
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14--character-instruction-字符指令" class="md-nav__link">
+    1.4  Character Instruction 字符指令
+  </a>
+  
+    <nav class="md-nav" aria-label="1.4  Character Instruction 字符指令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#案例-strcpy的mips实现" class="md-nav__link">
+    案例 strcpy的MIPS实现
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-寻址模式" class="md-nav__link">
+    1.5 寻址模式
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-mips指令总结" class="md-nav__link">
+    1.6 MIPS指令总结
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#extra文件的一些背景知识" class="md-nav__link">
+    Extra：文件的一些背景知识
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-mips-需要补充的内容" class="md-nav__link">
+    1.7 MIPS 需要补充的内容
+  </a>
+  
+    <nav class="md-nav" aria-label="1.7 MIPS 需要补充的内容">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#171-伪指令" class="md-nav__link">
+    1.7.1 伪指令
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#172-系统调用" class="md-nav__link">
+    1.7.2 系统调用
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#案例1实现一个swap函数" class="md-nav__link">
+    案例1：实现一个swap函数
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#案例2指针和数组的区别" class="md-nav__link">
+    案例2：指针和数组的区别
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+
+<h1 id="1-mips-指令系统">1. MIPS 指令系统<a class="headerlink" href="#1-mips-指令系统" title="Permanent link">&para;</a></h1>
+<h2 id="11-基本的mips指令">1.1 基本的MIPS指令<a class="headerlink" href="#11-基本的mips指令" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>Operands 操作数</p>
+</li>
+<li>
+<p>算术指令的操作数一定存放在在寄存器(registers)中</p>
+<ul>
+<li>MIPS体系中有32个寄存器，每个寄存器有32bits</li>
+</ul>
+</li>
+<li>寄存器中可以用<code>$s0-$s7</code>来存储变量，其**编号为16-23**<ul>
+<li>这和C语言中的<code>register int i;</code>进行的操作相同</li>
+</ul>
+</li>
+<li>
+<p>可以用<code>$t0,$t1,…</code>来存储一些临时变量，编号为8-15，各寄存器的功能和对应编号如下</p>
+</li>
+<li>
+<p>Data transfer instructions 数据传输指令</p>
+</li>
+<li>
+<p>需要获取数据在内存的地址</p>
+</li>
+<li>读取数据用lw，存储数据用sw，<strong>寄存器中存储了数据在内存中的地址</strong>  </li>
+<li>Offset 偏移量：数据传输指令中的常数，表示读取多少位</li>
+<li>
+<p>Base Register：用于存储**基地址**的寄存器(比如数组的基地址)</p>
+<ul>
+<li>MIPS中的地址偏移量和数组下标之间的关系是**4倍**，比如数组A的基地址在<code>$s3</code>中，要获取A[8]，则需要指令<code>lw $t0,32($s3)</code>  </li>
+<li>原因是内存中一次只能读出**4字节内存中的一行**，也就是1word的长度，事实上一条MIPS指令的长度就是1word</li>
+</ul>
+</li>
+<li>
+<p>MIPS指令对应的机器码格式</p>
+</li>
+<li>
+<p>R型指令：<code>OP+RS+RT+RD+shamt+funct</code> </p>
+</li>
+<li>I型指令：<code>OP+RS+RT+address</code> </li>
+<li>OP是对应的**操作码**，RS,RT分别是第一个和第二个操作寄存器，RD是**目标寄存器**，shamt是偏移量，func是函数对应的编码<ul>
+<li>R型指令的操作码没记错的话都是<code>00000</code> </li>
+</ul>
+</li>
+<li>所有的**MIPS指令都是32位**的，其中OP6位，寄存器都是5位，shamt是5位，funct是6位，address是16位 <ul>
+<li>这是设计的原则：good design demands good compromises</li>
+<li>计算机的两条原则</li>
+<li>指令用数字表示</li>
+<li>程序可以存储在内存中，像数字一样读写</li>
+</ul>
+</li>
+</ul>
+<h2 id="12-条件判断指令">1.2 条件判断指令<a class="headerlink" href="#12-条件判断指令" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>选择判断型指令</p>
+</li>
+<li>
+<p><code>beq register1,register2,L1</code> 和<code>bne register1,register2,L1</code> </p>
+<ul>
+<li>L1是一个行标号，可以在每行MIPS指令前写，跳转的时候就按照标号所在的位置进行跳转</li>
+<li>相当于C语言中的goto</li>
+</ul>
+</li>
+<li>例子：实现一个简单的loop，其中变量g,h,i,j存储在s1-s4而数组A的基地址存储在s5</li>
+</ul>
+<p><div class="highlight"><pre><span></span><code><span class="nl">Loop</span><span class="p">:</span><span class="w"> </span><span class="n">g</span><span class="o">=</span><span class="n">g</span><span class="o">+</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="w">      </span><span class="n">i</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="p">;</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="o">!=</span><span class="n">h</span><span class="p">)</span><span class="w"> </span><span class="k">goto</span><span class="w"> </span><span class="n">Loop</span><span class="p">;</span><span class="w">    </span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Loop:add $t1,$s3,$s3 #t1=2*i
+    add $t1,$t1,$t1
+    add $t1,$t1,$s5 #address if A[i]
+    lw $t0,0($s1)
+    add $s1,$s2,$t0 #g=g+A[i]
+    add $s3,$s3,$s4 #i=i+j
+    bne $s2,$s3,Loop
+</code></pre></div></p>
+<ul>
+<li>跳转指令jr，用法是<code>jr $r</code> r的计算方式是当前所在地址+4*要跳转的行数<ul>
+<li>一个函数结束的时候一定要写<code>jr $ra</code> 来返回主函数</li>
+</ul>
+</li>
+</ul>
+<h2 id="13-procedure-instructions-过程调用指令">1.3 Procedure Instructions 过程调用指令<a class="headerlink" href="#13-procedure-instructions-过程调用指令" title="Permanent link">&para;</a></h2>
+<ul>
+<li>用于过程调用的寄存器和指令</li>
+<li><code>$a0-$a3</code> 是4个传递参数到函数的寄存器</li>
+<li><code>$v0-$v1</code>是2个用于存储返回值的寄存器</li>
+<li><code>$ra</code> 用于返回地址的寄存器</li>
+<li><code>jal</code> (jump and link) 用于跳转到一个函数中，后面的参数为要跳转的地址，使用<code>jar $ra</code>返回主函数</li>
+<li><code>$sp</code> 一个栈指针，MIPS汇编中的栈从高地址往低地址扩展，支持Push和Pop两种操作</li>
+</ul>
+<h3 id="131-caller-saved和callee-saved寄存器">1.3.1 caller-saved和callee-saved寄存器<a class="headerlink" href="#131-caller-saved和callee-saved寄存器" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Caller-saved register 易失性寄存器：用于保存每个调用过程中**不需要在各个调用之间保留的**临时变量</li>
+<li>Callee-saved register 非易失性寄存器，用于**保存**需要在每个调用过程中保留的临时变量</li>
+<li>MIPS在函数调用的过程中需要保留<code>$s0-$s7</code> 和全局变量<code>$gp</code> 和栈指针<code>$sp</code>还有<code>$fp</code> </li>
+</ul>
+<h3 id="132-案例1编写一个简单的函数调用">1.3.2 案例1：编写一个简单的函数调用<a class="headerlink" href="#132-案例1编写一个简单的函数调用" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w">  </span><span class="nf">leaf_example</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">int</span><span class="w">  </span><span class="n">g</span><span class="p">,</span><span class="w">  </span><span class="kt">int</span><span class="w">  </span><span class="n">h</span><span class="p">,</span><span class="w">  </span><span class="kt">int</span><span class="w">  </span><span class="n">i</span><span class="p">,</span><span class="w">  </span><span class="kt">int</span><span class="w">   </span><span class="n">j</span><span class="w"> </span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">f</span><span class="p">;</span>
+<span class="w">    </span><span class="n">f</span><span class="o">=</span><span class="p">(</span><span class="n">g</span><span class="o">+</span><span class="n">h</span><span class="p">)</span><span class="o">-</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">f</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li>其对应的MIPS汇编代码如下</li>
+<li>
+<p>Assume: g ~ j ---- r0 ~ r3    f ---- r4  </p>
+<div class="highlight"><pre><span></span><code>Leaf:   addi $sp,$sp,-12    #adjust stack to make room for 3 items
+        sw $t1,8($sp)
+        sw $t0,4($sp)
+        sw $s0,0($sp)
+        add $t0,$a0,$a1     #g+h
+        add $t1,$a2,$a3     #i+j
+        sub $s0,$t0,$t1     #f=(g+h)-(i+j)
+        add $v0,$s0,$zero   #return value in v0
+        lw * 3 #restore register for caller
+        add $sp,$sp,12
+        jr $ra
+</code></pre></div>
+</li>
+<li>
+<p>往往在函数调用的时候把下一行的地址写在寄存器ra中，因此函数运行结束之后可以用<code>jr $ra</code> 指令返回到函数调用的下一句继续执行程序</p>
+</li>
+<li>函数编写的时候，s0-s7的寄存器需要被**保护**，不能在函数中使用使用的，t0-t9存储临时变量，可以视情况调用</li>
+</ul>
+<h3 id="133-案例2循环调用-nested-procedure">1.3.3 案例2：循环调用 Nested Procedure<a class="headerlink" href="#133-案例2循环调用-nested-procedure" title="Permanent link">&para;</a></h3>
+<ul>
+<li>简单的递归函数</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="nf">fact</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">n</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">n</span><span class="o">*</span><span class="n">fact</span><span class="p">(</span><span class="n">n</span><span class="mi">-1</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li>对应的MIPS汇编如下：</li>
+</ul>
+<div class="highlight"><pre><span></span><code>fact:   add $sp,$sp,-8
+        sw $ra,4($sp)
+        sw $a0,0($sp)
+        slti $t0,$a0,1 #test for n&lt;1
+        beq $t0,$zero,L1
+        add $v0,$zero,1 #return 1
+        add $sp,$sp,8
+        jr $ra #return to after j
+L1:     addi $a0,$a0,-1
+        jal fact #call fact with n-1
+2000:   lw $a0, 0($sp)      
+        lw $ra, 4($sp)      
+        addi $sp,$sp,8
+        mul $v0,$a0,$v0
+        jr $ra
+</code></pre></div>
+<ul>
+<li><code>$fp</code>提供了一了一个stable base register</li>
+<li><code>$gp</code>指向静态变量static variables</li>
+</ul>
+<h2 id="14--character-instruction-字符指令">1.4  Character Instruction 字符指令<a class="headerlink" href="#14--character-instruction-字符指令" title="Permanent link">&para;</a></h2>
+<ul>
+<li>操作字节的MIPS指令</li>
+<li>Load byte <code>lb $t0,0($sp)</code> 读取字节</li>
+<li>Store byte <code>sb $t0,0($sp)</code> 存储字节</li>
+<li>MIPS中表示字符串的三种方法<ul>
+<li>在string的开头先写好长度</li>
+<li>维护一个表示string长度的变量</li>
+<li>在末尾使用结束标志表示一个字符串的末尾(C语言的choice)、</li>
+</ul>
+</li>
+<li>同时还有</li>
+</ul>
+<h3 id="案例-strcpy的mips实现">案例 strcpy的MIPS实现<a class="headerlink" href="#案例-strcpy的mips实现" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">strcpy</span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">x</span><span class="p">[],</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">y</span><span class="p">[])</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">while</span><span class="p">((</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">!=</span><span class="mi">0</span><span class="p">)</span>
+<span class="w">        </span><span class="n">i</span><span class="o">+=</span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li>其对应的MIPS代码如下，其中x和y的首地址位于a0和a1</li>
+</ul>
+<div class="highlight"><pre><span></span><code>strcpy: addi $sp,$sp,-4
+        sw $s0,0(sp)
+        add $s0,$zero,$zero #i=0
+L1:     add $t1,$a1,$s0  address of y[i] in $t1
+        lb $t2,0($t1) 
+        add $t3,$a0,$s0
+        sb $t2,0($t3)
+        add $s0,$s0,1
+        bne $t2,$zero,L1
+        lw $s0,0($sp)  end of the string 
+        add $sp,$sp,4  pop 1 word off the stack
+        jr $ra #return 
+</code></pre></div>
+<h2 id="15-寻址模式">1.5 寻址模式<a class="headerlink" href="#15-寻址模式" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Immediate addressing 立即数寻址</li>
+<li>在I型指令中出现，I型指令中的后16位作为一个二进制数字来使用</li>
+<li>立即数有时候是地址，有时候是运算数</li>
+<li>**跳转**寻址</li>
+<li>比如J指令前六位是000010，后面26位就表示要跳转到的地址<ul>
+<li>这里的26位需要乘以4变成PC form</li>
+</ul>
+</li>
+<li>分支语句的寻址——相对寻址</li>
+<li>对于bne之类的分支语句的寻址，计算机采用**相对寻址**<ul>
+<li>PC(Program Counter)计算方式是<code>PC+4+offset*4</code>，offset是分支指令后16位</li>
+</ul>
+</li>
+<li>原因是每条MIPS指令都是4字节长</li>
+<li>MIPS中的寻址方式的总结</li>
+<li>寄存器寻址：通过寄存器的编号来找到对应的寄存器，常见于R型指令</li>
+<li>基地址寻址：用寄存器中存储的地址到内存中去寻址，比如lw和sw</li>
+<li>立即数寻址：通过I型指令中的**立即数**来寻址</li>
+<li>PC相对寻址：通过PC+4寻址</li>
+<li>伪直接寻址：J型指令中经常出现</li>
+</ul>
+<p><img alt="madr" src="../static/madr-0000.jpg" /></p>
+<h2 id="16-mips指令总结">1.6 MIPS指令总结<a class="headerlink" href="#16-mips指令总结" title="Permanent link">&para;</a></h2>
+<ul>
+<li>MIPS指令的形式</li>
+</ul>
+<p><img alt="image-20200522101951712" src="./static/image-20200522101951712.jpg" /></p>
+<ul>
+<li>MIPS指令的Operands</li>
+<li>32 registers</li>
+<li>Memory words</li>
+<li>MIPS编程中的注意点</li>
+<li>汇编程序可以不遵循编程原则</li>
+<li>函数可以直接跳出</li>
+<li>形参超过四个可以用栈来存储参数，在函数中弹出栈，返回值超过2个也要用堆栈，当然可以打破规则用闲置的寄存器传递参数</li>
+<li>
+<p>传递参数和获取返回值的寄存器a0-a3和v0-v1一般不直接参与运算</p>
+</li>
+<li>
+<p>C语言程序在计算机中的编译过程</p>
+</li>
+<li>编译compiling：将C程序转化为汇编语言程序</li>
+<li>汇编assembling：将汇编语言程序转化为机器码</li>
+<li>链接linking：将object-modules(含各个库)转化成可执行程序</li>
+</ul>
+<h2 id="extra文件的一些背景知识">Extra：文件的一些背景知识<a class="headerlink" href="#extra文件的一些背景知识" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>文件存储在硬盘的逻辑分区中，具体来说是扇区，一般为32KB</p>
+</li>
+<li>
+<p>100个1字节的文件占据了100*32KB的空间，而100KB的内容占据了4/*32KB</p>
+</li>
+<li>
+<p>文件的起始扇区存在目录中，多个扇区的顺序存在FAT表中，文件删除的时候需要在目录中先清空文件名，再在FAT表中设置各扇区为空闲</p>
+</li>
+<li>
+<p>目录也是一个文件，每个文件在目录中是一条记录</p>
+</li>
+<li>内存/磁盘碎片整理<ul>
+<li>文件分配的原理：从0开始，找到一块整块的能存下则放置文件，否则就进行分散分配</li>
+<li>内存用于执行某个程序，则从0开始，找到一块整块的能存下，则分配邮与文件删除和内存释放造成碎片</li>
+</ul>
+</li>
+<li>
+<p>链接库</p>
+</li>
+<li>
+<p>分为静态链接库和动态链接库，静态链接库可以直接链接，动态链接库作为外部调用</p>
+</li>
+<li>Windows系统中动态链接库的后缀是dll，静态链接库的后缀是lib</li>
+<li>Linux系统中动态链接库的后缀是so，静态是a</li>
+<li>MIPS体系下的内存动态分配：从低位到高位依次是</li>
+<li>保留区，Text区</li>
+<li>static data区</li>
+<li>dynamic data区</li>
+<li>stack</li>
+</ul>
+<h2 id="17-mips-需要补充的内容">1.7 MIPS 需要补充的内容<a class="headerlink" href="#17-mips-需要补充的内容" title="Permanent link">&para;</a></h2>
+<h3 id="171-伪指令">1.7.1 伪指令<a class="headerlink" href="#171-伪指令" title="Permanent link">&para;</a></h3>
+<ul>
+<li>伪指令：没有基于硬件实现，而是用现有的指令组合而成的一些功能</li>
+<li><code>move $rd, $rs</code>：值的拷贝， 实现的功能是rd=rs</li>
+<li><code>blt $rs, $rt, RR</code> 比较地址的大小，如果rt的地址比较大则进行跳转</li>
+</ul>
+<h3 id="172-系统调用">1.7.2 系统调用<a class="headerlink" href="#172-系统调用" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>MIPS中的系统调用相当于一个内部中断，调用系统程序</p>
+</li>
+<li>
+<p>指令的格式是<code>syscall</code> 进行系统调用</p>
+</li>
+<li>系统调用会读取<code>$v0</code> 寄存器中的数字，根据不同的数字来执行不同的系统调用，将结果保存在a系列或者f系列的寄存器中</li>
+</ul>
+<p><img alt="image-20200828153039608" src="../static/image-20200828153039608.jpg" /></p>
+<ul>
+<li>
+<p>系统调用的一个实例</p>
+</li>
+<li>
+<p>这个系统调用的作用就是把寄存器t0中的数字打印出来</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code>li  $v0, 1            service 1 is print integer
+add $a0, $t0, $zero   load desired value into argument register $a0, using pseudo-op
+syscall
+</code></pre></div>
+<h3 id="案例1实现一个swap函数">案例1：实现一个swap函数<a class="headerlink" href="#案例1实现一个swap函数" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">swap</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">v</span><span class="p">[],</span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">temp</span><span class="p">;</span>
+<span class="w">    </span><span class="n">temp</span><span class="o">=</span><span class="n">v</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
+<span class="w">    </span><span class="n">v</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">=</span><span class="n">v</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+<span class="w">    </span><span class="n">v</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="n">temp</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li>对应的MIPS代码如下，其中v的基地址在a0，k在a1，temp是t0</li>
+</ul>
+<div class="highlight"><pre><span></span><code>swap:   add $t1,$a1,$a1
+        add $t1,$t1,$t1
+        add $t1,$a0,$t1  t1 has the address of v[k]
+        lw $t0,0($t1)
+        lw $t2,4($t1)
+        sw $t2,0($t1)
+        sw $t0,4($t1)
+        jr $ra
+</code></pre></div>
+<h3 id="案例2指针和数组的区别">案例2：指针和数组的区别<a class="headerlink" href="#案例2指针和数组的区别" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">clear1</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">[],</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">size</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">        </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">clear2</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">a</span><span class="p">,</span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">p</span><span class="p">;</span>
+<span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="n">p</span><span class="o">=&amp;</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span><span class="n">p</span><span class="o">&lt;&amp;</span><span class="n">a</span><span class="p">[</span><span class="n">size</span><span class="p">];</span><span class="n">p</span><span class="o">+=</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">        </span><span class="o">*</span><span class="n">p</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li>第一种函数的MIPS实现</li>
+<li>只要size是正数就可以工作</li>
+</ul>
+<div class="highlight"><pre><span></span><code>        move $t0,$zero
+loop1:  add $t1,$t0,$t0
+        add $t1,$t1,$t1  i*4
+        add $t2,$a0,$t1  address of a[i]
+        sw $zero,0($t2)
+        addi $t0,$t0,1
+        slt $t3,$t0,$a1
+        bne $t3,$zero,loop1 
+</code></pre></div>
+<ul>
+<li>第二种函数的MIPS实现</li>
+</ul>
+<div class="highlight"><pre><span></span><code>        move $t0,$a0 #p=&amp;a[0]
+        add $t1,$a1,$a1
+        add $t1,$t1,$t1
+        add $t2,$0,$t1 #t2=&amp;a[size]
+loop2:  sw $zero,0($t0) #*p=0
+        addi $t0,$t0,4 #p=p+4
+        slt $t3,$t0,$t2  p&lt;&amp;array[size] ?
+        bne $t3,$zero,loop
+</code></pre></div>
+<p><span id="busuanzi_container_page_pv">本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span></p>
+
+  <hr>
+<div class="md-source-file">
+  <small>
+    
+      最后更新:
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年1月25日 17:15:47</span>
+      
+        <br>
+        创建日期:
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年1月25日 17:15:47</span>
+      
+    
+  </small>
+</div>
+
+
+
+
+<div id="__comments">
+    
+    <script src="https://giscus.app/client.js"
+        data-repo="Zhang-Each/My-CS-Notebook"
+        data-repo-id="R_kgDOI0dr4w"
+        data-category="General"
+        data-category-id="DIC_kwDOI0dr484CTvIK"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="1"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="zh-CN"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+        </script>
+    <h3>颜色主题调整</h3>
+    <div class="tx-switch">
+    <button class="button1" data-md-color-primary="red" style="background-color:red">red</button>
+    <button class="button1" data-md-color-primary="pink" style="background-color:pink;color:black">pink</button>
+    <button class="button1" data-md-color-primary="purple" style="background-color:purple">purple</button>
+    <button class="button1" data-md-color-primary="indigo" style="background-color:indigo">indigo</button>
+    <button class="button1" data-md-color-primary="blue" style="background-color:blue">blue</button>
+    <button class="button1" data-md-color-primary="cyan" style="background-color:cyan;color:black">cyan</button>
+    <button class="button1" data-md-color-primary="teal" style="background-color:teal">teal</button>
+    <button class="button1" data-md-color-primary="green" style="background-color:green">green</button>
+    <button class="button1" data-md-color-primary="lime" style="background-color:lime;color:black">lime</button>
+    <button class="button1" data-md-color-primary="orange" style="background-color:orange;color:black">orange</button>
+    <button class="button1" data-md-color-primary="brown" style="background-color:brown;border-radius=3px">brown</button>
+    <button class="button1" data-md-color-primary="grey" style="background-color:grey">grey</button>
+    <button class="button1" data-md-color-primary="black" style="background-color:black">black</button>
+    <button class="button1" data-md-color-primary="white" style="background-color:white;color:black">white</button>
+    </div>
+    
+    <script>
+    var buttons = document.querySelectorAll("button[data-md-color-primary]")
+    buttons.forEach(function(button) {
+            button.addEventListener("click", function() {
+            var attr = this.getAttribute("data-md-color-primary")
+            document.body.setAttribute("data-md-color-primary", attr)
+            localStorage.setItem("data-md-color-primary",attr);
+            })
+    })
+    </script>
+    
+    <h2 ><!-- 评论 -->评论区~</h2>
+    
+    有用的话请给我个star或者follow我的账号!! 非常感谢!!
+    
+    </br>
+    
+    快来跟我聊天~
+    
+    </div>
+    
+    <script src="https://giscus.app/client.js"
+        data-repo="Zhang-Each/Notebook-Comments"
+        data-repo-id="R_kgDOI0dlNg"
+        data-category="General"
+        data-category-id="DIC_kwDOI0dlNs4CTvH-"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="1"
+        data-input-position="top"
+        data-theme="preferred_color_scheme"
+        data-lang="zh-CN"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+    </script>
+    
+    <!-- Synchronize Giscus theme with palette -->
+    <script>
+    var giscus = document.querySelector("script[src*=giscus]")
+    
+    /* Set palette on initial load */
+    // var palette = __md_get("__palette")
+    // if (palette && typeof palette.color === "object") {
+    //     var theme = palette.color.scheme === "slate" ? "dark" : "light"
+    //     giscus.setAttribute("data-theme", theme) 
+    // }
+    
+    /* Register event handlers after documented loaded */
+    // document.addEventListener("DOMContentLoaded", function() {
+    //     var ref = document.querySelector("[data-md-component=palette]")
+    //     ref.addEventListener("change", function() {
+    //     var palette = __md_get("__palette")
+    //     if (palette && typeof palette.color === "object") {
+    //         var theme = palette.color.scheme === "slate" ? "dark" : "light"
+    
+    //         /* Instruct Giscus to change theme */
+    //         var frame = document.querySelector(".giscus-frame")
+    //         frame.contentWindow.postMessage(
+    //         { giscus: { setConfig: { theme } } },
+    //         "https://giscus.app"
+    //         )
+    //     }
+    //     })
+    // })
+    </script>
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            回到页面顶部
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      本页面的全部内容在 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh">CC BY-SA 4.0</a> 和 <a href="https://github.com/zTrix/sata-license">SATA</a> 协议之条款下提供，附加条款亦可能应用。<br /><span id="busuanzi_container_site_uv">本站访客总人数<span id="busuanzi_value_site_uv"></span>人次，</span><span id="busuanzi_container_site_pv">本站总访问次数<span id="busuanzi_value_site_pv"></span>次。</span>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "content.code.annotate", "navigation.tracking", "navigation.indexes", "navigation.top", "toc.follow"], "search": "../../assets/javascripts/workers/search.e5c33ebb.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.51d95adb.min.js"></script>
+      
+        <script src="../../from_oi_wiki/js/extra.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js"></script>
+      
+        <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+      
+    
+  </body>
+</html>

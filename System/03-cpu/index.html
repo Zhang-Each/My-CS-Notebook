@@ -1,0 +1,3248 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://zhang-each.github.io/My-CS-notebook/System/03-cpu/">
+      
+      
+        <link rel="prev" href="../02-calculation/">
+      
+      
+        <link rel="next" href="../04-memory/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.6">
+    
+    
+      
+        <title>3. CPU结构 - 小角龙的学习记录</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.558e4712.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.2505c338.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Hiragino+Sans+GB:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Hiragino Sans GB";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../from_oi_wiki/css/extra.css?v=13">
+    
+      <link rel="stylesheet" href="../../css/status.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#3-cpu结构" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="小角龙的学习记录" class="md-header__button md-logo" aria-label="小角龙的学习记录" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            小角龙的学习记录
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              3. CPU结构
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/zhang-each/My-CS-notebook/" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Zhang-Each/My-CS-notebook
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        🏡 主页
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../ML/" class="md-tabs__link">
+        🐯 统计机器学习
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../CS231N/" class="md-tabs__link">
+        🐰 深度学习
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../" class="md-tabs__link md-tabs__link--active">
+        🐑 计算机系统
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../OS/" class="md-tabs__link">
+        🐒 操作系统
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Networking/" class="md-tabs__link">
+        🐓 计算机网络
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../DB/" class="md-tabs__link">
+        🐶 数据库系统
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../%E6%9D%82%E8%B0%88%E4%B8%8E%E6%80%BB%E7%BB%93/" class="md-tabs__link">
+        🐷 杂谈与总结
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="小角龙的学习记录" class="md-nav__button md-logo" aria-label="小角龙的学习记录" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    小角龙的学习记录
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/zhang-each/My-CS-notebook/" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Zhang-Each/My-CS-notebook
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../..">🏡 主页</a>
+          
+            <label for="__nav_1">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="🏡 主页" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          🏡 主页
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/" class="md-nav__link">
+        关于我
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../ML/">🐯 统计机器学习</a>
+          
+            <label for="__nav_2">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="🐯 统计机器学习" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          🐯 统计机器学习
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A001%EF%BC%9A%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" class="md-nav__link">
+        01：机器学习中的基本概念
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A002%EF%BC%9A%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%AE%9A%E7%90%86/" class="md-nav__link">
+        02：贝叶斯定理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A003%EF%BC%9A%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/" class="md-nav__link">
+        03：线性模型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A004%EF%BC%9A%E6%84%9F%E7%9F%A5%E6%9C%BA/" class="md-nav__link">
+        04：感知机
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A005%EF%BC%9A%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BASVM/" class="md-nav__link">
+        05：支持向量机SVM
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A006%EF%BC%9AkNN/" class="md-nav__link">
+        06：kNN
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A007%EF%BC%9A%E5%86%B3%E7%AD%96%E6%A0%91DecisionTree/" class="md-nav__link">
+        07：决策树DecisionTree
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A008%EF%BC%9A%E8%81%9A%E7%B1%BBClustering/" class="md-nav__link">
+        08：聚类Clustering
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A009%EF%BC%9A%E6%8F%90%E5%8D%87Boosting%E4%B8%8EEnsemble/" class="md-nav__link">
+        09：提升Boosting与Ensemble
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A010%EF%BC%9AEM%E7%AE%97%E6%B3%95%E5%92%8CGMM/" class="md-nav__link">
+        10：EM算法和GMM
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A011%EF%BC%9A%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90PCA/" class="md-nav__link">
+        11：主成分分析PCA
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A012%EF%BC%9A%E7%BA%BF%E6%80%A7%E5%88%A4%E5%88%AB%E5%88%86%E6%9E%90LDA/" class="md-nav__link">
+        12：线性判别分析LDA
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A013%EF%BC%9A%E9%9A%90%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E6%A8%A1%E5%9E%8B/" class="md-nav__link">
+        13：隐马尔可夫模型
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../CS231N/">🐰 深度学习</a>
+          
+            <label for="__nav_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="🐰 深度学习" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          🐰 深度学习
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_3_2" type="checkbox" id="__nav_3_2" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3_2" tabindex="0" aria-expanded="false">
+          CS231N-神经网络与深度学习
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="CS231N-神经网络与深度学习" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          CS231N-神经网络与深度学习
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B01%EF%BC%9AkNN%E5%92%8C%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB%E5%99%A8/" class="md-nav__link">
+        01.kNN和线性分类器
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B02%EF%BC%9A%E5%A4%9A%E5%B1%82%E5%85%A8%E8%BF%9E%E6%8E%A5%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%92%8C%E4%BC%98%E5%8C%96%E5%99%A8/" class="md-nav__link">
+        02.多层全连接神经网络和优化器
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B03%EF%BC%9ANormalization%E5%92%8CDropOut/" class="md-nav__link">
+        03.Normalization和DropOut
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B04%EF%BC%9A%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9CCNN/" class="md-nav__link">
+        04.卷积神经网络CNN
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B05%EF%BC%9ARNN%26LSTM%E4%B8%8E%E5%9B%BE%E7%89%87%E6%8F%8F%E8%BF%B0/" class="md-nav__link">
+        05.RNN&LSTM与图片描述
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B06%EF%BC%9ATransformer%E4%B8%8E%E5%9B%BE%E7%89%87%E6%8F%8F%E8%BF%B0/" class="md-nav__link">
+        06.Transformer与图片描述
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B07%EF%BC%9A%E6%A8%A1%E5%9E%8B%E5%8F%AF%E8%A7%86%E5%8C%96%EF%BC%8C%E5%9B%BE%E5%83%8F%E6%AC%BA%E8%AF%88%E5%92%8CGAN/" class="md-nav__link">
+        07.模型可视化，图像欺诈和GAN
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B08%EF%BC%9A%E8%87%AA%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%E4%B8%8E%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/" class="md-nav__link">
+        08.自监督学习与课程总结
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_3_3" type="checkbox" id="__nav_3_3" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../CS224W/">CS224W-图机器学习与图神经网络</a>
+          
+            <label for="__nav_3_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="CS224W-图机器学习与图神经网络" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          CS224W-图机器学习与图神经网络
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A001/" class="md-nav__link">
+        01.导论，传统的图学习方法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A002/" class="md-nav__link">
+        02.节点嵌入和PageRank
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A003/" class="md-nav__link">
+        03.消息传递机制
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A004/" class="md-nav__link">
+        04.图神经网络基础
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A005/" class="md-nav__link">
+        05.图神经网络的训练和应用，表示能力分析
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A006/" class="md-nav__link">
+        06.知识图谱，知识图谱推理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A007/" class="md-nav__link">
+        07.频繁子图挖掘
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A008/" class="md-nav__link">
+        08.社区检测
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A009/" class="md-nav__link">
+        09.图生成模型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A010/" class="md-nav__link">
+        10.图神经网络前沿话题
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_3_4" type="checkbox" id="__nav_3_4" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../CS224N/">CS224N-基于深度学习的自然语言处理</a>
+          
+            <label for="__nav_3_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="CS224N-基于深度学习的自然语言处理" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_4">
+          <span class="md-nav__icon md-icon"></span>
+          CS224N-基于深度学习的自然语言处理
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224N/NLP01-Introduction%26WordVector/" class="md-nav__link">
+        01-Introduction&WordVector
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224N/NLP02-Word2Vec/" class="md-nav__link">
+        02-Word2Vec
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224N/NLP03-DependenceParsing/" class="md-nav__link">
+        03-DependenceParsing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224N/NLP04-LM%26RNN%26LSTM/" class="md-nav__link">
+        04-LM&RNN&LSTM
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224N/NLP05-Seq2Seq/" class="md-nav__link">
+        05-Seq2Seq
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224N/Stanford-CS224N-Assignment1%262/" class="md-nav__link">
+        Assignment1&2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224N/Stanford-CS224N-Assignment3/" class="md-nav__link">
+        Assignment3
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CS224N/Stanford-CS224N-Assignment4/" class="md-nav__link">
+        Assignment4
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../">🐑 计算机系统</a>
+          
+            <label for="__nav_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="🐑 计算机系统" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          🐑 计算机系统
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../00-intro/" class="md-nav__link">
+        0.计算机基本知识
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-mips/" class="md-nav__link">
+        1. MIPS 指令系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-calculation/" class="md-nav__link">
+        2.  Arithmetic for computer 计算机运算
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          3. CPU结构
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        3. CPU结构
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#31-计算机的基本结构" class="md-nav__link">
+    3.1 计算机的基本结构
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#32-基本的功能组件" class="md-nav__link">
+    3.2 基本的功能组件
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#33-单指令数据通道" class="md-nav__link">
+    3.3 单指令数据通道
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#34-单时钟cpu数据通道" class="md-nav__link">
+    3.4 单时钟CPU数据通道
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#35-多时钟cpu设计" class="md-nav__link">
+    3.5 多时钟CPU设计
+  </a>
+  
+    <nav class="md-nav" aria-label="3.5 多时钟CPU设计">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#351-dna里的图" class="md-nav__link">
+    3.5.1 DNA里的图
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#352-基本指令的多周期运行过程" class="md-nav__link">
+    3.5.2 基本指令的多周期运行过程
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#353-控制信号和有限状态机" class="md-nav__link">
+    3.5.3 控制信号和有限状态机
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#36-微指令" class="md-nav__link">
+    3.6 微指令
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#37-流水线pipline和冒险hazard" class="md-nav__link">
+    3.7 流水线(pipline)和冒险(hazard)
+  </a>
+  
+    <nav class="md-nav" aria-label="3.7 流水线(pipline)和冒险(hazard)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#371-流水线的基本原理" class="md-nav__link">
+    3.7.1 流水线的基本原理
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#372-冒险-hazard" class="md-nav__link">
+    3.7.2 冒险 hazard
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-memory/" class="md-nav__link">
+        4. 存储器
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-io/" class="md-nav__link">
+        5. I/O系统
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../OS/">🐒 操作系统</a>
+          
+            <label for="__nav_5">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="🐒 操作系统" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          🐒 操作系统
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F0-Linux%E5%86%85%E6%A0%B8/" class="md-nav__link">
+        操作系统0 Linux内核
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F1-%E5%AF%BC%E8%AE%BA/" class="md-nav__link">
+        操作系统1：导论和操作系统结构
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F2-%E8%BF%9B%E7%A8%8B%26%E7%BA%BF%E7%A8%8B/" class="md-nav__link">
+        操作系统2：进程/线程
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F3-CPU%E8%B0%83%E5%BA%A6%26%E5%90%8C%E6%AD%A5/" class="md-nav__link">
+        操作系统3：CPU调度
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F4-%E5%90%8C%E6%AD%A5%E5%92%8C%E6%AD%BB%E9%94%81/" class="md-nav__link">
+        操作系统4：同步和死锁
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F5-%E5%AD%98%E5%82%A8/" class="md-nav__link">
+        操作系统5：存储管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F6-%E6%96%87%E4%BB%B6/" class="md-nav__link">
+        操作系统6：文件
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F7-%E7%A3%81%E7%9B%98%E5%92%8CIO/" class="md-nav__link">
+        操作系统7：磁盘和I/O
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../Networking/">🐓 计算机网络</a>
+          
+            <label for="__nav_6">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="🐓 计算机网络" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          🐓 计算机网络
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Networking/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C1-OSI%E6%A8%A1%E5%9E%8B/" class="md-nav__link">
+        计算机网络1-OSI模型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Networking/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C2-%E7%89%A9%E7%90%86%E5%B1%82/" class="md-nav__link">
+        计算机网络2-物理层
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Networking/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C3-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%26MAC/" class="md-nav__link">
+        计算机网络3-数据链路层&MAC
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Networking/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C4-%E7%BD%91%E7%BB%9C%E5%B1%82/" class="md-nav__link">
+        计算机网络4-网络层
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Networking/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C5-%E8%BF%90%E8%BE%93%E5%B1%82/" class="md-nav__link">
+        计算机网络5-运输层
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Networking/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C6-%E5%BA%94%E7%94%A8%E5%B1%82/" class="md-nav__link">
+        计算机网络6-应用层
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Networking/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C7-%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" class="md-nav__link">
+        计算机网络7-网络安全
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../DB/">🐶 数据库系统</a>
+          
+            <label for="__nav_7">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="🐶 数据库系统" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          🐶 数据库系统
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../DB/db/" class="md-nav__link">
+        数据库系统复习笔记
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_8" type="checkbox" id="__nav_8" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../%E6%9D%82%E8%B0%88%E4%B8%8E%E6%80%BB%E7%BB%93/">🐷 杂谈与总结</a>
+          
+            <label for="__nav_8">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="🐷 杂谈与总结" data-md-level="1">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          🐷 杂谈与总结
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%9D%82%E8%B0%88%E4%B8%8E%E6%80%BB%E7%BB%93/2021%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/" class="md-nav__link">
+        I. 2021年度总结
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%9D%82%E8%B0%88%E4%B8%8E%E6%80%BB%E7%BB%93/%E6%9C%AC%E7%A7%91%E5%89%8D%E4%B8%89%E5%B9%B4%E7%9A%84%E6%80%BB%E7%BB%93/" class="md-nav__link">
+        II. 本科前三年的总结
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%9D%82%E8%B0%88%E4%B8%8E%E6%80%BB%E7%BB%93/%E5%AF%B9%E8%BD%AF%E5%B7%A5%E4%B8%93%E4%B8%9A%E7%9A%84%E8%AF%BE%E7%A8%8B%E8%AF%84%E4%BB%B7%E5%92%8C%E4%BF%AE%E6%94%B9%E6%84%8F%E8%A7%81/" class="md-nav__link">
+        III. 对软工专业的课程评价和修改意见
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%9D%82%E8%B0%88%E4%B8%8E%E6%80%BB%E7%BB%93/2022%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/" class="md-nav__link">
+        IV. 2022年度总结
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#31-计算机的基本结构" class="md-nav__link">
+    3.1 计算机的基本结构
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#32-基本的功能组件" class="md-nav__link">
+    3.2 基本的功能组件
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#33-单指令数据通道" class="md-nav__link">
+    3.3 单指令数据通道
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#34-单时钟cpu数据通道" class="md-nav__link">
+    3.4 单时钟CPU数据通道
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#35-多时钟cpu设计" class="md-nav__link">
+    3.5 多时钟CPU设计
+  </a>
+  
+    <nav class="md-nav" aria-label="3.5 多时钟CPU设计">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#351-dna里的图" class="md-nav__link">
+    3.5.1 DNA里的图
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#352-基本指令的多周期运行过程" class="md-nav__link">
+    3.5.2 基本指令的多周期运行过程
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#353-控制信号和有限状态机" class="md-nav__link">
+    3.5.3 控制信号和有限状态机
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#36-微指令" class="md-nav__link">
+    3.6 微指令
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#37-流水线pipline和冒险hazard" class="md-nav__link">
+    3.7 流水线(pipline)和冒险(hazard)
+  </a>
+  
+    <nav class="md-nav" aria-label="3.7 流水线(pipline)和冒险(hazard)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#371-流水线的基本原理" class="md-nav__link">
+    3.7.1 流水线的基本原理
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#372-冒险-hazard" class="md-nav__link">
+    3.7.2 冒险 hazard
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+
+<h1 id="3-cpu结构">3. CPU结构<a class="headerlink" href="#3-cpu结构" title="Permanent link">&para;</a></h1>
+<h2 id="31-计算机的基本结构">3.1 计算机的基本结构<a class="headerlink" href="#31-计算机的基本结构" title="Permanent link">&para;</a></h2>
+<ul>
+<li>计算机的组成结构</li>
+<li>
+<p>CPU</p>
+<ul>
+<li>control unit 控制单元</li>
+<li>datapath 数据通道</li>
+<li>path</li>
+<li>ALU 算术逻辑单元</li>
+<li>registers 寄存器</li>
+</ul>
+</li>
+<li>
+<p>Memory 内存</p>
+</li>
+<li>
+<p>I/O interface 输入/输出接口</p>
+</li>
+<li>
+<p>简单的MIPS实现原理</p>
+</li>
+</ul>
+<p><img alt="image-20200809135614210" src="./static/image-20200809135614210.png" />
+  - 不 言 而 喻 ，一 目 了 然</p>
+<h2 id="32-基本的功能组件">3.2 基本的功能组件<a class="headerlink" href="#32-基本的功能组件" title="Permanent link">&para;</a></h2>
+<p>这一部分貌似是数逻学的，没修过所以这里先学一学</p>
+<ul>
+<li>逻辑门电路：由于非常天空上的图非常难看，所以不贴图了</li>
+<li>
+<p>与门电路：符号是半个椭圆型</p>
+<p><img alt="gateand" src="../static/gateand-0000.jpg" /></p>
+</li>
+<li>
+<p>或门电路：符号是月牙形</p>
+<p><img alt="gateor" src="../static/gateor-0000.jpg" /></p>
+</li>
+<li>
+<p>非门电路：符号是三角形+圆点</p>
+<p><img alt="gatenot" src="../static/gatenot-0000.jpg" /></p>
+</li>
+<li>
+<p>异或门电路：<span class="arithmatex">\((A/and /neg B)/or(/neg A/and B)\)</span> 由两个与门和一个或门组合而成</p>
+<p><img alt="gatexor" src="../static/gatexor-0000.jpg" /></p>
+</li>
+<li>
+<p>组合逻辑 combinational logic</p>
+</li>
+<li>
+<p>译码器 Decoder</p>
+<ul>
+<li>
+<p>给出一组输入，所有输出端的输出只有一个与其他所有的输出都不同。译码器可以用于地址选择，如果译码器由n个输入端，有<span class="arithmatex">\(2^n\)</span>个输出端，则是完全译码器</p>
+</li>
+<li>
+<p>由若干个非门电路和与门电路组成</p>
+</li>
+<li>
+<p>2-4 译码器</p>
+<p><img alt="decode24" src="../static/decode24-0000.jpg" /></p>
+</li>
+<li>
+<p>3-8 译码器</p>
+<p><img alt="decode" src="../static/decode-1597027905491-0000.jpg" /></p>
+</li>
+</ul>
+</li>
+<li>
+<p>多路选择器 MUX</p>
+<ul>
+<li>
+<p>有多个数据输入，只能有一个数据输出，通过控制信号决定哪个输入被连接到输出端</p>
+</li>
+<li>
+<p>通过控制信号，对输出进行筛选，信号是若干个0或1，通过**非门和与门的组合**使得恰好只有一个输入值会被原样输出，n位的信号刚好可以控制<span class="arithmatex">\(2^n\)</span>个输入数据</p>
+</li>
+</ul>
+<p><img alt="mux" src="../static/mux-0000.jpg" /></p>
+<ul>
+<li>
+<p>四个选择的多路选择器MUX实现原理</p>
+<p><img alt="mux4" src="../static/mux4-0000.jpg" /></p>
+</li>
+</ul>
+</li>
+<li>
+<p>移位器 Shift</p>
+<ul>
+<li>
+<p>使用**移位寄存器**或者**多路选择器**实现移位的操作，多路选择器的本质是**空间换时间**，利用复杂的设计提高位移速度</p>
+</li>
+<li>
+<p>固定的移位可以直接通过输入输出线的错位来实现</p>
+</li>
+</ul>
+<p><img alt="sft2" src="../static/sft2-0000.jpg" /></p>
+</li>
+<li>
+<p>符号扩展 Sign Extend</p>
+<ul>
+<li>对于有符号的补码进行扩展，并且正数和负数的扩展方式不同，对于补码的扩展可以通过重复符号位的方式实现，对于无符号数的扩展</li>
+</ul>
+<p><img alt="signext" src="../static/signext-0000.jpg" /></p>
+</li>
+<li>
+<p>状态元件</p>
+</li>
+<li>
+<p>状态元件和组合逻辑的区别</p>
+<ul>
+<li>组合逻辑的输出只和输入值有关</li>
+<li>状态原件的输出还**和状态元件自身的状态有关**，一般输入输出有一个时钟的延时</li>
+</ul>
+</li>
+<li>
+<p>寄存器单元</p>
+<ul>
+<li>
+<p>输入的值有：clk时钟，<strong>RegWrite 写入控制</strong>，idat **32位**的输入数据</p>
+</li>
+<li>
+<p>输出的值有：odat 32位的输出数据</p>
+</li>
+</ul>
+<p><img alt="register" src="../static/register-0000.jpg" /></p>
+</li>
+<li>
+<p>复杂模块</p>
+</li>
+<li>
+<p>ALU 算术逻辑单元</p>
+<ul>
+<li>
+<p>算术逻辑单元ALU可以执行算术逻辑运算，是CPU中最重要的运算部件</p>
+</li>
+<li>
+<p>支持的运算包括加减法，逻辑and和or，以及slt，采用3位控制信号</p>
+</li>
+<li>
+<p>控制信号中000表示and，001表示or，010表示加法，110表示减法，111表示slt</p>
+</li>
+</ul>
+<p><img alt="image-20200809184700155" src="../static/image-20200809184700155.jpg" /></p>
+<ul>
+<li>32位ALU简化的示意图如下</li>
+</ul>
+<p><img alt="alu" src="../static/alu-0000.jpg" /></p>
+<ul>
+<li>
+<p>输入：两个32位的数据，ALUop <strong>3位的操作码ALUoper</strong></p>
+</li>
+<li>
+<p>输出：</p>
+</li>
+<li>
+<p>Result 32位的输出</p>
+</li>
+<li>zero零标志，这个值为1的时候表示结果为0，为0的时候表示结果不是0</li>
+<li>carryout **进位**标志</li>
+<li>overflow 溢出标志</li>
+</ul>
+</li>
+<li>
+<p>ALU 控制器：为了让常见的运算(加减法)更加容易控制</p>
+<ul>
+<li>
+<p>输入的内容：</p>
+</li>
+<li>
+<p>ALUop 两位的**控制信号**</p>
+</li>
+<li>
+<p>Func 指令的功能字段</p>
+</li>
+<li>
+<p>输出：ALUoper ——ALU的操作码，有3位</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>ALUop</th>
+<th>Function Field(F5-F0)</th>
+<th>ALU</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>00</td>
+<td>XXXXXX</td>
+<td>010——add</td>
+</tr>
+<tr>
+<td>01</td>
+<td>XXXXXX</td>
+<td>110——sub</td>
+</tr>
+<tr>
+<td>1X</td>
+<td>XX0000</td>
+<td>010——add</td>
+</tr>
+<tr>
+<td>1X</td>
+<td>XX0010</td>
+<td>110——sub</td>
+</tr>
+<tr>
+<td>1X</td>
+<td>XX0100</td>
+<td>000——and</td>
+</tr>
+<tr>
+<td>1X</td>
+<td>XX0101</td>
+<td>001——or</td>
+</tr>
+<tr>
+<td>1X</td>
+<td>XX1010</td>
+<td>111——slt</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>ALU控制器的示意图：</li>
+</ul>
+<p><img alt="aluctrc" src="../static/aluctrc-0000.jpg" /></p>
+</li>
+<li>
+<p>算术逻辑单元的多级控制</p>
+<ul>
+<li>用ALU控制器控制ALU，示意图如下：</li>
+</ul>
+<p><img alt="aluctrl" src="../static/aluctrl-0000.jpg" /></p>
+</li>
+<li>
+<p>存储器</p>
+</li>
+<li>
+<p>存储器是多个寄存器和集合，由**译码器**选择指定的寄存器单元(通过地址)</p>
+</li>
+<li>
+<p>存储器分为只读存储器和读写存储器</p>
+<ul>
+<li>
+<p>指令存储器是**只读**存储器(Read Only Memory, ROM)</p>
+</li>
+<li>
+<p>数据存储器是读写存储器(RAM) 可以根据读写控制信号，一次读/写一个32位的数据</p>
+</li>
+<li>
+<p>读写**共用一个地址输入端**，读写数据分别和存储器连接</p>
+</li>
+</ul>
+<p><img alt="image-20200809235040985" src="../static/image-20200809235040985.jpg" /></p>
+<ul>
+<li>存储器按照字节编址，MIPS采用了32位的**地址线**，可寻址空间为<span class="arithmatex">\(2^{32}=4GB\)</span>， 数据线也是32位</li>
+</ul>
+</li>
+<li>
+<p><strong>寄存器组</strong>：</p>
+<ul>
+<li>
+<p>寄存器组是CPU的主要部件</p>
+</li>
+<li>
+<p>因为很多指令都有2-3个操作数，因此需要用寄存器组来实现多路同时读写</p>
+</li>
+<li>
+<p>寄存器组的读</p>
+</li>
+<li>
+<p>32个32位的存储单元，由两路5位寄存器地址选择读出寄存器中的内容</p>
+<p><img alt="rgfr" src="../static/rgfr-0000.jpg" /></p>
+</li>
+<li>
+<p>寄存器组的写</p>
+</li>
+<li>
+<p>由5位地址选择器选择写入的寄存器，数据端位32位</p>
+</li>
+<li>
+<p>信号RehWrite 作为允许写入操作的控制信号</p>
+<p><img alt="rgfw" src="../static/rgfw-0000.jpg" /></p>
+</li>
+<li>
+<p>寄存器组的整体结构图</p>
+</li>
+</ul>
+<p><img alt="image-20200810001953782" src="../static/image-20200810001953782.jpg" /></p>
+<ul>
+<li>
+<p>MIPS的一个寄存器组一共有32个32位的寄存器，编号为0-31，采用5位二进制寻址</p>
+</li>
+<li>
+<p>各个寄存器的功能之前已经提到过了，在第一部分MIPS指令系统里面</p>
+<p><img alt="regfile1" src="../static/regfile1-0000.jpg" /></p>
+</li>
+<li>
+<p>输入数据</p>
+<ul>
+<li>clk 时钟</li>
+<li>rst 种植控制</li>
+<li>regA，regB两路5位读的寄存器号，regW 一路写的寄存器号</li>
+<li>wdat写入的数据</li>
+<li>regWrite：1的时候表示允许写入</li>
+</ul>
+</li>
+<li>
+<p>输出：Adat，Bdat 二路32位读出的数据</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="33-单指令数据通道">3.3 单指令数据通道<a class="headerlink" href="#33-单指令数据通道" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>PC组件</p>
+</li>
+<li>
+<p>在MIPS中，所有的指令都是等长的，每条指令4字节(32位)，在PC中，保存着当前执行指令的地址</p>
+</li>
+<li>
+<p>PC的输出接到指令存储器的地址端，每条指令执行之后，PC+4，在下一个时钟的时候就自动转到执行下一条指令</p>
+<p><img alt="fetch" src="../static/fetch-0000.jpg" /></p>
+</li>
+<li>
+<p>R指令的数据通道</p>
+</li>
+<li>
+<p>回忆：MIPS中R指令的格式为6位操作码+3个五位的操作数(rs,rt,rd 其中rd是目标寄存器)+5位shamt+6位func</p>
+<p><img alt="singlert" src="../static/singlert-0000.jpg" /></p>
+</li>
+<li>
+<p>LW/SW指令的数据通道</p>
+</li>
+<li>
+<p>lw指令的格式：<code>100011+rs+rd+offset</code>, 表示<code>$rd=Memory[$rs + offset]</code> </p>
+<p><img alt="singlelw" src="../static/singlelw-0000.jpg" /></p>
+</li>
+<li>
+<p>sw 指令的格式<code>101011+rs+rt+offset</code> ，表示<code>Memory[$rs + offset] = $rt</code>  </p>
+<p><img alt="singlesw" src="../static/singlesw-1597027153950-0000.jpg" /></p>
+</li>
+<li>
+<p>BEQ指令的数据通道</p>
+</li>
+<li>
+<p>BEQ指令：<code>pc+=4; if(r1==r2) PC+= address*4;</code> </p>
+<p><img alt="singlebeq" src="../static/singlebeq-0000.jpg" /></p>
+</li>
+<li>
+<p>J指令：0-25位是一个address，<code>PC={PC[31-28], IR[25-0], {00}}</code> </p>
+</li>
+</ul>
+<p><img alt="singlej" src="../static/singlej-0000.jpg" /></p>
+<ul>
+<li>addi指令:<code>rd = rs + Data</code> </li>
+</ul>
+<p><img alt="singleaddi" src="../static/singleaddi-0000.jpg" /></p>
+<h2 id="34-单时钟cpu数据通道">3.4 单时钟CPU数据通道<a class="headerlink" href="#34-单时钟cpu数据通道" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>接入和接出的实现原理</p>
+</li>
+<li>
+<p>分支接出：对于电路，从一组线接出或者部分接出都可以</p>
+<p><img alt="line" src="../static/line-0000.jpg" /></p>
+</li>
+<li>
+<p>多路接入：使用多路选择器MUX</p>
+<ul>
+<li>
+<p>当有多个信号接入同一个输入端，不能直接合并，必须通过MUX选择性接入</p>
+</li>
+<li>
+<p>通过控制信号来决定**哪一个输入连接到输出**端</p>
+</li>
+</ul>
+<p><img alt="mux3" src="../static/mux3-0000.jpg" /></p>
+</li>
+<li>
+<p>指令的组合：可以通过多路选择器的设计将指令合并到一个数据通道中</p>
+</li>
+<li>
+<p>多路选择器对于不同的指令(R型，I型，J型)会选择不同的路径</p>
+</li>
+<li>
+<p>需要刻在DNA里的单时钟CPU实现原理图：</p>
+<p><img alt="single1" src="../static/single1-0000.jpg" /></p>
+</li>
+<li>
+<p>新增control unit控制单元，可以发出一系列的**控制信号**，对不同的指令取不同的值</p>
+<p><img alt="sigctrl" src="../static/sigctrl-0000.jpg" /></p>
+<ul>
+<li>
+<p>控制信号控制了数据的流向和操作类型</p>
+</li>
+<li>
+<p>可以将指令码各位进行逻辑and运算，保证一条线只有当操作码为对应指令的时候才是1，否则为0</p>
+</li>
+<li>
+<p>控制单元内部原理示意图：</p>
+</li>
+</ul>
+<p><img alt="ctrlunjt" src="../static/ctrlunjt-1597029836258-0000.jpg" /></p>
+<ul>
+<li>控制信号对应表</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>控制信号</th>
+<th>R</th>
+<th>LW</th>
+<th>SW</th>
+<th>BEQ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RegDst</td>
+<td>1</td>
+<td>0</td>
+<td>x</td>
+<td>x</td>
+</tr>
+<tr>
+<td>ALUsrc</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>ALUop</td>
+<td>10</td>
+<td>00</td>
+<td>00</td>
+<td>01</td>
+</tr>
+<tr>
+<td>MemtoReg</td>
+<td>0</td>
+<td>1</td>
+<td>x</td>
+<td>x</td>
+</tr>
+<tr>
+<td>RegWrite</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>MemRead</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>MemWrite</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Branch</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>
+<p>该数据通道的若干假设</p>
+</li>
+<li>
+<p>等长的指令结构，每条指令都是32-bit，其中最高的6位是操作码</p>
+</li>
+<li>内存以字节编址，32位的寻址范围</li>
+<li>寄存器组公有32个32位的寄存器(5-bit寻址)，其中<ul>
+<li>0号寄存器的值恒为0</li>
+<li>31号寄存器是指令的地址寄存器，用于存放**子程序的地址** </li>
+<li>29号是堆栈指针寄存器</li>
+</ul>
+</li>
+<li>Memory，Register File，ALU的操作分别需要2，1，2个单位的时间，其他的时间可以忽略不计</li>
+</ul>
+</li>
+<li>
+<p>各项指令执行所需要的时间统计表</p>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>取指令</th>
+<th>寄存器</th>
+<th>运算</th>
+<th>存储器</th>
+<th>回写</th>
+<th>合计</th>
+<th>使用率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>R</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td></td>
+<td>1</td>
+<td>6</td>
+<td>44%</td>
+</tr>
+<tr>
+<td>LW</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>8</td>
+<td>24%</td>
+</tr>
+<tr>
+<td>SW</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td></td>
+<td>7</td>
+<td>12%</td>
+</tr>
+<tr>
+<td>BEQ</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td></td>
+<td></td>
+<td>5</td>
+<td>18%</td>
+</tr>
+<tr>
+<td>J</td>
+<td>2</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>2</td>
+<td>2%</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>指令执行的平均时间为6.34</li>
+<li>在单数据通道中，每条指令只能设置一次各种控制信号，所以只能以需要时间最长的指令为一个时钟，也就是8</li>
+<li>执行效率：6.34/8=79.25% 比较低</li>
+</ul>
+</li>
+<li>
+<p>单时钟数据通道新增指令设计</p>
+</li>
+<li>
+<p>设计机器码的格式：操作码6位是固定的，其他的东西安排在剩下的26位里面</p>
+</li>
+<li>
+<p>在原设计图上增加必要的组件和通路</p>
+<ul>
+<li>寄存器组和存储器，ALU等一般不变，可以实现新的指令功能</li>
+</ul>
+</li>
+<li>
+<p>添加新的控制信号：对于添加的新控制信号，一般原指令的默认值为0</p>
+</li>
+<li>
+<p>举例：新增<code>push $r</code> 指令</p>
+<ul>
+<li>指令的执行过程</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">$sp</span><span class="o">=</span><span class="n">$sp</span><span class="mi">-4</span>
+<span class="n">Memory</span><span class="p">[</span><span class="n">$sp</span><span class="p">]</span><span class="o">=</span><span class="n">$r</span>
+</code></pre></div>
+<ul>
+<li>方案1：由于指令里只有一个操作数r，因此可以将sp直接涉及到指令里面，sp有读写操作，而r只读，需要增加额外的信号4，为了连接简便，将ALUsrc改为4选1</li>
+<li>指令格式是<code>000000+sp+r+sp+shamt+push</code> </li>
+<li>控制信号中，ALUsrc设置为10</li>
+<li>方案2：4可以写在立即数中，但此时第三个寄存器不能放sp，需要R1连接到R3，作为写sp</li>
+<li>指令格式是<code>push+sp+r+0004</code> </li>
+<li>信号设计：RegDst设置为10</li>
+</ul>
+</li>
+</ul>
+<h2 id="35-多时钟cpu设计">3.5 多时钟CPU设计<a class="headerlink" href="#35-多时钟cpu设计" title="Permanent link">&para;</a></h2>
+<h3 id="351-dna里的图">3.5.1 DNA里的图<a class="headerlink" href="#351-dna里的图" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>由于单时钟只能以耗时最长的指令为时钟，为了提高效率，可以考虑**缩短时钟**，以主要部件的执行时间为时钟，重新设置一遍控制信号</p>
+</li>
+<li>
+<p>每个部件在每个时钟**分别执行各自的任务**，在各个主要部件之间用寄存器存放临时的结果</p>
+</li>
+<li>
+<p>IR：指令寄存器，MDR：内存数据寄存器</p>
+<p><img alt="datapathm" src="../static/datapathm-0000.jpg" /></p>
+</li>
+<li>
+<p>本数据通道基于如下假设——和单时钟基本一样</p>
+<ul>
+<li>等长的指令结构，每条指令都是32-bit，最高的六位是操作码</li>
+<li>内存以字节编址，32位的寻址空间是4GB，有32个32位的寄存器</li>
+<li>Memory，Register File和ALU的操作分别需要2，1，2个时间，其他的忽略不计</li>
+<li>微指令有七个字段，分别是ALU，Reg，Mem，PC等等</li>
+</ul>
+</li>
+<li>
+<p>多周期CPU的数据通道(第二张需要**刻在DNA里的图**) </p>
+<p><img alt="mulc" src="../static/mulc-0000.jpg" /></p>
+</li>
+</ul>
+<h3 id="352-基本指令的多周期运行过程">3.5.2 基本指令的多周期运行过程<a class="headerlink" href="#352-基本指令的多周期运行过程" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>多时钟周期的五个执行阶段：每个指令需要**3-5个周期**</p>
+</li>
+<li>
+<p>IF阶段：Instruction Fetch 获取指令,具体的步骤如下</p>
+<ul>
+<li>使用PC来获取需要执行的指令，放到指令寄存器中</li>
+<li>PC+4然后把结果返回给PC(上面两步基本上是同步进行的</li>
+<li>第一阶段所有的指令基本都是一样的</li>
+<li>其Register-Transfer Language(RTL) 是</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">IR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Memory</span><span class="p">[</span><span class="n">PC</span><span class="p">];</span>
+<span class="n">PC</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PC</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+</code></pre></div>
+</li>
+<li>
+<p>ID：指令得而**译码**和register fetch</p>
+<ul>
+<li>在需要的时候，读取寄存器rs和rt中的内容</li>
+<li>如果是分支指令就需要计算分支的地址</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Reg</span><span class="p">[</span><span class="n">IR</span><span class="p">[</span><span class="mi">25-21</span><span class="p">]];</span>
+<span class="n">B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Reg</span><span class="p">[</span><span class="n">IR</span><span class="p">[</span><span class="mi">20-16</span><span class="p">]];</span>
+<span class="n">ALUOut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PC</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">sign</span><span class="o">-</span><span class="n">extend</span><span class="p">(</span><span class="n">IR</span><span class="p">[</span><span class="mi">15-0</span><span class="p">])</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
+</code></pre></div>
+</li>
+<li>
+<p>EX(BC)：执行，内存地址计算或者分支选择完成</p>
+<ul>
+<li>ALU根据指令类型执行一种指令</li>
+<li>对于内存调用 <code>ALUOut = A + sign-extend(IR[15-0]);</code> </li>
+<li>对于R型指令，<code>ALUOut = A op B;</code> </li>
+<li>对于分支指令：<code>if (A == B) PC = ALUOut;</code> </li>
+<li>对于jump指令，<code>PC = PC[31-28] + IR[25-0] &lt;&lt; 2;</code> </li>
+</ul>
+</li>
+<li>
+<p>MEM(WB)：**内存访问**或者R型指令的完成</p>
+<ul>
+<li>对于lw，<code>MDR = Memory[ALUOut];</code> </li>
+<li>对于sw，<code>Memory[ALUOut] = B;</code> </li>
+<li>对于R型的指令，<code>Reg[rd] = Reg[IR[15-11]] = ALUOut;</code> </li>
+</ul>
+</li>
+<li>
+<p>WB：write-back步骤</p>
+</li>
+<li>
+<p>对于lw指令，<code>Reg[rt]=Reg[IR[20-16]]= MDR;</code></p>
+</li>
+<li>
+<p>总结：</p>
+</li>
+</ul>
+<p><img alt="image-20200822231538639" src="../static/image-20200822231538639.jpg" /></p>
+<div class="highlight"><pre><span></span><code>- 所以R型指令4割周期，J型指令和分支指令都是3个周期，内存读写都是5个周期
+</code></pre></div>
+<h3 id="353-控制信号和有限状态机">3.5.3 控制信号和有限状态机<a class="headerlink" href="#353-控制信号和有限状态机" title="Permanent link">&para;</a></h3>
+<ul>
+<li>重要的控制信号和其作用</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>信号</th>
+<th>设置为0时的作用</th>
+<th>设置为1时的作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RegDst</td>
+<td>设置目标寄存器为rt(20:16)</td>
+<td>WB阶段设置目标寄存器为rd(15:11)</td>
+</tr>
+<tr>
+<td>RegWrite</td>
+<td>None</td>
+<td>目标寄存器的输入时Write data input的值</td>
+</tr>
+<tr>
+<td>ALUScrA</td>
+<td>第一个ALU的操作数是PC</td>
+<td>ALU的操作数来自A寄存器</td>
+</tr>
+<tr>
+<td>MemRead</td>
+<td>None</td>
+<td>内存中输入地址指定的内容作为输出</td>
+</tr>
+<tr>
+<td>MemWrite</td>
+<td>None</td>
+<td>内存中输入地址指定的位置的值变为输入的值</td>
+</tr>
+<tr>
+<td>MemtoReg</td>
+<td>写入寄存器中的输入数据来自ALUout</td>
+<td>写入寄存器的数据来自MDA</td>
+</tr>
+<tr>
+<td>IorD</td>
+<td>PC向内存单元提供地址</td>
+<td>ALUOut提供地址</td>
+</tr>
+<tr>
+<td>IRWrite</td>
+<td>None</td>
+<td>内存的输出被写入IR</td>
+</tr>
+<tr>
+<td>PCWrite</td>
+<td>None</td>
+<td>PC被改变，被PCSource控制</td>
+</tr>
+<tr>
+<td>PCWriteCond</td>
+<td>None</td>
+<td>如果ALU的零输出active，PC被改变</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>信号</th>
+<th>值和对应的作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ALUOp</td>
+<td>00：加法运算，01减法运算，10按照funct来决定ALU操作</td>
+</tr>
+<tr>
+<td>ALUScrB</td>
+<td>00：第二个输入ALU的是寄存器B<br /> 01：第二个输入是常数4<br /> 10：第二个输入是符号扩展的，IR的低16位<br /> 11：第二个输入是符号扩展的，IR的低16位移位了2位的结果</td>
+</tr>
+<tr>
+<td>PCSource</td>
+<td>00：ALU的输出(PC+4)被写回PC<br /> 01：分支目标地址被写回PC<br /> 10：J指令被写回PC</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>
+<p>有限状态机(Finte State Machine)</p>
+</li>
+<li>
+<p>表示各个阶段控制信号需要设置的值</p>
+</li>
+<li>第三张需要刻在DNA里的图</li>
+<li>第一个阶段都一样</li>
+</ul>
+<p><img alt="fsm0" src="../static/fsm0-0000.jpg" /></p>
+<h2 id="36-微指令">3.6 微指令<a class="headerlink" href="#36-微指令" title="Permanent link">&para;</a></h2>
+<ul>
+<li>把FSM所有的控制信号预先存储在存储器中，每次只要从存储器中读到控制寄存器中，由控制存储器作为控制信号，接到相应的组件中</li>
+</ul>
+<p><img alt="ctrlreg" src="../static/ctrlreg-0000.jpg" /></p>
+<ul>
+<li>
+<p>存储控制信号的存储器叫做控制存储器control memory</p>
+</li>
+<li>
+<p>核心是空间换时间，用一个存储器存储各类信号来缩短工作时间</p>
+</li>
+<li>
+<p>有寄存控制器的多周期CPU数据通道</p>
+<p><img alt="mulo" src="../static/mulo-0000.jpg" /></p>
+</li>
+<li>
+<p>微程序控制器：</p>
+<ul>
+<li>控制寄存器：每一位接相应的控制信号</li>
+<li>控制存储器：存放所有的控制信号</li>
+<li>地址转移逻辑：决定下一条微指令的地址</li>
+</ul>
+</li>
+<li>
+<p>微程序控制逻辑</p>
+<p><img alt="microCtrl" src="../static/microCtrl-0000.jpg" /></p>
+<p><img alt="image-20200812144217138" src="../static/image-20200812144217138.jpg" /></p>
+</li>
+<li>
+<p>微指令编程</p>
+</li>
+<li>
+<p>为了便于微程序的编写，把控制信号分成了若干组：存储器，寄存器组，ALU，PC等七个字段</p>
+<p><img alt="micro2" src="../static/micro2-0000.jpg" /></p>
+</li>
+<li>
+<p>为了实现微程序的选择转移，增加标号和下一步指令两个字段</p>
+</li>
+</ul>
+<h2 id="37-流水线pipline和冒险hazard">3.7 流水线(pipline)和冒险(hazard)<a class="headerlink" href="#37-流水线pipline和冒险hazard" title="Permanent link">&para;</a></h2>
+<ul>
+<li>这一部分虽然上课没讲过但是历年卷里出现了选择题</li>
+</ul>
+<h3 id="371-流水线的基本原理">3.7.1 流水线的基本原理<a class="headerlink" href="#371-流水线的基本原理" title="Permanent link">&para;</a></h3>
+<ul>
+<li>CPU的流水线技术本质上利用了时间的并行性，将原本需要串行的处理一定程度上并行化了，使得CPU的效率提高，原理如下图</li>
+</ul>
+<p><img alt="piplin1" src="../static/piplin1-0000.jpg" /></p>
+<ul>
+<li>转换成指令的运行的原理如下</li>
+</ul>
+<p><img alt="piplin2" src="../static/piplin2-0000.jpg" /></p>
+<h3 id="372-冒险-hazard">3.7.2 冒险 hazard<a class="headerlink" href="#372-冒险-hazard" title="Permanent link">&para;</a></h3>
+<ul>
+<li>在流水线中我们希望当前每个时钟周期都有一条指令进入流水线可以执行，但是某些情况下下一条指令无法按照预期的开始执行，这种情况就是冒险hazard</li>
+<li>冒险有三种：</li>
+<li>结构冒险：如果一条指令需要的**硬件**还在为之前的指令工作，而无法为这条指令提供服务</li>
+<li>数据冒险：如果一条指令需要的数据正在被之前的指令操作，那么这条指令就无法执行<ul>
+<li>解决方法：Forward data if possible</li>
+</ul>
+</li>
+<li>控制冒险：如果需要执行的指令是由之前的运行结果决定的，而运行的结果还没有产生，就是控制冒险<ul>
+<li>解决方法：stall the pipeline，Predict branch outcome， Delayed branch</li>
+</ul>
+</li>
+<li>总结：硬件——结构冒险，数据——数据冒险，控制指令——控制冒险</li>
+</ul>
+<p><span id="busuanzi_container_page_pv">本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span></p>
+
+  <hr>
+<div class="md-source-file">
+  <small>
+    
+      最后更新:
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年1月25日 17:15:47</span>
+      
+        <br>
+        创建日期:
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年1月25日 17:15:47</span>
+      
+    
+  </small>
+</div>
+
+
+
+
+<div id="__comments">
+    
+    <script src="https://giscus.app/client.js"
+        data-repo="Zhang-Each/My-CS-Notebook"
+        data-repo-id="R_kgDOI0dr4w"
+        data-category="General"
+        data-category-id="DIC_kwDOI0dr484CTvIK"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="1"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="zh-CN"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+        </script>
+    <h3>颜色主题调整</h3>
+    <div class="tx-switch">
+    <button class="button1" data-md-color-primary="red" style="background-color:red">red</button>
+    <button class="button1" data-md-color-primary="pink" style="background-color:pink;color:black">pink</button>
+    <button class="button1" data-md-color-primary="purple" style="background-color:purple">purple</button>
+    <button class="button1" data-md-color-primary="indigo" style="background-color:indigo">indigo</button>
+    <button class="button1" data-md-color-primary="blue" style="background-color:blue">blue</button>
+    <button class="button1" data-md-color-primary="cyan" style="background-color:cyan;color:black">cyan</button>
+    <button class="button1" data-md-color-primary="teal" style="background-color:teal">teal</button>
+    <button class="button1" data-md-color-primary="green" style="background-color:green">green</button>
+    <button class="button1" data-md-color-primary="lime" style="background-color:lime;color:black">lime</button>
+    <button class="button1" data-md-color-primary="orange" style="background-color:orange;color:black">orange</button>
+    <button class="button1" data-md-color-primary="brown" style="background-color:brown;border-radius=3px">brown</button>
+    <button class="button1" data-md-color-primary="grey" style="background-color:grey">grey</button>
+    <button class="button1" data-md-color-primary="black" style="background-color:black">black</button>
+    <button class="button1" data-md-color-primary="white" style="background-color:white;color:black">white</button>
+    </div>
+    
+    <script>
+    var buttons = document.querySelectorAll("button[data-md-color-primary]")
+    buttons.forEach(function(button) {
+            button.addEventListener("click", function() {
+            var attr = this.getAttribute("data-md-color-primary")
+            document.body.setAttribute("data-md-color-primary", attr)
+            localStorage.setItem("data-md-color-primary",attr);
+            })
+    })
+    </script>
+    
+    <h2 ><!-- 评论 -->评论区~</h2>
+    
+    有用的话请给我个star或者follow我的账号!! 非常感谢!!
+    
+    </br>
+    
+    快来跟我聊天~
+    
+    </div>
+    
+    <script src="https://giscus.app/client.js"
+        data-repo="Zhang-Each/Notebook-Comments"
+        data-repo-id="R_kgDOI0dlNg"
+        data-category="General"
+        data-category-id="DIC_kwDOI0dlNs4CTvH-"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="1"
+        data-input-position="top"
+        data-theme="preferred_color_scheme"
+        data-lang="zh-CN"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+    </script>
+    
+    <!-- Synchronize Giscus theme with palette -->
+    <script>
+    var giscus = document.querySelector("script[src*=giscus]")
+    
+    /* Set palette on initial load */
+    // var palette = __md_get("__palette")
+    // if (palette && typeof palette.color === "object") {
+    //     var theme = palette.color.scheme === "slate" ? "dark" : "light"
+    //     giscus.setAttribute("data-theme", theme) 
+    // }
+    
+    /* Register event handlers after documented loaded */
+    // document.addEventListener("DOMContentLoaded", function() {
+    //     var ref = document.querySelector("[data-md-component=palette]")
+    //     ref.addEventListener("change", function() {
+    //     var palette = __md_get("__palette")
+    //     if (palette && typeof palette.color === "object") {
+    //         var theme = palette.color.scheme === "slate" ? "dark" : "light"
+    
+    //         /* Instruct Giscus to change theme */
+    //         var frame = document.querySelector(".giscus-frame")
+    //         frame.contentWindow.postMessage(
+    //         { giscus: { setConfig: { theme } } },
+    //         "https://giscus.app"
+    //         )
+    //     }
+    //     })
+    // })
+    </script>
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            回到页面顶部
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      本页面的全部内容在 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh">CC BY-SA 4.0</a> 和 <a href="https://github.com/zTrix/sata-license">SATA</a> 协议之条款下提供，附加条款亦可能应用。<br /><span id="busuanzi_container_site_uv">本站访客总人数<span id="busuanzi_value_site_uv"></span>人次，</span><span id="busuanzi_container_site_pv">本站总访问次数<span id="busuanzi_value_site_pv"></span>次。</span>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "content.code.annotate", "navigation.tracking", "navigation.indexes", "navigation.top", "toc.follow"], "search": "../../assets/javascripts/workers/search.e5c33ebb.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.51d95adb.min.js"></script>
+      
+        <script src="../../from_oi_wiki/js/extra.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js"></script>
+      
+        <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+      
+    
+  </body>
+</html>
