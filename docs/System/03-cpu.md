@@ -36,7 +36,7 @@
 
     ![gatenot](./static/gatenot-0000.jpg)
 
-  - 异或门电路：$(A/and /neg B)/or(/neg A/and B)$ 由两个与门和一个或门组合而成
+  - 异或门电路：$(A\and \neg B)/or(\neg A\and B)$ 由两个与门和一个或门组合而成
 
     ![gatexor](./static/gatexor-0000.jpg)
 

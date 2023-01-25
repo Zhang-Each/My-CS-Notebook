@@ -193,7 +193,7 @@
       > - Tag需要的bits数量=address - index -block size = 32 - 10 -4 = 18bits
       >   - 其中4word需要16bits，因此block size是4
       > - 有效位是1bit，一共需要19bits
-      > - 所以cache的总的size就是 $2^{10}/times(128+18+1)=147000$ bits = 18.4 KB
+      > - 所以cache的总的size就是 $2^{10}\times(128+18+1)=147000$ bits = 18.4 KB
 
       > 例题2：一个64块的cache，块的大小是16bytes，则字节地址为1200应该直接映射到哪里？
       >
@@ -206,7 +206,7 @@
       > - 条件是32位的字节地址，直接映射的cache，有$2^n$个block，一个block的大小是$2^m$ word，因此需要n位作为index，m位用于查找块中的字，2位是字节的偏移信息
       > - 则TAG的大小是32-(n+m+2)
       > - cache需要的总位数是block数量*(block的大小+有效位的大小+TAG大小)也就是
-      >   - $2^{n}(2^{m+2}/times 8+(32-m-n-2) +1)$ 
+      >   - $2^{n}(2^{m+2}\times 8+(32-m-n-2) +1)$ 
       > - 关于block size的计算：假设block是$2^m$个word的大小
       >   - 常识：word是计算机中存取的基本单位
       >   - 为了定位是哪一个word，需要m位
@@ -289,7 +289,7 @@
       - T=Ti+Td/*p=(Tc+(1-Hi)Tm)+(Tc+(1-Hd)Tm)*p
   - CPU时间的计算
     - CPU时间 = (CPU执行的周期数 + Memory-stall 时钟周期) * 一个时钟周期的时间
-      - $CPU_{time}=I/times CPI/times Clock$ 
+      - $CPU_{time}=I\times CPI/times Clock$ 
     - Memory-stall 时钟周期 = 指令的数量 * 失配率 * 失配的penalty = read-stall cycles + write-stall cycles
       - 而read-stall cycles = program中read的次数 * 失配率 /* 失配的penalty
       - write-stall cycles = program中write的次数 * 失配率 * 失配的penalty + write buffer stalls
