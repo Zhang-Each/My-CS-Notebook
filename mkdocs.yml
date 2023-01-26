@@ -50,6 +50,53 @@ nav:
       - Assignment1&2: CS224N/Stanford-CS224N-Assignment1&2.md
       - Assignment3: CS224N/Stanford-CS224N-Assignment3.md
       - Assignment4: CS224N/Stanford-CS224N-Assignment4.md
+  - 🐍 论文阅读:
+    - Papers/index.md
+    - Papers/论文阅读笔记01：知识图谱嵌入综述.md
+    - Papers/论文阅读笔记02：关系抽取文献综述.md
+    - Papers/论文阅读笔记03：Transformer.md
+    - Papers/论文阅读笔记04：Node2Vec.md
+    - Papers/论文阅读笔记05：TransE.md
+    - Papers/论文阅读笔记06：TransH.md
+    - Papers/论文阅读笔记07：GraphVQA.md
+    - Papers/论文阅读笔记08：RotatE.md
+    - Papers/论文阅读笔记09：GAN4KGE&KBGAN.md
+    - Papers/论文阅读笔记10：AffinityDependentNS.md
+    - Papers/论文阅读笔记11：StructureAwareNS.md
+    - Papers/论文阅读笔记12：PNS.md
+    - Papers/论文阅读笔记13：NSCaching.md
+    - Papers/论文阅读笔记14：知识图谱路径推理.md
+    - Papers/论文阅读笔记15：GraphTransformer.md
+    - Papers/论文阅读笔记16：BERT.md
+    - Papers/论文阅读笔记17：Rule-Based-KGE.md
+    - Papers/论文阅读笔记18：神经符号推理和知识图谱.md
+    - Papers/论文阅读笔记19：电商知识图谱预训练.md
+    - Papers/论文阅读笔记20：PathCon.md
+    - Papers/论文阅读笔记21：FSL4TKG.md
+    - Papers/论文阅读笔记22：KG-BERT&K-BERT.md
+    - Papers/论文阅读笔记23：Graphformer.md
+    - Papers/论文阅读笔记24：多模态知识图谱表示学习.md
+    - Papers/论文阅读笔记25：SMORE大规模知识图谱系统.md
+    - Papers/论文阅读笔记26：K3M多模态商品知识图谱预训练.md
+    - Papers/论文阅读笔记27：图对比学习.md
+    - Papers/论文阅读笔记28：多模态BERT.md
+    - Papers/论文阅读笔记29：异构GCN.md
+    - Papers/论文阅读笔记30：异构分布式机器学习Partial Reduce.md
+    - Papers/论文阅读笔记31：大规模知识图谱对齐LargeEA.md
+    - Papers/论文阅读笔记32：Prompt.md
+    - Papers/论文阅读笔记33：结合BERT的知识图谱补全.md
+  - 🐎 编程语言:
+    - PL/index.md
+    - C++:
+      - OOP课程笔记: PL/CPP/OOP-Review.md
+    - Java:
+      - PL/Java/Java应用技术1：基础语法.md
+      - PL/Java/Java应用技术2：类和对象.md
+      - PL/Java/Java应用技术3：高级语法特性.md
+      - PL/Java/深入理解JVM-1.md
+    - Go:
+      - PL/Go/Go-01. Go语言的基础语法.md
+      - PL/Go/Go-02. Go语言的依赖管理与进阶语法.md
   - 🐑 计算机系统:
     - System/index.md
     - System/00-intro.md
@@ -157,7 +204,7 @@ markdown_extensions:
   - pymdownx.tasklist:
       custom_checkbox: true
   - pymdownx.tilde
-copyright: '本页面的全部内容在 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh">CC BY-SA 4.0</a> 和 <a href="https://github.com/zTrix/sata-license">SATA</a> 协议之条款下提供，附加条款亦可能应用。<br /><span id="busuanzi_container_site_uv">本站访客总人数<span id="busuanzi_value_site_uv"></span>人次，</span><span id="busuanzi_container_site_pv">本站总访问次数<span id="busuanzi_value_site_pv"></span>次。</span>'
+copyright: '本页面的全部内容在 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh">CC BY-SA 4.0</a> 和 <a href="https://github.com/zTrix/sata-license">SATA</a> 协议之条款下提供，附加条款亦可能应用。'
 
 extra_css:
   - 'from_oi_wiki/css/extra.css?v=13'
