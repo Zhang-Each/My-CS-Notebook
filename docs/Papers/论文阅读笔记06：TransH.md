@@ -79,3 +79,5 @@ $$
 - 每个head实体平均拥有的tail数量，计为tph
 
 然后用参数$p=\frac{tph}{hpt+tph}$定义一个伯努利分布，每次负采样用p的概率对head进行替换，以1-p的概率对tail进行替换。
+<span id=busuanzi_container_page_pv>本文总阅读量<span id=busuanzi_value_page_pv></span>次</span>
+

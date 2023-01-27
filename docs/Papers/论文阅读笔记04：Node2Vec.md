@@ -141,3 +141,6 @@ $$
 
 ​		本论文中提出了一种新的偏见游走策略并在此基础上产生了一种新的图特征学习算法，有了特征表示我们才能在具体的图机器学习任务中有所作为，而node2vec所提出的这种偏见游走策略，实际上体现的依然是机器学习中的一种trade-off的思想，即将BFS和DFS两种采样策略进行了一定的妥协，最终得到了效果更好的采样策略。
 
+
+<span id=busuanzi_container_page_pv>本文总阅读量<span id=busuanzi_value_page_pv></span>次</span>
+

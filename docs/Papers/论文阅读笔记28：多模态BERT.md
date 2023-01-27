@@ -133,3 +133,5 @@ VisualBERT这篇文章看起来还是比较粗糙的，很多设计上都基本�
 | 数据集     | 在MSCOCO数据集上进行预训练                           | 在Conceptual Captions上进行预训练                            | 在Conceptual Captions上进行预训练 |
 
 总的来说这些多模态BERT虽然看起来很nb，但好像仍然处于多模态表示学习的初级阶段。我之前一直想用多模态BERT做一些下游任务，但是现在看来理想和现实还有有比较大的GAP，也不知道事情究竟能不能成。多模态BERT在`transformers`这个库里有的也不多，只看到了一个VisualBERT
+<span id=busuanzi_container_page_pv>本文总阅读量<span id=busuanzi_value_page_pv></span>次</span>
+

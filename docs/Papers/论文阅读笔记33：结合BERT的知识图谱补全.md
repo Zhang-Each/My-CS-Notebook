@@ -77,3 +77,6 @@ $$
 
 不过这篇论文对模型本身没什么新的贡献，用的还是以TransE为代表的老一套东西，只不过实体的表示改为由BERT初始化再投影，训练的对象也从每个实体各自的Embedding转变为投影矩阵。
 
+
+<span id=busuanzi_container_page_pv>本文总阅读量<span id=busuanzi_value_page_pv></span>次</span>
+

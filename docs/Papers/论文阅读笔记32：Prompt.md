@@ -208,3 +208,6 @@ Prompt模型的参数主要来自于Prompt函数和PLM，而在Prompt模型训�
 | Fix-prompt LM Tuning   | Prompt的参数不变，调整PLM的参数 | 提示工程和答案工程的效果会更好，并且可以更有效的学习 | 依然需要提示工程和答案工程，同时泛化能力可能不好，在一个下游任务上微调的参数不一定适合另一个任务 |
 | Prompt+LM Fine-tuning  | 所有参数都一起调整              | 适合大规模的数据集                                   | 在小数据集上容易过拟合，并且训练代价比较高                   |
 
+
+<span id=busuanzi_container_page_pv>本文总阅读量<span id=busuanzi_value_page_pv></span>次</span>
+

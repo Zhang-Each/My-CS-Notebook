@@ -88,3 +88,6 @@ $$
 本论文就是在矩阵分解方法的基础之上，尝试加入逻辑规则在提升矩阵分解的效果。
 
 ### 规则的注入
+
+<span id=busuanzi_container_page_pv>本文总阅读量<span id=busuanzi_value_page_pv></span>次</span>
+

@@ -2,6 +2,8 @@ nav:
   - 🏡 主页: # 主页/
     - index.md
     - 关于我: about.md
+  # - 🐭 数学基础:
+  # - 🐂 概率图模型与因果推断:
   - 🐯 统计机器学习:
     - ML/index.md
     - 01：机器学习中的基本概念: ML/统计机器学习01：机器学习中的基本概念.md 
@@ -50,6 +52,10 @@ nav:
       - Assignment1&2: CS224N/Stanford-CS224N-Assignment1&2.md
       - Assignment3: CS224N/Stanford-CS224N-Assignment3.md
       - Assignment4: CS224N/Stanford-CS224N-Assignment4.md
+  - 🐲 数据结构与算法:
+    - DS/index.md
+    - 数据结构基础: DS/ds.md
+    - 高级数据结构与算法分析: DS/ads.md
   - 🐍 论文阅读:
     - Papers/index.md
     - Papers/论文阅读笔记01：知识图谱嵌入综述.md
