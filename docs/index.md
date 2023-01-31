@@ -8,6 +8,7 @@ statistics: true
     - 平时会更新一些学习CS各方向内容的笔记，欢迎关注我的[GitHub账号](https://github.com/Zhang-Each)和[个人博客](https://zhang-each.github.io/)!
 
 ???+ tip "更新日志"
+    - 2023/01/31 迁移了部分之前的学习笔记，包括Stanford的CS246数据挖掘课程，CMU的15-445数据库系统课程和MIT的6.830数据库系统课程。
     - 2023/01/27 完成了[数据结构和高级数据结构](https://zhang-each.github.io/My-CS-Notebook/DS/)的笔记迁移
     - 2023/01/26 完成了[编程语言学习笔记](https://zhang-each.github.io/My-CS-Notebook/PL/)和[论文阅读笔记](https://zhang-each.github.io/My-CS-Notebook/Papers/)的迁移
     - 2023/01/25 完成了[操作系统](https://zhang-each.github.io/My-CS-Notebook/OS/)、[计算机网络](https://zhang-each.github.io/My-CS-Notebook/Networking/)、[数据库系统](https://zhang-each.github.io/My-CS-Notebook/DB/)、[计算机系统原理](https://zhang-each.github.io/My-CS-Notebook/System/)笔记的迁移

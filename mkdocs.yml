@@ -4,21 +4,29 @@ nav:
     - 关于我: about.md
   # - 🐭 数学基础:
   # - 🐂 概率图模型与因果推断:
-  - 🐯 统计机器学习:
+  - 🐯 机器学习与数据挖掘:
     - ML/index.md
-    - 01：机器学习中的基本概念: ML/统计机器学习01：机器学习中的基本概念.md 
-    - 02：贝叶斯定理: ML/统计机器学习02：贝叶斯定理.md
-    - 03：线性模型: ML/统计机器学习03：线性模型.md
-    - 04：感知机: ML/统计机器学习04：感知机.md
-    - 05：支持向量机SVM: ML/统计机器学习05：支持向量机SVM.md
-    - 06：kNN: ML/统计机器学习06：kNN.md
-    - 07：决策树DecisionTree: ML/统计机器学习07：决策树DecisionTree.md
-    - 08：聚类Clustering: ML/统计机器学习08：聚类Clustering.md
-    - 09：提升Boosting与Ensemble: ML/统计机器学习09：提升Boosting与Ensemble.md
-    - 10：EM算法和GMM: ML/统计机器学习10：EM算法和GMM.md
-    - 11：主成分分析PCA: ML/统计机器学习11：主成分分析PCA.md
-    - 12：线性判别分析LDA: ML/统计机器学习12：线性判别分析LDA.md
-    - 13：隐马尔可夫模型: ML/统计机器学习13：隐马尔可夫模型.md
+    - 统计机器学习:
+      - 01：机器学习中的基本概念: ML/统计机器学习01：机器学习中的基本概念.md 
+      - 02：贝叶斯定理: ML/统计机器学习02：贝叶斯定理.md
+      - 03：线性模型: ML/统计机器学习03：线性模型.md
+      - 04：感知机: ML/统计机器学习04：感知机.md
+      - 05：支持向量机SVM: ML/统计机器学习05：支持向量机SVM.md
+      - 06：kNN: ML/统计机器学习06：kNN.md
+      - 07：决策树DecisionTree: ML/统计机器学习07：决策树DecisionTree.md
+      - 08：聚类Clustering: ML/统计机器学习08：聚类Clustering.md
+      - 09：提升Boosting与Ensemble: ML/统计机器学习09：提升Boosting与Ensemble.md
+      - 10：EM算法和GMM: ML/统计机器学习10：EM算法和GMM.md
+      - 11：主成分分析PCA: ML/统计机器学习11：主成分分析PCA.md
+      - 12：线性判别分析LDA: ML/统计机器学习12：线性判别分析LDA.md
+      - 13：隐马尔可夫模型: ML/统计机器学习13：隐马尔可夫模型.md
+    - CS246-数据挖掘课程笔记:
+      - ML/CS246/Lecture001.频繁模式和关联规则挖掘.md
+      - ML/CS246/Lecture002.局部敏感性哈希.md
+      - ML/CS246/Lecture003.聚类和降维.md
+      - ML/CS246/Lecture004.推荐系统RecSys.md
+      - ML/CS246/Lecture005.数据流挖掘.md
+      - ML/CS246/Lecture006.计算广告学.md
   - 🐰 深度学习:
     - CS231N/index.md
     - CS231N-神经网络与深度学习:
@@ -132,7 +140,19 @@ nav:
     - 计算机网络7-网络安全: Networking/计算机网络7-网络安全.md
   - 🐶 数据库系统:
     - DB/index.md
-    - 数据库系统复习笔记: DB/db.md
+    - ZJU数据库系统课程复习笔记: DB/db.md
+    - CMU15-445 Database Systems:
+      - DB/CMU15-445/index.md
+      - DB/CMU15-445/CMU15-445-01-数据存储.md
+      - DB/CMU15-445/CMU15-445-02-索引.md
+      - DB/CMU15-445/CMU15-445-03-查询处理.md
+      - DB/CMU15-445/CMU15-445-04-查询优化.md
+      - DB/CMU15-445/CMU15-445-05-事务与并发控制.md
+    - MIT6.830 Database Systems Project:
+      - DB/MIT6.830/MIT6.830-lab1-SimpleDB Overview.md
+      - DB/MIT6.830/MIT6.830-lab2-SimpleDB Operators.md
+      - DB/MIT6.830/MIT6.830-lab3-Query Optimizer.md
+      - DB/MIT6.830/MIT6.830-lab4-Transaction.md
   - 🐷 杂谈与总结:
     - 杂谈与总结/index.md
     - I. 2021年度总结: 杂谈与总结/2021年度总结.md
