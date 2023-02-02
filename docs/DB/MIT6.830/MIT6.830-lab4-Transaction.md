@@ -134,3 +134,8 @@ public void transactionComplete(TransactionId tid, boolean commit) {
 ```
 
 事实上这个方法的实现逻辑很简单，如果一个事务commit了，那么就要保存对应的内容，将修改过的页写回磁盘中持久化保存，否则为了避免页被修改，就要重新读取这些页，之后我们需要将这些页的锁都进行释放。
+
+
+<span id=busuanzi_container_page_pv>本文总阅读量<span id=busuanzi_value_page_pv></span>次</span>
+
+

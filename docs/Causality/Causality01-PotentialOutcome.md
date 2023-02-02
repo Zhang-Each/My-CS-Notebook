@@ -19,13 +19,16 @@
 > 所有的treatment都是针对特定unit进行的，对于一个unit-treatment对，最终的结果就被称为potential outcome
 
 下面这幅图用医学实验来简单说明了什么是potential outcome：
-![[resources/Pasted image 20230129120834.png]]
 
-![[resources/Pasted image 20230129120909.png]]
+![](resources/Pasted%20image%2020230129120909.png)
+
+![](resources/Pasted%20image%2020230129120909.png)
 
 ### 1.1 Basis
-我们可以用$T$来表示treatment，然后用$Y(t)$来表示对应的结果，用i来表示一个unit，同样以上面的医学实验作为例子，第i个unit(即病人)在施加了吃药($T=1$)和不吃药($T=0$)两种treatment的情况下，对应的结果分别是$Y_i(1), Y_i(0)$ (1代表健康，0代表继续生病)，如下图所示：
-![[resources/Pasted image 20230129152415.png]]
+我们可以用$T$来表示treatment，然后用$Y(t)$来表示对应的结果，用i来表示一个unit，同样以上面的医学实验作为例子，第i个unit(即病人)在施加了吃药($T=1$)和不吃药($T=0$)两种treatment的情况下，对应的结果分别是$Y_i(1), Y_i(0)$ (1代表健康，0代表继续生病)，如下图所示：\
+
+![](resources/Pasted%20image%2020230129152415.png)
+
 
 这样一来，在吃药的treatment下，一个病人的表现和不吃药的差别就是$Y_i(1)- Y_i(0)=1$，这个结果就代表了吃药这个treatment对当前病人i的因果效应。我们称之为individual treatment effect (ITE)，记为$\tau$，它的计算方式是：
 
@@ -45,5 +48,16 @@ $$
 \tau \triangleq\mathbb{E}[Y_i(1)-Y_i(0)]=\mathbb{E}[Y_i(1)]-\mathbb{E}[Y_i(0)]
 $$
 
-那么现在我们的问题就变成了如何计算$\mathbb{E}[Y_i(1)]-\mathbb{E}[Y_i(0)]$，一个很容易产生的想法是，$\mathbb{E}[Y_i(1)]-\mathbb{E}[Y_i(0)]=\mathbb{E}[Y|T=1]-\mathbb{E}[Y|T=0]$，这样一来，我们只需要对每个treatment，将它们对应的结果求一下期望再相减即可。
-但事实上，这种想法是错误的，因为
+那么现在我们的问题就变成了如何计算$\mathbb{E}[Y_i(1)]-\mathbb{E}[Y_i(0)]$，一个很容易产生的想法是，$\mathbb{E}[Y_i(1)]-\mathbb{E}[Y_i(0)]=\mathbb{E}[Y|T=1]-\mathbb{E}[Y|T=0]$，这样一来，我们只需要对每个treatment，将它们对应的结果求一下期望再相减即可。以下面这张图的数据为例，计算得到的结果应该是1/3:
+![](resources/Pasted%20image%2020230131231505.png)
+但事实上，这种想法是错误的，因为这实际上弄混了因果性和关联性的区别，$\mathbb{E}[Y_i(1)]-\mathbb{E}[Y_i(0)]$是一个因果量，而$\mathbb{E}[Y|T=1]-\mathbb{E}[Y|T=0]$是一个关联量，他们二者是不等价的，这是因为表中的数据太少了，并且不是随机对照试验，而且这些真实数据中存在着混淆变量，会同时影响T和Y，如下图所示(下图的具体含义需要等后面章节因果图的时候在详细展开)，但总的来说，上面的表达式是不成立的。
+
+![](resources/Pasted%20image%2020230131231921.png)
+
+那么我们应该怎么计算$\mathbb{E}[Y_i(1)]-\mathbb{E}[Y_i(0)]$呢？这实际上也是潜在结果框架要研究的主要问题，我们必须突破Causal Inference中这一基础问题，才能把因果表达式转化成统计表达式，这种能力被称为Identifiability(可识别性)
+
+> Identifiability的定义是：A causal quantity (e.g. $\mathbb{E}[Y(t)]$) is identifi- able if we can compute it from a purely statistical quantity (e.g. $\mathbb{E}[Y|t]$).
+
+下一节内容我们将具体介绍潜在结果框架是如何基于一定的假设来计算因果量的。
+
+

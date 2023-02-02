@@ -128,3 +128,8 @@ SimpleDB中的数据有两种组织方式，一种是堆文件Heap File，即无
 
 lab1的最后，我们要实现一个顺序扫描的运算符，实际上就是要实现一个能够实现顺序扫描的迭代器，我们上面实现的Heap File迭代器就可以直接调用，在SeqScan这个类中再封装一层就行，其他的没什么东西，无非就是多加了一些其他的属性以及get方法。
 
+
+
+<span id=busuanzi_container_page_pv>本文总阅读量<span id=busuanzi_value_page_pv></span>次</span>
+
+

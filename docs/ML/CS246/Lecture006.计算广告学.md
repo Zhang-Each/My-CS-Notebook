@@ -66,3 +66,8 @@ $$
 
 - 仔细看了看感觉BALANCE算法也是一个传统算法，没什么令人惊奇之处，就不仔细分析了，给出一个结论那就是BALANCE算法的近似率是$1-\frac 1e$
 
+
+
+<span id=busuanzi_container_page_pv>本文总阅读量<span id=busuanzi_value_page_pv></span>次</span>
+
+

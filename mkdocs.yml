@@ -3,7 +3,15 @@ nav:
     - index.md
     - 关于我: about.md
   # - 🐭 数学基础:
-  # - 🐂 概率图模型与因果推断:
+  - 🐂 概率图模型与因果推断:
+    - 概率图模型:
+      - PGM/index.md
+      - 01. Introduction: PGM/CMU10-708PGM01：Introduction.md
+      - 02. Directed Graph Model: PGM/CMU10-708PGM02：GM.md
+      - 03. Exact Inference: PGM/CMU10-708PGM03：Exact Inference.md
+    - 因果推断:
+      - Causality01-因果推断与潜在结果框架: Causality/Causality01-PotentialOutcome.md
+      - Causality02-潜在结果框架的基本假设: Causality/Causality02-Assumptions.md
   - 🐯 机器学习与数据挖掘:
     - ML/index.md
     - 统计机器学习:
