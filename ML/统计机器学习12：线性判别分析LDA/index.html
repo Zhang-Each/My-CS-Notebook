@@ -3855,6 +3855,17 @@
 
 
 <h1 id="统计机器学习12线性判别分析lda">统计机器学习12：线性判别分析LDA<a class="headerlink" href="#统计机器学习12线性判别分析lda" title="Permanent link">&para;</a></h1>
+<details class="info" open="open">
+<summary>统计信息</summary>
+<ul>
+<li>
+<p>本文约 2249 个字,  预计阅读时间 7 分钟。</p>
+</li>
+<li>
+<p><span id="busuanzi_container_page_pv">本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span></p>
+</li>
+</ul>
+</details>
 <p>线性判别分析(Linear Disciminant Analysis)是一种经典的降维方法，并且是一种线性的学习方法，LDA的基本想法就是，对于给定的训练集，我们可以设法将这些样本投影到一条直线上，并且使得同类样本点的投影尽可能接近而不同类的样本点的投影尽可能远离，这样一来我们实际上就需要训练出一条直线来进行特征空间中的分类，而对于测试集中的数据，可以将其同样投影到这条直线上面去，再根据投影点位置来确定该样本属于哪一类别。</p>
 <h2 id="lda问题的定义">LDA问题的定义<a class="headerlink" href="#lda问题的定义" title="Permanent link">&para;</a></h2>
 <p>我们先来研究二分类问题的LDA，可以假设问题定义在数据机D上，用<span class="arithmatex">\(X_i,\mu_i,\Sigma_i\)</span>分别表示某一类别的数据集合，均值和协方差矩阵，如果能够将数据投影到特征空间中的一条直线<span class="arithmatex">\(\omega\)</span>上，那么两类样本的中心在直线上的投影分别是<span class="arithmatex">\(\omega ^T \mu_0\)</span>和<span class="arithmatex">\(\omega ^T \mu_1\)</span>，如果将两类样本的所有点都投影到这条直线上面，那么两类样本的协方差是<span class="arithmatex">\(\omega ^T\Sigma_i\omega\)</span></p>

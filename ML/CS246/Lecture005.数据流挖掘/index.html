@@ -3815,6 +3815,17 @@
 
 
 <h1 id="数据流挖掘">数据流挖掘<a class="headerlink" href="#数据流挖掘" title="Permanent link">&para;</a></h1>
+<details class="info" open="open">
+<summary>统计信息</summary>
+<ul>
+<li>
+<p>本文约 1093 个字,  预计阅读时间 4 分钟。</p>
+</li>
+<li>
+<p><span id="busuanzi_container_page_pv">本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span></p>
+</li>
+</ul>
+</details>
 <h2 id="数据流">数据流<a class="headerlink" href="#数据流" title="Permanent link">&para;</a></h2>
 <p>在很多数据挖掘的场景下，我们并不会预先知道所有的数据集，而是一段段接收到需要处理的数据，这种形式的数据又叫做数据流，而数据流的管理也是数据挖掘中一个很重要的话题，比如谷歌搜索引擎和推特的热榜，都需要面对数据流的场景，这种场景下我们可以认为数据是无限多并且非固定的，也就是说数据的分布情况可能会随着时间的变化而变化。</p>
 <p>很显然一个数据处理系统不可能保存所有的流数据，并且流数据输入的速度也是不一定的，因此如何对流数据进行建模就变的非常重要。我们常说的SGD其实就是一个非常经典的流算法，因为SGD对于每个输入的样本都进行微小的梯度更新，这种方式在机器学习中也被称为**在线学习**，数据流挖掘需要解决的问题主要有：</p>

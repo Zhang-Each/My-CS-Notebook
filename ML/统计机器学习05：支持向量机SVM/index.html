@@ -3801,6 +3801,17 @@
 
 
 <h1 id="统计机器学习05支持向量机svm和kernel方法">统计机器学习05：支持向量机SVM和Kernel方法<a class="headerlink" href="#统计机器学习05支持向量机svm和kernel方法" title="Permanent link">&para;</a></h1>
+<details class="info" open="open">
+<summary>统计信息</summary>
+<ul>
+<li>
+<p>本文约 94 个字,  预计阅读时间不到 1 分钟。</p>
+</li>
+<li>
+<p><span id="busuanzi_container_page_pv">本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span></p>
+</li>
+</ul>
+</details>
 <h2 id="支持向量的引入">支持向量的引入<a class="headerlink" href="#支持向量的引入" title="Permanent link">&para;</a></h2>
 <p>对于一个分类问题，我们如果可以找到一个向量<span class="arithmatex">\(\omega\)</span>，使得对于数据集D中的任何样本x，如果x是正例(用+1表示)就有<span class="arithmatex">\(\omega^Tx&gt; 0\)</span>，如果x是反例(用-1表示)就有<span class="arithmatex">\(\omega^Tx&lt;0\)</span>，那么我们就可以很好地对数据集进行分类，判断依据就是<span class="arithmatex">\(\omega^Tx\)</span></p>
 <p>我们也可以这样来考虑，将数据集D中的每个样本x投射到d维的空间上，如果我们可以找到一个d维空间里的超平面(hyperplane)<span class="arithmatex">\(\omega^Tx+b=0\)</span>，将这个空间划分成两个部分，其中一个部分里的样本x全是正例，另一个空间里的样本x全是反例，那么这个数据集的分类问题就解决了，但是实际情况并不会这么好，对于d维空间里的点x，其到超平面的距离可以表示为：</p>

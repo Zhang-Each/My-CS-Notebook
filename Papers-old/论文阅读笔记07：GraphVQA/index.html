@@ -3829,6 +3829,17 @@
 
 
 <h1 id="论文阅读笔记7graphvqa">论文阅读笔记7：GraphVQA<a class="headerlink" href="#论文阅读笔记7graphvqa" title="Permanent link">&para;</a></h1>
+<details class="info" open="open">
+<summary>统计信息</summary>
+<ul>
+<li>
+<p>本文约 1750 个字,  预计阅读时间 6 分钟。</p>
+</li>
+<li>
+<p><span id="busuanzi_container_page_pv">本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span></p>
+</li>
+</ul>
+</details>
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
 <p>​     可视问答(VQA)是一个人工智能领域很热门的topic，需要对于一张给定的图片和问题生成对应的回答，而这个问题的难点在于它是一个结合了计算机视觉和自然语言处理的交叉任务，需要同时处理图像和文本数据。而这个问题**本质上是一个分类问题**，我们要做的就是在一个有限的答案集合中寻找到合适的答案。</p>
 <p>​     大多数现有的VQA都是使用一种“二流混合”策略，也就是独立地学习出图像和问题的嵌入表示(分别利用CNN和词嵌入相关的模型)，然后将它们混合得到一个嵌入表示，使用这个嵌入表示来预测最终的答案，混合的方法往往是采用求点积和双向池化等，也有将注意力机制引入其中的模型。</p>

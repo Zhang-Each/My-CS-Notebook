@@ -3829,6 +3829,17 @@
 
 
 <h1 id="统计机器学习03线性模型">统计机器学习03：线性模型<a class="headerlink" href="#统计机器学习03线性模型" title="Permanent link">&para;</a></h1>
+<details class="info" open="open">
+<summary>统计信息</summary>
+<ul>
+<li>
+<p>本文约 1989 个字,  预计阅读时间 7 分钟。</p>
+</li>
+<li>
+<p><span id="busuanzi_container_page_pv">本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span></p>
+</li>
+</ul>
+</details>
 <p>前面说到机器学习中的任务主要是分类和回归，分类如前面的贝叶斯定理所展现的那样是输出一个类别(有限的离散数值)，而回归的任务则是输出一个real value</p>
 <h2 id="线性回归的基本思路">线性回归的基本思路<a class="headerlink" href="#线性回归的基本思路" title="Permanent link">&para;</a></h2>
 <p>对于n维的样本<span class="arithmatex">\(\boldsymbol x=[x_1,x_2,…,x_n]\)</span>找到一系列线性函数<span class="arithmatex">\(\omega=[\omega_1,\omega_2,…,\omega_n]\)</span>使得<span class="arithmatex">\(f(x)=\omega^T\boldsymbol x+b\)</span>，这个问题可以变形为n+1维使得<span class="arithmatex">\(f(x)=\omega^T\boldsymbol x\)</span>其中<span class="arithmatex">\(\boldsymbol x=[1,x_1,x_2,…,x_n]\)</span>而<span class="arithmatex">\(\omega=[b,\omega_1,\omega_2,…,\omega_n]\)</span>，这样一来表达式的形式更加统一了，而我们的目标就是训练出这个函数f，使得对于训练数据<span class="arithmatex">\((x_i,y_i)\)</span>，有<span class="arithmatex">\(f(x_i)=y_i\)</span>，我们要求解的对象就是这个n+1维的向量<span class="arithmatex">\(\omega\)</span></p>
