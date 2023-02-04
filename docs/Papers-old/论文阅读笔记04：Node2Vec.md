@@ -1,4 +1,4 @@
-# 论文阅读报告：Node2Vec
+# 论文阅读笔记4：Node2Vec
 
 > 论文《node2vec: Scalable Feature Learning for networks》的阅读笔记
 

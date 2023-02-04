@@ -98,3 +98,40 @@ $$
 引入更多的混淆(协变量X)更容易导致Unconfoundedness假设不成立，同时也更容易导致Positivity的假设不成立，当我们增加协变量的维度时，我们使协变量的任何水平x的子组变小。随着每个子组的变小，整个子组都得到某个治疗方案的机会越来越大，这就会导致Positivity不成立。
 
 ## 4. No interference, Consistency, and SUTVA
+其实我们在介绍上面两种假设的时候，已经使用了一些基本的共通的假设，这一节主要就是详细介绍这几个假设。
+### 4.1 No Interference
+无干扰假设(No Interference)这个假设的是说，不同的unit之间进行的treatment互相不影响，也就是我们对不同受试者采取的治疗方案不会影响到其他受试者的实验结果。这个假设可以形式化地表述为：
+
+$$
+Y_i\left(t_1, \ldots, t_{i-1}, t_i, t_{i+1}, \ldots, t_n\right)=Y_i\left(t_i\right)
+$$
+
+### 4.2 Consistency
+一致性假设(Consistency)说的是treatment T和潜在结果Y是对应的，也就是说，给定$T=t$，那么潜在结果Y应该是$Y(t)$，也就是说：
+
+$$
+T=t \Longrightarrow Y=Y(t)
+$$
+
+### 4.3 SUTVA
+stable unit-treatment value assumption(SUTVA)假设在一些书上也会出现说，实际上它就是无干扰假设和一致性假设的组合。
+
+### 4.4 总结
+综上所述，在潜在结果框架中，我们一共有这样四个基本的假设：
+- Unconfoundedness
+- Positivity
+- No interference
+- Consistency
+在真实的因果效应计算中，我们需要学习一个估计器(estimator)将数据集映射成对应的估计量，在机器学习中，这个估计器往往是一个模型，用来计算$P(Y|T,X)$，这就是model-assisted estimator，面对一个真实的数据集，我们可以用下面的方法来估计ATE:
+
+$$
+\begin{aligned}
+	ATE&=\mathbb{E}_X[\mathbb{E}[Y \mid T=1, X]-\mathbb{E}[Y \mid T=0, X]]\\
+	&=\frac{1}{n} \sum_i\left[\mathbb{E}\left[Y \mid T=1, X=x_i\right]-\mathbb{E}\left[Y \mid T=0, X=x_i\right]\right]
+\end{aligned}
+$$
+
+我们要做的就是使用机器学习模型来预测$\mathbb{E}\left[Y \mid T=t, X=x_i\right]$，很显然，机器学习模型是可以做到的。 
+
+
+<span id="busuanzi_container_page_pv">本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span>
