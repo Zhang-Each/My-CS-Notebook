@@ -1,0 +1,3 @@
+[mkdocs.plugins]
+statistics = mkdocs_statistics_plugin.plugin:StatisticsPlugin
+

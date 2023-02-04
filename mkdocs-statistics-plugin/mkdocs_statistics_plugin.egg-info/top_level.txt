@@ -1,0 +1,1 @@
+mkdocs_statistics_plugin
