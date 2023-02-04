@@ -237,4 +237,3 @@ class ParserModel(nn.Module):
 
 - 到这里为止，整个作业基本就结束了，后面还有一部分从语法学的角度讲了依赖性解析的一般规则和容易出现的错误。
 
-<span id="busuanzi_container_page_pv">本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span>

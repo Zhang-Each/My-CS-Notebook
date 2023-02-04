@@ -167,4 +167,3 @@ $$
 分类树的构建方法和普通的决策树一样，只不过选用基尼指数作为评价标准并且每次划分只能划分成两个子节点，递归建树的过程和普通决策树是完全一致的。
 
 
-<span id="busuanzi_container_page_pv">本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span>

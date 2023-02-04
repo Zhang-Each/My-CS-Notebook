@@ -132,4 +132,3 @@ $$
 2.  不同的类别数K会带来不同的聚类结果，一般来说分类的平均直径会随着K的增大先减小后不变，这个算法中的K是一个超参数，也是需要人为进行设定的
 
 
-<span id="busuanzi_container_page_pv">本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span>

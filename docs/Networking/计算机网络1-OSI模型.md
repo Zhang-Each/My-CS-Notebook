@@ -137,4 +137,3 @@
 - 吞吐量：表示单位时间内某个网络每秒的实际数据量，并不是实际数据总量
 
 
-<span id="busuanzi_container_page_pv">本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span>

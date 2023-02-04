@@ -134,4 +134,3 @@ $$
 我们要做的就是使用机器学习模型来预测$\mathbb{E}\left[Y \mid T=t, X=x_i\right]$，很显然，机器学习模型是可以做到的。 
 
 
-<span id="busuanzi_container_page_pv">本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span>

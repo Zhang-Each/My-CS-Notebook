@@ -201,4 +201,3 @@ def step(self, Ybar_t: torch.Tensor,
 
 因为做这个作业的时候手里还没有GPU，因此就没有在GPU上进行训练和测试(如果是Stanford的学生按照guidance可以使用免费的Azure VM)，简单在本地试运行了一下发现可以跑起来，loss也在缓慢下降，就当作这次实验成功了吧。
 
-<span id="busuanzi_container_page_pv">本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span>

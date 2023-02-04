@@ -124,4 +124,4 @@ $$K(x_i,x_j)=K(x_j,x_i)\ge 0$$而 对于$|D|=m$，$K(x_i,x_j)$可以形成m维�
 
 借助核方法和核函数我们可以把线性分类器用到非线性分类的问题上，但是具体如何选择核函数是未知的，或许需要自己一个个去尝试。
 
-<span id="busuanzi_container_page_pv">本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span>
+

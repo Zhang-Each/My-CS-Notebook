@@ -44,4 +44,3 @@ kd树是一种对k维空间中的实例点进行存储以便对其进行快速�
 父节点，并不断查找与目标点最邻近的节点，当确定不可能存在更近的节点的时候终止。
 
 
-<span id="busuanzi_container_page_pv">本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span>

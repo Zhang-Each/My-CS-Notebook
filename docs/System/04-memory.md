@@ -413,4 +413,4 @@
     - 虚拟存储技术使得程序员**不必考虑实际存储器的大小**，而**由OS来负责计题的存储器的使用** 
 
 
-<span id="busuanzi_container_page_pv">本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span>
+

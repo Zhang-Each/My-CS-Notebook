@@ -207,4 +207,4 @@ $$
 这里的参数可以用样本的数据进行估计，比如$\pi_c=\frac{N_c}{N}$，$\mu_c=\frac{1}{N_c}\sum_{i\in N(c)}x_i$，$\Sigma_c=\frac 1N_c(x-\mu_c)(x-\mu_c)^T$，这些都是基于极大似然法的常见估计。
 
 
-<span id="busuanzi_container_page_pv">本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span>
+

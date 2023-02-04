@@ -304,4 +304,3 @@ class ThreeLayerConvNet(nn.Module):
 - 我们用这样几行代码就做好了一个简单的三层神经网络，使用Pytorch的`nn.Module API`搭建神经网络的时候只需要继承`nn.Module`类，并在init函数中定义好所需要的层，在forward函数中定义神经网络的计算过程就可以了
 - 模型的训练也很简单，只需要定义优化器和编写简单的每个epoch代码，Pytorch就会自动完成求梯度和反向传播的过程。
 
-<span id="busuanzi_container_page_pv">本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span>

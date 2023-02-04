@@ -258,4 +258,3 @@ def dropout_backward(dout, cache):
 
 可以很明显的看到Dropout带来了训练时候的准确度下降，但是也带来了验证阶段的准确度的提升，说明Dropout机制确实可以起到正则化，防止过拟合的作用。
 
-<span id="busuanzi_container_page_pv">本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span>
