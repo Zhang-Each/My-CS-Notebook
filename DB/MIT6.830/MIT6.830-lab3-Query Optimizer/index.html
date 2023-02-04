@@ -3827,14 +3827,14 @@
 
 
 <h1 id="mit6830-lab3query-optimizer">MIT6.830-lab3：Query Optimizer<a class="headerlink" href="#mit6830-lab3query-optimizer" title="Permanent link">&para;</a></h1>
-<details class="info" open="open">
-<summary>统计信息</summary>
+<details class="abstract" open="open">
+<summary>本页统计信息</summary>
 <ul>
 <li>
-<p>本文约 1467 个字,  18 行代码,  预计阅读时间 5 分钟。</p>
+<p>本页约 1460 个字,  18 行代码,  预计阅读时间 5 分钟。</p>
 </li>
 <li>
-<p><span id="busuanzi_container_page_pv">本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span></p>
+<p><span id="busuanzi_container_page_pv">本页总阅读量<span id="busuanzi_value_page_pv"></span>次</span></p>
 </li>
 </ul>
 </details>
@@ -3889,14 +3889,13 @@
 </code></pre></div>
 <p>而我们采用的实现方式也非常简单，就是暴力遍历所有可能的Join排列，然后分别估计它们的总的Cost，然后选出总Cost最小的一组作为查询优化的结果。事实上SimpleDB已经给我们提供了一个方法<code>enumerateSubsets</code>来帮助我们实现子集的搜索，我们只要调用这个方法，就不用自己再写一个对Join进行搜索的过程。</p>
 <p>在搜索的过程中，我们要用一个提供的类PlanCache来存储搜索过程中的中间数据，PlanCache会自动排序找出最优的Join顺序，我们只需要在最后调用它的接口返回正确结果就可以了。</p>
-<p><span id=busuanzi_container_page_pv>本文总阅读量<span id=busuanzi_value_page_pv></span>次</span></p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月2日 21:57:31</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月5日 00:05:13</span>
       
         <br>
         创建日期:
