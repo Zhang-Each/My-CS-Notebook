@@ -84,5 +84,5 @@ GPU上开启一个工作线程进行学习，每次先更新存在GPU里的局�
 
 这篇文章的实验采用了BetaE，Q2B和GQE等多跳推理模型以及多个KG数据集，和其他KG文章不同的是，作者还比较了GPU利用率，查询处理速度和采样器消耗时间的对比。
 
-<span id=busuanzi_container_page_pv>本文总阅读量<span id=busuanzi_value_page_pv></span>次</span>
+
 

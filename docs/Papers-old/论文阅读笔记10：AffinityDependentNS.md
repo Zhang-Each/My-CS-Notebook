@@ -25,5 +25,5 @@ $$
 ![image-20210806214431476](static/image-20210806214431476.png)
 
 - 读下来感觉整篇文章言之无物，主要就是讲了一个用cosine计算相似度然后进行负采样的故事
-<span id=busuanzi_container_page_pv>本文总阅读量<span id=busuanzi_value_page_pv></span>次</span>
+
 

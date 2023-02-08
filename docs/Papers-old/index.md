@@ -1,5 +1,5 @@
 # 论文阅读
 
 - 本科阶段为了“搞科研”而阅读的一些经典论文，主要方向包含知识图谱、NLP、多模态学习等等，不过话说回来，正式在实验室做自己的课题之后，就不太做阅读笔记了。
-<span id=busuanzi_container_page_pv>本文总阅读量<span id=busuanzi_value_page_pv></span>次</span>
+
 

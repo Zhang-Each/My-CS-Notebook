@@ -84,5 +84,5 @@ $$
 #### channel融合
 
 论文里提出的channel融合策略就是非常简单的直接相加，把structure channel和name channel的两个相似度矩阵直接相加作为最后的相似度矩阵，并以此来进行实体对齐的判定。
-<span id=busuanzi_container_page_pv>本文总阅读量<span id=busuanzi_value_page_pv></span>次</span>
+
 
