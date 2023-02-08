@@ -4618,14 +4618,14 @@
 <h3 id="11-关系型数据库-relational-database">1.1 关系型数据库 Relational Database<a class="headerlink" href="#11-关系型数据库-relational-database" title="Permanent link">&para;</a></h3>
 <h4 id="关系型数据的一些基本特点">关系型数据的一些基本特点<a class="headerlink" href="#关系型数据的一些基本特点" title="Permanent link">&para;</a></h4>
 <ul>
-<li>关系型数据库是一系列**表的集合** </li>
+<li>关系型数据库是一系列<strong>表的集合</strong> </li>
 <li>一张表是一个基本单位</li>
 <li>表中的一行表示一条关系</li>
 </ul>
 <h3 id="12--基本概念和结构">1.2  基本概念和结构<a class="headerlink" href="#12--基本概念和结构" title="Permanent link">&para;</a></h3>
 <ul>
-<li>a relation r is a subset of <span class="arithmatex">\(D_{1}\times D_{2}\times …\times D_{n}\)</span>，一条relation就是其中的一个n元的**元组(tuple)** </li>
-<li>attribute属性，指表中的**列名**  </li>
+<li>a relation r is a subset of <span class="arithmatex">\(D_{1}\times D_{2}\times …\times D_{n}\)</span>，一条relation就是其中的一个n元的<strong>元组(tuple)</strong> </li>
+<li>attribute属性，指表中的<strong>列名</strong>  </li>
 <li>attribution type 属性的类型</li>
 <li>attribute value 属性值，某个属性在某条relation中的值<ul>
 <li>关系型数据库中的属性值必须要是atomic的，即不可分割的</li>
@@ -4633,26 +4633,26 @@
 </ul>
 </li>
 <li>Relation Schema 关系模式</li>
-<li><span class="arithmatex">\(R=(A_{1},A_{2},…,A_{n})\)</span> 其中<span class="arithmatex">\(A_i\)</span>是一系列属性，关系模式是对关系的一种**抽象** </li>
+<li><span class="arithmatex">\(R=(A_{1},A_{2},…,A_{n})\)</span> 其中<span class="arithmatex">\(A_i\)</span>是一系列属性，关系模式是对关系的一种<strong>抽象</strong> </li>
 <li>r(R)表示关系模式R中的一种关系，table表示这个关系当前的值(关系实例)<ul>
 <li>每个关系r中的元素是table中的一行</li>
 <li>不过经常用相同的名字命名关系模式和关系</li>
 </ul>
 </li>
-<li>关系是**无序**的，关系中行和列的顺序是irrelevant的</li>
+<li>关系是<strong>无序</strong>的，关系中行和列的顺序是irrelevant的</li>
 </ul>
 <h3 id="13-keys键">1.3 Keys键<a class="headerlink" href="#13-keys键" title="Permanent link">&para;</a></h3>
 <ul>
-<li>super key超键：能够**唯一标识**元组的属性集，即对于每一条关系而言超键的值是唯一的</li>
+<li>super key超键：能够<strong>唯一标识</strong>元组的属性集，即对于每一条关系而言超键的值是唯一的</li>
 <li>超键可以是多个属性的组合</li>
 <li>如果A是关系R的一个超键，那么(A, B)也是关系R的一个超键</li>
 <li>超键的“唯一标识”各个元组是可以有冗余信息的</li>
-<li>candidate key候选键：**不含多余属性**的超键</li>
+<li>candidate key候选键：<strong>不含多余属性</strong>的超键</li>
 <li>如果K是R的一个超键，而任何K的真子集不是R的一个超键，那么K就是R的一个候选键</li>
 <li>primary key主键：</li>
-<li>数据库管理员**指定**的元组标识的一个候选键，不能是null值</li>
+<li>数据库管理员<strong>指定</strong>的元组标识的一个候选键，不能是null值</li>
 <li>foreign key外键：用来描述两个表之间的关系，可以有空值</li>
-<li>如果关系模式R1中的一个属性是另一个关系模式R2中的一个**主键**，那么这个属性就是R1的一个外键<ul>
+<li>如果关系模式R1中的一个属性是另一个关系模式R2中的一个<strong>主键</strong>，那么这个属性就是R1的一个外键<ul>
 <li>a foreign key from r1 referencing r2</li>
 </ul>
 </li>
@@ -4663,7 +4663,7 @@
 <li>筛选出所有满足条件p(t)的元素t</li>
 <li>Project投影：<span class="arithmatex">\(\prod_{A_1,A_2,\cdots,A_k}(r)\)</span></li>
 <li>运算的结果是原来的关系r中各列只保留属性<span class="arithmatex">\(A_1,A_2,\dots,A_k\)</span> 后的关系</li>
-<li>会**自动去掉重复**的元素，因为可能投影的时候舍弃的属性是可以标识关系唯一性的属性</li>
+<li>会<strong>自动去掉重复</strong>的元素，因为可能投影的时候舍弃的属性是可以标识关系唯一性的属性</li>
 <li>Union 并操作：<span class="arithmatex">\(r \cup s=\{t|t\in r \or t \in s\}\)</span>  </li>
 <li>两个关系的属性个数必须相同</li>
 <li>各属性的domain必须是可以比较大小的</li>
@@ -4677,12 +4677,12 @@
 <li>扩展运算: 可以用前面的六种基本运算得到</li>
 <li>Intersection 交运算<span class="arithmatex">\(r \cap s=\{t|t\in r \and t \in s\}=r-(r-s)\)</span>   </li>
 <li>Natual-Join 自然连接：<span class="arithmatex">\(r\Join s\)</span> <ul>
-<li>两个关系中同名属性在自然连接的时候当作**同一个属性**来处理</li>
+<li>两个关系中同名属性在自然连接的时候当作<strong>同一个属性</strong>来处理</li>
 <li><strong>Theta join</strong> 满足某种条件的合并：<span class="arithmatex">\(r\Join_{\theta} s=\sigma_{\theta}(r\Join s)\)</span>  </li>
 </ul>
 </li>
 <li>Outer-Join外部连接，分为左外连接，右外连接，全外连接<ul>
-<li>用于应对一些**信息缺失**的情况(有null值)</li>
+<li>用于应对一些<strong>信息缺失</strong>的情况(有null值)</li>
 <li>左外连接$\ltimes $ </li>
 <li>左边的表取全部值按照关系和右边连接，右边不存在时为空值 </li>
 <li>右外连接$\rtimes $ </li>
@@ -4730,7 +4730,7 @@
 </code></pre></div></p>
 </li>
 <li>
-<p><code>integrity-contraint</code> 完整性约束：可以**指定primary key**, <strong>foreign key references xxx, not null</strong></p>
+<p><code>integrity-contraint</code> 完整性约束：可以<strong>指定primary key</strong>, <strong>foreign key references xxx, not null</strong></p>
 </li>
 <li>
 <p>删除数据表 <code>drop table</code> </p>
@@ -4765,19 +4765,19 @@
 <p>SQL查询的结果是一个关系</p>
 </li>
 <li>
-<p>select子句的一些**细节** </p>
+<p>select子句的一些<strong>细节</strong> </p>
 </li>
 <li>
-<p><code>select * from xxx</code> 表示获取**所有属性**，事实上我怀疑*是正则表达式，表示可能有的所有内容，从后面的内容来看，select语句确实是支持正则表达式</p>
+<p><code>select * from xxx</code> 表示获取<strong>所有属性</strong>，事实上我怀疑*是正则表达式，表示可能有的所有内容，从后面的内容来看，select语句确实是支持正则表达式</p>
 </li>
 <li>
-<p>SQL中的**保留字**对于**大小写不敏感** </p>
+<p>SQL中的<strong>保留字</strong>对于<strong>大小写不敏感</strong> </p>
 </li>
 <li>
 <p>去除重复：<code>select distinct</code>，防止重复丢失的办法<code>select all</code></p>
 </li>
 <li>
-<p>select子句中的表达式支持基本的**四则运算**(加减乘除)，比如</p>
+<p>select子句中的表达式支持基本的<strong>四则运算</strong>(加减乘除)，比如</p>
 <div class="highlight"><pre><span></span><code><span class="k">select</span><span class="w"> </span><span class="n">ID</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">salary</span><span class="o">/</span><span class="mi">2</span>
 <span class="k">from</span><span class="w"> </span><span class="n">instructor</span><span class="p">;</span>
 </code></pre></div>
@@ -4804,7 +4804,7 @@
 </code></pre></div>
 </li>
 <li>
-<p>字符串支持**正则表达式**匹配，用<code>like regrex</code>的方式可以进行属性值的正则表达式匹配</p>
+<p>字符串支持<strong>正则表达式</strong>匹配，用<code>like regrex</code>的方式可以进行属性值的正则表达式匹配</p>
 <ul>
 <li>正则表达式的用法没怎么讲</li>
 </ul>
@@ -4822,7 +4822,7 @@
 <li>
 <p>集合操作：</p>
 <ul>
-<li>可以用<code>union/intersect/except</code>等集合运算来**连接两条不同的查询**</li>
+<li>可以用<code>union/intersect/except</code>等集合运算来<strong>连接两条不同的查询</strong></li>
 </ul>
 </li>
 <li>
@@ -4865,7 +4865,7 @@
 <span class="k">from</span><span class="w"> </span><span class="n">r1</span><span class="p">,</span><span class="n">r2</span><span class="p">,</span><span class="err">…</span><span class="p">,</span><span class="n">rn</span>
 <span class="k">where</span><span class="w"> </span><span class="n">P</span>
 </code></pre></div>
-<p>其中的A，r，P都可以被替换为一个**子查询** </p>
+<p>其中的A，r，P都可以被替换为一个<strong>子查询</strong> </p>
 </li>
 <li>
 <p>集合关系：用 <code>in/not in +子查询</code>来判断否些属性是否属于特定的集合中</p>
@@ -4917,7 +4917,7 @@
 <h3 id="25-sql-view-视图-index-索引">2.5 SQL view 视图, index 索引<a class="headerlink" href="#25-sql-view-视图-index-索引" title="Permanent link">&para;</a></h3>
 <ul>
 <li>
-<p>视图：一种**只显示数据表中部分属性值**的机制</p>
+<p>视图：一种<strong>只显示数据表中部分属性值</strong>的机制</p>
 </li>
 <li>
 <p>不会在数据库中重新定义一张新的表，而是隐藏了一些数据</p>
@@ -5002,7 +5002,7 @@
 <li>
 <p>Assertions(Mysql不支持)</p>
 <ul>
-<li>对于数据库中需要满足的关系的一种**预先判断** </li>
+<li>对于数据库中需要满足的关系的一种<strong>预先判断</strong> </li>
 <li><code>create assertion &lt;assertion-name&gt; check &lt;predicate&gt;</code> 下面是一段例子</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="w"> </span><span class="k">create</span><span class="w"> </span><span class="k">assertion</span><span class="w"> </span><span class="n">credits_constaint</span><span class="w"> </span><span class="k">check</span>
@@ -5080,7 +5080,7 @@
 <p>表示方法</p>
 <ul>
 <li>长方形代表实体集合</li>
-<li>属性写在长方形中，**primary key用下划线**标注 </li>
+<li>属性写在长方形中，<strong>primary key用下划线</strong>标注 </li>
 </ul>
 </li>
 <li>
@@ -5109,14 +5109,14 @@
   - mapping cardinalities <strong>映射基数</strong> 
 - 二元关系中映射基数只有一对一，一对多，多对一，多对多
 - E-R模型中表示映射关系：箭头表示一，直线表示多
-- 三元关系中：<strong>箭头只能出现一次</strong>，否则会出现**二义性** 
+- 三元关系中：<strong>箭头只能出现一次</strong>，否则会出现<strong>二义性</strong> 
   - 参与度约束
 - total participation： 若一个实体集全部参与到关系中，要用两条线
 - partical participation 部分参与
   - key约束：和前面的基本一样
   - 弱实体集weak entity set：一些实体集的属性不足以形成主键，就是弱实体集，与之相对的是强实体集
 - 用于表示一些关系中的依赖性，弱实体集需要和强实体集关联才有意义
-- 经常出现在一对多的关系中，在ER图中需要用**双线方框**表示，比如职工和职工家属，职工家属不能脱离于职工存在，所以职工家属就是一个弱实体集
+- 经常出现在一对多的关系中，在ER图中需要用<strong>双线方框</strong>表示，比如职工和职工家属，职工家属不能脱离于职工存在，所以职工家属就是一个弱实体集
 - Aggregation 聚合</p>
 </blockquote>
 </li>
@@ -5142,7 +5142,7 @@
 <h4 id="332-first-normal-form-第一范式">3.3.2 First Normal Form 第一范式<a class="headerlink" href="#332-first-normal-form-第一范式" title="Permanent link">&para;</a></h4>
 <ul>
 <li>原子性atomic ：不能再继续拆分，属性不能再向下拆分</li>
-<li>第一范式的定义：一个关系模式R的**所有属性都是atomic的**，这个关系模式R就是**第一范式** </li>
+<li>第一范式的定义：一个关系模式R的<strong>所有属性都是atomic的</strong>，这个关系模式R就是<strong>第一范式</strong> </li>
 <li>存在的问题</li>
 <li>redundancy 冗余</li>
 <li>complicates updates 更新数据很复杂</li>
@@ -5163,15 +5163,15 @@
 </ul>
 <h4 id="333-functional-dependency-函数依赖">3.3.3 Functional dependency 函数依赖<a class="headerlink" href="#333-functional-dependency-函数依赖" title="Permanent link">&para;</a></h4>
 <ul>
-<li>**函数依赖**的定义</li>
+<li><strong>函数依赖</strong>的定义</li>
 <li>对于一个关系模式R，如果<span class="arithmatex">\(\alpha \subset R\)</span> 并且<span class="arithmatex">\(\beta\subset R\)</span> 则函数依赖<span class="arithmatex">\(\alpha \rightarrow\beta\)</span> 定义在R上，当且仅当<ul>
 <li>如果对于R的任意关系r(R)  当其中的任意两个元组t1和t2，如果他们的<span class="arithmatex">\(\alpha\)</span>属性值相同可以推出他们的<span class="arithmatex">\(\beta\)</span>属性值也相同</li>
 </ul>
 </li>
 <li>如果某个属性集A可以决定另一个属性集B的值，就称<span class="arithmatex">\(A\rightarrow B\)</span>是一个函数依赖</li>
 <li>函数依赖和键的关系：函数依赖实际上是键的概念的一种泛化<ul>
-<li>K是关系模式R的**超键**当且仅当 <span class="arithmatex">\(K\rightarrow R\)</span> </li>
-<li>K 是R上的**候选主键**当且仅当 <span class="arithmatex">\(K\rightarrow R\)</span> 并且不存在 <span class="arithmatex">\(\alpha\sub K, \alpha\rightarrow R\)</span> </li>
+<li>K是关系模式R的<strong>超键</strong>当且仅当 <span class="arithmatex">\(K\rightarrow R\)</span> </li>
+<li>K 是R上的<strong>候选主键</strong>当且仅当 <span class="arithmatex">\(K\rightarrow R\)</span> 并且不存在 <span class="arithmatex">\(\alpha\sub K, \alpha\rightarrow R\)</span> </li>
 </ul>
 </li>
 <li>一个平凡的的结论：子集一定对自己函数依赖</li>
@@ -5182,7 +5182,7 @@
 <p>Closure 闭包</p>
 </li>
 <li>
-<p>闭包, 对于原始的函数依赖集合F可以推出的所有函数依赖关系产生的集合就是**F的闭包** </p>
+<p>闭包, 对于原始的函数依赖集合F可以推出的所有函数依赖关系产生的集合就是<strong>F的闭包</strong> </p>
 </li>
 <li>
 <p>符号用<span class="arithmatex">\(F^+\)</span>表示</p>
@@ -5210,7 +5210,7 @@
 <ul>
 <li>闭包中所有关于<span class="arithmatex">\(\alpha\)</span>函数依赖的属性集构成的集合</li>
 <li>即如果<span class="arithmatex">\((\alpha\rightarrow \beta)\in F^+\)</span>则有<span class="arithmatex">\(\beta\in\alpha^{+}\)</span> </li>
-<li>计算**属性集闭包**的算法</li>
+<li>计算<strong>属性集闭包</strong>的算法</li>
 </ul>
 <div class="highlight"><pre><span></span><code>result={a}
 while result is changed do
@@ -5242,16 +5242,16 @@ while result is changed do
 <p>BC范式的条件是：闭包<span class="arithmatex">\(F^+\)</span>中的所有函数依赖<span class="arithmatex">\(\alpha \rightarrow \beta\)</span> 至少满足下面的一条</p>
 <ul>
 <li><span class="arithmatex">\(\alpha \rightarrow \beta\)</span> 是平凡的(也就是β是α的子集)</li>
-<li>α是关系模式R的一个**超键**，即<span class="arithmatex">\(\alpha \rightarrow R\)</span> </li>
+<li>α是关系模式R的一个<strong>超键</strong>，即<span class="arithmatex">\(\alpha \rightarrow R\)</span> </li>
 </ul>
 </li>
 <li>如何验证BCNF：<ul>
 <li>检测一个非平凡的函数依赖<span class="arithmatex">\(\alpha\rightarrow\beta\)</span>是否违背了BCNF的原则</li>
 <li>计算α的属性闭包</li>
-<li>如果这个属性闭包包含了所有的元素，那么α就是一个**超键** </li>
+<li>如果这个属性闭包包含了所有的元素，那么α就是一个<strong>超键</strong> </li>
 <li>如果α不是超键而这个函数依赖又不平凡，就打破了BCNF的原则</li>
 <li>简化的检测方法：</li>
-<li>只需要看关系模式R和已经给定的函数依赖集合**F中的各个函数依赖**是否满足BCNF的原则<ul>
+<li>只需要看关系模式R和已经给定的函数依赖集合<strong>F中的各个函数依赖</strong>是否满足BCNF的原则<ul>
 <li>不需要检查F闭包中所有的函数独立</li>
 </ul>
 </li>
@@ -5595,7 +5595,7 @@ while result changed do
 </ul>
 </li>
 <li>cost计算的方式：在B个blocks中查询S次所消耗的时间=B*转移到一个block的时间+S*一次查询的时间：<span class="arithmatex">\(B\times t_T+S\times t_S\)</span> 其中<span class="arithmatex">\(t_T\)</span> 表示一次block transfer的时间<ul>
-<li>cost依赖于主存中**缓冲区的大小**：更多的内存可以减少disk access</li>
+<li>cost依赖于主存中<strong>缓冲区的大小</strong>：更多的内存可以减少disk access</li>
 <li>通常考虑最坏的情况：只提供最少的内存来完成查询工作</li>
 </ul>
 </li>
@@ -5609,7 +5609,7 @@ while result changed do
 <p>Algorithm1:线性搜索，查询每个block判断是否满足查询条件</p>
 <ul>
 <li>
-<p>Cost =  br block transfers + 1 seek，其中<span class="arithmatex">\(b_r\)</span> 是关系r中**存储了记录的block的数量** </p>
+<p>Cost =  br block transfers + 1 seek，其中<span class="arithmatex">\(b_r\)</span> 是关系r中<strong>存储了记录的block的数量</strong> </p>
 </li>
 <li>
 <p>如果通过键来搜索，在找到的时候就停止，则 cost = (br /2) block transfers + 1 seek</p>
@@ -5657,7 +5657,7 @@ while result changed do
 <li>create sorted runs</li>
 <li>merge the runs</li>
 <li>需要的merge pass总数 <span class="arithmatex">\([ \log_{M-1}(b_r/M)]\)</span> </li>
-<li>创建和每次run过程中的disk access数量 2*br*</li>
+<li>创建和每次run过程中的disk access数量 2<em>br</em></li>
 <li>外部排序中总的disk access次数 <span class="arithmatex">\((2[ \log_{M-1}(b_r/M)]+1)b_r\)</span> </li>
 </ul>
 </li>
@@ -5703,7 +5703,7 @@ while result changed do
 <p>Index nested-loop join</p>
 <ul>
 <li>索引一定程度上可以代替file scan</li>
-<li><span class="arithmatex">\(cost=b_r(t_T+t_s)+c\times n_r\)</span> 其中c表示遍历索引和找到所有匹配的s中的tuple所消耗的时间，可以用**一次s上的单个selection来估计s的值** </li>
+<li><span class="arithmatex">\(cost=b_r(t_T+t_s)+c\times n_r\)</span> 其中c表示遍历索引和找到所有匹配的s中的tuple所消耗的时间，可以用<strong>一次s上的单个selection来估计s的值</strong> </li>
 </ul>
 </li>
 <li>
@@ -5914,7 +5914,7 @@ while result changed do
 </li>
 <li>partially committed 在最后一句指令被执行之后</li>
 <li>failed 在发现执行失败之后</li>
-<li>aborted 回滚结束，会选择是**重新执行事务**还是结束</li>
+<li>aborted 回滚结束，会选择是<strong>重新执行事务</strong>还是结束</li>
 <li>committed 事务被完整的执行</li>
 </ul>
 <h4 id="512-事务的并发执行">5.1.2 事务的并发执行<a class="headerlink" href="#512-事务的并发执行" title="Permanent link">&para;</a></h4>
@@ -5930,7 +5930,7 @@ while result changed do
 <li>执行失败最后一步是abort instruction</li>
 <li>serial schedule 串行调度：一个事务调度完成之后再进行下一个</li>
 <li>equivalent schedule 等价调度：改变处理的顺序但是和原来等价</li>
-<li>**Serializability**可串行化</li>
+<li><strong>Serializability</strong>可串行化</li>
 <li>基本假设：事务不会破坏数据库的一致性，只考虑读写两种操作</li>
 <li>冲突可串行化 conflict serializability<ul>
 <li>同时读不引发冲突，而读写并行或者同时写会引发冲突</li>
@@ -5939,7 +5939,7 @@ while result changed do
 <li><strong>Precedence graph</strong>  前驱图 </li>
 <li>图中的顶点是各个事务，当事务<span class="arithmatex">\(T_i, T_j\)</span> 冲突并且<span class="arithmatex">\(T_i\)</span> 先访问出现冲突的数据的时候，就画一条边<span class="arithmatex">\(T_i\rightarrow T_j\)</span> </li>
 <li>一个调度是冲突可串行化的当且仅当前驱图是无环图</li>
-<li>对于无环图，可以使用**拓扑逻辑排序**获得一个合适的执行顺序</li>
+<li>对于无环图，可以使用<strong>拓扑逻辑排序</strong>获得一个合适的执行顺序</li>
 </ul>
 </li>
 <li>Recoverable Schedules 可恢复调度</li>
@@ -5949,7 +5949,7 @@ while result changed do
 <li>单个事务的fail造成了一系列的事务回滚</li>
 <li><strong>Cascadeless Schedules</strong> 避免级联回滚的调度</li>
 <li>对于每一组事务a和b并且b需要读入一个a写入的数据，那么a必须在b的读操作开始之前commit</li>
-<li>**Cascadeless Schedules**也是可恢复的调度</li>
+<li><strong>Cascadeless Schedules</strong>也是可恢复的调度</li>
 </ul>
 </li>
 </ul>
@@ -6074,7 +6074,7 @@ while result changed do
 <li>
 <p>lock manager维护一个内存中的数据结构lock-table来记录已经发出的批准</p>
 <ul>
-<li>Lock table 是一个**in-memory的hash表**</li>
+<li>Lock table 是一个<strong>in-memory的hash表</strong></li>
 <li>通过被上锁的数据项作为索引，黑框代表上锁，而白框表示在等待</li>
 <li>新的上锁请求被放在队列的末端，并且在和其他锁兼容的时候会被授权上锁</li>
 <li>解锁的请求会删除对应的请求，检查后面的请求是否可以被授权</li>
@@ -6194,7 +6194,7 @@ while result changed do
 <li>新的数据在提交的时候不一定是安全的：错误发生时难以保护改变后的值不变</li>
 <li>旧的数据在提交之前不一定是安全的：在commit之前发生错误将无法回滚到原来的值</li>
 <li>对于更新事务的两条规则<ul>
-<li>commit rule：新的数据在commit之前必须被写在**非易失性**的存储器中</li>
+<li>commit rule：新的数据在commit之前必须被写在<strong>非易失性</strong>的存储器中</li>
 <li>logging rule：旧的值在新的写入之前需要被写在日志里</li>
 </ul>
 </li>
@@ -6230,7 +6230,7 @@ while result changed do
 <ul>
 <li>undo：撤回，将事务<span class="arithmatex">\(T_i\)</span> 中已经更新的值变回原本的值</li>
 <li>redo：从事务<span class="arithmatex">\(T_i\)</span> 的第一步开始重新做，将所有值设定为新的值</li>
-<li>两种操作都需要**idempotent**——也就是操作执行多次和执行一次的效果相同</li>
+<li>两种操作都需要<strong>idempotent</strong>——也就是操作执行多次和执行一次的效果相同</li>
 <li>undo的条件：日志中包含这个事务的start而不包含commit，即事务进行到一半中断了</li>
 <li>redo的条件：日志中包含这个事务的start和commit</li>
 </ul>
@@ -6269,7 +6269,7 @@ while result changed do
 </ul>
 </li>
 <li>
-<p>日志中更早的部分**或许需要**undo，但一定不需要redo</p>
+<p>日志中更早的部分<strong>或许需要</strong>undo，但一定不需要redo</p>
 <ul>
 <li>继续向前扫描直到发现一个事务的start日志</li>
 <li>最早的start之前的日志不需要进行恢复操作，并且可以清除</li>
@@ -6347,19 +6347,19 @@ while result changed do
 <p>ARIES中的数据结构</p>
 </li>
 <li>Log sequence number (LSN) <ul>
-<li>用于标识**每一条记录**，需要是线性增长的</li>
+<li>用于标识<strong>每一条记录</strong>，需要是线性增长的</li>
 <li>其实是一个offset，方便从文件的起点开始访问</li>
 </ul>
 </li>
 <li><strong>Page LSN</strong> 每一页的LSN<ul>
-<li>是每一页中**最后一条** **起作用**的日志记录的LSN编号</li>
+<li>是每一页中<strong>最后一条</strong> <strong>起作用</strong>的日志记录的LSN编号</li>
 <li>每当一个更新的操作在某一页发生的时候，Page LSN就变成对应的Page LSN</li>
-<li>在恢复的撤销阶段，LSN值不超过PageLSN的日志记录将**不会在该页上执行**，因为其动作已经在该页上了</li>
+<li>在恢复的撤销阶段，LSN值不超过PageLSN的日志记录将<strong>不会在该页上执行</strong>，因为其动作已经在该页上了</li>
 <li>可以避免重复的redo</li>
 </ul>
 </li>
 <li>log record 日志记录<ul>
-<li>每一条日志记录包含自己的LSN和**同一个事务中前一步操作**的LSN——PreLSN</li>
+<li>每一条日志记录包含自己的LSN和<strong>同一个事务中前一步操作</strong>的LSN——PreLSN</li>
 <li>CLR：在恢复期间不需要undo，是redo-only的日志记录</li>
 <li>有一个UndoNextLSN区域用于记录下一个(更早,往前搜索)的需要undo的记录</li>
 <li>在这之间的记录应该早就已经undo了</li>
@@ -6369,7 +6369,7 @@ while result changed do
 <li>存储在缓冲区的，记录已经被更新过的page的表</li>
 <li>包含以下内容</li>
 <li>每个页的PageLSN</li>
-<li>每个页的RecLSN，表示这一页的日志记录中，LSN在这之前的记录已经**都被写入磁盘中**了<ul>
+<li>每个页的RecLSN，表示这一页的日志记录中，LSN在这之前的记录已经<strong>都被写入磁盘中</strong>了<ul>
 <li>当page被插入脏页表的时候，<strong>初始化为当前的PageLSN</strong> </li>
 <li>记录在checkpoint中，用于减少redo的次数</li>
 </ul>
@@ -6381,7 +6381,7 @@ while result changed do
 <p>checkpoint处的日志记录</p>
 <ul>
 <li>包含：脏页表和当前活跃的所有事务</li>
-<li>对每一个活跃的事务，记录了LastLSN，即这个事务在日志中写下的**最后一条记录** </li>
+<li>对每一个活跃的事务，记录了LastLSN，即这个事务在日志中写下的<strong>最后一条记录</strong> </li>
 <li>在checkpoint的时间点，脏页的信息不会写入磁盘</li>
 </ul>
 </li>
@@ -6397,15 +6397,15 @@ while result changed do
 <li>
 <p>分析阶段：需要决定哪些事务undo，哪些页是脏页</p>
 <ul>
-<li>从**最后一条完整的checkpoint日志记录**开始</li>
+<li>从<strong>最后一条完整的checkpoint日志记录</strong>开始</li>
 <li>读取脏页表的信息</li>
 <li>设置RedoLSN = min RecLSN(脏页表中的)，如果脏页表是空的就设置为checkpoint的LSN</li>
 <li>设置undo-list：checkpoint中记录的事务</li>
 <li>读取undo-list中每一个事务的最后一条记录的LSN</li>
 <li>从checkpoint开始正向扫描</li>
 <li>如果发现了不在undo-list中的记录就写入undo-list</li>
-<li>当发现一条**更新记录**的时候，如果这一页**不在脏页表**中，用该记录的LSN作为RecLSN写入脏页表中</li>
-<li>如果发现了标志事务**结束**的日志记录(commit, abort) 就从undo-list中**移除**这个事务</li>
+<li>当发现一条<strong>更新记录</strong>的时候，如果这一页<strong>不在脏页表</strong>中，用该记录的LSN作为RecLSN写入脏页表中</li>
+<li>如果发现了标志事务<strong>结束</strong>的日志记录(commit, abort) 就从undo-list中<strong>移除</strong>这个事务</li>
 <li>
 <p>搜索直到undo-list中的每一个事务都到了最后一条</p>
 </li>
@@ -6419,7 +6419,7 @@ while result changed do
 <li>
 <p>Redo阶段</p>
 <ul>
-<li>从RedoLSN开始**正向扫描**，当发现更新记录的时候</li>
+<li>从RedoLSN开始<strong>正向扫描</strong>，当发现更新记录的时候</li>
 <li>如果这一页不在脏页表中。或者这一条记录的LSN小于页面的RecLSN就忽略这一条</li>
 <li>否则从磁盘中读取这一页，如果磁盘中得到的这一页的PageLSN比这一条要小，就redo，否则就忽略这一条记录</li>
 </ul>
@@ -6428,7 +6428,7 @@ while result changed do
 <p>Undo阶段</p>
 <ul>
 <li>从日志末尾先前向前搜索，undo所有undo-list中有的事务</li>
-<li>符合如下条件的记录可以**跳过** </li>
+<li>符合如下条件的记录可以<strong>跳过</strong> </li>
 <li>用分析阶段的最后一个LSN来找到每个日志最后的记录</li>
 <li>每次选择一个最大的LSN对应的事务undo</li>
 <li>在undo一条记录之后<ul>
@@ -6463,7 +6463,7 @@ while result changed do
 </ul>
 </li>
 <li>XML文档需要有一个root</li>
-<li>一个元素可以有多个**属性**，但是**属性名不能重复**，用<code>attr_name=value</code>的形式内嵌在起始tag上面</li>
+<li>一个元素可以有多个<strong>属性</strong>，但是<strong>属性名不能重复</strong>，用<code>attr_name=value</code>的形式内嵌在起始tag上面</li>
 <li>命名空间namespaces<ul>
 <li>同一个标签名在不同的地方可能代表不同的意思，需要在tag前面加上<code>namespace:</code>标识这个tag是被谁定义的</li>
 </ul>
@@ -6497,7 +6497,7 @@ while result changed do
 <p>EMPTY 或者 ANY 表示没有子元素或者任何东西都可以作为子元素</p>
 </li>
 <li>
-<p>子元素的声明可以使用**正则表达式** </p>
+<p>子元素的声明可以使用<strong>正则表达式</strong> </p>
 </li>
 <li>“ | ” 表示可以互相替代</li>
 <li>“ + ” 至少出现一个</li>
@@ -6588,7 +6588,7 @@ while result changed do
 </ul>
 </li>
 <li>
-<p>查询和交换基于XML的**树模型**</p>
+<p>查询和交换基于XML的<strong>树模型</strong></p>
 <ul>
 <li>树模型中的节点是XML文档中的元素，节点分为元素、属性、文本、命名空间、处理指令、注释以及文档（根）节点，元素下的节点是属性或者子元素，上面的则是父元素</li>
 <li>根节点只有一个儿子，就是XML文档的根元素</li>
@@ -6598,10 +6598,10 @@ while result changed do
 <p>XPath </p>
 <ul>
 <li>用类似于文件路径的表达式来进行查询，用斜杠进行连接</li>
-<li>第一个斜杠的意思表示根目录，路径中**可以添加查询条件**，需要用<code>[]</code>括起来</li>
+<li>第一个斜杠的意思表示根目录，路径中<strong>可以添加查询条件</strong>，需要用<code>[]</code>括起来</li>
 <li>比如<code>//title[@lang]</code> 可以选取所有拥有属性名lang的元素title</li>
 <li>比如<code>/bookstore/book[1]</code> 表示选取bookstore下面第一个查询到的book元素</li>
-<li>访问**属性**需要使用<code>@</code>标记(注意标签的属性和值的区别)</li>
+<li>访问<strong>属性</strong>需要使用<code>@</code>标记(注意标签的属性和值的区别)</li>
 <li>可以使用通配符来查询：</li>
 <li>*可以表示所有的元素节点，比如<code>//*</code>  可以获取文档中的所有元素</li>
 <li>@*可以表示所有的属性节点</li>
@@ -6624,7 +6624,7 @@ while result changed do
 <ul>
 <li>XQuery使用的语法是</li>
 <li><code>for xxx let xxx where xxx order by xxx return</code></li>
-<li>for相当于SQL中的<code>select</code>，let允许使用**临时变量** </li>
+<li>for相当于SQL中的<code>select</code>，let允许使用<strong>临时变量</strong> </li>
 <li>一个简单的案例，对<code>&lt;course_id&gt;..&lt;/course_id&gt;</code>中的内容进行查询</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="nv">$</span><span class="n">x</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">/</span><span class="nt">university</span><span class="p">/</span><span class="nt">course</span>

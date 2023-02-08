@@ -3751,7 +3751,7 @@
 <summary>本页统计信息</summary>
 <ul>
 <li>
-<p>本页约 849 个字,  预计阅读时间 3 分钟。</p>
+<p>本页约 842 个字,  预计阅读时间 3 分钟。</p>
 </li>
 <li>
 <p><span id="busuanzi_container_page_pv">本页总阅读量<span id="busuanzi_value_page_pv"></span>次</span></p>
@@ -3763,7 +3763,7 @@
 </blockquote>
 <h2 id="introductioncontribution">Introduction&amp;Contribution<a class="headerlink" href="#introductioncontribution" title="Permanent link">&para;</a></h2>
 <p>论文开头还是介绍了一通知识图谱相关的东西，然后说到知识图谱是不完整的，其数据具有稀疏性和不完整性的特点，并且在训练的过程中需要用负样本进行对比，而传统的负采样方法获得的样本太“naive”了，对知识图谱嵌入模型带来的性能提升不够显著，基于对抗学习生成负样本计算代价又太高</p>
-<p>因此本论文提出了一种**结构感知的负采样(Structure Aware Negative Sampling, SANS)**方法，利用知识图谱作为“图”的结构来找到合适的负样本。该算法会用一个三元组中的head或者tail的K跳以内的邻居来替换对应部分产生有效的负样本。作者假设和待替换的实体**相邻但是没有直接关系**的实体有更高的概率成为一个好的替换对象来产生负样本，并使用一系列实验进行了对比。</p>
+<p>因此本论文提出了一种<strong>结构感知的负采样(Structure Aware Negative Sampling, SANS)</strong>方法，利用知识图谱作为“图”的结构来找到合适的负样本。该算法会用一个三元组中的head或者tail的K跳以内的邻居来替换对应部分产生有效的负样本。作者假设和待替换的实体<strong>相邻但是没有直接关系</strong>的实体有更高的概率成为一个好的替换对象来产生负样本，并使用一系列实验进行了对比。</p>
 <h2 id="sans算法">SANS算法<a class="headerlink" href="#sans算法" title="Permanent link">&para;</a></h2>
 <p>对于一个给定的三元组<span class="arithmatex">\((h,r,t)\)</span>，负样本可以通过替换其head和tail中的一个来随机生成，同时在训练过程中SANS将损失函数定义为了：
 $$
@@ -3780,14 +3780,13 @@ $$
 <h2 id="sans算法的变体">SANS算法的变体<a class="headerlink" href="#sans算法的变体" title="Permanent link">&para;</a></h2>
 <p>SANS在开始训练之前需要做找K-hop这一步工作，而这一步工作在数据集比较大的时候往往是比较耗时间的，因此论文还提供了一种近似计算的方法，使用<span class="arithmatex">\(\omega\)</span>个步长为k的随机游走来近似估计<span class="arithmatex">\(\mathbb{K}\)</span>，具体的算法如下：</p>
 <p><img src="static/image-20210807001816581.png" alt="image-20210807001816581" style="zoom: 50%;" /></p>
-<p><span id=busuanzi_container_page_pv>本文总阅读量<span id=busuanzi_value_page_pv></span>次</span></p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月4日 10:57:21</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月8日 14:30:35</span>
       
         <br>
         创建日期:

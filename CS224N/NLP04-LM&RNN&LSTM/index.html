@@ -3973,7 +3973,7 @@ P\left(w_{1}, \ldots, w_{m}\right)=\prod_{i=1}^{i=m} P\left(w_{i} \mid w_{1}, \l
 \]</div>
 <p>这个表达式在机器翻译中有比较大的作用，翻译系统在完成句子的翻译之后实际上会生成多种不同的结果，这个时候就可以使用语言模型来对每一种结果进行评估，一般来说语义不通顺的句子计算出的概率会比较低，而语义通顺的句子计算出的概率会比较高，这样一来就可以选择概率最高的一个作为翻译的结果。</p>
 <h3 id="n-gram语言模型">n-gram语言模型<a class="headerlink" href="#n-gram语言模型" title="Permanent link">&para;</a></h3>
-<p>因此要获得一个语言模型，我们需要对**每一组连续n个单词**进行出现频率的计算，这就是n-gram语言模型，比如说对于一个2-gram的语言模型，我们可以这样计算：</p>
+<p>因此要获得一个语言模型，我们需要对<strong>每一组连续n个单词</strong>进行出现频率的计算，这就是n-gram语言模型，比如说对于一个2-gram的语言模型，我们可以这样计算：</p>
 <div class="arithmatex">\[
 p(w_2|w_1)=\frac{\mathrm{count}(w_1, w_2)}{\mathrm{count}(w_1)}
 \]</div>
@@ -3994,7 +3994,7 @@ p(w_2|w_1)=\frac{\mathrm{count}(w_1, w_2)}{\mathrm{count}(w_1)}
 \hat{y}=\operatorname{softmax}\left(W^{(2)} \tanh \left(W^{(1)} x+b^{(1)}\right)+W^{(3)} x+b^{(3)}\right)
 \]</div>
 <p>其中第一个矩阵作用在词向量上(图中的绿色实线)，第二个矩阵作用在隐层，第三个矩阵作用在词向量上(图中的绿色虚线)，这个模型虽然简单但是也能够起到比较好的performance，</p>
-<p>上面提到的这些语言模型实际上只是**基于有限长度的滑动窗口的卷积模型**，但事实上，窗口比较小的时候模型预测的准确度也是无法保证的，而窗口大了又会导致参数的规模急剧增长，因此我们需要**一个可以处理任意长度的输入，并且参数规模维持在一定范围内**的新模型。</p>
+<p>上面提到的这些语言模型实际上只是<strong>基于有限长度的滑动窗口的卷积模型</strong>，但事实上，窗口比较小的时候模型预测的准确度也是无法保证的，而窗口大了又会导致参数的规模急剧增长，因此我们需要<strong>一个可以处理任意长度的输入，并且参数规模维持在一定范围内</strong>的新模型。</p>
 <h2 id="循环神经网络rnn">循环神经网络RNN<a class="headerlink" href="#循环神经网络rnn" title="Permanent link">&para;</a></h2>
 <h3 id="rnn的架构">RNN的架构<a class="headerlink" href="#rnn的架构" title="Permanent link">&para;</a></h3>
 <p>和只能给予一个有限长度的滑动窗口不同，卷积翻译模型不同，循环神经网络(Recurrent
@@ -4007,7 +4007,7 @@ Neural Networks)是可以根据语料库中所有之前出现过的额单词来�
         \hat{y}_{t}=\operatorname{softmax}\left(W^{(S)} h_{t}\right)
 \end{array}
 \]</div>
-<p>并且权重矩阵<span class="arithmatex">\(W^{(hh)},W^{(hx)}\)</span>在不同的timestep之间时共享的，这样一来**一个RNN模型需要学习的参数数量是比较少的，并且和输入语料库的长度是没有无关的**，不仅避免了参数的维度爆炸，而且可以处理任意长度的输入结果。</p>
+<p>并且权重矩阵<span class="arithmatex">\(W^{(hh)},W^{(hx)}\)</span>在不同的timestep之间时共享的，这样一来<strong>一个RNN模型需要学习的参数数量是比较少的，并且和输入语料库的长度是没有无关的</strong>，不仅避免了参数的维度爆炸，而且可以处理任意长度的输入结果。</p>
 <h3 id="rnn的损失函数">RNN的损失函数<a class="headerlink" href="#rnn的损失函数" title="Permanent link">&para;</a></h3>
 <p>RNN的损失函数通常采用交叉熵来计算，对于第t个timestep，其交叉熵可以表示为：</p>
 <div class="arithmatex">\[
@@ -4088,7 +4088,7 @@ f=[f_1,f_2,\dots,f_{|V|}],\quad f_i=\frac{\exp ^{x_i}}{\sum_{j=1}^{|V|}\exp ^{x_
 <p>但是同时，RNN的缺点也是很明显的：</p>
 <ul>
 <li>
-<p>RNN是一个序列化的模型，因此**RNN不能进行并行的训练**</p>
+<p>RNN是一个序列化的模型，因此<strong>RNN不能进行并行的训练</strong></p>
 </li>
 <li>
 <p>事实上随着timestep的推移，前面的信息越来越难以被保留下来，可能存在梯度消失和梯度爆炸的问题</p>

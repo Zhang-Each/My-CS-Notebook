@@ -4139,7 +4139,7 @@ h_{v}^{(l+1)}=\sigma(\sum_{r\in R}\sum_{u\in N(v)}\frac 1{C_{v,r}}W_r^{(l)}h_u^{
 <li>知识图谱是用图的形式来保存一些知识，用节点来表示实体，并且用实体的种类作为标签，用边来表示实体之间的关系。现实生活中有不少知识图谱的具体案例，知识图谱也是异构图的一种。</li>
 <li>知识图谱中比较重要的一个任务是做图谱的补全，也就是找到知识图谱中缺失的连接关系。</li>
 <li>我们要注意到知识图谱中的关系也是有很多种类的，主要有对称的关系和可你关系</li>
-<li>知识图谱的关键idea在于知识图谱的表示，知识图谱中的一条边可以表示为一个**三元组**<span class="arithmatex">\((h,r,t)\)</span>，分别表示头节点，关系和尾节点</li>
+<li>知识图谱的关键idea在于知识图谱的表示，知识图谱中的一条边可以表示为一个<strong>三元组</strong><span class="arithmatex">\((h,r,t)\)</span>，分别表示头节点，关系和尾节点</li>
 <li>实体和关系可以建模成一个d维空间中的嵌入向量</li>
 <li>对于一个给定的三元组，我们的目标是<span class="arithmatex">\((h,r)\)</span>的嵌入向量必须要和<span class="arithmatex">\(t\)</span>的嵌入向量尽可能接近，因此问题也就变成了如何对<span class="arithmatex">\((h,r)\)</span>进行嵌入与如何定义“接近”</li>
 </ul>
@@ -4157,7 +4157,7 @@ f_r(h,t)=-||\bold h+\bold r-\bold t||
 <h4 id="关系模式">关系模式<a class="headerlink" href="#关系模式" title="Permanent link">&para;</a></h4>
 <p>​   知识图谱中有一系列各式各样的关系，比如：</p>
 <ul>
-<li>对称关系：<span class="arithmatex">\(r(h,t)\rightarrow r(t,h)\)</span>，同样的还有**反对称关系**</li>
+<li>对称关系：<span class="arithmatex">\(r(h,t)\rightarrow r(t,h)\)</span>，同样的还有<strong>反对称关系</strong></li>
 <li>可逆关系：<span class="arithmatex">\(r_1(h,t)\rightarrow r_2(t,h)\)</span></li>
 <li>组合关系(可传递关系)：<span class="arithmatex">\(r_1(x,y)\cap r_2(y,z)\rightarrow r_3(x,z)\)</span></li>
 <li>一对多关系，一个实体对应多个实体</li>
@@ -4225,13 +4225,13 @@ f_{r}(h, t)=\operatorname{Re}\left(\sum_{i} \mathbf{h}_{i} \cdot \mathbf{r}_{i} 
 <p>​     这样一来上一章提到的各种知识图谱嵌入方法，比如TransE，TransR，DisMult和ComplEx等等就可以使用到知识图谱的问答中，而上述方法中，只有TransE可以刻画传递关系(composition relations)其他几个方法都不行，因此最终用于知识图谱推理问答的只有TransE，而如果是更复杂的conjunctive query，比如“What are drugs that cause Short of Breath and treat diseases associated with protein ESR2?”，它可以表示为<code>((e:ESR2, (r:Assoc, r:TreatedBy)), (e:Short of Breath, (r:CausedBy))</code> 而查询的过程可以表示为：</p>
 <p><img alt="image-20210629153622220" src="../static/image-20210629153622220.png" /></p>
 <h3 id="query2box">Query2Box<a class="headerlink" href="#query2box" title="Permanent link">&para;</a></h3>
-<p>​     这一节的内容将着重介绍一种新提出的知识图谱推理方式：使用Box Embedding进行推理。这种方法中，一系列的query被表示成了一系列超矩形(hyper-rectangles)，也叫做box，采用center和offset两个量来描述一个query，依然用上面那张生理医学知识图谱为例，我们可以将Fulvestrant(一种药)的所有不良反应都**嵌入到一片矩形的区域**内：</p>
+<p>​     这一节的内容将着重介绍一种新提出的知识图谱推理方式：使用Box Embedding进行推理。这种方法中，一系列的query被表示成了一系列超矩形(hyper-rectangles)，也叫做box，采用center和offset两个量来描述一个query，依然用上面那张生理医学知识图谱为例，我们可以将Fulvestrant(一种药)的所有不良反应都<strong>嵌入到一片矩形的区域</strong>内：</p>
 <p><img src="static/image-20210629154928968.png" alt="image-20210629154928968" style="zoom: 33%;" /></p>
 <p>Box embedding使我们在遍历KG进行查询的时候，每一步都可以得到一系列reachable的实体组成的集合，并且box的交集(Intersection)是良好定义的。Box是一种很强的抽象，可以通过将中心节点进行投影并控制offset，将相关的实体包含在内，将无关的实体排除在外。在Query2Box中，</p>
 <ul>
 <li>每个实体用d维的向量来表示，并且被视为一种没有容积(zero-volume)的box</li>
 <li>每个关系用一个box来描述，包含center和offset两个量来描述</li>
-<li>交集运算符f，可以计算一系列box的**交集**</li>
+<li>交集运算符f，可以计算一系列box的<strong>交集</strong></li>
 </ul>
 <h4 id="投影操作">投影操作<a class="headerlink" href="#投影操作" title="Permanent link">&para;</a></h4>
 <p>​       利用已有的关系嵌入，将输入的一个box投影成另一个box，即<span class="arithmatex">\(Box \times Relation\rightarrow Box\)</span> 这个过程可以用下面的图来描述：</p>
@@ -4270,9 +4270,9 @@ $$
 <p>​     然而AND-OR查询不能用低维的向量来表示，比如有3个不同的query和对应的结果，可以使用2维空间表示，而如果有4个不同的query，当下面这种情况出现的时候就需要3维的空间：</p>
 <p><img src="static/image-20210704105528406.png" alt="image-20210704105528406" style="zoom:67%;" /></p>
 <p>这是为了保证任意两个query的并集中不能包含其他的query，而对于M个组合的query，表示出所有的OR操作至少需要<span class="arithmatex">\(O(M)\)</span>规模的嵌入空间，因此数据规模一大就不能用低维向量来表示所有的并集操作。</p>
-<p>​     但这个问题也不是完全没有解决的办法，论文中提出的一个key idea就是**改变处理一个联合查询时候的顺序**，到最后一步再做union</p>
+<p>​     但这个问题也不是完全没有解决的办法，论文中提出的一个key idea就是<strong>改变处理一个联合查询时候的顺序</strong>，到最后一步再做union</p>
 <p><img alt="image-20210704124001196" src="../static/image-20210704124001196.png" /></p>
-<p>​     具体的做法是，任何一个AND-OR查询可以转变成一个等价的**析取范式(DNF)**，即<span class="arithmatex">\(q=q_1\or q_2\or\dots q_m\)</span>，这样一来我们来处理一个查询的时候就可以先求出所有<span class="arithmatex">\(q_i\)</span>的嵌入，到最后一步再进行union操作。在最后计算距离作为score的时候，容易得到有：
+<p>​     具体的做法是，任何一个AND-OR查询可以转变成一个等价的<strong>析取范式(DNF)</strong>，即<span class="arithmatex">\(q=q_1\or q_2\or\dots q_m\)</span>，这样一来我们来处理一个查询的时候就可以先求出所有<span class="arithmatex">\(q_i\)</span>的嵌入，到最后一步再进行union操作。在最后计算距离作为score的时候，容易得到有：
 $$
 d_{\text {box }}(\mathbf{q}, \mathbf{v})=\min \left(d_{\text {box }}\left(\mathbf{q}<em _box="{box" _text="\text">{1}, \mathbf{v}\right), \ldots, d</em>}\left(\mathbf{q}_{m}, \mathbf{v}\right)\right)
 $$</p>

@@ -3969,7 +3969,7 @@
 <summary>本页统计信息</summary>
 <ul>
 <li>
-<p>本页约 3008 个字,  预计阅读时间 10 分钟。</p>
+<p>本页约 3001 个字,  预计阅读时间 10 分钟。</p>
 </li>
 <li>
 <p><span id="busuanzi_container_page_pv">本页总阅读量<span id="busuanzi_value_page_pv"></span>次</span></p>
@@ -3991,7 +3991,7 @@
 </ul>
 <p>而每个关系r则只有一个表示，因为关系没有图片描述。</p>
 <h3 id="总体框架打分函数">总体框架(打分函数)<a class="headerlink" href="#总体框架打分函数" title="Permanent link">&para;</a></h3>
-<p>和所有其他的知识表示方法一样，IKRL也需要定义一个打分函数(论文中称为**能量函数**，不过一般KGE中就是称为打分函数，所以我们也这么叫)，本论文中提出的打分函数定义是：
+<p>和所有其他的知识表示方法一样，IKRL也需要定义一个打分函数(论文中称为<strong>能量函数</strong>，不过一般KGE中就是称为打分函数，所以我们也这么叫)，本论文中提出的打分函数定义是：
 $$
 E(h, r, t)=E_{S S}+E_{S 1}+E_{I S}+E_{I I}
 $$
@@ -3999,7 +3999,7 @@ $$
 $$
 E_{SS}=||h_S+r-t_S||, E_{II}=||H_I+r-t_I||,E_{SI}=||h_S+r-t_I||,E_{IS}=||h_I+r-t_S||
 $$
-这个函数这样定义的目的是为了在**同一个表示空间中学习到每个实体的结构化表示和图像表示**，我们需要定义一个图像编码器对图像的特征进行提取，同时一个实体可能会有多张图像与之对应，因此我们希望能够让实体选择与之最符合的图像进行共同表示，所以模型中还**使用了注意力机制**来实现多张图像的权重分配。</p>
+这个函数这样定义的目的是为了在<strong>同一个表示空间中学习到每个实体的结构化表示和图像表示</strong>，我们需要定义一个图像编码器对图像的特征进行提取，同时一个实体可能会有多张图像与之对应，因此我们希望能够让实体选择与之最符合的图像进行共同表示，所以模型中还<strong>使用了注意力机制</strong>来实现多张图像的权重分配。</p>
 <p>IKRL模型的总体架构如下图所示：</p>
 <p><img alt="image-20211109141739899" src="../static/image-20211109141739899.png" /></p>
 <h3 id="图像编码器">图像编码器<a class="headerlink" href="#图像编码器" title="Permanent link">&para;</a></h3>
@@ -4121,7 +4121,7 @@ $$
 <p>同时，对于文本特征和图像特征，论文在实验过程中分别使用了预训练好的300维GLOVE和VGG模型，直接从中提取了对应的特征。</p>
 <h2 id="论文3文本图像数值神经网络">论文3：文本+图像+数值+神经网络<a class="headerlink" href="#论文3文本图像数值神经网络" title="Permanent link">&para;</a></h2>
 <p>相比之下第三篇论文和前两篇工作的继承性没有那么大，这篇论文在图像，文本的基础上新增了一种模态的数据——数值，这篇博客的第一张图就是一个包含数值的知识图谱。</p>
-<p>此外，这篇文章的另一个亮点在于提出了对**缺失的模态数据进行补全**的方法，主要是基于GAN的，可以补全缺失的图像/文本和数值，看起来非常🐂，同时文章也指出，已有的多模态知识图谱表示方法都不能够对跨模态的数据进行补全，这是因为他们的搜索空间是无限的。</p>
+<p>此外，这篇文章的另一个亮点在于提出了对<strong>缺失的模态数据进行补全</strong>的方法，主要是基于GAN的，可以补全缺失的图像/文本和数值，看起来非常🐂，同时文章也指出，已有的多模态知识图谱表示方法都不能够对跨模态的数据进行补全，这是因为他们的搜索空间是无限的。</p>
 <p>这篇文章的总体的思路是用CNN/RNN/MLP分别来提取图像/文本/数值三个模态的特征信息，提出的模型架构如下：</p>
 <p><img alt="image-20211109153731560" src="../static/image-20211109153731560.png" /></p>
 <h3 id="多模态数据编码">多模态数据编码<a class="headerlink" href="#多模态数据编码" title="Permanent link">&para;</a></h3>
@@ -4147,14 +4147,13 @@ $$</p>
 <p>论文的实验在两个数据集MovieLens和YAGO-10上面进行，相比之下这两个数据集比之前的数据集要大得多。同时实验过程中对MovieLens数据集进行了立rating prediction任务，对YAGO-10数据集进行了链接预测任务，并探究了多种模态的特征是否添加对于模型的性能影响。</p>
 <p>其中一个实验如下图所示：</p>
 <p><img alt="image-20211109170032991" src="../static/image-20211109170032991.png" /></p>
-<p><span id=busuanzi_container_page_pv>本文总阅读量<span id=busuanzi_value_page_pv></span>次</span></p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月4日 10:57:21</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月8日 14:30:35</span>
       
         <br>
         创建日期:

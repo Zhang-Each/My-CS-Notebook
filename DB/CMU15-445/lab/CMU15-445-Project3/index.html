@@ -3808,11 +3808,11 @@
 <h2 id="bustub中的系统架构设计">Bustub中的系统架构设计<a class="headerlink" href="#bustub中的系统架构设计" title="Permanent link">&para;</a></h2>
 <p>在开始写这部分的代码之前，我们需要先熟悉一下这部分相关的代码结构，并学习一下bustub的系统设计模式。</p>
 <h3 id="catalog数据结构设计">Catalog数据结构设计<a class="headerlink" href="#catalog数据结构设计" title="Permanent link">&para;</a></h3>
-<p>Bustub中的catalog定义了一系列用来维护数据元信息的数据结构，包括<code>Catalog, TableInfo, IndexInfo</code>等等，<code>TableInfo</code>和<code>IndexInfo</code>分别代表了一个表/索引的元信息，而Catalog定义了整个数据库系统的元信息，包括了若干表和索引组成的数组。而一个表和索引中最关键的信息就是一个被称为<code>Schema</code>的类，这个类中定义了**表/索引每一列的性质**，包括数据类型，长度限制等等，一个列所具有的特征用<code>Column</code>这个类来表示，Schema中就集成了一系列的Column并提供对外访问的API。</p>
+<p>Bustub中的catalog定义了一系列用来维护数据元信息的数据结构，包括<code>Catalog, TableInfo, IndexInfo</code>等等，<code>TableInfo</code>和<code>IndexInfo</code>分别代表了一个表/索引的元信息，而Catalog定义了整个数据库系统的元信息，包括了若干表和索引组成的数组。而一个表和索引中最关键的信息就是一个被称为<code>Schema</code>的类，这个类中定义了<strong>表/索引每一列的性质</strong>，包括数据类型，长度限制等等，一个列所具有的特征用<code>Column</code>这个类来表示，Schema中就集成了一系列的Column并提供对外访问的API。</p>
 <p>综上所属，Bustub的Catalog部分的关键类之间的组合关系是<code>Column --&gt; Schema --&gt; TableInfo/ IndexInfo --&gt; Catalog</code> </p>
 <h3 id="execution数据结构设计">Execution数据结构设计<a class="headerlink" href="#execution数据结构设计" title="Permanent link">&para;</a></h3>
 <h4 id="查询上下文的设计">查询上下文的设计<a class="headerlink" href="#查询上下文的设计" title="Permanent link">&para;</a></h4>
-<p>查询上下文是一个用来**保存查询处理的时候的上下文环境**的泪，它的定义中包含了如下内容：</p>
+<p>查询上下文是一个用来<strong>保存查询处理的时候的上下文环境</strong>的泪，它的定义中包含了如下内容：</p>
 <div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">ExecutorContext</span><span class="w"> </span><span class="p">{</span>
 <span class="w"> </span><span class="k">private</span><span class="o">:</span>
 <span class="w">  </span><span class="cm">/** The transaction context associated with this executor context */</span>
@@ -3864,13 +3864,13 @@
 <span class="p">};</span>
 </code></pre></div>
 <p>每个执行器对象会拥有自己的输出格式(<code>OutputSchema</code>)和执行上下文，这个类被不同SQL操作对应的执行器继承，形成一系列执行器。</p>
-<p>Bustub中执行器的设计采用了**工厂模式**，定义了一个<code>ExecutorFactory</code>以及静态函数<code>CreateExecutor</code>来生成一个执行器。这个静态函数的定义如下所示：</p>
+<p>Bustub中执行器的设计采用了<strong>工厂模式</strong>，定义了一个<code>ExecutorFactory</code>以及静态函数<code>CreateExecutor</code>来生成一个执行器。这个静态函数的定义如下所示：</p>
 <div class="highlight"><pre><span></span><code><span class="k">static</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">AbstractExecutor</span><span class="o">&gt;</span><span class="w"> </span>
 <span class="w">  </span><span class="n">CreateExecutor</span><span class="p">(</span><span class="n">ExecutorContext</span><span class="w"> </span><span class="o">*</span><span class="n">exec_ctx</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">AbstractPlanNode</span><span class="w"> </span><span class="o">*</span><span class="n">plan</span><span class="p">);</span>
 </code></pre></div>
 <p>它会根据执行上下文和执行计划中包含的操作类型，返回对应操作的执行器。</p>
 <h4 id="查询计划的设计">查询计划的设计<a class="headerlink" href="#查询计划的设计" title="Permanent link">&para;</a></h4>
-<p>查询计划在Bustub中被定义为了文件<code>abstract_plan.h</code> 中的一个抽象类<code>AbstractPlanNode</code>，这个抽象类中记录了查询计划节点**所应该具有的抽象特征和元信息**，其关键的定义如下：</p>
+<p>查询计划在Bustub中被定义为了文件<code>abstract_plan.h</code> 中的一个抽象类<code>AbstractPlanNode</code>，这个抽象类中记录了查询计划节点<strong>所应该具有的抽象特征和元信息</strong>，其关键的定义如下：</p>
 <div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">AbstractPlanNode</span><span class="w"> </span><span class="p">{</span>
 <span class="w"> </span><span class="k">private</span><span class="o">:</span>
 <span class="w">  </span><span class="cm">/**</span>

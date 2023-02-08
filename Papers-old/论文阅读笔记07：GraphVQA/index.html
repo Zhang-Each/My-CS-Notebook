@@ -3833,7 +3833,7 @@
 <summary>本页统计信息</summary>
 <ul>
 <li>
-<p>本页约 1750 个字,  预计阅读时间 6 分钟。</p>
+<p>本页约 1743 个字,  预计阅读时间 6 分钟。</p>
 </li>
 <li>
 <p><span id="busuanzi_container_page_pv">本页总阅读量<span id="busuanzi_value_page_pv"></span>次</span></p>
@@ -3841,7 +3841,7 @@
 </ul>
 </details>
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>​     可视问答(VQA)是一个人工智能领域很热门的topic，需要对于一张给定的图片和问题生成对应的回答，而这个问题的难点在于它是一个结合了计算机视觉和自然语言处理的交叉任务，需要同时处理图像和文本数据。而这个问题**本质上是一个分类问题**，我们要做的就是在一个有限的答案集合中寻找到合适的答案。</p>
+<p>​     可视问答(VQA)是一个人工智能领域很热门的topic，需要对于一张给定的图片和问题生成对应的回答，而这个问题的难点在于它是一个结合了计算机视觉和自然语言处理的交叉任务，需要同时处理图像和文本数据。而这个问题<strong>本质上是一个分类问题</strong>，我们要做的就是在一个有限的答案集合中寻找到合适的答案。</p>
 <p>​     大多数现有的VQA都是使用一种“二流混合”策略，也就是独立地学习出图像和问题的嵌入表示(分别利用CNN和词嵌入相关的模型)，然后将它们混合得到一个嵌入表示，使用这个嵌入表示来预测最终的答案，混合的方法往往是采用求点积和双向池化等，也有将注意力机制引入其中的模型。</p>
 <p>​     而随着深度学习的发展，计算机视觉领域的工作希望能够学习到更高级别的图片表示方法，一种基于目标检测的方法就被提出了，首先使用目标检测模型检测出图像中的所有目标，然后针对这些目标来生成图像的特征表示，而不是使用一个作用于全图的卷积层。本论文中就将这种方法应用到了VQA任务中。</p>
 <h2 id="本文的contribution">本文的contribution<a class="headerlink" href="#本文的contribution" title="Permanent link">&para;</a></h2>
@@ -3850,9 +3850,9 @@
 <p><img alt="image-20210711150805893" src="../static/image-20210711150805893.png" /></p>
 <h2 id="模型的细节">模型的细节<a class="headerlink" href="#模型的细节" title="Permanent link">&para;</a></h2>
 <h3 id="输入数据的处理">输入数据的处理<a class="headerlink" href="#输入数据的处理" title="Permanent link">&para;</a></h3>
-<p>​     本模型中输入数据的处理采用和很多经典VQA方法相似的手段，使用预训练好的词向量来表示输入的问题中的每一个词语，并使用门控循环单元(GRU)来学习出**整个输入问题的嵌入向量**<span class="arithmatex">\(q\)</span>，而对于图片则使用一个对象检测器来检测出图中的对象，用框对其进行标注，然后使用图学习器来学习出每个框中对象的嵌入表示，最后将其聚合成一个总的图像嵌入。</p>
+<p>​     本模型中输入数据的处理采用和很多经典VQA方法相似的手段，使用预训练好的词向量来表示输入的问题中的每一个词语，并使用门控循环单元(GRU)来学习出<strong>整个输入问题的嵌入向量</strong><span class="arithmatex">\(q\)</span>，而对于图片则使用一个对象检测器来检测出图中的对象，用框对其进行标注，然后使用图学习器来学习出每个框中对象的嵌入表示，最后将其聚合成一个总的图像嵌入。</p>
 <h3 id="图学习器">图学习器<a class="headerlink" href="#图学习器" title="Permanent link">&para;</a></h3>
-<p>​     图学习器的设计是本论文中最重要的一个contribution，这个图学习器可以将图像中检测出的一系列目标表示成一个图，并计算其邻接矩阵。我们的目标就是根据**输入问题中包含的条件与对象特征的相似度**来学习出对象之间的关系并用图中的边来表示，最终得到一个无向的图结构，我们可以首先将问题的嵌入表示<span class="arithmatex">\(q\)</span>和对象的特征<span class="arithmatex">\(v_m\)</span>进行组合并得到一个联合嵌入，即：
+<p>​     图学习器的设计是本论文中最重要的一个contribution，这个图学习器可以将图像中检测出的一系列目标表示成一个图，并计算其邻接矩阵。我们的目标就是根据<strong>输入问题中包含的条件与对象特征的相似度</strong>来学习出对象之间的关系并用图中的边来表示，最终得到一个无向的图结构，我们可以首先将问题的嵌入表示<span class="arithmatex">\(q\)</span>和对象的特征<span class="arithmatex">\(v_m\)</span>进行组合并得到一个联合嵌入，即：
 $$
 e_n=F([w_n||q])
 $$
@@ -3879,14 +3879,13 @@ $$
 L(t,y)=\sum_{t_i\in t}t_i\log(\frac{1}{1+\exp(-y_i)})+(1-t_i)\log(\frac{\exp(-y_i)}{1+-\exp(-y_i)})
 $$
 这里的<span class="arithmatex">\(t_i\)</span>表示每个答案对应的权重，而y是模型的输出结果。</p>
-<p><span id=busuanzi_container_page_pv>本文总阅读量<span id=busuanzi_value_page_pv></span>次</span></p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月4日 10:57:21</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月8日 14:30:35</span>
       
         <br>
         创建日期:

@@ -4068,12 +4068,12 @@
 </details>
 <h2 id="节点嵌入-node-embedding">节点嵌入 Node Embedding<a class="headerlink" href="#节点嵌入-node-embedding" title="Permanent link">&para;</a></h2>
 <ul>
-<li>**图表示学习**的目标是提供一个统一的图特征提取方式，对于不同的图机器学习任务都可以使用，而节点嵌入就是指将图中的节点映射到嵌入空间中，用一个稠密的向量来表示不同的节点，而向量的相似度又决定了节点在图中的相似度，也就是说将整个网络进行了编码。</li>
+<li><strong>图表示学习</strong>的目标是提供一个统一的图特征提取方式，对于不同的图机器学习任务都可以使用，而节点嵌入就是指将图中的节点映射到嵌入空间中，用一个稠密的向量来表示不同的节点，而向量的相似度又决定了节点在图中的相似度，也就是说将整个网络进行了编码。</li>
 </ul>
 <h3 id="编码器和解码器">编码器和解码器<a class="headerlink" href="#编码器和解码器" title="Permanent link">&para;</a></h3>
 <ul>
 <li>
-<p>节点嵌入的目标就是对节点进行编码并映射到嵌入空间中，使得两个节点在嵌入空间中的相似度近似于节点在图中的相似度，而**相似度和嵌入向量的形式都是需要定义**的</p>
+<p>节点嵌入的目标就是对节点进行编码并映射到嵌入空间中，使得两个节点在嵌入空间中的相似度近似于节点在图中的相似度，而<strong>相似度和嵌入向量的形式都是需要定义</strong>的</p>
 </li>
 <li>
 <p>因此节点嵌入的两个关键的组件就是编码器和相似度函数</p>
@@ -4095,7 +4095,7 @@ $$</p>
 <h3 id="随机游走random-walk">随机游走Random Walk<a class="headerlink" href="#随机游走random-walk" title="Permanent link">&para;</a></h3>
 <h4 id="什么是随机游走">什么是随机游走<a class="headerlink" href="#什么是随机游走" title="Permanent link">&para;</a></h4>
 <p>​       随机游走是一种用来定义图节点相似度的方法， <span class="arithmatex">\(z_u\)</span>表示图节点u的嵌入向量，而概率<span class="arithmatex">\(P(v|z_u)\)</span>表示在节点u的随机游走中遇到节点v的概率。</p>
-<p>​       随机游走的过程即每次**随机选择**当前节点的一个邻居并“走”到这个邻居的位置上不断重复的过程，这个过程中将产生一个随机的节点序列，称为图的随机游走。而用随机游走定义的相似度就是**u和v出现在同一个随机游走中的概率**。这种方式计算相似度需要以下几个步骤：</p>
+<p>​       随机游走的过程即每次<strong>随机选择</strong>当前节点的一个邻居并“走”到这个邻居的位置上不断重复的过程，这个过程中将产生一个随机的节点序列，称为图的随机游走。而用随机游走定义的相似度就是<strong>u和v出现在同一个随机游走中的概率</strong>。这种方式计算相似度需要以下几个步骤：</p>
 <ul>
 <li>使用一定的决策策略R来计算从u出发的随机游走经过v的概率</li>
 <li>根据随机游走的结果优化嵌入函数并进行编码</li>
@@ -4119,20 +4119,20 @@ $$
 <div class="arithmatex">\[
 \mathcal L=\sum_{u\in V}\sum_{v\in N_R(u)}-\log (P(v|z_u))
 \]</div>
-<p>​       而概率<span class="arithmatex">\(P(v|z_u)\)</span>可以用**sotfmax函数**来进行参数化，选用softmax函数的原因是因为指数运算避免了负概率的出现，并且使得不同节点的相似度区分变得更加明显
+<p>​       而概率<span class="arithmatex">\(P(v|z_u)\)</span>可以用<strong>sotfmax函数</strong>来进行参数化，选用softmax函数的原因是因为指数运算避免了负概率的出现，并且使得不同节点的相似度区分变得更加明显
 $$
 P(v|z_u)=\frac{\exp(z_u^Tz_v)}{\sum_{n\in V}\exp(z_u^Tz_n)}
 $$
-​       但是用上述办法来计算目标函数的话复杂度是非常高的，，可以采用负采样的方式来近似计算损失函数，这里用到了sigmoid函数来近似计算：
-$$
-\log (\frac{\exp(z_u^Tz_v)}{\sum_{n\in V}\exp(z_u^Tz_n)})\approx\log (\sigma(z_u<sup>Tz_v))-\sum_{i=1}</sup>k\log(\sigma(z_u^Tz_{n_i}))
-$$</p>
+​       但是用上述办法来计算目标函数的话复杂度是非常高的，，可以采用负采样的方式来近似计算损失函数，这里用到了sigmoid函数来近似计算：</p>
+<div class="arithmatex">\[
+\log (\frac{\exp(z_u^Tz_v)}{\sum_{n\in V}\exp(z_u^Tz_n)})\approx\log (\sigma(z_u^Tz_v))-\sum_{i=1}^k\log(\sigma(z_u^Tz_{n_i}))
+\]</div>
 <ul>
 <li>
 <p>这种近似方法不计算全部节点而是只采样了K个随机的负样本，并且用sigmoid函数来近似指数运算，这里的k个negative nodes按照其度数成正比的概率进行选取</p>
 </li>
 <li>
-<p>在得到了目标函数的近似形式之后，我们可以采用**随机梯度下降法**来对目标函数进行优化，定义
+<p>在得到了目标函数的近似形式之后，我们可以采用<strong>随机梯度下降法</strong>来对目标函数进行优化，定义
   $$
   \mathcal L^{(u)}=\sum_{v\in N_R(u)}-\log (P(v|z_u))
   $$</p>
@@ -4167,7 +4167,7 @@ $$</p>
 <h4 id="总结">总结<a class="headerlink" href="#总结" title="Permanent link">&para;</a></h4>
 <ul>
 <li>这里其实还没太搞懂node2vec的真正含义，应该有时间去阅读一下提出node2vec的论文，虽然我觉得大概率没什么时间</li>
-<li>node2vec拥有线性的时间复杂度，并且上述算法框架中的三个步骤是可以**并行**的</li>
+<li>node2vec拥有线性的时间复杂度，并且上述算法框架中的三个步骤是可以<strong>并行</strong>的</li>
 </ul>
 <h3 id="图嵌入">图嵌入<a class="headerlink" href="#图嵌入" title="Permanent link">&para;</a></h3>
 <ul>
@@ -4187,8 +4187,8 @@ Z_G=\sum_{v\in G}z_v
 <li>想法2:将匿名游走的嵌入结果进行合并</li>
 </ul>
 <h2 id="链接分析pagerank算法">链接分析：PageRank算法<a class="headerlink" href="#链接分析pagerank算法" title="Permanent link">&para;</a></h2>
-<p>​       这一节的内容主要从矩阵的角度来进行图的分析和学习，我们可以将互联网看成一张巨大的图，里面的网页就是图中的一个个节点，而网页可以通过超链接可以跳转到别的网页，称为链接link，可以把这种关系作为图中的有向边，因此互联网中的网页构成一张**大而稀疏的有向图**，可以用一个邻接矩阵来表示。类似的结构有论文引用图等等。</p>
-<p>​       但是图中每个节点并不都是同等重要的，可以通过一系列链接分析的方法来分析出不同节点的重要性，一般认为一个网站如果有很多链接，那么它往往就比较重要。而出链接和入链接又是两种不同的链接，又应该有不同的考虑。PageRank算法认为**被重要的网页指向的网页**也往往更重要。</p>
+<p>​       这一节的内容主要从矩阵的角度来进行图的分析和学习，我们可以将互联网看成一张巨大的图，里面的网页就是图中的一个个节点，而网页可以通过超链接可以跳转到别的网页，称为链接link，可以把这种关系作为图中的有向边，因此互联网中的网页构成一张<strong>大而稀疏的有向图</strong>，可以用一个邻接矩阵来表示。类似的结构有论文引用图等等。</p>
+<p>​       但是图中每个节点并不都是同等重要的，可以通过一系列链接分析的方法来分析出不同节点的重要性，一般认为一个网站如果有很多链接，那么它往往就比较重要。而出链接和入链接又是两种不同的链接，又应该有不同的考虑。PageRank算法认为<strong>被重要的网页指向的网页</strong>也往往更重要。</p>
 <h3 id="pagerank算法模型">PageRank算法模型<a class="headerlink" href="#pagerank算法模型" title="Permanent link">&para;</a></h3>
 <h4 id="节点的权重">节点的权重<a class="headerlink" href="#节点的权重" title="Permanent link">&para;</a></h4>
 <p>​       我们可以在网络图中定义<span class="arithmatex">\(d_i\)</span>是一个节点的出度，而节点的权重就可以表示为：
@@ -4208,7 +4208,7 @@ $$</p>
 $$
 p(t+1)=Mp(t)
 $$
-我们发现矩阵的权重向量r也可以表示随机游走的分布情况，进一步我们发现r其实就是矩阵M的**特征向量**，因此PageRank实际上就是矩阵M最大的的特征向量，我们一般用幂法可以得到矩阵M的最大特征向量。</p>
+我们发现矩阵的权重向量r也可以表示随机游走的分布情况，进一步我们发现r其实就是矩阵M的<strong>特征向量</strong>，因此PageRank实际上就是矩阵M最大的的特征向量，我们一般用幂法可以得到矩阵M的最大特征向量。</p>
 <h3 id="如何求解pagerank">如何求解PageRank<a class="headerlink" href="#如何求解pagerank" title="Permanent link">&para;</a></h3>
 <ul>
 <li>
@@ -4246,7 +4246,7 @@ G=\beta M+(1-\beta)[\frac{1}n]_{n\times n}
 \]</div>
 <h3 id="个性化的pagerank">个性化的PageRank<a class="headerlink" href="#个性化的pagerank" title="Permanent link">&para;</a></h3>
 <ul>
-<li>通过**几个特定的节点来衡量所有节点的rank**，可以用带restart的随机游走高效计算，这是考虑到了不同用户之间的浏览偏好往往不同，不能用全局的所有节点作为衡量标准，这样一来可以实现个性化的推荐</li>
+<li>通过<strong>几个特定的节点来衡量所有节点的rank</strong>，可以用带restart的随机游走高效计算，这是考虑到了不同用户之间的浏览偏好往往不同，不能用全局的所有节点作为衡量标准，这样一来可以实现个性化的推荐</li>
 </ul>
 
   <hr>
@@ -4254,7 +4254,7 @@ G=\beta M+(1-\beta)[\frac{1}n]_{n\times n}
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月5日 00:05:13</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月8日 14:30:35</span>
       
         <br>
         创建日期:

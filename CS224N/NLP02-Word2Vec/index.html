@@ -4002,9 +4002,9 @@
 <h1 id="nlp02-word2vec">NLP02-word2vec<a class="headerlink" href="#nlp02-word2vec" title="Permanent link">&para;</a></h1>
 <h2 id="word2vec">Word2vec<a class="headerlink" href="#word2vec" title="Permanent link">&para;</a></h2>
 <h3 id="基于迭代的模型">基于迭代的模型<a class="headerlink" href="#基于迭代的模型" title="Permanent link">&para;</a></h3>
-<p>基于SVD的方法实际上考虑的都是单词的**全局特征**，因此计算代价和效果都不太好，因此我们可以尝试建立一个基于迭代的模型并根据单词在上下文中出现的概率来进行编码。</p>
+<p>基于SVD的方法实际上考虑的都是单词的<strong>全局特征</strong>，因此计算代价和效果都不太好，因此我们可以尝试建立一个基于迭代的模型并根据单词在上下文中出现的概率来进行编码。</p>
 <p>另一种思路是设计一个参数是词向量的模型，然后针对一个目标进行模型的训练，在每一次的迭代中计算错误率或者loss函数并据此来更新模型的参数，也就是词向量，最后就可以得到一系列结果作为单词的嵌入向量。</p>
-<p>常见的方法包括**bag-of-words(CBOW)和skip-gram**，其中CBOW的目标是**根据上下文来预测中心的单词**，而**skip-gram则是根据中心单词来预测上下文中的各种单词出现的概率**。这两种方法统称为word2vec，是Google AI团队在<a href="https://papers.nips.cc/paper/2013/file/9aa42b31882ec039965f3c4923ce901b-Paper.pdf">《Distributed Representations of Words and Phrases and their Compositionality》</a> 等多篇论文中提出的词向量训练模型。</p>
+<p>常见的方法包括<strong>bag-of-words(CBOW)和skip-gram</strong>，其中CBOW的目标是<strong>根据上下文来预测中心的单词</strong>，而<strong>skip-gram则是根据中心单词来预测上下文中的各种单词出现的概率</strong>。这两种方法统称为word2vec，是Google AI团队在<a href="https://papers.nips.cc/paper/2013/file/9aa42b31882ec039965f3c4923ce901b-Paper.pdf">《Distributed Representations of Words and Phrases and their Compositionality》</a> 等多篇论文中提出的词向量训练模型。</p>
 <p>而这些模型常用的训练方法有：</p>
 <ul>
 <li>
@@ -4015,17 +4015,17 @@
 </li>
 </ul>
 <h3 id="语言模型language-model">语言模型Language Model<a class="headerlink" href="#语言模型language-model" title="Permanent link">&para;</a></h3>
-<p>**语言模型**可以给一系列单词序列指定一个概率来判断它是不是可以作为一个完整的句子输出，一般完整性强的，语义通顺的句子被赋予的概率会更大，而无法组成句子的一系列单词可能就会计算出非常小的概率，语言模型用公式来表示就是要计算下面的概率：
+<p><strong>语言模型</strong>可以给一系列单词序列指定一个概率来判断它是不是可以作为一个完整的句子输出，一般完整性强的，语义通顺的句子被赋予的概率会更大，而无法组成句子的一系列单词可能就会计算出非常小的概率，语言模型用公式来表示就是要计算下面的概率：
 $$
 P\left(w_{1}, w_{2}, \cdots, w_{n}\right)
 $$
-如果我们假设每个单词在每个位置出现的概率是**独立**的话，这个表达式就会变成：
+如果我们假设每个单词在每个位置出现的概率是<strong>独立</strong>的话，这个表达式就会变成：
 $$
 P\left(w_{1}, w_{2}, \cdots, w_{n}\right)=\prod_{i=1}^nP(w_{i})
 $$
 但这显然是不可能的，因为单词的出现并不是不受约束的，而是和其周围的单词(也就是上下文)有一定的联系，这也是NLP中一个非常重要的观点，那就是</p>
 <blockquote>
-<p>分布式语义(Distributional semantics)：一个词语的**意思是由附近的单词决定的**，一个单词的上下文就是"附近的单词"，可以通过一个定长的滑动窗口来捕捉每个单词对应的上下文和语义。</p>
+<p>分布式语义(Distributional semantics)：一个词语的<strong>意思是由附近的单词决定的</strong>，一个单词的上下文就是"附近的单词"，可以通过一个定长的滑动窗口来捕捉每个单词对应的上下文和语义。</p>
 </blockquote>
 <p>Bi-gram model认为单词出现的概率取决于它的上一个单词，即：
 $$
@@ -4035,7 +4035,7 @@ $$
 <p>事实上上面提出的CBOW和Skip-gram也可以看成是一种简单的语言模型，我们通过训练一个语言模型的方式来训练出文档中出现的单词的词向量。</p>
 <h3 id="连续词袋模型cbow">连续词袋模型(CBOW)<a class="headerlink" href="#连续词袋模型cbow" title="Permanent link">&para;</a></h3>
 <p>连续词袋模型(Continuous Bag of Words Model)是一种根据上下文单词来预测中心单词的模型，对于每一个单词我们需要训练出两个向量u和v分别代表该单词作为中心单词和作为上下文单词的时候的嵌入向量(一种代表输出结果，一种代表输入)</p>
-<p>因此可以定义两个矩阵<span class="arithmatex">\(\mathcal{V} \in \mathbb{R}^{n \times|V|}\)</span> 和 <span class="arithmatex">\(\mathcal{U} \in \mathbb{R}^{|V| \times n}\)</span>，其中n代表了嵌入空间的维度，矩阵<span class="arithmatex">\(\mathcal{V}\)</span>的每一列代表了词汇表中一个单词**作为上下文单词时候的嵌入向量**，用<span class="arithmatex">\(v_i\)</span>表示，而矩阵<span class="arithmatex">\(\mathcal{U}\)</span>表示的是预测的结果，每一行代表了一个单词的嵌入向量，用<span class="arithmatex">\(u_j\)</span>表示。</p>
+<p>因此可以定义两个矩阵<span class="arithmatex">\(\mathcal{V} \in \mathbb{R}^{n \times|V|}\)</span> 和 <span class="arithmatex">\(\mathcal{U} \in \mathbb{R}^{|V| \times n}\)</span>，其中n代表了嵌入空间的维度，矩阵<span class="arithmatex">\(\mathcal{V}\)</span>的每一列代表了词汇表中一个单词<strong>作为上下文单词时候的嵌入向量</strong>，用<span class="arithmatex">\(v_i\)</span>表示，而矩阵<span class="arithmatex">\(\mathcal{U}\)</span>表示的是预测的结果，每一行代表了一个单词的嵌入向量，用<span class="arithmatex">\(u_j\)</span>表示。</p>
 <p>这里其实隐含了一个假设，那就是单词作为上下文和中心词的时候具有的特征是不一样的，因此要用不同的词向量来表示。</p>
 <h4 id="cbow模型的工作原理">CBOW模型的工作原理<a class="headerlink" href="#cbow模型的工作原理" title="Permanent link">&para;</a></h4>
 <ol>
@@ -4051,7 +4051,7 @@ $$
     <span class="arithmatex">\(<span class="arithmatex">\(\hat{v}=\frac{v_{c-m}+v_{c-m+1}+\ldots+v_{c+m}}{2 m} \in \mathbb{R}^{n}\)</span>\)</span></p>
 </li>
 <li>
-<p>生成一个**分数向量**<span class="arithmatex">\(z=\mathcal{U}\hat{v}\)</span>，当相似向量的点积较大时，会将相似的词推到一起，以获得较高的分数</p>
+<p>生成一个<strong>分数向量</strong><span class="arithmatex">\(z=\mathcal{U}\hat{v}\)</span>，当相似向量的点积较大时，会将相似的词推到一起，以获得较高的分数</p>
 </li>
 <li>
 <p>用softmax函数将分数向量转化成概率分布：<span class="arithmatex">\(\hat{y}=\mathrm{softmax}(z)\in \mathbb R^{|V|}\)</span></p>
@@ -4060,11 +4060,11 @@ $$
 <p>根据概率分布<span class="arithmatex">\(\hat{y}\)</span>得到最终的结果<span class="arithmatex">\(y\)</span>(是一个one-hot向量的形式)，也就是最有可能出现在中心位置的单词</p>
 </li>
 </ol>
-<p>因此现在的问题就变成了，我们应该如何学习到两个最关键的矩阵<span class="arithmatex">\(\mathcal{V}\)</span>和<span class="arithmatex">\(\mathcal{U}\)</span>，这也是CBOW最关键的一个问题，这里可以采用**交叉熵**来定义一个目标函数：
+<p>因此现在的问题就变成了，我们应该如何学习到两个最关键的矩阵<span class="arithmatex">\(\mathcal{V}\)</span>和<span class="arithmatex">\(\mathcal{U}\)</span>，这也是CBOW最关键的一个问题，这里可以采用<strong>交叉熵</strong>来定义一个目标函数：
 $$
 H(\hat{y}, y)=-\sum_{j=1}^{|V|} y_{j} \log \left(\hat{y}<em i="i">{j}\right)=-y</em> \log \left(\hat{y}_{i}\right)
 $$
-因为概率的**真实值<span class="arithmatex">\(y\)</span>是一个one-hot向量，只有一个维度是1其他的都是0**，因此可以进行这样的化简。</p>
+因为概率的<strong>真实值<span class="arithmatex">\(y\)</span>是一个one-hot向量，只有一个维度是1其他的都是0</strong>，因此可以进行这样的化简。</p>
 <h4 id="损失函数与优化方式">损失函数与优化方式<a class="headerlink" href="#损失函数与优化方式" title="Permanent link">&para;</a></h4>
 <p>我们可以定义如下形式的损失函数并进行优化：</p>
 <div class="arithmatex">\[
@@ -4075,7 +4075,7 @@ $$
     &amp;=-u_{c}^{T} \hat{v}+\log \sum_{j=1}^{|V|} \exp \left(u_{j}^{T} \hat{v}\right)
 \end{aligned}
 \]</div>
-<p>事实上这里的loss function就是上面的交叉熵的进一步推导。我们可以采用**随机梯度下降**SGD的方式来进行模型的求解和参数的更新。</p>
+<p>事实上这里的loss function就是上面的交叉熵的进一步推导。我们可以采用<strong>随机梯度下降</strong>SGD的方式来进行模型的求解和参数的更新。</p>
 <h3 id="skip-gram模型">Skip-gram模型<a class="headerlink" href="#skip-gram模型" title="Permanent link">&para;</a></h3>
 <p>Skip-gram模型是一种给定中心单词来预测上下文中各个位置的不同单词出现概率的模型，模型的工作原理可以用如下几个步骤概括：</p>
 <ol>
@@ -4136,11 +4136,11 @@ $$
 <h3 id="负采样negative-sampling">负采样Negative Sampling<a class="headerlink" href="#负采样negative-sampling" title="Permanent link">&para;</a></h3>
 <p>上面提到的算法中，时间复杂度基本都是<span class="arithmatex">\(O(|V|)\)</span>的(比如softmax计算中，会消耗大量的算力)，也就是词汇表的大小，而这个规模往往是比较大的，因此我们可以想办法逼近这个值。</p>
 <p>在每一次的迭代中，不是遍历整个词汇表而是进行一些负采样操作，我们可以从一个噪声分布中"采样"，其概率与词汇表频率的顺序匹配。</p>
-<p>负采样可以理解为单词和短语及其构成的分布式表示，比如在skip-gram模型中，假设一对单词和上下文<span class="arithmatex">\((w,c)\)</span>，我们用<span class="arithmatex">\(P(D|w,c),D\in \left\{0,1\right\}\)</span>来表示**一对单词和上下文是否属于训练集中出现过的内容**，首先可以用sigmoid函数来定义这个概率：</p>
+<p>负采样可以理解为单词和短语及其构成的分布式表示，比如在skip-gram模型中，假设一对单词和上下文<span class="arithmatex">\((w,c)\)</span>，我们用<span class="arithmatex">\(P(D|w,c),D\in \left\{0,1\right\}\)</span>来表示<strong>一对单词和上下文是否属于训练集中出现过的内容</strong>，首先可以用sigmoid函数来定义这个概率：</p>
 <div class="arithmatex">\[
 P(D=1 \mid w, c, \theta)=\sigma\left(v_{c}^{T} v_{w}\right)=\frac{1}{1+e^{-v_{c}^{T} v_{w}}}
 \]</div>
-<p>这里的v就是上面提到的嵌入向量，然后我们可以构建一个新的目标函数来试图最大化一个单词和上下文对属于训练文本的概率，也就是采用**极大似然法来估计参数**，这里我们将需要求的参数<span class="arithmatex">\(\mathcal{V},\mathcal{U}\)</span>记作<span class="arithmatex">\(\theta\)</span>，则极大似然估计的目标可以表示为：</p>
+<p>这里的v就是上面提到的嵌入向量，然后我们可以构建一个新的目标函数来试图最大化一个单词和上下文对属于训练文本的概率，也就是采用<strong>极大似然法来估计参数</strong>，这里我们将需要求的参数<span class="arithmatex">\(\mathcal{V},\mathcal{U}\)</span>记作<span class="arithmatex">\(\theta\)</span>，则极大似然估计的目标可以表示为：</p>
 <div class="arithmatex">\[
 \begin{aligned}
         \theta &amp;=\arg\max_{\theta} \prod_{(w, c) \in D} P(D=1 \mid w, c, \theta) \prod_{(w, c) \in \tilde{D}} P(D=0 \mid w, c, \theta) \\
@@ -4154,7 +4154,7 @@ P(D=1 \mid w, c, \theta)=\sigma\left(v_{c}^{T} v_{w}\right)=\frac{1}{1+e^{-v_{c}
 <div class="arithmatex">\[
 J=-\sum_{(w, c) \in D} \log \frac{1}{1+\exp \left(-u_{w}^{T} v_{c}\right)}-\sum_{(w, c) \in \tilde{D}} \log \frac{1}{1+\exp \left(u_{w}^{T} v_{c}\right)}
 \]</div>
-<p>这里的集合<span class="arithmatex">\(\tilde{D}\)</span> 表示负采样集合，也就是一系列**不属于训练文本的中心词和上下文的对构成的一个集合**，我们可以通过根据训练文本随机生成的方式来得到负采样集合。这样一来CBOW的损失函数就变成了：</p>
+<p>这里的集合<span class="arithmatex">\(\tilde{D}\)</span> 表示负采样集合，也就是一系列<strong>不属于训练文本的中心词和上下文的对构成的一个集合</strong>，我们可以通过根据训练文本随机生成的方式来得到负采样集合。这样一来CBOW的损失函数就变成了：</p>
 <div class="arithmatex">\[
 J=-\log \sigma\left(u_{c}^{T} \cdot \hat{v}\right)-\sum_{k=1}^{K} \log \sigma\left(-\tilde{u}_{k}^{T} \cdot \hat{v}\right)
 \]</div>
@@ -4178,8 +4178,8 @@ J=-\log \sigma\left(u_{o}^{T} \cdot v_{c}\right)-\sum_{k=1}^{K} \log \sigma\left
 \]</div>
 <h2 id="全局词向量glove">全局词向量GloVe<a class="headerlink" href="#全局词向量glove" title="Permanent link">&para;</a></h2>
 <h3 id="已有的单词表示方法">已有的单词表示方法<a class="headerlink" href="#已有的单词表示方法" title="Permanent link">&para;</a></h3>
-<p>到现在为止已经介绍过的单词表示方法主要分为两种，一种是基于次数统计和矩阵分解的传统机器学习方法，这类方法可以获取**全局**的统计信息，并很好的捕捉单词之间的相似性，但是在单词类比之类的任务重表现较差，比较经典的有潜在语义分析(LSA)等等</p>
-<p>另一类是上面提到的基于\"浅窗口\"(shallow window based)的方法，比如CBOW和Skip-gram，通过局部的上下文来进行上下文或者中心单词的预测，这样的方法可以捕捉到复杂的语言模式和上下文信息，但是**对全局的统计信息知之甚少**，缺少\"大局观\"，这也是这些模型的缺点。</p>
+<p>到现在为止已经介绍过的单词表示方法主要分为两种，一种是基于次数统计和矩阵分解的传统机器学习方法，这类方法可以获取<strong>全局</strong>的统计信息，并很好的捕捉单词之间的相似性，但是在单词类比之类的任务重表现较差，比较经典的有潜在语义分析(LSA)等等</p>
+<p>另一类是上面提到的基于\"浅窗口\"(shallow window based)的方法，比如CBOW和Skip-gram，通过局部的上下文来进行上下文或者中心单词的预测，这样的方法可以捕捉到复杂的语言模式和上下文信息，但是<strong>对全局的统计信息知之甚少</strong>，缺少\"大局观\"，这也是这些模型的缺点。</p>
 <p>而GloVe则使用一些全局的统计信息，比如共生矩阵，并使用最小二乘损失函数来预测一个单词出现在一段上下文中的概率，并且在单词类比的任务上取得了SOTA的效果。</p>
 <h3 id="glove算法">GloVe算法<a class="headerlink" href="#glove算法" title="Permanent link">&para;</a></h3>
 <p>首先用<span class="arithmatex">\(X\)</span>来表示训练集的共生矩阵，而<span class="arithmatex">\(X_{ij}\)</span>表示单词i的上下文中出现单词j的次数，用<span class="arithmatex">\(X_i\)</span>来表示矩阵中第i行的和则这样一来：</p>

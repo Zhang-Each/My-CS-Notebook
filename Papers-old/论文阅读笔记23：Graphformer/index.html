@@ -3939,7 +3939,7 @@
 <summary>本页统计信息</summary>
 <ul>
 <li>
-<p>本页约 2156 个字,  预计阅读时间 7 分钟。</p>
+<p>本页约 2149 个字,  预计阅读时间 7 分钟。</p>
 </li>
 <li>
 <p><span id="busuanzi_container_page_pv">本页总阅读量<span id="busuanzi_value_page_pv"></span>次</span></p>
@@ -3950,8 +3950,8 @@
 <p>论文《<a href="https://arxiv.org/pdf/2106.05234.pdf">Do Transformers Really Perform Bad for Graph Representation?</a>》的阅读笔记，该论文发表在NIPS2021上，提出了一种新的图Transformer架构，对原有的GNN和Graph-Transformer等架构进行了总结和改进。</p>
 </blockquote>
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Transformer是近几年来人工智能领域极度热门的一个模型，在自然语言处理和计算机视觉等领域取得了巨大的成功，但是它却在图结构的数据，尤其是图级别的预测任务(就是以图而非节点和边为单位进行性质的预测)上表现不好，之前论文阅读笔记系列中，我们也在《<a href="https://zhang-each.github.io/2021/09/09/reading15/">论文阅读笔记15：Graph-Transformer</a>》中介绍了图Transformer的通用架构以及专门用于异构图的Transformer模型，但是这些模型都主要面向节点级别的任务，并且**基本就是在通用的GNN架构上换用了Transformer引以为傲的自注意力机制**，而对于图级别的预测任务表现不佳。</p>
-<p>本论文提出的Graphformer就是针对图级别的任务提出的Tranformer架构。我们知道Transformer的强项在于对序列化的数据进行建模，而图作为一个非欧式数据结构是没有序列特征的，因此直接使用Transformer架构必然会带来各种问题，而作者认为解决问题的关键就在于将**图的结构信息引入模型**中，为此作者在论文中提出了下面三个重要的图结构编码方式：</p>
+<p>Transformer是近几年来人工智能领域极度热门的一个模型，在自然语言处理和计算机视觉等领域取得了巨大的成功，但是它却在图结构的数据，尤其是图级别的预测任务(就是以图而非节点和边为单位进行性质的预测)上表现不好，之前论文阅读笔记系列中，我们也在《<a href="https://zhang-each.github.io/2021/09/09/reading15/">论文阅读笔记15：Graph-Transformer</a>》中介绍了图Transformer的通用架构以及专门用于异构图的Transformer模型，但是这些模型都主要面向节点级别的任务，并且<strong>基本就是在通用的GNN架构上换用了Transformer引以为傲的自注意力机制</strong>，而对于图级别的预测任务表现不佳。</p>
+<p>本论文提出的Graphformer就是针对图级别的任务提出的Tranformer架构。我们知道Transformer的强项在于对序列化的数据进行建模，而图作为一个非欧式数据结构是没有序列特征的，因此直接使用Transformer架构必然会带来各种问题，而作者认为解决问题的关键就在于将<strong>图的结构信息引入模型</strong>中，为此作者在论文中提出了下面三个重要的图结构编码方式：</p>
 <table>
 <thead>
 <tr>
@@ -3979,7 +3979,7 @@
 </tbody>
 </table>
 <ul>
-<li>本模型是面向图级别的预测任务的，但是上面的几种编码依然是对结点和边进行编码，之后还需要通过**图池化**(Graph Pooling)等手段**得到整张图的特征**，这个后面会细嗦</li>
+<li>本模型是面向图级别的预测任务的，但是上面的几种编码依然是对结点和边进行编码，之后还需要通过<strong>图池化</strong>(Graph Pooling)等手段<strong>得到整张图的特征</strong>，这个后面会细嗦</li>
 </ul>
 <p>论文对这几种编码方式的有效性进行了数学上的证明，并在数据集上进行了实验</p>
 <h2 id="相关工作">相关工作<a class="headerlink" href="#相关工作" title="Permanent link">&para;</a></h2>
@@ -3994,7 +3994,7 @@ $$
 h_{G}=\operatorname{READOUT}\left(\left{h_{i}^{(L)} \mid v_{i} \in G\right}\right)
 $$</p>
 <ul>
-<li>我们可以发现图神经网络中，节点特征都**依赖于局部结构**——即节点邻居的信息，很难学到全局的特征表示，因此通用的GNN架构对于图级别的问题效果可能不好。</li>
+<li>我们可以发现图神经网络中，节点特征都<strong>依赖于局部结构</strong>——即节点邻居的信息，很难学到全局的特征表示，因此通用的GNN架构对于图级别的问题效果可能不好。</li>
 </ul>
 <h3 id="transformer架构">Transformer架构<a class="headerlink" href="#transformer架构" title="Permanent link">&para;</a></h3>
 <p>Transformer因为太热门我已经不想提了，之前的论文里也好几次提到过，这个模型引以为傲的东西就是它的多头自注意力机制和FFN，Position Encoding等一系列trick，其中自注意力机制可以表示为：
@@ -4013,7 +4013,7 @@ $$</p>
 <p>可以看到整个模型就是在原本的Transformer模型上融入了三个新的编码特征，下面我们逐一介绍：</p>
 <h3 id="结构编码">结构编码<a class="headerlink" href="#结构编码" title="Permanent link">&para;</a></h3>
 <h4 id="中心编码">中心编码<a class="headerlink" href="#中心编码" title="Permanent link">&para;</a></h4>
-<p>中心编码使用**节点的度数作为节点重要性的衡量标准**，这其实也基于一个很直观的感受，那就是图中被更多节点连接的结点往往会更重要，比如社交网络中，网红总是被更多人点了关注，因此Graphformer构造了一批**和节点度数有关的向量**(每个度数都有一个向量表示，和具体是哪个节点无关，度数相同的结点的中心编码也相同)，并且将这个中心编码直接和节点特征相加作为输入：
+<p>中心编码使用<strong>节点的度数作为节点重要性的衡量标准</strong>，这其实也基于一个很直观的感受，那就是图中被更多节点连接的结点往往会更重要，比如社交网络中，网红总是被更多人点了关注，因此Graphformer构造了一批<strong>和节点度数有关的向量</strong>(每个度数都有一个向量表示，和具体是哪个节点无关，度数相同的结点的中心编码也相同)，并且将这个中心编码直接和节点特征相加作为输入：
 $$
 h_{i}<sup -="-">{(0)}=x_{i}+z_{\mathrm{deg}</sup>\left(v_{i}\right)}<sup _="+">{-}+z_{\mathrm{deg}</sup>\left(v_{i}\right)}^{+}
 $$</p>
@@ -4070,14 +4070,13 @@ $$</p>
 </tr>
 </tbody>
 </table>
-<p><span id=busuanzi_container_page_pv>本文总阅读量<span id=busuanzi_value_page_pv></span>次</span></p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月4日 10:57:21</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月8日 14:30:35</span>
       
         <br>
         创建日期:

@@ -3741,7 +3741,7 @@
 <li>缓冲区管理器的各项功能</li>
 <li>并行的缓冲区管理器</li>
 </ul>
-<p>同时已经提供的代码中封装好了页的数据结构<code>Page</code>，磁盘的**读写操作API**<code>Disk Manager</code>可以使用，Page类的关键属性和函数定义如下：</p>
+<p>同时已经提供的代码中封装好了页的数据结构<code>Page</code>，磁盘的<strong>读写操作API</strong><code>Disk Manager</code>可以使用，Page类的关键属性和函数定义如下：</p>
 <div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Page</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="kr">inline</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="nf">GetData</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">data_</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
 <span class="w">  </span><span class="kr">inline</span><span class="w"> </span><span class="n">page_id_t</span><span class="w"> </span><span class="nf">GetPageId</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">page_id_</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
@@ -3901,7 +3901,7 @@
 <li>其他的几个功能也都是类似的写法，不过没有Fetch那么复杂</li>
 </ul>
 <h2 id="step3-parallel-buffer-pool-manager">Step3-Parallel Buffer Pool Manager<a class="headerlink" href="#step3-parallel-buffer-pool-manager" title="Permanent link">&para;</a></h2>
-<p>第三步是实现具有**多个Buffer Pool的Manager**以支持多线程的访问，这一部分的主要任务就是创建多个缓冲区管理器的实例用来并发访问，并通过一定的规则建立起页和缓冲池的映射关系，然后在缓冲池中进行对应页的操作。需要实现的功能包括：</p>
+<p>第三步是实现具有<strong>多个Buffer Pool的Manager</strong>以支持多线程的访问，这一部分的主要任务就是创建多个缓冲区管理器的实例用来并发访问，并通过一定的规则建立起页和缓冲池的映射关系，然后在缓冲池中进行对应页的操作。需要实现的功能包括：</p>
 <ul>
 <li><code>ParallelBufferPoolManager(num_instances, pool_size, disk_manager, log_manager)</code></li>
 <li><code>~ParallelBufferPoolManager()</code></li>

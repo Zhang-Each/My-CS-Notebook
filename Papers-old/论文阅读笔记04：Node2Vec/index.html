@@ -3953,7 +3953,7 @@
 <summary>本页统计信息</summary>
 <ul>
 <li>
-<p>本页约 2606 个字,  预计阅读时间 9 分钟。</p>
+<p>本页约 2599 个字,  预计阅读时间 9 分钟。</p>
 </li>
 <li>
 <p><span id="busuanzi_container_page_pv">本页总阅读量<span id="busuanzi_value_page_pv"></span>次</span></p>
@@ -3969,7 +3969,7 @@
 <p>​       事实上这是一个非常大的研究领域——图嵌入，传统的图嵌入模型有两种比较常见的特征表示方法，一种是大量依赖人造的手工特征，而另一种是使用无监督的特征学习方式，使用谱图理论对每个图的拉普拉斯特征图进行一定的降维操作从而得到图节点的特征表示，这些方法要不缺乏可解释性，要不就存在计算量过大的问题（因为构造拉普拉斯特征图和降维都是确定性的算法，时间复杂度非常高）</p>
 <p>​       而本论文《node2vec: Scalable Feature Learning for networks》则提出了一种可度量的网络结构特征表示学习方法，并将其命名为node2vec，这种表示学习方式在保留了局部特征的同时，采用一定的随即策略降低了算法的复杂度。</p>
 <h2 id="论文解决的问题">论文解决的问题<a class="headerlink" href="#论文解决的问题" title="Permanent link">&para;</a></h2>
-<p>​       本论文主要解决的问题就是在DeepWalk等的基础上提出了更加合理的图特征学习方法，提出了用于网络中**可伸缩特征学习的半监督算法**，使用SGD优化一个自定义的基于图的目标函数，该方法可以最大化的在D维特征空间保留节点的网络领域信息；在随机游走的基础上设计了一种二阶随机游走的过程，相当于对DeepWalk算法的一种扩展，它保留了邻居节点的图特征。该论文的贡献可以概括为：</p>
+<p>​       本论文主要解决的问题就是在DeepWalk等的基础上提出了更加合理的图特征学习方法，提出了用于网络中<strong>可伸缩特征学习的半监督算法</strong>，使用SGD优化一个自定义的基于图的目标函数，该方法可以最大化的在D维特征空间保留节点的网络领域信息；在随机游走的基础上设计了一种二阶随机游走的过程，相当于对DeepWalk算法的一种扩展，它保留了邻居节点的图特征。该论文的贡献可以概括为：</p>
 <ul>
 <li>提出了node2vec这种图特征学习算法，并使用SGD来优化一个neighborhood preserving的目标函数</li>
 <li>展示了node2vec如何提供发现符合不同等价的表示的灵活性</li>
@@ -4007,7 +4007,7 @@ $$
 <p><img alt="image-20210612194143948" src="../static/image-20210612194143948.png" /></p>
 <p>​       在学习一个网络的嵌入表示的时候最值得关注的两个特征就是节点的同质性和结构上的等价性，同质性的节点往往更容易互联连接，而结构等价性是节点的局部拓扑结构的相似性，BFS倾向于在初始节点的周围游走，可以反映出一个节点的邻居的微观特性；而DFS一般会跑的离初始节点越来越远，可以反映出一个节点邻居的宏观特性。</p>
 <h4 id="node2vec中改进的偏见随机游走">node2vec中改进的偏见随机游走<a class="headerlink" href="#node2vec中改进的偏见随机游走" title="Permanent link">&para;</a></h4>
-<p>​       node2vec中定义了一种**二阶的随机游走策略**，并且给每种不同类型的点分配了不同的权重，对于一个节点v，假设随机游走到v之前的一个节点是x，那么在v的所有邻居节点中，不同的节点按照到节点x的最短路径的边数分成了三类，即0(节点x本身)，1(和vx两个节点都相邻)和2(和v相邻但是和x不相邻)，随机游走的概率可以定义为：
+<p>​       node2vec中定义了一种<strong>二阶的随机游走策略</strong>，并且给每种不同类型的点分配了不同的权重，对于一个节点v，假设随机游走到v之前的一个节点是x，那么在v的所有邻居节点中，不同的节点按照到节点x的最短路径的边数分成了三类，即0(节点x本身)，1(和vx两个节点都相邻)和2(和v相邻但是和x不相邻)，随机游走的概率可以定义为：
 $$
 \pi_{v x}=\alpha_{p q}(t, x) \cdot w_{v x}
 $$
@@ -4037,7 +4037,7 @@ $$
 </ul>
 <h2 id="实验结果">实验结果<a class="headerlink" href="#实验结果" title="Permanent link">&para;</a></h2>
 <h3 id="算法性能">算法性能<a class="headerlink" href="#算法性能" title="Permanent link">&para;</a></h3>
-<p>​       论文中对使用node2vec算法得到的特征表示在多标签节点分类任务、链接预测任务中进行了评估，并且和谱聚类，DeepWalk和LINE等之前的特征表示学习算法在BlogCatalog，PPI和Wikipedia等数据集上进行了对比得到的**F1分数比较结果**如下：</p>
+<p>​       论文中对使用node2vec算法得到的特征表示在多标签节点分类任务、链接预测任务中进行了评估，并且和谱聚类，DeepWalk和LINE等之前的特征表示学习算法在BlogCatalog，PPI和Wikipedia等数据集上进行了对比得到的<strong>F1分数比较结果</strong>如下：</p>
 <p><img alt="image-20210612203152993" src="../static/image-20210612203152993.png" /></p>
 <p>同时论文中还给出了两种F1分数下的算法性能对比图：</p>
 <p><img alt="image-20210612203446352" src="../static/image-20210612203446352.png" /></p>
@@ -4048,14 +4048,13 @@ $$
 <p>从图中我们可以看到算法小号的时间和节点数基本成线性关系，说明算法的scalability比较好。</p>
 <h2 id="总结与展望">总结与展望<a class="headerlink" href="#总结与展望" title="Permanent link">&para;</a></h2>
 <p>​       本论文中提出了一种新的偏见游走策略并在此基础上产生了一种新的图特征学习算法，有了特征表示我们才能在具体的图机器学习任务中有所作为，而node2vec所提出的这种偏见游走策略，实际上体现的依然是机器学习中的一种trade-off的思想，即将BFS和DFS两种采样策略进行了一定的妥协，最终得到了效果更好的采样策略。</p>
-<p><span id=busuanzi_container_page_pv>本文总阅读量<span id=busuanzi_value_page_pv></span>次</span></p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月4日 10:57:21</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月8日 14:30:35</span>
       
         <br>
         创建日期:

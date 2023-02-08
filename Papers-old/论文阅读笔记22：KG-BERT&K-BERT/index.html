@@ -3913,7 +3913,7 @@
 <summary>本页统计信息</summary>
 <ul>
 <li>
-<p>本页约 2255 个字,  预计阅读时间 8 分钟。</p>
+<p>本页约 2248 个字,  预计阅读时间 7 分钟。</p>
 </li>
 <li>
 <p><span id="busuanzi_container_page_pv">本页总阅读量<span id="busuanzi_value_page_pv"></span>次</span></p>
@@ -3928,7 +3928,7 @@
 <p>而在BERT这样的预训练模型被提出之后，结合BERT做的一些知识和文本的联合表示又兴盛了起来，主要有两条发展路线：</p>
 <ul>
 <li>第一条路是用语言模型解决知识图谱自身的下游任务比如链接预测，实体预测等等</li>
-<li>第二条路是用知识赋能语言模型，增强语言模型的表示能力并用于各种下游任务，如**垂直领域的对话**就非常适合用语言模型+领域知识图谱来一起做</li>
+<li>第二条路是用知识赋能语言模型，增强语言模型的表示能力并用于各种下游任务，如<strong>垂直领域的对话</strong>就非常适合用语言模型+领域知识图谱来一起做</li>
 </ul>
 <p>这一次我读的两篇论文分别是KG-BERT和K-BERT，分别就是在BERT发布初期对于上面两条路线的一些尝试。</p>
 <h2 id="kg-bert用bert做kg补全">KG-BERT：用BERT做KG补全<a class="headerlink" href="#kg-bert用bert做kg补全" title="Permanent link">&para;</a></h2>
@@ -3971,7 +3971,7 @@ $$</p>
 <p>嵌入层的作用是将句子树转化成嵌入表示，这里的token embedding生成的方式和BERT非常相似，由三个部分相加而成，分别是token本身的embedding(同时要在句子开头加上CLS标签)，软位置编码和段编码三个部分。</p>
 <h4 id="软位置编码">软位置编码<a class="headerlink" href="#软位置编码" title="Permanent link">&para;</a></h4>
 <p>位置编码是BERT中提出的一个很重要的trick，如果BERT中没有位置编码就会变成和词袋模型等价的语言模型， 这会导致缺少模型缺少结构化的信息(比如token之间的位置关系)，位置编码正是提供了这样一种结构化的信息。</p>
-<p>但是K-BERT的输入不是句子而是一个句子树，因此取代原本的硬位置编码(按照单词的顺序确定位置，不适用于树形的结构)提出了**软位置编码**的方式，这样一来就可以对树状结构进行位置编码了。</p>
+<p>但是K-BERT的输入不是句子而是一个句子树，因此取代原本的硬位置编码(按照单词的顺序确定位置，不适用于树形的结构)提出了<strong>软位置编码</strong>的方式，这样一来就可以对树状结构进行位置编码了。</p>
 <h4 id="段编码">段编码<a class="headerlink" href="#段编码" title="Permanent link">&para;</a></h4>
 <p>段编码也是BERT中一个重要的部分，K-BERT沿用了段编码，并在组合的句子中采用不同的段标识，但是如果只有一个句子树，那么所有的token的段编码是相同的。</p>
 <h3 id="可视层seeing-layer">可视层Seeing Layer<a class="headerlink" href="#可视层seeing-layer" title="Permanent link">&para;</a></h3>
@@ -3983,9 +3983,9 @@ M_{i j}=\left{\begin{array}{cc}
 -\infty &amp; w_{i} \oslash w_{j}
 \end{array}\right.
 $$
-两个token i和j在同一个分支上的时候就是对应位置权重就是0，否则就是负无穷，这里的i和j是**硬位置**，因为软位置会导致下标重合。</p>
+两个token i和j在同一个分支上的时候就是对应位置权重就是0，否则就是负无穷，这里的i和j是<strong>硬位置</strong>，因为软位置会导致下标重合。</p>
 <h3 id="掩码transformer">掩码Transformer<a class="headerlink" href="#掩码transformer" title="Permanent link">&para;</a></h3>
-<p>最后还需要将嵌入层和可视层的结果输入到一个掩码Transformer层中，这里采用的是**掩码自注意力机制**，掩码自注意力要用到可视矩阵M，来排除无关token对特定token的影响，具体的运算方式如下：
+<p>最后还需要将嵌入层和可视层的结果输入到一个掩码Transformer层中，这里采用的是<strong>掩码自注意力机制</strong>，掩码自注意力要用到可视矩阵M，来排除无关token对特定token的影响，具体的运算方式如下：
 $$
 \begin{array}{c}
 Q^{i+1}, K^{i+1}, V<sup i="i">{i+1}=h</sup> W_{q}, h^{i} W_{k}, h^{i} W_{v} \
@@ -3996,14 +3996,13 @@ $$
 <img alt="image-20211026144253124" src="../static/image-20211026144253124.png" /></p>
 <h2 id="实验结果">实验结果<a class="headerlink" href="#实验结果" title="Permanent link">&para;</a></h2>
 <p>两篇文章都和已有的方法做了大量对比，KG-BERT和Trans家族等一系列模型在知识图谱补全任务中进行对比，结论是效果好的惊人(你用了这么多参数不惊人才比较奇怪)，第二篇文章更是重量级，财大气粗直接用不同的语料库自己重新训练了几个不同的BERT模型，并在开放域问答和领域内(金融，法律)的问答和命名实体标注等多项任务中进行了比较，结论都是有明显的提升，具体的图表就不放了。</p>
-<p><span id=busuanzi_container_page_pv>本文总阅读量<span id=busuanzi_value_page_pv></span>次</span></p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月4日 10:57:21</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月8日 14:30:35</span>
       
         <br>
         创建日期:

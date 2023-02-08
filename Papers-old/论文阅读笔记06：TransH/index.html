@@ -3819,7 +3819,7 @@
 <summary>本页统计信息</summary>
 <ul>
 <li>
-<p>本页约 2252 个字,  预计阅读时间 8 分钟。</p>
+<p>本页约 2245 个字,  预计阅读时间 7 分钟。</p>
 </li>
 <li>
 <p><span id="busuanzi_container_page_pv">本页总阅读量<span id="busuanzi_value_page_pv"></span>次</span></p>
@@ -3827,12 +3827,12 @@
 </ul>
 </details>
 <blockquote>
-<p>阅读知识图谱嵌入领域的论文《Knowledge Graph Embedding by Translating on Hyperplanes》的阅读笔记，该论文中提出了知识图谱嵌入的**TransE模型**</p>
+<p>阅读知识图谱嵌入领域的论文《Knowledge Graph Embedding by Translating on Hyperplanes》的阅读笔记，该论文中提出了知识图谱嵌入的<strong>TransE模型</strong></p>
 </blockquote>
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
 <p>​     论文的开头提出了知识图谱领域老生常谈的一些话题，包括知识图谱是什么，知识图谱是一个实体-关系-实体组成的三元组等等，这些内容在TransE模型的原论文中也已经提的不要提了，而知识图谱的研究存在的两个主要的困难是：</p>
 <ul>
-<li>知识图谱本质上是一个符号逻辑系统，是人工智能流派中的符号学派的产物，但是计算机只能支持数值计算，而**符号逻辑和数值计算之间存在着一个巨大的鸿沟**难以跨越</li>
+<li>知识图谱本质上是一个符号逻辑系统，是人工智能流派中的符号学派的产物，但是计算机只能支持数值计算，而<strong>符号逻辑和数值计算之间存在着一个巨大的鸿沟</strong>难以跨越</li>
 <li>难以获得全局的知识，传统的方法在面对长距离的推理的时候缺少鲁棒性</li>
 </ul>
 <p>而TransE的提出使得知识图谱可以表示成连续空间中的向量并保留原本图谱中的一些性质，同时，实体和关系的表示可以用最小化一个全局损失函数的方式来进行优化。这样一来每一个实体和关系的嵌入表示就将全局的信息编码了进去，而学习到的嵌入表示就可以用到各种任务中去，比如知识图谱的补全。</p>
@@ -3842,12 +3842,12 @@
 <p>​     同时TransH模型的复杂度和TransE基本相同，为了训练出更好的嵌入表示，论文指出构造负样本非常重要，并且提出了一种trick可以减少生成错误负样本的概率。</p>
 <h2 id="transh算法的细节">TransH算法的细节<a class="headerlink" href="#transh算法的细节" title="Permanent link">&para;</a></h2>
 <h3 id="对transe的分析">对TransE的分析<a class="headerlink" href="#对transe的分析" title="Permanent link">&para;</a></h3>
-<p>​     TransE存在一些问题，论文对这些存在的问题进行了简单的分析，首先基于translation的知识图谱嵌入方法都用打分函数作为评价标准，而打分函数往往是<span class="arithmatex">\(||h+r-t||_{l1/l2}\)</span>，如果这个分数的值非常小就说明这个三元组的嵌入向量学习的比较到位，但是这个模型只在**一对一和非自反的关系中**比较有效。我们不妨假设一个三元组的嵌入向量满足<span class="arithmatex">\(h+r-t=0\)</span>，我们可以进行如下推导：</p>
+<p>​     TransE存在一些问题，论文对这些存在的问题进行了简单的分析，首先基于translation的知识图谱嵌入方法都用打分函数作为评价标准，而打分函数往往是<span class="arithmatex">\(||h+r-t||_{l1/l2}\)</span>，如果这个分数的值非常小就说明这个三元组的嵌入向量学习的比较到位，但是这个模型只在<strong>一对一和非自反的关系中</strong>比较有效。我们不妨假设一个三元组的嵌入向量满足<span class="arithmatex">\(h+r-t=0\)</span>，我们可以进行如下推导：</p>
 <ul>
 <li>如果这个三元组是自反的，即<span class="arithmatex">\((h,r,t)\in \Delta\rightarrow (t,r,h)\in \Delta\)</span>，那么根据<span class="arithmatex">\(h+r=t=h-r\)</span>有<span class="arithmatex">\(r=0,h=t\)</span>，这很明显是不合理的，因为r不可能是0，h和t也不一定相等</li>
 <li>如果这是一个多对一关系，即<span class="arithmatex">\((h_i,r,t)\in \Delta\)</span>，那么就有<span class="arithmatex">\(h_i=t-r=h_j\)</span>，也就是说所有的h都相等，这很明显也不合理，同样的多对一和多对多关系也是同理</li>
 </ul>
-<p>上面的推导表明TransE在这些情况下学习到的嵌入向量存在很多问题，究其根本，就是因为TransE对所有的实体和关系都只用了一个嵌入向量来描述，而**忽略了实体在不同关系中的分布式表示**，也就是说**每个实体在不同的关系中表现出的“特征”可能是不一样的**，而TransE只用了一个向量来表示实体就是让每个实体都只有一个特征表示，这就导致了TransE算法在特定情况下的失败。</p>
+<p>上面的推导表明TransE在这些情况下学习到的嵌入向量存在很多问题，究其根本，就是因为TransE对所有的实体和关系都只用了一个嵌入向量来描述，而<strong>忽略了实体在不同关系中的分布式表示</strong>，也就是说<strong>每个实体在不同的关系中表现出的“特征”可能是不一样的</strong>，而TransE只用了一个向量来表示实体就是让每个实体都只有一个特征表示，这就导致了TransE算法在特定情况下的失败。</p>
 <h3 id="transh算法">TransH算法<a class="headerlink" href="#transh算法" title="Permanent link">&para;</a></h3>
 <p><img src="static/image-20210726182518068.png" alt="image-20210726182518068" style="zoom:50%;" /></p>
 <p>​     因此TransH提出了用给每个关系使用一个专用的超平面，并且将实体投影到这个超平面上使得每个实体都有一个分布式的表示方式，我们假设投影之后的h和t变成了<span class="arithmatex">\(h_{\perp},t_{\perp}\)</span>，那么打分函数就变成了：
@@ -3889,15 +3889,14 @@ $$
 <li>每个tail实体平均拥有的head数量，计为hpt</li>
 <li>每个head实体平均拥有的tail数量，计为tph</li>
 </ul>
-<p>然后用参数<span class="arithmatex">\(p=\frac{tph}{hpt+tph}\)</span>定义一个伯努利分布，每次负采样用p的概率对head进行替换，以1-p的概率对tail进行替换。
-<span id=busuanzi_container_page_pv>本文总阅读量<span id=busuanzi_value_page_pv></span>次</span></p>
+<p>然后用参数<span class="arithmatex">\(p=\frac{tph}{hpt+tph}\)</span>定义一个伯努利分布，每次负采样用p的概率对head进行替换，以1-p的概率对tail进行替换。</p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月4日 10:57:21</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月8日 14:30:35</span>
       
         <br>
         创建日期:

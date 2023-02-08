@@ -3927,7 +3927,7 @@
 <summary>本页统计信息</summary>
 <ul>
 <li>
-<p>本页约 2405 个字,  预计阅读时间 8 分钟。</p>
+<p>本页约 2398 个字,  预计阅读时间 8 分钟。</p>
 </li>
 <li>
 <p><span id="busuanzi_container_page_pv">本页总阅读量<span id="busuanzi_value_page_pv"></span>次</span></p>
@@ -3938,8 +3938,8 @@
 <p>研究生课程《高级数据库技术》课程指定的阅读论文其中一篇《Heterogeneity-Aware Distributed Machine Learning Training via Partial Reduce》，发表于SIGMOD2021，因为期末考试要考所以仔细读一读。</p>
 </blockquote>
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>数据的并行化训练是分布式机器学习的关键，在同构环境下，All-Reduce是最常用的分布式机器学习训练时的通信算法，但是这种算法对**straggler**(即一直没有完成训练的节点，在All-Reduce算法中，其他节点需要等待这个节点训练完成)和**通信延迟**非常敏感，但是随着现在的深度学习任务往往被部署在异构的环境上进行(比如云端服务器)，straggler和通信延迟的现象会越来越多，因为不同的节点处于不同的环境中，节点上模型训练的速度也会有很大的差别，这就导致每个节点完成训练的时间点可能有较大差距，这种异构的训练环境下并不适合使用All-Reduce算法，这也正是这篇论文的motivation</p>
-<p>已有的分布式训练算法包括Parameter-Server，All-Reduce等等，而实现了这些算法的分布式学习系统包括PS2, PyTorch, TensorFlow等等，它们采用的策略都是对数据进行并行化处理，然后使用**分布式SGD**使模型达到收敛。一般来说，同构环境下的数据并行的分布式训练是在多个节点上部署模型，并用数据的不同部分来训练模型，在每一次迭代结束之后，都会在所有节点之间进行一次参数的同步。这种方式一旦出现了straggler就会导致模型训练的效率降低，因为同构环境下，这些模型和算法都**假设**不同节点上的模型的训练效率保持一致。然而事实就是大部分情况下，不同节点的训练环境都是异构的。</p>
+<p>数据的并行化训练是分布式机器学习的关键，在同构环境下，All-Reduce是最常用的分布式机器学习训练时的通信算法，但是这种算法对<strong>straggler</strong>(即一直没有完成训练的节点，在All-Reduce算法中，其他节点需要等待这个节点训练完成)和<strong>通信延迟</strong>非常敏感，但是随着现在的深度学习任务往往被部署在异构的环境上进行(比如云端服务器)，straggler和通信延迟的现象会越来越多，因为不同的节点处于不同的环境中，节点上模型训练的速度也会有很大的差别，这就导致每个节点完成训练的时间点可能有较大差距，这种异构的训练环境下并不适合使用All-Reduce算法，这也正是这篇论文的motivation</p>
+<p>已有的分布式训练算法包括Parameter-Server，All-Reduce等等，而实现了这些算法的分布式学习系统包括PS2, PyTorch, TensorFlow等等，它们采用的策略都是对数据进行并行化处理，然后使用<strong>分布式SGD</strong>使模型达到收敛。一般来说，同构环境下的数据并行的分布式训练是在多个节点上部署模型，并用数据的不同部分来训练模型，在每一次迭代结束之后，都会在所有节点之间进行一次参数的同步。这种方式一旦出现了straggler就会导致模型训练的效率降低，因为同构环境下，这些模型和算法都<strong>假设</strong>不同节点上的模型的训练效率保持一致。然而事实就是大部分情况下，不同节点的训练环境都是异构的。</p>
 <p>论文认为，训练的异构性主要表现为以下三个方面：</p>
 <ul>
 <li>通讯的异构：大规模的数据很多都存储在数据中心里，这就导致了在数据中心内部的通讯和数据中心之间的通讯所需要的时间会相差很多，即使是在同个数据中心中，数据的通信效率也会因为网络接口的不同而有较大差异。</li>
@@ -3999,20 +3999,19 @@
 <p><img src="static/image-20211221200642951.png" alt="image-20211221200642951" style="zoom:33%;" /></p>
 <h3 id="动态partial-reduce">动态Partial-Reduce<a class="headerlink" href="#动态partial-reduce" title="Permanent link">&para;</a></h3>
 <p>在CPR中，模型聚合成全局模型的过程中使用的权重是固定的1/P，但是这种方式存在缺点，因为所有的worker都是从相同的初始化参数开始训练的，而训练的慢的worker可能会撞上训练的快的worker(比如快的worker训练3轮之后刚好遇到了慢的worker结束1轮训练)，这个时候它们需要共同进行Reduce操作，显然如果还是按照CPR的方法对模型进行平均加权，那显然不合适。</p>
-<p>所以论文提出了一种动态的Partial-Reduce，可以根据每个模型训练的轮数**自动调整其对应的权重**，使用的权重设定方法是EMA(Exponential Moving Average)，即：</p>
+<p>所以论文提出了一种动态的Partial-Reduce，可以根据每个模型训练的轮数<strong>自动调整其对应的权重</strong>，使用的权重设定方法是EMA(Exponential Moving Average)，即：</p>
 <div class="arithmatex">\[
 \overline{\mathbf{x}}_{k}=\sum_{i=1}^{k} \beta_{i} \mathbf{x}_{i}, \quad \beta_{i}=\frac{(1-\alpha) \alpha^{k-i}}{1-\alpha^{k}}
 \]</div>
 <h2 id="实验">实验<a class="headerlink" href="#实验" title="Permanent link">&para;</a></h2>
-<p>论文的实验主要是用PyTorch构建了一个P-Reduce分布式训练的原型系统，并且使用CIFAR10数据集和一系列经典的深度CNN作为训练数据集和目标进行了实验，将实验结果和All-Reduce，Eager-Reduce和PS等算法进行了对比，主要研究了模型的收敛率，运算效率和可扩展性等问题。
-<span id=busuanzi_container_page_pv>本文总阅读量<span id=busuanzi_value_page_pv></span>次</span></p>
+<p>论文的实验主要是用PyTorch构建了一个P-Reduce分布式训练的原型系统，并且使用CIFAR10数据集和一系列经典的深度CNN作为训练数据集和目标进行了实验，将实验结果和All-Reduce，Eager-Reduce和PS等算法进行了对比，主要研究了模型的收敛率，运算效率和可扩展性等问题。</p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月4日 10:57:21</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月8日 14:30:35</span>
       
         <br>
         创建日期:

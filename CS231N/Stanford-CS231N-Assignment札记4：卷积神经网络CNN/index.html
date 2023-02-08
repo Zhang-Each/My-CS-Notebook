@@ -4075,7 +4075,7 @@ s\left[i,j\right]=(x*w)[i,j]=\sum_{m=-M}^M\sum_{n=-N}^Nx[i+m,j+n]w[m,n]
 </ul>
 <h4 id="步长stride">步长Stride<a class="headerlink" href="#步长stride" title="Permanent link">&para;</a></h4>
 <ul>
-<li>卷积核的移动存在一个步长(stride)，卷积核移动的步长小于卷积核的边长时，变会出现卷积核与原始输入矩阵作用范围在区域上的**重叠**，卷积核移动的步长与卷积核的边长相一致时，不会出现重叠现象</li>
+<li>卷积核的移动存在一个步长(stride)，卷积核移动的步长小于卷积核的边长时，变会出现卷积核与原始输入矩阵作用范围在区域上的<strong>重叠</strong>，卷积核移动的步长与卷积核的边长相一致时，不会出现重叠现象</li>
 <li>因此卷积操作需要设定一个步长，步长也会决定得到的新的feature map的大小</li>
 </ul>
 <h4 id="接受域receptive-field">接受域Receptive Field<a class="headerlink" href="#接受域receptive-field" title="Permanent link">&para;</a></h4>
@@ -4178,8 +4178,8 @@ $$</p>
 <h2 id="池化层pooling-layer">池化层Pooling Layer<a class="headerlink" href="#池化层pooling-layer" title="Permanent link">&para;</a></h2>
 <h3 id="什么是池化层">什么是池化层<a class="headerlink" href="#什么是池化层" title="Permanent link">&para;</a></h3>
 <ul>
-<li>当我们发现了一个特征之后，这个特征相对于其他特征的位置相比于这个特征的值而言更为重要，很明显的一个例子就是计算机视觉中的目标检测任务，我们要检测的目标所处周围环境的特点更能帮助我们检测出真的目标，这就是池化层的idea的来源，池化层是CNN架构中提出的另一种特殊层，起到了**降采样**的作用。</li>
-<li>池化就是通过一种非线性的变换，对特征进行进一步的**抽象和降维**，常见的有最大池化，平均池化等等，就是按照池化窗口的大小将矩阵分成若干个区域，在每个区域中进行池化操作(求最大，均值等等)，生成一个维度更小的feature map，同时池化层也可以起到防止过拟合的作用。</li>
+<li>当我们发现了一个特征之后，这个特征相对于其他特征的位置相比于这个特征的值而言更为重要，很明显的一个例子就是计算机视觉中的目标检测任务，我们要检测的目标所处周围环境的特点更能帮助我们检测出真的目标，这就是池化层的idea的来源，池化层是CNN架构中提出的另一种特殊层，起到了<strong>降采样</strong>的作用。</li>
+<li>池化就是通过一种非线性的变换，对特征进行进一步的<strong>抽象和降维</strong>，常见的有最大池化，平均池化等等，就是按照池化窗口的大小将矩阵分成若干个区域，在每个区域中进行池化操作(求最大，均值等等)，生成一个维度更小的feature map，同时池化层也可以起到防止过拟合的作用。</li>
 <li>池化层同样也有长宽和步长等参数</li>
 </ul>
 <h3 id="池化层的前向传播">池化层的前向传播<a class="headerlink" href="#池化层的前向传播" title="Permanent link">&para;</a></h3>
@@ -4290,7 +4290,7 @@ $$</p>
         <span class="n">grads</span><span class="p">[</span><span class="s1">&#39;W1&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reg</span> <span class="o">*</span> <span class="n">W1</span>
 </code></pre></div>
 <ul>
-<li>最后这个自己搭建的简单三层神经网络**在部分CIFAR数据集上**的表现如下图所示，可以看到在训练集上的表现非常不错，但是在测试集上的表现比较糟糕，原因也很简单，就是因为神经网络训练过程中过拟合了，如果考虑使用标准化层和DropOut可能表现效果会更好一点</li>
+<li>最后这个自己搭建的简单三层神经网络<strong>在部分CIFAR数据集上</strong>的表现如下图所示，可以看到在训练集上的表现非常不错，但是在测试集上的表现比较糟糕，原因也很简单，就是因为神经网络训练过程中过拟合了，如果考虑使用标准化层和DropOut可能表现效果会更好一点</li>
 </ul>
 <p><img alt="image-20211107214722089" src="../static/image-20211107214722089.png" /></p>
 <p>而当我们在整个CIFAR数据集上进行训练的时候，最后得到的三层CNN在训练集和验证集上的精度分别是0.476和0.499</p>

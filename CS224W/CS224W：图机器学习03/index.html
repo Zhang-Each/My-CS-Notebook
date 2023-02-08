@@ -3854,7 +3854,7 @@
 <ul>
 <li>这一节内容主要关注对于一个给定的网络结构，一些节点已经做好了标注，那么我们如何对图中的剩余节点进行标准，就比如一张图中已知部分节点是可疑的，另一部分节点是可信的，那么我们应该如何判定剩下那些没有标注的节点是否可信呢？</li>
 <li>这类任务被称为半监督的节点分类问题</li>
-<li>之前已经介绍了节点嵌入的方法可以识别相似的节点，而这一节主要介绍的方法是**消息传递**</li>
+<li>之前已经介绍了节点嵌入的方法可以识别相似的节点，而这一节主要介绍的方法是<strong>消息传递</strong></li>
 <li>一般我们认为网络中的关系是具有相关性的，也就是说相似的节点会互相连接，并且相近的节点可能属于相同的类型</li>
 <li>同质性Homophily：指的就是相同或者类似的节点个体会和其他的节点相互连接</li>
 <li>影响：网络中的连接关系可能会影响到单个节点，即节点可能会被与之相互连接的节点给带偏</li>
@@ -3871,7 +3871,7 @@
 <li>信任传播Belief propagation</li>
 </ul>
 <h3 id="关系分类">关系分类<a class="headerlink" href="#关系分类" title="Permanent link">&para;</a></h3>
-<p>​       关系分类的基本想法：节点v的类概率<span class="arithmatex">\(Y_v\)</span>是一个节点附近节点的类别的**加权平均**(这里我们只考虑二分类问题，正反类别的标签分别用1和0来表示)，而对于已经有标记的节点v，其<span class="arithmatex">\(Y_v\)</span>可以**直接设置成其真实类别**，而对于没有标记的节点可以将其初始化为<span class="arithmatex">\(Y_v=0.5\)</span>，然后对所有的节点进行类似于加权平均的更新知道收敛或者达到最大迭代次数上限。
+<p>​       关系分类的基本想法：节点v的类概率<span class="arithmatex">\(Y_v\)</span>是一个节点附近节点的类别的<strong>加权平均</strong>(这里我们只考虑二分类问题，正反类别的标签分别用1和0来表示)，而对于已经有标记的节点v，其<span class="arithmatex">\(Y_v\)</span>可以<strong>直接设置成其真实类别</strong>，而对于没有标记的节点可以将其初始化为<span class="arithmatex">\(Y_v=0.5\)</span>，然后对所有的节点进行类似于加权平均的更新知道收敛或者达到最大迭代次数上限。
 $$
 P(Y_v=c)=\frac{1}{\sum_{(v,u)\in E}A_{v,u}}\sum_{(v,u)\in E}A_{v,u}P(Y_v=c)
 $$</p>
@@ -3903,13 +3903,13 @@ $$</p>
 <ul>
 <li>定义节点的顺序形成一条完整的路径</li>
 <li>每次向下一个节点来传播当前统计到的节点个数，最后一个节点要发送出去的数据就是结果</li>
-<li>这样的算法也可以在树状的结构中进行，区别就是要从**叶节点将信息汇总到根节点** </li>
+<li>这样的算法也可以在树状的结构中进行，区别就是要从<strong>叶节点将信息汇总到根节点</strong> </li>
 </ul>
 <h4 id="循环消息传递算法">循环消息传递算法<a class="headerlink" href="#循环消息传递算法" title="Permanent link">&para;</a></h4>
 <p>​       加入一个节点i指向j，那么i将会给j传递消息，而传递什么消息需要根据i从指向i的节点中获得的信息来决定，循环消息传递算法中定义了这样几个关键的变量：</p>
 <ul>
 <li>
-<p>标签**势能**矩阵，<span class="arithmatex">\(\Phi(Y_i,Y_j)\)</span>表示对于一个节点j，如果给定它的邻居节点i属于类别<span class="arithmatex">\(Y_i\)</span>时，节点j属于类别<span class="arithmatex">\(Y_j\)</span>的概率</p>
+<p>标签<strong>势能</strong>矩阵，<span class="arithmatex">\(\Phi(Y_i,Y_j)\)</span>表示对于一个节点j，如果给定它的邻居节点i属于类别<span class="arithmatex">\(Y_i\)</span>时，节点j属于类别<span class="arithmatex">\(Y_j\)</span>的概率</p>
 </li>
 <li>
 <p>先验信任 <span class="arithmatex">\(\phi(Y_i)\)</span>表示节点i属于<span class="arithmatex">\(Y_i\)</span>类别的概率</p>

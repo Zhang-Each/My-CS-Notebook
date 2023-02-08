@@ -3873,7 +3873,7 @@
 <summary>本页统计信息</summary>
 <ul>
 <li>
-<p>本页约 1168 个字,  预计阅读时间 4 分钟。</p>
+<p>本页约 1161 个字,  预计阅读时间 4 分钟。</p>
 </li>
 <li>
 <p><span id="busuanzi_container_page_pv">本页总阅读量<span id="busuanzi_value_page_pv"></span>次</span></p>
@@ -3885,10 +3885,10 @@
 </blockquote>
 <h2 id="老生常谈的introduction">老生常谈的Introduction<a class="headerlink" href="#老生常谈的introduction" title="Permanent link">&para;</a></h2>
 <p>​       将关系和实体用低维向量进行表示是一个很常见的问题(这个时候知识图谱的概念还没有提出)，而关系和实体可以使用一个三元组<code>(head, realtion, tail)</code>来表示，而在多关系的数据中，关系可能有很多个并且是异构的，这个时候传统的方法就不太好用了。</p>
-<p>​       这篇论文中提出了一种基于Translation(转化)的思想，首先将一系列实体表示成向量空间中的一系列向量，然后将**relation看成是从head到tail的一种translation**，这样的方法可以大幅度减少参数的规模，并在处理一对一的关系中取得了非常好的表现，但是在处理一对多，多对一和多对多的关系中表现并不好，因为TransE模型中只把关系和实体都表示成一个向量，所以不好表示含多个实体的关系。</p>
+<p>​       这篇论文中提出了一种基于Translation(转化)的思想，首先将一系列实体表示成向量空间中的一系列向量，然后将<strong>relation看成是从head到tail的一种translation</strong>，这样的方法可以大幅度减少参数的规模，并在处理一对一的关系中取得了非常好的表现，但是在处理一对多，多对一和多对多的关系中表现并不好，因为TransE模型中只把关系和实体都表示成一个向量，所以不好表示含多个实体的关系。</p>
 <h2 id="trans模型的具体描述">Trans模型的具体描述<a class="headerlink" href="#trans模型的具体描述" title="Permanent link">&para;</a></h2>
 <h3 id="基本的定义">基本的定义<a class="headerlink" href="#基本的定义" title="Permanent link">&para;</a></h3>
-<p>​       假设训练集S包含一系列三元组<span class="arithmatex">\((h,l,t)\)</span>，所有的实体组成集合E而所有的关系组成集合L，模型的目标就是去学习到一系列实体和关系的嵌入表示，并且要使得<span class="arithmatex">\(h+l\approx t\)</span>，并且在基于能量的框架下，能量可以使用一个有关三元组的函数<span class="arithmatex">\(d(h+l, t)\)</span>，而能量函数d一般是在d维度空间中衡量向量的**不相似度**(可以是相似度的相反数)的函数，往往采用L1或者L2范数。</p>
+<p>​       假设训练集S包含一系列三元组<span class="arithmatex">\((h,l,t)\)</span>，所有的实体组成集合E而所有的关系组成集合L，模型的目标就是去学习到一系列实体和关系的嵌入表示，并且要使得<span class="arithmatex">\(h+l\approx t\)</span>，并且在基于能量的框架下，能量可以使用一个有关三元组的函数<span class="arithmatex">\(d(h+l, t)\)</span>，而能量函数d一般是在d维度空间中衡量向量的<strong>不相似度</strong>(可以是相似度的相反数)的函数，往往采用L1或者L2范数。</p>
 <h3 id="学习的目标">学习的目标<a class="headerlink" href="#学习的目标" title="Permanent link">&para;</a></h3>
 <p>​       为了学习到满足<span class="arithmatex">\(h+l\approx t\)</span>的嵌入表示，TransE提出的目标函数采用了如下这种基于margin的形式：
 $$
@@ -3898,7 +3898,7 @@ $$
 $$
 S</em><sup _prime="\prime">{\prime}=\left{\left(h</sup>, \ell, t\right) \mid h^{\prime} \in E\right} \cup\left{\left(h, \ell, t^{\prime}\right) \mid t^{\prime} \in E\right}
 $$
-是一个**负采样集合**，是将训练集中的三元组改变其head或者tail生成一个坏样本产生的，并且损失函数希望正常样本的能量要比坏样本的能量要低，因此负采样起到了这样一种监督作用，同时学习过程中的优化采用SGD完成。</p>
+是一个<strong>负采样集合</strong>，是将训练集中的三元组改变其head或者tail生成一个坏样本产生的，并且损失函数希望正常样本的能量要比坏样本的能量要低，因此负采样起到了这样一种监督作用，同时学习过程中的优化采用SGD完成。</p>
 <h3 id="具体算法">具体算法<a class="headerlink" href="#具体算法" title="Permanent link">&para;</a></h3>
 <p>​       TransE模型的具体算法如下：</p>
 <p><img alt="image-20210622154912254" src="../static/image-20210622154912254.png" /></p>
@@ -3921,14 +3921,13 @@ $$
 <p>​       TransE模型的实体和关系都只用了一个向量进行表示，而这样的表示方式在涉及到一对多，多对一，多对多的场景下学习的效果就不太好</p>
 <h2 id="实验">实验<a class="headerlink" href="#实验" title="Permanent link">&para;</a></h2>
 <p>​      TransE论文中对wordnet和Freebase等数据集上进行了一系列实验，并在链接预测等任务中和一系列baseline进行了比较。具体的就不关注了，反正就是TransE很强(2013年限定)</p>
-<p><span id=busuanzi_container_page_pv>本文总阅读量<span id=busuanzi_value_page_pv></span>次</span></p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月4日 10:57:21</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月8日 14:30:35</span>
       
         <br>
         创建日期:

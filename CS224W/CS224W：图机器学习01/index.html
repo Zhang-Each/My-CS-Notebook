@@ -4008,8 +4008,8 @@
 <ul>
 <li>常见的表示方式使用节点集合N和边集合E构成一个图结构<span class="arithmatex">\(G(N, E)\)</span> </li>
 <li>图可以分为有向图和无向图，区别就在于边是否具有方向性，节点的degree表示包含这个节点的边的数量，而在有向图中又可以具体分为出度和入度</li>
-<li>二分图是一种特殊的图结构，可以将图中的**节点**分成两个不相交的集合U和V，使得图中的任意一条边的两个顶点分别属于U和V</li>
-<li>图也可以用**接邻矩阵**来表示，其中无向图的邻接矩阵是一个对称矩阵，通常邻接矩阵都比较稀疏，网络结构通常都是比较稀疏的图</li>
+<li>二分图是一种特殊的图结构，可以将图中的<strong>节点</strong>分成两个不相交的集合U和V，使得图中的任意一条边的两个顶点分别属于U和V</li>
+<li>图也可以用<strong>接邻矩阵</strong>来表示，其中无向图的邻接矩阵是一个对称矩阵，通常邻接矩阵都比较稀疏，网络结构通常都是比较稀疏的图</li>
 <li>图可以用接邻表来表示，这种表示方式只保留了有边的节点的情况，而舍去了稀疏的大部分内容，节约了存储空间</li>
 <li>一些图中的基本概念：</li>
 <li>强连通有向图：任意两个节点U和V之间存在U到V以及V到U的路径</li>
@@ -4029,7 +4029,7 @@
 <li>graphlets</li>
 </ul>
 <h4 id="node-centrality">node centrality<a class="headerlink" href="#node-centrality" title="Permanent link">&para;</a></h4>
-<p>​       节点中心node centrality是在在一个图中表示出不同节点的**重要性**，而不是简单的出入度数。一个节点v如果与一些很重要的节点相邻那么这个节点也很重要，一个节点的centrality可以这样计算：
+<p>​       节点中心node centrality是在在一个图中表示出不同节点的<strong>重要性</strong>，而不是简单的出入度数。一个节点v如果与一些很重要的节点相邻那么这个节点也很重要，一个节点的centrality可以这样计算：
 $$
 c_v=\frac{1}{\lambda}\sum_{u\in N(v)}c_u
 $$</p>
@@ -4074,7 +4074,7 @@ $$</p>
   c_v=\frac 1 {\sum_{u\not=v}l_{uv}}
   $$</p>
 <h4 id="聚类系数">聚类系数<a class="headerlink" href="#聚类系数" title="Permanent link">&para;</a></h4>
-<p>​       聚类系数可以衡量一个节点的邻居节点的连接情况，假设一个节点v有k个邻居，这些**k个邻居之间有n条边**，那么聚类系数可以写作：
+<p>​       聚类系数可以衡量一个节点的邻居节点的连接情况，假设一个节点v有k个邻居，这些<strong>k个邻居之间有n条边</strong>，那么聚类系数可以写作：
 $$
 e_v=\frac{n}{C_k^2}=\frac{2n}{k(k-1)}
 $$</p>
@@ -4092,7 +4092,7 @@ $$</p>
 <li>GDV提供了一个节点的局部网络拓扑结构的衡量方式</li>
 </ul>
 <h3 id="边层面">边层面<a class="headerlink" href="#边层面" title="Permanent link">&para;</a></h3>
-<p>​       图机器学习在边层面的主要任务是基于已经存在的连接来**预测新的连接**，因此关键的问题在于如何设计和表示**一对节点**的特征，一般有两种边预测的场景：</p>
+<p>​       图机器学习在边层面的主要任务是基于已经存在的连接来<strong>预测新的连接</strong>，因此关键的问题在于如何设计和表示<strong>一对节点</strong>的特征，一般有两种边预测的场景：</p>
 <ul>
 <li>随机缺失了若干条边，要求将图补全</li>
 <li>随时间会变化的边关系：在时许数据的场景下节点和节点之间的边关系可能会随时间发生变化，这种情况叫做evaluation，一般来说可以用如下步骤来解决时序预测问题：</li>
@@ -4135,7 +4135,7 @@ S=\sum_{i=1}^{\inf}\beta^iA^i=(I-\beta A)^{-1}-I
 <h3 id="图层面的特征和图kernel">图层面的特征和图kernel<a class="headerlink" href="#图层面的特征和图kernel" title="Permanent link">&para;</a></h3>
 <p>​       目标是提取整张图整体的特征，而传统机器学习中经常使用kernel来进行特征的提取，图也可以使用kernel来进行特征的提取，其核心是一个图特征向量<span class="arithmatex">\(\phi(G)\)</span> </p>
 <h4 id="bow">BoW<a class="headerlink" href="#bow" title="Permanent link">&para;</a></h4>
-<p>​       图kerbel的关键想法是**基于Bag-of-Word(BoW)**BoW原本是指使用单词出现的次数来作为文档的特征，而将其扩展到图上就可以将节点作为“单词”，即可以计算图中各种不同度数的节点的数量，并将结果作为一个多维的向量输出，向量的每一个维度d的值代表了图中度数为d的节点总数</p>
+<p>​       图kerbel的关键想法是<strong>基于Bag-of-Word(BoW)</strong>BoW原本是指使用单词出现的次数来作为文档的特征，而将其扩展到图上就可以将节点作为“单词”，即可以计算图中各种不同度数的节点的数量，并将结果作为一个多维的向量输出，向量的每一个维度d的值代表了图中度数为d的节点总数</p>
 <h4 id="graphlet特征">Graphlet特征<a class="headerlink" href="#graphlet特征" title="Permanent link">&para;</a></h4>
 <ul>
 <li>可以计算图中不同的graphlet的个数来表示图的特征，但是这里的graphlet和节点层面的不太一样，不需要完全连接，也没有根的概念</li>

@@ -3877,7 +3877,7 @@ y_{COM}=\frac 1 M \sum_{i=1}^My_i(x)
 </li>
 </ul>
 <p>Bagging方法在基学习器是弱可学习的时候提升效果非常好，这一点也可以理解，因为Bagging方法的本质是生成了一系列乌合之众，然后用voting策略来预测结果，但是乌合之众的规模变大的时候准确度也会有所提高。</p>
-<p>这里的基学习器可以选择各类线性模型或者神经网络，也可以使用决策树，因为**决策树是一种比较容易获得的非线性分类器**，并且bias非常小而variance非常高，我们用ensemble的方式刚好可以降低决策树的variance，得到bias和variance都比较小的模型，而这种使用决策树作为基学习器的Bagging模型叫**做随机森林(Random Forest)**，这个名字也比较形象，很多"树"聚集成了森林。</p>
+<p>这里的基学习器可以选择各类线性模型或者神经网络，也可以使用决策树，因为<strong>决策树是一种比较容易获得的非线性分类器</strong>，并且bias非常小而variance非常高，我们用ensemble的方式刚好可以降低决策树的variance，得到bias和variance都比较小的模型，而这种使用决策树作为基学习器的Bagging模型叫<strong>做随机森林(Random Forest)</strong>，这个名字也比较形象，很多"树"聚集成了森林。</p>
 <h2 id="boosting方法与adaboost">Boosting方法与AdaBoost<a class="headerlink" href="#boosting方法与adaboost" title="Permanent link">&para;</a></h2>
 <p>与Bagging方法不同Boosting方法是一种迭代式的训练算法，其中比较著名的就是AdaBoost，这是一种串行的Ensemble方法，通过若干次迭代的训练将训练数据学习成若干个弱分类器，然后通过调整权重来提高模型预测的准确度。</p>
 <h3 id="adaboost算法步骤">AdaBoost算法步骤<a class="headerlink" href="#adaboost算法步骤" title="Permanent link">&para;</a></h3>

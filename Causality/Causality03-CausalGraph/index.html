@@ -767,6 +767,80 @@
     2. Causal Graph
   </a>
   
+    <nav class="md-nav" aria-label="2. Causal Graph">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-causal-edges-assumption" class="md-nav__link">
+    2.1 Causal Edges Assumption
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-graphical-building-blocks" class="md-nav__link">
+    2.2 Graphical Building Blocks
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2 Graphical Building Blocks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#221-two-node-graph" class="md-nav__link">
+    2.2.1 Two-node Graph
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#222-chain--fork--immorality" class="md-nav__link">
+    2.2.2 Chain / Fork / Immorality
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-d-separation" class="md-nav__link">
+    2.3 D-separation
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3 D-separation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#231-blocked-path" class="md-nav__link">
+    2.3.1 Blocked Path
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#232-d-separation" class="md-nav__link">
+    2.3.2 d-separation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-causal-association" class="md-nav__link">
+    2.4 Causal Association
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -3739,6 +3813,80 @@
     2. Causal Graph
   </a>
   
+    <nav class="md-nav" aria-label="2. Causal Graph">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-causal-edges-assumption" class="md-nav__link">
+    2.1 Causal Edges Assumption
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-graphical-building-blocks" class="md-nav__link">
+    2.2 Graphical Building Blocks
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2 Graphical Building Blocks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#221-two-node-graph" class="md-nav__link">
+    2.2.1 Two-node Graph
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#222-chain--fork--immorality" class="md-nav__link">
+    2.2.2 Chain / Fork / Immorality
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-d-separation" class="md-nav__link">
+    2.3 D-separation
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3 D-separation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#231-blocked-path" class="md-nav__link">
+    2.3.1 Blocked Path
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#232-d-separation" class="md-nav__link">
+    2.3.2 d-separation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-causal-association" class="md-nav__link">
+    2.4 Causal Association
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -3765,7 +3913,7 @@
 <summary>本页统计信息</summary>
 <ul>
 <li>
-<p>本页约 1234 个字,  预计阅读时间 4 分钟。</p>
+<p>本页约 3116 个字,  预计阅读时间 10 分钟。</p>
 </li>
 <li>
 <p><span id="busuanzi_container_page_pv">本页总阅读量<span id="busuanzi_value_page_pv"></span>次</span></p>
@@ -3775,7 +3923,7 @@
 <p>前面我们实际上已经见到过了用概率图模型表示变量之间关系的例子，这是一种很直观的方法，在这一节，我们将重点介绍概率图模型的方法在因果推断中的应用。</p>
 <h2 id="1-graph-and-graphic-models">1. Graph and Graphic Models<a class="headerlink" href="#1-graph-and-graphic-models" title="Permanent link">&para;</a></h2>
 <h2 id="11-graph">1.1 Graph<a class="headerlink" href="#11-graph" title="Permanent link">&para;</a></h2>
-<p>我们知道图(Graph)是由一系列节点和边组成的，图中的路径(path)是由一系列相邻的节点和边组成的序列。同时根据边是否有方向可以把图分为**有向图和无向图**两类。
+<p>我们知道图(Graph)是由一系列节点和边组成的，图中的路径(path)是由一系列相邻的节点和边组成的序列。同时根据边是否有方向可以把图分为<strong>有向图和无向图</strong>两类。
 - 有向图中的路径<span class="arithmatex">\(X\rightarrow Y\)</span> 表示X到Y有一条有向边，这个时候，X被称为ancestor，而Y被称为descendant，我们用<span class="arithmatex">\(de(X)\)</span>表示X的descendant
 - 有向图可以根据图中是否有环再分为两类，一类是有环图，一类是无环图，在因果推断中，我们主要研究的是有向无环图(directed acyclic graph, DAG)
 概率图模型(probabilistic graphical model)就是通过图结构的形式来研究随机变量之间的关系，而因果图模型(causal graphical models)也是通过有向无环图的方式来建模变量之间的因果关系(概率图模型中的有向图模型叫做贝叶斯网络Bayesian networks)，有非常多的东西可以直接从概率图模型那边借鉴过来，区别在于，概率图模型是统计模型，而因果图模型是因果模型。</p>
@@ -3807,13 +3955,84 @@ P\left(x_1, \ldots, x_n\right)=\prod_i P\left(x_i \mid \mathrm{pa}_i\right)
 这个假设被称为Minimality足见其重要性，这是因为，如果没有相邻节点不独立这条假设，我们在使用Local Markov Assumption的时候可能会引入额外的独立关系，比如考虑一个只包含两个节点X和Y的因果图，这个图里只有一条路径<span class="arithmatex">\(X\rightarrow Y\)</span>，如果我们只使用Local Markov Assumption来进行分解，我们可能会得到<span class="arithmatex">\(P(X,Y)=P(Y)P(X|Y)=P(X)P(Y)\)</span>，这是因为从X的角度来看，他没有父母节点，因此它对于Y是独立的，所以就会有这样的推导，我们在加上相邻节点相关的限制之后，这个推导就不成立了，我们只能推导出<span class="arithmatex">\(P(X,Y)=P(X)P(Y|X)\)</span>
 从贝叶斯网络中移除一些边就等价于额外添加了一些独立性，而Minimality Assumption的作用就在于，它要求贝叶斯网络中任何一条边都不能被删除，否则整个概率分布就会发生变化。</p>
 <h2 id="2-causal-graph">2. Causal Graph<a class="headerlink" href="#2-causal-graph" title="Permanent link">&para;</a></h2>
+<h3 id="21-causal-edges-assumption">2.1 Causal Edges Assumption<a class="headerlink" href="#21-causal-edges-assumption" title="Permanent link">&para;</a></h3>
+<p>前面一节介绍的概率图是一种统计模型，这一节我们将讨论如何使用因果推断中的假设来增强概率图的建模，进而构造因果图(Causal Graph)来解决各种跟因果有关的问题。为了引入这些因果假设，我们需要先了解一下什么是因果。</p>
+<blockquote>
+<p>(Cause的定义)如果变量X的改变也会引起Y的改变，那么变量X被称为是Y的cause</p>
+</blockquote>
+<p>我们在因果图中用一系列的节点来表示随机变量，用边来表示他们的关系，而在因果图中，我们做出了一个核心的假设：</p>
+<blockquote>
+<p>严格的因果边假设：在有向图中，由父节点指向子节点的所有边都代表了父节点是子节点的一个cause</p>
+</blockquote>
+<p>因果边假设实际上是由cause的定义以及概率图中的minmality assumption共同决定的。相比之下，非严格的因果边假设将允许一些父节点可以不是其子女的cause，它只是假设子女不是其父节点的原因。这样做可以减少我们作出的假设。
+总之，1.2中提到的Local Markov Assumption和这一节提到的Causal Edges Assumption，将会成为我们研究因果图模型的基础，下面我们将更深入地研究概率图模型。</p>
+<h3 id="22-graphical-building-blocks">2.2 Graphical Building Blocks<a class="headerlink" href="#22-graphical-building-blocks" title="Permanent link">&para;</a></h3>
+<p>DAG中有一些常见的基本构成模块，如下面两张图所示：</p>
+<p><img alt="" src="../resources/Pasted%20image%2020230207132418.png" />
+<img alt="两个不相连的节点和两个相连节点" src="../resources/Pasted%20image%2020230207131335.png" />
+书中提出了一个概念叫做flow of association，这个概念主要是用来表示两个节点是否独立(是否关联)，除此之外，我们会更进一步来研究两个节点是否条件独立。</p>
+<h4 id="221-two-node-graph">2.2.1 Two-node Graph<a class="headerlink" href="#221-two-node-graph" title="Permanent link">&para;</a></h4>
+<p>对于两个不相连的节点来说，很明显我们有：</p>
+<div class="arithmatex">\[
+P\left(x_1, x_2\right)=P\left(x_1\right) P\left(x_2\right)
+\]</div>
+<p>也就是说两个节点是不相关的(互相独立的)，而对于两个相连的节点，他们显然是不独立的。</p>
+<h4 id="222-chain--fork--immorality">2.2.2 Chain / Fork / Immorality<a class="headerlink" href="#222-chain--fork--immorality" title="Permanent link">&para;</a></h4>
+<p>对于链结构和叉结构(如下图所示)，很显然，根据因果边假设，X1和X2是关联的，而X2和X3也是关联的。我们重点要研究的问题是，X1和X3之间是否具有关联性。
+<img alt="" src="../resources/Pasted%20image%2020230207134828.png" /></p>
+<p><img alt="" src="../resources/Pasted%20image%2020230207135030.png" />
+对于链结构来说，很明显X1和X3也是相关联的，因为X1导致X2，而X2导致X3，而对于叉结构来说，X1和X3也是相关联的，因为他们和同一个父节点X2相关联。但是当我们给定X2的时候，X1和X3就相互独立了，也就是说：</p>
+<div class="arithmatex">\[
+X_1\perp\!\!\!\perp X_3 | X_2
+\]</div>
+<p>这其实非常容易证明，对于链结构，我们结合贝叶斯定理和X2给定这两个条件，可以作出如下推导证明：</p>
+<div class="arithmatex">\[
+\begin{aligned}
+P(x_1,x_3|x_2)&amp;=\frac{P(x_1,x_2,x_3)}{P(x_2)}\\
+&amp;=\frac{P(x_1)P(x_2|x_1)P(x_3|x_2)}{P(x_2)}\\
+&amp;=P(x_1|x_2)P(x_3|x_2)
+\end{aligned}
+\]</div>
+<p>这样一来，在给定<span class="arithmatex">\(X_2=x_2\)</span>的条件下，<span class="arithmatex">\(X_1, X_3\)</span>就是独立的。对于叉结构，证明就更容易了。
+<img alt="" src="../resources/Pasted%20image%2020230207202920.png" /></p>
+<p>对于上面这种immorality型结构，X1和X3明显是独立的，因为他们之间没有因果关系，但神奇的是，如果我们给定了X2(书上管X2叫做collider)，那么X1和X3就不独立了，这是因为他们共同决定了X2
+- 值得注意的是，如果给定了collider的子节点，那么X1和X3也是不独立的
+- 我们可以将上面说的这种情况理解为：原本X1和X3之间的cause path被X2阻塞(blocked)了，但是在给定X2之后，这条path就不阻塞(unblocked)了
+- 事实上这可以通过一些简单的例子计算得到(比如定义X1和X3都是标准分布，然后计算他们的协方差)，不过这些内容就不在这里详细展开了</p>
+<h3 id="23-d-separation">2.3 D-separation<a class="headerlink" href="#23-d-separation" title="Permanent link">&para;</a></h3>
+<h4 id="231-blocked-path">2.3.1 Blocked Path<a class="headerlink" href="#231-blocked-path" title="Permanent link">&para;</a></h4>
+<p>上面我们提到了一个概念就是cause path的block(阻塞)和unblock(非阻塞)，在这里，我们给出blocked path的具体定义：</p>
+<blockquote>
+<p>如果两个节点X和Y之间有一条路径，并且这个路径满足以下两个条件之一，那么这条路径就是一条blocked path：
+1. 在这条路径上有一个链结构<span class="arithmatex">\(\cdots \rightarrow W \rightarrow \cdots\)</span>或者一个叉结构<span class="arithmatex">\(\cdots \leftarrow W \rightarrow \cdots\)</span>，并且W是conditioned的
+2. 这条路径上有一个collider W，并且这个W不是conditioned的变量，W的所有后代节点也不是conditioned的变量</p>
+</blockquote>
+<p>而一个unblocked path则是那些blocked path的补集，相关性会在unblocked path中传递，但是不会在blocked path中传递，这和前面的几个最简单的结构的例子是一致的。</p>
+<h3 id="232-d-separation">2.3.2 d-separation<a class="headerlink" href="#232-d-separation" title="Permanent link">&para;</a></h3>
+<p>D-separation是因果图模型中一个非常重要的概念，它的定义如下：</p>
+<blockquote>
+<p>对于两个节点(的集合)X和Y，如果存在一个节点集合Z，使得X和Y之间所有的路径都被Z所阻塞，那么Z就是X和Y的一个d-分割。类似地，如果X和Y之间存在非阻塞的路径，那么X和Y就是d-相连的。</p>
+</blockquote>
+<p>d-分割是一个非常重要的概念，因为它可以表示两个(两组)变量之间的独立性关系，我们可以用<span class="arithmatex">\(X\perp\!\!\!\perp _G Y|Z\)</span> 来表示X和Y在图G上是一个关于Z的d-分割。如果在给定Z的条件下，X和Y在分布P中是条件独立的(是关于Z的一个d-分割)，那么就可以表示为<span class="arithmatex">\(X\perp\!\!\!\perp _P Y|Z\)</span></p>
+<blockquote>
+<p>如果给定一个满足G上马尔可夫的联合概率分布P(即遵循局部马尔可夫假设)，那么如果X和Y在G中是关于Z的一个d-分割，则X和Y在P中也是条件独立的(或者说这个分布P是满足关于图G的全局马尔可夫性的)，即：</p>
+</blockquote>
+<div class="arithmatex">\[
+X\perp\!\!\!\perp _G Y|Z\rightarrow X\perp\!\!\!\perp _P Y|Z
+\]</div>
+<p>这其实就是概率图模型中的<strong>全局马尔可夫性</strong>。从中我们可以看出全局马尔可夫性可以从局部马尔可夫性推导得出，这两个假设和贝叶斯网络分解其实都是等价的，是从不同角度对DAG的理解。我们将它们可以统称为马尔可夫假设。</p>
+<h3 id="24-causal-association">2.4 Causal Association<a class="headerlink" href="#24-causal-association" title="Permanent link">&para;</a></h3>
+<p>在DAG中，我们将<strong>沿着有向边流动的关联</strong>称为因果关联(Causal Association)，而那些非因果的关联被称为混淆关联(Confounding Association)，下图就是一个简单的例子：
+<img alt="" src="../resources/Pasted%20image%2020230208111250.png" />
+不管是在概率图还是在因果图中，association都是沿着上面提到的基本结构进行流动的(当然要考虑中间是否有conditioned的节点)，因果图的特别之处在于，我们通过假设使得图中的边都代表了因果关系，同时，这样的因果关系和原本的关联关系也有所区别，如果A关联B，那么B也关联A，所以关联关系是一种对称的关系，而因果关系则是非对称的。我们可以用下面这张图来表示，随着假设的一步步引入，我们所研究的问题的变化，这也是对这几节所学内容的一次总结。
+<img alt="" src="../resources/Pasted%20image%2020230208111952.png" /></p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月4日 23:53:26</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月8日 14:30:35</span>
       
         <br>
         创建日期:

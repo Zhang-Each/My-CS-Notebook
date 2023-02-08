@@ -2786,7 +2786,7 @@
         
           <li class="md-nav__item">
   <a href="#函数重载时候的优先级" class="md-nav__link">
-    函数重载时候的**优先级**
+    函数重载时候的优先级
   </a>
   
 </li>
@@ -4141,7 +4141,7 @@
         
           <li class="md-nav__item">
   <a href="#函数重载时候的优先级" class="md-nav__link">
-    函数重载时候的**优先级**
+    函数重载时候的优先级
   </a>
   
 </li>
@@ -4211,7 +4211,7 @@
 <h2 id="1-c的新特性">1. C++的新特性<a class="headerlink" href="#1-c的新特性" title="Permanent link">&para;</a></h2>
 <h3 id="10-输入输出">1.0 输入输出<a class="headerlink" href="#10-输入输出" title="Permanent link">&para;</a></h3>
 <ul>
-<li>C++可以使用输入输出流<code>(cin, cout)</code>进行输出，比如<code>cout&lt;&lt;"Hello World";</code> 需要包含**头文件**<code>#include&lt;iostream&gt;</code> </li>
+<li>C++可以使用输入输出流<code>(cin, cout)</code>进行输出，比如<code>cout&lt;&lt;"Hello World";</code> 需要包含<strong>头文件</strong><code>#include&lt;iostream&gt;</code> </li>
 <li>文件的输入输出, 使用ofstream和ifstream</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span>
@@ -4238,13 +4238,13 @@
 <p>C++中的变量类型</p>
 </li>
 <li>
-<p>global variable 全局变量，存储在**全局变量区** </p>
+<p>global variable 全局变量，存储在<strong>全局变量区</strong> </p>
 <ul>
 <li>可以在不同的cpp文件之间共享，可以使用关键字<code>extern</code> 来使用别的cpp文件中的全局变量</li>
 </ul>
 </li>
 <li>static global variable <strong>静态全局变量</strong>，不能在cpp文件之间共享</li>
-<li>local variable 存储在**栈**区上</li>
+<li>local variable 存储在<strong>栈</strong>区上</li>
 <li>static local variable 静态局部变量<ul>
 <li>存储在全局变量区</li>
 <li>在初次使用的时候初始化，keeps its value between visit to the function</li>
@@ -4277,7 +4277,7 @@
 <span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="p">;</span>
 </code></pre></div>
 <ul>
-<li>上面这段代码中一开始为指针p分配了一段内存空间并赋值了123，但是第三行代码又为p赋值了一段新的内存空间，原来的内存空间存储了123，但是这一段内存空间已经没有指针指向，因此**不能访问，也不能删除**，造成了内存泄漏</li>
+<li>上面这段代码中一开始为指针p分配了一段内存空间并赋值了123，但是第三行代码又为p赋值了一段新的内存空间，原来的内存空间存储了123，但是这一段内存空间已经没有指针指向，因此<strong>不能访问，也不能删除</strong>，造成了内存泄漏</li>
 </ul>
 </li>
 <li>
@@ -4306,11 +4306,11 @@
 </ul>
 <h3 id="12-引用-reference">1.2 引用 Reference<a class="headerlink" href="#12-引用-reference" title="Permanent link">&para;</a></h3>
 <ul>
-<li>a new type in C++， 相当于给变量取了一个别名，使用方法为<code>type &amp;refname = name;</code> 引用的对象**不能**是表达式</li>
+<li>a new type in C++， 相当于给变量取了一个别名，使用方法为<code>type &amp;refname = name;</code> 引用的对象<strong>不能</strong>是表达式</li>
 <li>引用和指针的区别</li>
-<li>不能定义**空引用**，引用必须连接到一块合法的内存</li>
-<li>一旦引用被初始化为一个对象**就不能更改** </li>
-<li>引用在创建的时候必须要**初始化** </li>
+<li>不能定义<strong>空引用</strong>，引用必须连接到一块合法的内存</li>
+<li>一旦引用被初始化为一个对象<strong>就不能更改</strong> </li>
+<li>引用在创建的时候必须要<strong>初始化</strong> </li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="nf">f</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
 <span class="p">{</span>
@@ -4347,7 +4347,7 @@
 <p>Run-time constants 运行时常量</p>
 </li>
 <li>
-<p>数组的定义时的长度值必须在**编译期**就已知，所以宏定义中的常数可以作为数组长度，而<code>int n; int a[n]</code>这样的语法就是错误的，不过现在似乎有了编译器优化，在Dev-cpp中这样写也可以通过编译</p>
+<p>数组的定义时的长度值必须在<strong>编译期</strong>就已知，所以宏定义中的常数可以作为数组长度，而<code>int n; int a[n]</code>这样的语法就是错误的，不过现在似乎有了编译器优化，在Dev-cpp中这样写也可以通过编译</p>
 </li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">;</span>
@@ -4365,7 +4365,7 @@
 <li>
 <p>常量指针：<code>char * const p = "abc";</code> <strong>不能赋予这个指针新的地址</strong>，相当于地址是const类型，但是p指向的值可以改变</p>
 </li>
-<li><code>const char* p = "abc";</code> 这种情况下p指向的是一个const char类型的值，因此**指向的值不能改变**，而指针指向的对象可以改变</li>
+<li><code>const char* p = "abc";</code> 这种情况下p指向的是一个const char类型的值，因此<strong>指向的值不能改变</strong>，而指针指向的对象可以改变</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="c1">//第一种情况是q是一个const指针，但是q指向的东西可以变</span>
 <span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">q</span><span class="w"> </span><span class="o">=</span><span class="s">&quot;abc&quot;</span><span class="p">;</span>
@@ -4413,7 +4413,7 @@
 <span class="p">}</span>
 </code></pre></div>
 <ul>
-<li><code>char * s="Hello World!";</code>实质上是<code>const char *</code>类型，不要去修改s中的内容，这是一种**未定义的行为**(undefined behavior)，应该写成 <code>char s[]="Hello World!";</code> </li>
+<li><code>char * s="Hello World!";</code>实质上是<code>const char *</code>类型，不要去修改s中的内容，这是一种<strong>未定义的行为</strong>(undefined behavior)，应该写成 <code>char s[]="Hello World!";</code> </li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span>
 <span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
@@ -4452,7 +4452,7 @@
 <li>
 <p>初始化列表：在函数签名后面，大括号之前直接对类中定义的变量进行赋值</p>
 <ul>
-<li>const类型的成员变量初始化**只能用初始化列表** </li>
+<li>const类型的成员变量初始化<strong>只能用初始化列表</strong> </li>
 <li>构造函数的执行分为两个阶段：初始化阶段和函数执行阶段，会先执行初始化列表里的赋值，在进入函数主体进行对应的操作</li>
 </ul>
 </li>
@@ -4460,7 +4460,7 @@
 <p>Destructor 析构函数</p>
 </li>
 <li>
-<p>析构函数的函数名是类名前面加一个~，析构函数不需要参数，在类的生命周期结束的时候会**被编译器自动调用** </p>
+<p>析构函数的函数名是类名前面加一个~，析构函数不需要参数，在类的生命周期结束的时候会<strong>被编译器自动调用</strong> </p>
 </li>
 <li>
 <p>function overloading 函数重载：</p>
@@ -4485,7 +4485,7 @@
 <p>const声明写在函数的开头表示函数的返回值类型是const</p>
 </li>
 <li>
-<p>const声明写在函数签名的末尾表示这个成员函数**不能修改类中定义的成员变量**，被称为**常成员函数** </p>
+<p>const声明写在函数签名的末尾表示这个成员函数<strong>不能修改类中定义的成员变量</strong>，被称为<strong>常成员函数</strong> </p>
 </li>
 <li>
 <p>但是如果是成员变量中有指针，并不能保证指针指向的内容不被修改</p>
@@ -4517,7 +4517,7 @@
 <ul>
 <li>non-const成员函数不能调用const类型对象的成员变量，而const类型可以访问</li>
 <li>const类型函数不会改变任何成员变量的值</li>
-<li>构成重载关系的时候，const类型的对象只能调用const类型的成员函数，不能调用non-const，而非const类型的对象**优先调用non-const的成员函数**，如果没有non-const再调用const类型的</li>
+<li>构成重载关系的时候，const类型的对象只能调用const类型的成员函数，不能调用non-const，而非const类型的对象<strong>优先调用non-const的成员函数</strong>，如果没有non-const再调用const类型的</li>
 </ul>
 </li>
 </ul>
@@ -4544,7 +4544,7 @@
 <span class="w">    </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">;</span><span class="w"> </span><span class="c1">//调用重载之后的等号</span>
 <span class="p">}</span>
 </code></pre></div>
-- C++中的拷贝：<strong>浅拷贝**和**深拷贝</strong> 
+- C++中的拷贝：<strong>浅拷贝</strong>和<strong>深拷贝</strong> 
 - 浅拷贝：在原来已有的内存中增加一个新的指针指向这一段内存
 - 比如<code>string s1="zyc"; string s2(s1);</code>  就是一种浅拷贝 
 - 深拷贝：分配一块新的内存，复制对应的值，并定义一个新的指针指向这一块内存
@@ -4596,7 +4596,7 @@
 <p><strong>静态函数不能访问实例成员</strong> </p>
 </li>
 <li>
-<p>之前已经讲到了static类型的全局变量只在当前文件有效，不能通过extern跨文件调用，而函数中的static类型的变量在**第一次调用**的时候会被初始化，之后再调用该函数这个static类型的变量**保持上一次函数调用结束时的值** </p>
+<p>之前已经讲到了static类型的全局变量只在当前文件有效，不能通过extern跨文件调用，而函数中的static类型的变量在<strong>第一次调用</strong>的时候会被初始化，之后再调用该函数这个static类型的变量<strong>保持上一次函数调用结束时的值</strong> </p>
 </li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span>
@@ -4627,7 +4627,7 @@
 <ul>
 <li>类中的static</li>
 <li>
-<p>类中定义的static类型的变量是**静态成员变量**，其值会在这个类的**所有成员之间共享** </p>
+<p>类中定义的static类型的变量是<strong>静态成员变量</strong>，其值会在这个类的<strong>所有成员之间共享</strong> </p>
 <ul>
 <li>non-const类型的静态成员变量需要在类的外面进行定义，比如：</li>
 </ul>
@@ -4657,7 +4657,7 @@
 <li>
 <p>静态成员函数：</p>
 <ul>
-<li><strong>可以访问类定义中的静态成员变量</strong>，但是**不能直接访问普通的**成员变量</li>
+<li><strong>可以访问类定义中的静态成员变量</strong>，但是<strong>不能直接访问普通的</strong>成员变量</li>
 <li>需要在函数定义之前加static关键字</li>
 </ul>
 </li>
@@ -4666,10 +4666,10 @@
 <ul>
 <li>需要在函数名前面加关键字<code>inline</code> </li>
 <li>内联函数在编译期会被编译器在调用处直接扩展为一个完整的函数，因此可以减少运行时调用函数的cost</li>
-<li>内联函数的定义和函数主体部分都应该写在**头文件**中</li>
+<li>内联函数的定义和函数主体部分都应该写在<strong>头文件</strong>中</li>
 <li>本质是空间换时间</li>
-<li>class中的函数都是**默认inline**的</li>
-<li>an inline function is expanded in place, like a preprocessormacro, so the overhead of the function call is eliminated,不需要函数调用产生的开销，由编译器**直接优化**，但是可能会使得需要编译的代码量增大(虽然写的人是看不出来的)，主要作用是减小函数调用时的开销，一般在函数比较小的时候才会使用</li>
+<li>class中的函数都是<strong>默认inline</strong>的</li>
+<li>an inline function is expanded in place, like a preprocessormacro, so the overhead of the function call is eliminated,不需要函数调用产生的开销，由编译器<strong>直接优化</strong>，但是可能会使得需要编译的代码量增大(虽然写的人是看不出来的)，主要作用是减小函数调用时的开销，一般在函数比较小的时候才会使用</li>
 </ul>
 <h3 id="24-继承inheritance">2.4 继承Inheritance<a class="headerlink" href="#24-继承inheritance" title="Permanent link">&para;</a></h3>
 <ul>
@@ -4679,16 +4679,16 @@
 <li>
 <p>Inheritance：从基类中继承生成派生类</p>
 </li>
-<li>派生类**继承了基类的所有变量和成员函数** </li>
-<li>派生类中**不能直接访问**基类的private的变量和成员函数，但是可以通过基类的成员函数来访问这些成员函数和变量</li>
+<li>派生类<strong>继承了基类的所有变量和成员函数</strong> </li>
+<li>派生类中<strong>不能直接访问</strong>基类的private的变量和成员函数，但是可以通过基类的成员函数来访问这些成员函数和变量</li>
 <li>
 <p>派生类的构造函数</p>
 <ul>
 <li>
-<p>可以在派生类的构造函数中**调用**基类的构造函数</p>
+<p>可以在派生类的构造函数中<strong>调用</strong>基类的构造函数</p>
 </li>
 <li>
-<p>派生类在被构造的时候会**先调用基类的构造函数**，再调用派生类的构造函数，析构的时候先调用派生类的析构函数，再调用基类的析构函数</p>
+<p>派生类在被构造的时候会<strong>先调用基类的构造函数</strong>，再调用派生类的构造函数，析构的时候先调用派生类的析构函数，再调用基类的析构函数</p>
 </li>
 <li>如果派生类没有定义构造函数，则直接调用基类的构造函数</li>
 <li>如果派生类定义了构造函数，在执行之前会先调用基类的构造函数，如果派生类的构造函数中没有显式调用基类的构造函数，则会选择调用基类的无参构造函数</li>
@@ -4723,20 +4723,20 @@
 <li>
 <p>Base class is always constructed first</p>
 </li>
-<li>就算组合的类在**初始化列表或者构造函数中没有调用**构造函数，C++编译器也会自动调用这个类默认的构造函数</li>
+<li>就算组合的类在<strong>初始化列表或者构造函数中没有调用</strong>构造函数，C++编译器也会自动调用这个类默认的构造函数</li>
 <li>
 <p>派生类中可以对基类函数进行重载，此时如果派生类对象调用对应的函数按照派生类中的同名函数执行</p>
 </li>
 <li>
 <p>仍然调用基类的方法<code>object.Base::function()</code> </p>
 </li>
-<li>class和struct的区别：class中的变量和函数**默认为private**，struct中的函数默认为public</li>
+<li>class和struct的区别：class中的变量和函数<strong>默认为private</strong>，struct中的函数默认为public</li>
 <li>访问控制</li>
 <li>public：所有情况下可见</li>
 <li>protected：可以被自己/派生类和友元函数访问</li>
 <li>private：对于自己和友元函数可见</li>
 <li>继承的种类：public，private，protected继承，继承之后的基类变量的访问控制取原本类型和继承类型中较严格的</li>
-<li>可以通过**强制类型转换**把派生类的对象转化为基类的对象</li>
+<li>可以通过<strong>强制类型转换</strong>把派生类的对象转化为基类的对象</li>
 </ul>
 </li>
 </ul>
@@ -4865,14 +4865,14 @@
 <p>虚函数 Virtual Function</p>
 </li>
 <li>
-<p>一种用于**实现多态**的机制，核心理念是通过基类访问派生类定义的函数</p>
+<p>一种用于<strong>实现多态</strong>的机制，核心理念是通过基类访问派生类定义的函数</p>
 <ul>
-<li>这种方式称为**动态**链接 </li>
+<li>这种方式称为<strong>动态</strong>链接 </li>
 <li>
-<p>用于区分派生类中和基类同名的方法函数，需要将**基类**的成员函数类型声明为virtual</p>
+<p>用于区分派生类中和基类同名的方法函数，需要将<strong>基类</strong>的成员函数类型声明为virtual</p>
 </li>
 <li>
-<p>基类中的**析构函数一定要为虚函数**，否则会出现对象释放错误 </p>
+<p>基类中的<strong>析构函数一定要为虚函数</strong>，否则会出现对象释放错误 </p>
 </li>
 <li>纯虚函数：<code>virtual int func() = 0;</code> 表明该函数没有主体，基类中没有给出有意义的实现方式，需要在派生类中进行扩展</li>
 </ul>
@@ -4883,9 +4883,9 @@
 <li>
 <p>虚函数需要借助指针和引用达到多态的效果</p>
 <ul>
-<li>如果基类指针/引用**指向基类**，那就正常调用基类的相关成员函数</li>
-<li>如果基类指针**指向派生类**，则调用的时候会调用派生类的成员函数</li>
-<li>派生类指针**不能**指向基类</li>
+<li>如果基类指针/引用<strong>指向基类</strong>，那就正常调用基类的相关成员函数</li>
+<li>如果基类指针<strong>指向派生类</strong>，则调用的时候会调用派生类的成员函数</li>
+<li>派生类指针<strong>不能</strong>指向基类</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">A</span><span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
@@ -4912,7 +4912,7 @@
 <li>
 <p>虚函数的实现方式：<strong>虚函数表</strong> virtual table </p>
 <ul>
-<li>每一个有虚函数的类都会有一个虚函数表，该类的任何对象中都存放着虚函数表的指针，虚函数表中**列出了该类的虚函数地址** </li>
+<li>每一个有虚函数的类都会有一个虚函数表，该类的任何对象中都存放着虚函数表的指针，虚函数表中<strong>列出了该类的虚函数地址</strong> </li>
 <li>虚函数表是一个指针数组，里面存放了一系列虚函数的指针</li>
 <li>虚函数的调用需要经过虚函数表的查询，非虚函数的调用不需要经过虚函数表</li>
 <li>虚函数表在代码的编译阶段就完成了构造</li>
@@ -4992,7 +4992,7 @@
 <p>总结：</p>
 </li>
 <li>
-<p>virtual的虚函数关键字是**向下负责**的，派生类声明virtual对基类无任何影响</p>
+<p>virtual的虚函数关键字是<strong>向下负责</strong>的，派生类声明virtual对基类无任何影响</p>
 </li>
 <li>
 <p>对于指针和引用而言</p>
@@ -5125,7 +5125,7 @@
 </ul>
 <h4 id="282-const_cast">2.8.2 const_cast<a class="headerlink" href="#282-const_cast" title="Permanent link">&para;</a></h4>
 <ul>
-<li><code>const_cast</code> 可以强制去掉const的常数特性，**只能用在指针和引用**上面</li>
+<li><code>const_cast</code> 可以强制去掉const的常数特性，<strong>只能用在指针和引用</strong>上面</li>
 <li>常量指针被转化成非常量的指针，仍然指向原来的对象</li>
 <li>常量引用被转换成为非常量的引用，仍指向原来的对象</li>
 <li>来看一段代码</li>
@@ -5262,11 +5262,11 @@
 <li>
 <p>大部分运算符都可以重载</p>
 </li>
-<li><code>.    ::   ?:</code>之类的运算符不能重载，sizeof，typeid，static之类的**关键字不能重载** </li>
+<li><code>.    ::   ?:</code>之类的运算符不能重载，sizeof，typeid，static之类的<strong>关键字不能重载</strong> </li>
 <li>不能重载不存在的运算符</li>
 <li>必须对于整个class或者enumeration type进行运算符的重载</li>
 <li>
-<p>重载之后的运算符依然保持**原来一样的运算优先级和操作数的个数** </p>
+<p>重载之后的运算符依然保持<strong>原来一样的运算优先级和操作数的个数</strong> </p>
 </li>
 <li>
 <p>运算符重载的基本语法</p>
@@ -5275,7 +5275,7 @@
 <p>在类定义中对member function进行重载<code>return_type class_name::operator运算符(parameters)</code> 此时参数为对应运算符所需参数-1</p>
 </li>
 <li>对外部函数进行重载<code>返回值类型 operator运算符(参数表)</code> 此时参数个数和对应的运算符的所需个数相同<ul>
-<li>如果要访问类的private内容，需要声明这个重载函数为**友元** </li>
+<li>如果要访问类的private内容，需要声明这个重载函数为<strong>友元</strong> </li>
 <li>单目运算符一般声明为成员函数，双目运算符一般作为外部的函数</li>
 <li>[ ] ( ) -&gt; 等运算符必须作为成员函数</li>
 </ul>
@@ -5290,10 +5290,10 @@
 </code></pre></div>
 <ul>
 <li>
-<p>比较大小关系的运算符重载时，可以通过**代码的复用**减少不必要的代码量</p>
+<p>比较大小关系的运算符重载时，可以通过<strong>代码的复用</strong>减少不必要的代码量</p>
 </li>
 <li>
-<p>自定义的**类型转换** </p>
+<p>自定义的<strong>类型转换</strong> </p>
 </li>
 <li>
 <p>例如 <code>Rational::operator double() const {};</code></p>
@@ -5378,12 +5378,12 @@
 <p>函数模板：使用关键字template 后面加若干个变量作为类型声明一个函数模板，类型变量可以代替函数的返回值类型，参数类型和函数中的变量的类型</p>
 </li>
 <li>
-<p>函数模板需要**实例化**(instantiation)之后再使用，如果没有被调用就不会被实例化</p>
+<p>函数模板需要<strong>实例化</strong>(instantiation)之后再使用，如果没有被调用就不会被实例化</p>
 <ul>
 <li>实例化是讲模板函数中的模板替换为对应的变量类型，然后生成一个对应的函数</li>
-<li>函数模板在使用过程中不能发生参数和返回值的类型转换，必须要**类型完全匹配才能使用**</li>
+<li>函数模板在使用过程中不能发生参数和返回值的类型转换，必须要<strong>类型完全匹配才能使用</strong></li>
 <li>
-<h4 id="函数重载时候的优先级">函数重载时候的**优先级**<a class="headerlink" href="#函数重载时候的优先级" title="Permanent link">&para;</a></h4>
+<h4 id="函数重载时候的优先级">函数重载时候的<strong>优先级</strong><a class="headerlink" href="#函数重载时候的优先级" title="Permanent link">&para;</a></h4>
 </li>
 <li>
 <p>先找是否有完全匹配的普通函数</p>
@@ -5454,7 +5454,7 @@
 </ul>
 </li>
 <li>
-<p>模板类调用的**优先级**</p>
+<p>模板类调用的<strong>优先级</strong></p>
 <ul>
 <li>全特化类&gt;偏特化类&gt;主版本的模板类（就是直接调用模板类，最常见的用法）</li>
 <li>有隐式转换的优先级比较低，先考虑所有不需要隐式转换的模板，再考虑需要隐式转换的模板</li>
@@ -5464,7 +5464,7 @@
 <h3 id="43-stl和迭代器">4.3 STL和迭代器<a class="headerlink" href="#43-stl和迭代器" title="Permanent link">&para;</a></h3>
 <ul>
 <li>
-<p>STL=Standard Template Library 是标准库的一部分，使用C++STL可以减少开发时间，提高可读性和**鲁棒性** ，STL包含了：</p>
+<p>STL=Standard Template Library 是标准库的一部分，使用C++STL可以减少开发时间，提高可读性和<strong>鲁棒性</strong> ，STL包含了：</p>
 </li>
 <li>
 <p>容器</p>
@@ -5477,7 +5477,7 @@
 <p>STL容器的使用：刻在DNA里，不需要整理</p>
 </li>
 <li>
-<p>关于map：map的key**必须是**可以满足**可以排序**性质的，如果是自定义的类需要**重载&lt;函数**，否则这个类不能作为key值</p>
+<p>关于map：map的key<strong>必须是</strong>可以满足<strong>可以排序</strong>性质的，如果是自定义的类需要<strong>重载&lt;函数</strong>，否则这个类不能作为key值</p>
 </li>
 <li>
 <p>迭代器：<code>STL&lt;parameters&gt;::iterator  xxx</code></p>
@@ -5486,7 +5486,7 @@
 <p>迭代器是一种顺序访问容器的方式：Generalization of pointers</p>
 </li>
 <li>
-<p>两个特殊的迭代器：begin( ) 和 end( )分别表示容器的**头和尾** </p>
+<p>两个特殊的迭代器：begin( ) 和 end( )分别表示容器的<strong>头和尾</strong> </p>
 <ul>
 <li>很多时候end并不能达到，因此到结束的判断条件往往是<code>!=stl.end()</code> </li>
 </ul>
@@ -5507,7 +5507,7 @@
 </code></pre></div>
 </li>
 <li>
-<p>可以看成是一种**泛化的指针** </p>
+<p>可以看成是一种<strong>泛化的指针</strong> </p>
 </li>
 </ul>
 <h2 id="5-exceptions-异常处理">5. Exceptions 异常处理<a class="headerlink" href="#5-exceptions-异常处理" title="Permanent link">&para;</a></h2>
@@ -5516,7 +5516,7 @@
 <li>
 <p><code>try{ } catch{ }</code> ：捕获throw抛出的异常</p>
 <ul>
-<li><code>catch (...)</code>表示捕捉**所有可能的异常** </li>
+<li><code>catch (...)</code>表示捕捉<strong>所有可能的异常</strong> </li>
 <li>try括号中的代码被称为保护代码</li>
 </ul>
 </li>
@@ -5545,9 +5545,9 @@
 <li>
 <p>函数定义的异常声明</p>
 </li>
-<li>可以在函数名后面加<code>noexcept</code>关键字，说明该函数在运行的过程中**不抛出任何异常**，如果还是产生了异常，就会调用<code>std::terminate</code>终止程序</li>
+<li>可以在函数名后面加<code>noexcept</code>关键字，说明该函数在运行的过程中<strong>不抛出任何异常</strong>，如果还是产生了异常，就会调用<code>std::terminate</code>终止程序</li>
 <li>可以在函数声明中列出所有可能抛出的异常类型，比如<code>double f(int, int) throw(int);</code> 如果是throw()表示不抛出一场，就算函数里有throw也不会执行</li>
-<li>throw会导致一个函数没有执行完毕，但是在函数throw之前会执行所有**局部变量的析构函数**</li>
+<li>throw会导致一个函数没有执行完毕，但是在函数throw之前会执行所有<strong>局部变量的析构函数</strong></li>
 <li>最好不要在析构函数中抛出异常</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">T</span>
@@ -5596,8 +5596,8 @@
 <p><code>std::unique_ptr</code>只允许这个指针来管理对应的资源，<strong>不允许指针之间的拷贝</strong>，但是</p>
 <ul>
 <li>不允许进行指针的赋值和拷贝</li>
-<li>可以用**<code>move</code>方法来移动指针的所有权**，比如<code>unique_ptr&lt;int&gt; p2 = move(p1);</code> </li>
-<li>可以用**<code>release</code>方法**来释放指针的所有权</li>
+<li>可以用<strong><code>move</code>方法来移动指针的所有权</strong>，比如<code>unique_ptr&lt;int&gt; p2 = move(p1);</code> </li>
+<li>可以用<strong><code>release</code>方法</strong>来释放指针的所有权</li>
 </ul>
 </li>
 </ul>
@@ -5624,7 +5624,7 @@
 </code></pre></div>
 <ul>
 <li>
-<p><code>std::shared_ptr</code>非独占的指针，可以多个指针管理一个对象。shared_ptr使用**引用计数**，每一个shared_ptr的拷贝都指向相同的内存。每使用他一次，内部的引用计数加1，每析构一次，内部的引用计数减1，减为0时，自动删除所指向的堆内存。shared_ptr内部的引用计数是**线程安全**的，但是对象的读取需要**加锁** </p>
+<p><code>std::shared_ptr</code>非独占的指针，可以多个指针管理一个对象。shared_ptr使用<strong>引用计数</strong>，每一个shared_ptr的拷贝都指向相同的内存。每使用他一次，内部的引用计数加1，每析构一次，内部的引用计数减1，减为0时，自动删除所指向的堆内存。shared_ptr内部的引用计数是<strong>线程安全</strong>的，但是对象的读取需要<strong>加锁</strong> </p>
 <ul>
 <li>可以用<code>use_count</code>函数来查看某个对象拥有的指针的个数</li>
 <li>可以用<code>get</code>函数来获取原始指针</li>
@@ -5644,7 +5644,7 @@
 <li>
 <p><code>std::weak_ptr</code>是没用重载*和-&gt;操作符，没有普通指针具有的行为，最大的作用在于协助其他指针的工作，查看对象中的资源使用情况</p>
 <ul>
-<li>weak_ptr可以通过一个shared_ptr或者weak_ptr来进行构造，获取观测权，但是weak_ptr**不会造成指针引用计数的增加** </li>
+<li>weak_ptr可以通过一个shared_ptr或者weak_ptr来进行构造，获取观测权，但是weak_ptr<strong>不会造成指针引用计数的增加</strong> </li>
 </ul>
 </li>
 </ul>

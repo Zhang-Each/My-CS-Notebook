@@ -3942,9 +3942,9 @@
 <p>需要有一定的机制去维持一致性</p>
 </li>
 <li>
-<p>比如上一节提到的有限缓冲区问题中，我们维护一个counter来记录缓冲区中item的个数，其中两个进程producer和customer分别需要执行<code>counter++</code>和<code>counter--</code>，但是这两种操作需要满足**原子性**(运行的时候不允许被中断)，如果两个进程producer和customer都想要改变counter，就可能导致数据的不一致性</p>
+<p>比如上一节提到的有限缓冲区问题中，我们维护一个counter来记录缓冲区中item的个数，其中两个进程producer和customer分别需要执行<code>counter++</code>和<code>counter--</code>，但是这两种操作需要满足<strong>原子性</strong>(运行的时候不允许被中断)，如果两个进程producer和customer都想要改变counter，就可能导致数据的不一致性</p>
 <ul>
-<li>一个<code>counter++</code>的操作编译成汇编语言可能就是,<code>counter</code>--同理，区别是**寄存器不同**</li>
+<li>一个<code>counter++</code>的操作编译成汇编语言可能就是,<code>counter</code>--同理，区别是<strong>寄存器不同</strong></li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="n">regiter1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">counter</span><span class="p">;</span>
 <span class="n">register1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">register1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
@@ -3968,7 +3968,7 @@
 <span class="p">}</span><span class="w">    </span>
 </code></pre></div>
 <ul>
-<li>这道题的答案是3，因为每一次都会有<code>total=registerX</code> 这样一个步骤，只需要合理地控制这一步就可以使得最后total是3，题目中讲的方法就是在写入total之前执行另一个进程剩下的49次，这样就使得total不会被这49次影响，因此**能影响到total结果的只有一次+1，一次+2**，最后的结果就是3</li>
+<li>这道题的答案是3，因为每一次都会有<code>total=registerX</code> 这样一个步骤，只需要合理地控制这一步就可以使得最后total是3，题目中讲的方法就是在写入total之前执行另一个进程剩下的49次，这样就使得total不会被这49次影响，因此<strong>能影响到total结果的只有一次+1，一次+2</strong>，最后的结果就是3</li>
 </ul>
 </li>
 <li>
@@ -3977,7 +3977,7 @@
 <li>
 <p>多个进程都需要访问和修改一块共享数据区，此时数据的状态取决于最后访问这一区域的进程</p>
 </li>
-<li>为了防止竞争条件的出现，并发的进程必须**同步**<code>Sychronized</code></li>
+<li>为了防止竞争条件的出现，并发的进程必须<strong>同步</strong><code>Sychronized</code></li>
 <li>三个控制问题：<ul>
 <li>互斥mutual exclusion 多个进程不能同时得到一个资源</li>
 <li>死锁dead lock 进程互不相让，导致永远得不到资源</li>
@@ -4129,11 +4129,11 @@
 <li>问题描述：</li>
 <li>只要读数据的称为读者，一些进程要求修改数据内容的称为写者</li>
 <li>读者可以同时读，但是写者不能和其他进程同时访问，必须互斥</li>
-<li>**第一**读者写者问题：允许多个读者一起读，只有一个写者可以进入数据区，会导致写者饥饿<ul>
+<li><strong>第一</strong>读者写者问题：允许多个读者一起读，只有一个写者可以进入数据区，会导致写者饥饿<ul>
 <li>信号量的设置：<code>mutex=1，wrt=1</code> 用一个readcount记录读者的数量</li>
 </ul>
 </li>
-<li>**第二**读者写者问题：当有写者就绪的时候就尽可能满足写者的要求</li>
+<li><strong>第二</strong>读者写者问题：当有写者就绪的时候就尽可能满足写者的要求</li>
 </ul>
 <h6 id="653-哲学家吃饭问题">6.5.3 哲学家吃饭问题<a class="headerlink" href="#653-哲学家吃饭问题" title="Permanent link">&para;</a></h6>
 <ul>
@@ -4160,7 +4160,7 @@
 <p>边分成请求边和分配边两种，请求边从P指向R，表示进程请求这个资源，分配边从R指向P，表示资源被分配给进程</p>
 </li>
 <li>
-<p>资源分配图中有环就表明**可能存在**死锁，当一个资源有多个实例的时候也可能不死锁，也就是说判断是否死锁需要考虑资源的实例个数和分配情况</p>
+<p>资源分配图中有环就表明<strong>可能存在</strong>死锁，当一个资源有多个实例的时候也可能不死锁，也就是说判断是否死锁需要考虑资源的实例个数和分配情况</p>
 </li>
 <li>没有环的肯定没有死锁</li>
 <li>有环并且可用的只有一个实例，就产生死锁</li>
@@ -4193,7 +4193,7 @@
 <p><strong>安全状态</strong>：系统存在一种调度的方式使得进程按这个顺序可以申请到所需资源并完成运行，这个进程序列叫做安全序列，否则就叫不安全状态</p>
 </li>
 <li>
-<p>如果系统处于安全状态就不可能会产生死锁，否则就有可能，而**避免死锁就要让系统永远处于安全状态**</p>
+<p>如果系统处于安全状态就不可能会产生死锁，否则就有可能，而<strong>避免死锁就要让系统永远处于安全状态</strong></p>
 <ul>
 <li>每类资源只有一个实例，使用资源分配图算法</li>
 <li>每类资源有多个实例，使用银行家算法</li>
@@ -4223,7 +4223,7 @@
 <p><img alt="image-20201126144018477" src="../static/image-20201126144018477.png" /><br />
 - 死锁的检测：</p>
 <ul>
-<li>单个实例：使用等待图，如果**有环就是死锁** </li>
+<li>单个实例：使用等待图，如果<strong>有环就是死锁</strong> </li>
 <li>多个实例：有一套死锁检测算法</li>
 </ul>
 <p><img alt="image-20201129152437083" src="../static/image-20201129152437083.png" /><br />

@@ -4026,7 +4026,7 @@
 <p><img src="static/image-20201202115828956.png" alt="image-20201202115828956" style="zoom: 33%;" /></p>
 <h3 id="45-generics-泛型">4.5 Generics 泛型<a class="headerlink" href="#45-generics-泛型" title="Permanent link">&para;</a></h3>
 <ul>
-<li>是一种**对变量类型进行参数化的**功能，类似于C++中的模板</li>
+<li>是一种<strong>对变量类型进行参数化的</strong>功能，类似于C++中的模板</li>
 <li>优点是能在编译期就发现一些错误而不是运行时</li>
 <li>一个泛型类或者方法可以声明类名和函数名作为变量</li>
 </ul>
@@ -4035,7 +4035,7 @@
 <li>泛型方法的类型参数声明要卸载返回值类型前面，用尖括号括起来，比如</li>
 <li><code>public static &lt;E&gt; void printArray(E[] input);</code></li>
 <li>类型参数可以有多个参数，有逗号隔开，类型参数可以被用来声明返回值类型</li>
-<li>**有界限的**类型参数：可以让类型参数有一定的范围<ul>
+<li><strong>有界限的</strong>类型参数：可以让类型参数有一定的范围<ul>
 <li>用extends关键字+类型的上界来控制类型的范围</li>
 <li>比如<code>&lt;T extends Comparable&lt;T&gt;&gt;</code> 表示T必须是可以比较大小的类型</li>
 </ul>
@@ -4054,10 +4054,10 @@
 <h4 id="452-泛型类">4.5.2 泛型类<a class="headerlink" href="#452-泛型类" title="Permanent link">&para;</a></h4>
 <ul>
 <li>
-<p>类型参数的声明添加在**类名的后面**</p>
+<p>类型参数的声明添加在<strong>类名的后面</strong></p>
 </li>
 <li>
-<p>参数化类型**没有实际类型参数的继承关系**</p>
+<p>参数化类型<strong>没有实际类型参数的继承关系</strong></p>
 </li>
 <li>比如<code>List&lt;Integer&gt; list = new List&lt;Object&gt;</code>会编译错误，把两个参数类型反过来也是编译错误</li>
 <li>

@@ -3979,7 +3979,7 @@
 <summary>本页统计信息</summary>
 <ul>
 <li>
-<p>本页约 2722 个字,  预计阅读时间 9 分钟。</p>
+<p>本页约 2715 个字,  预计阅读时间 9 分钟。</p>
 </li>
 <li>
 <p><span id="busuanzi_container_page_pv">本页总阅读量<span id="busuanzi_value_page_pv"></span>次</span></p>
@@ -3992,7 +3992,7 @@
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
 <p>在电商领域中，知识图谱已经有了一些应用，而对于海量的电商数据而言，其商品数据中可能包含了结构化信息，文本和图像等多种模态的信息，但同时，这些信息又有可能是不完整或者充满噪声的，比如下面的图中，第一个商品的信息是完整的，而第二三个商品的信息则有噪声或者缺失：</p>
 <p><img alt="商品数据" src="../static/image-20211116142218441.png" /></p>
-<p>面对众多的下游任务，每种商品各自的表示就显得尤为重要，商品表示的预训练已经被证明是一种非常有效的手段，而面对多模态的商品数据和数据有大量缺失和噪声的实际场景下，直接使用多模态的预训练方式效果不尽如人意，而本论文汲取了之前一篇论文商品知识图谱预训练的思想，在商品数据预训练的过程中**融入多模态数据和知识三元组**，增强预训练模型的鲁棒性，解决数据缺失和数据噪声的问题，从而得到更好的商品表示向量。</p>
+<p>面对众多的下游任务，每种商品各自的表示就显得尤为重要，商品表示的预训练已经被证明是一种非常有效的手段，而面对多模态的商品数据和数据有大量缺失和噪声的实际场景下，直接使用多模态的预训练方式效果不尽如人意，而本论文汲取了之前一篇论文商品知识图谱预训练的思想，在商品数据预训练的过程中<strong>融入多模态数据和知识三元组</strong>，增强预训练模型的鲁棒性，解决数据缺失和数据噪声的问题，从而得到更好的商品表示向量。</p>
 <p>本文的贡献在于：</p>
 <ul>
 <li>提出了将结构化的商品数据表示称形如<code>&lt;item, property, value&gt;</code>形式的三元组，并构建知识图谱，将知识图谱作为一个新的模态和图像文本等数据融合。</li>
@@ -4028,7 +4028,7 @@
 </tr>
 <tr>
 <td>交互层</td>
-<td>负责进行跨模态的信息交互，其中包括了**图像和文本模态之间**的交互以及**图像和文本模态与知识模态之间**的交互</td>
+<td>负责进行跨模态的信息交互，其中包括了<strong>图像和文本模态之间</strong>的交互以及<strong>图像和文本模态与知识模态之间</strong>的交互</td>
 </tr>
 <tr>
 <td>任务层</td>
@@ -4037,7 +4037,7 @@
 </tbody>
 </table>
 <h4 id="编码层">编码层<a class="headerlink" href="#编码层" title="Permanent link">&para;</a></h4>
-<p>编码层首先要对三个模态的数据分别进行编码，由于模型要从头开始训练，所以不能使用预训练好的BERT之类的模型，论文中提出的方法是，对图像和文本分别使用Transformer结构进行编码表示，然后对于商品知识图谱中的数据，首先使用和文本模态中的同一个Transformer模型对实体/关系按照文本进行表示，然后通过平均池化得到商品item的**每个property和value的表示向量**。</p>
+<p>编码层首先要对三个模态的数据分别进行编码，由于模型要从头开始训练，所以不能使用预训练好的BERT之类的模型，论文中提出的方法是，对图像和文本分别使用Transformer结构进行编码表示，然后对于商品知识图谱中的数据，首先使用和文本模态中的同一个Transformer模型对实体/关系按照文本进行表示，然后通过平均池化得到商品item的<strong>每个property和value的表示向量</strong>。</p>
 <p>总之就是使用了非常多的Transformer分别进行编码，然后编码的时候要注意使用一些常用的trick包括：</p>
 <ul>
 <li>使用R-CNN对输入的图像进行目标检测然后进行掩码和分割成若干个patch</li>
@@ -4047,7 +4047,7 @@
 <p>交互层主要分成了图像文本模态间的交互和图像文本与知识模态之间的共同交互。</p>
 <h5 id="图像文本交互">图像文本交互<a class="headerlink" href="#图像文本交互" title="Permanent link">&para;</a></h5>
 <p>首先将输入的图像和文本数据通过一个使用共同注意力机制的Transformer进行融合，但是问题在于，使用共同注意力机制的时候，模态之间的独立性就被破坏了，但是如果出现了模态数据的缺失和噪声，这种方法会对模型的性能造成比较大的影响，因此维护模态之间的独立性也是非常有必要的</p>
-<p>为此论文提出了保留原本的文本和图像信息，并设计了一个**初始特征交互模块(initial-interactive feature fusion module, IIFM)**，这个模块负责将交互后的特征和初始的模态特征进行融合</p>
+<p>为此论文提出了保留原本的文本和图像信息，并设计了一个<strong>初始特征交互模块(initial-interactive feature fusion module, IIFM)</strong>，这个模块负责将交互后的特征和初始的模态特征进行融合</p>
 <ul>
 <li>实际上我认为这种方法很像率先在CV中提出的残差连接，即ResNet的核心idea</li>
 </ul>
@@ -4099,16 +4099,15 @@ $$</p>
 <p>这篇论文提出的预训练模型需要解决的预训练任务主要有商品分类，商品对齐和多模态问答等等，商品分类和对齐实际上就是一类问题，就是将一个或者多个商品的预训练好的embedding输入一个简单的MLP中进行微调，然后进行多分类和二分类(对齐实际上就是一个二分类问题)</p>
 <p>而多模态问答好像看论文里说的也跟另外两个任务差不多，通过输入一个形如<code>product title [SEP] question</code>的问题以及答案，然后使用预训练好的embedding来预测结果，并用交叉熵作为loss进行微调，因为看不到数据集所以具体也不知道这个任务究竟是什么形式。</p>
 <h3 id="实验">实验<a class="headerlink" href="#实验" title="Permanent link">&para;</a></h3>
-<p>实验是我认为这篇文章中另一个做的比较到位的地方，首先关于baseline，论文选用了现成的预训练模型如ViLBERT和LXMBERT，VLBERT等，并探究了这些多模态BERT在**不使用PKG和使用PKG**两种情况下的性能作为对照，来体现K3M(论文提出的模型)的强大能力。</p>
+<p>实验是我认为这篇文章中另一个做的比较到位的地方，首先关于baseline，论文选用了现成的预训练模型如ViLBERT和LXMBERT，VLBERT等，并探究了这些多模态BERT在<strong>不使用PKG和使用PKG</strong>两种情况下的性能作为对照，来体现K3M(论文提出的模型)的强大能力。</p>
 <p>另一方面，本论文的核心其实是对模态数据缺失和噪声场景下模型的鲁棒性，因此实验部分设置了若干个缺失率参数TMR，IMR，MMR以及噪声参数TNR，INR，TINR和MNR(T和I代表标题和图像，M和N代表缺失和噪声)，探究了各个模型在不同的缺失率和噪声比例下的性能，并和baseline进行对比，可以说工作量大的离谱。</p>
-<p><span id=busuanzi_container_page_pv>本文总阅读量<span id=busuanzi_value_page_pv></span>次</span></p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月4日 10:57:21</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月8日 14:30:35</span>
       
         <br>
         创建日期:

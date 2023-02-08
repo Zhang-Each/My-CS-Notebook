@@ -3995,7 +3995,7 @@
 <summary>本页统计信息</summary>
 <ul>
 <li>
-<p>本页约 2888 个字,  预计阅读时间 10 分钟。</p>
+<p>本页约 2881 个字,  预计阅读时间 10 分钟。</p>
 </li>
 <li>
 <p><span id="busuanzi_container_page_pv">本页总阅读量<span id="busuanzi_value_page_pv"></span>次</span></p>
@@ -4010,7 +4010,7 @@
 <h3 id="关于多模态任务">关于多模态任务<a class="headerlink" href="#关于多模态任务" title="Permanent link">&para;</a></h3>
 <p>所谓的多模态任务，常见的有图片标准Image Captioning，可视问答VQA，图片-文本检索和可视常识推理等等，多模态的任务往往需要将给定的图片和文本信息结合起来，找到它们的内在联系，这也是多模态任务的最大特征，即数据集中的图片和文本信息往往是成对的，并且图像和文本之间存在着一定的语义关联性，而多模态机器学习的最重要任务就是挖掘出成对的图像和文本信息之间隐藏的关联性。</p>
 <h3 id="关于预训练模型">关于预训练模型<a class="headerlink" href="#关于预训练模型" title="Permanent link">&para;</a></h3>
-<p>预训练模型的通用范式有两种，一种是基于特征的，即**将从预训练好的模型中得到的特征**作为额外的特征输入，而另一种是基于微调的，即在训练好的模型的基础上**增加与下游任务相关的一些神经网络层**，并且在下游任务的数据集上进行训练，这个过程就称为微调。而BERT系列的预训练模型都是基于微调的，我们需要在海量数据集上进行预训练，并将训练好的模型迁移到特定的下游任务中进行微调。</p>
+<p>预训练模型的通用范式有两种，一种是基于特征的，即<strong>将从预训练好的模型中得到的特征</strong>作为额外的特征输入，而另一种是基于微调的，即在训练好的模型的基础上<strong>增加与下游任务相关的一些神经网络层</strong>，并且在下游任务的数据集上进行训练，这个过程就称为微调。而BERT系列的预训练模型都是基于微调的，我们需要在海量数据集上进行预训练，并将训练好的模型迁移到特定的下游任务中进行微调。</p>
 <p>对于微调型的预训练模型而言，最重要的几个组成部分是：</p>
 <ul>
 <li>模型的架构：比如BERT使用的是深层的双向Transformer</li>
@@ -4019,7 +4019,7 @@
 </ul>
 <p>我们研究多模态的预训练模型也可以从这三个角度入手。</p>
 <h3 id="关于多模态bert的架构">关于多模态BERT的架构<a class="headerlink" href="#关于多模态bert的架构" title="Permanent link">&para;</a></h3>
-<p>多模态BERT模型的一般情况下可以分成两类：单流模型和双流模型，所谓的单流模型就是对文本特征和图像特征**用同一个深层的双向Transformer进行编码**，而双流模型则是图像和文本分开编码，然后用共同注意力机制进行特征的融合，下面提到的三个模型中，VisualBERT和VL-BERT都是单流模型，而ViLBERT则是双流模型。</p>
+<p>多模态BERT模型的一般情况下可以分成两类：单流模型和双流模型，所谓的单流模型就是对文本特征和图像特征<strong>用同一个深层的双向Transformer进行编码</strong>，而双流模型则是图像和文本分开编码，然后用共同注意力机制进行特征的融合，下面提到的三个模型中，VisualBERT和VL-BERT都是单流模型，而ViLBERT则是双流模型。</p>
 <p>下面我们来分别介绍三个不同的多模态BERT，我们将重点放在它们各自的模型架构，预训练任务和下游任务上。</p>
 <h2 id="visualbert">VisualBERT<a class="headerlink" href="#visualbert" title="Permanent link">&para;</a></h2>
 <p>首先是第一篇VisualBERT，这个模型在ICLR2019的论文《VISUALBERT: A SIMPLE AND PERFORMANT BASELINE FOR VISION AND LANGUAGE》中被提出，它的模型结构如下图所示：</p>
@@ -4041,7 +4041,7 @@
 <li>这篇论文的下游任务感觉写的可读性较差，所以我就不太想看了</li>
 </ul>
 <h2 id="vl-bert">VL-BERT<a class="headerlink" href="#vl-bert" title="Permanent link">&para;</a></h2>
-<p>第二篇文章VL-BERT是ICLR2020上的论文《VL-BERT: PRE-TRAINING OF GENERIC VISUALLINGUISTIC REPRESENTATIONS》上提出的，这篇论文中提出了一种**混合预训练的预训练方式**，并且提供了一种改进的多模态模型架构。</p>
+<p>第二篇文章VL-BERT是ICLR2020上的论文《VL-BERT: PRE-TRAINING OF GENERIC VISUALLINGUISTIC REPRESENTATIONS》上提出的，这篇论文中提出了一种<strong>混合预训练的预训练方式</strong>，并且提供了一种改进的多模态模型架构。</p>
 <h3 id="模型架构_1">模型架构<a class="headerlink" href="#模型架构_1" title="Permanent link">&para;</a></h3>
 <p>Vl-BERT的模型架构如下图所示：</p>
 <p><img alt="image-20211129163909208" src="../static/image-20211129163909208.png" /></p>
@@ -4050,7 +4050,7 @@
 <h3 id="预训练任务和数据集_1">预训练任务和数据集<a class="headerlink" href="#预训练任务和数据集_1" title="Permanent link">&para;</a></h3>
 <p>VL-BERT采用了两种预训练任务，分别是经典的掩码语言模型和掩码ROI分类，其中掩码语言模型是结合图像特征的，而掩码ROI分类则是结合了文本特征。</p>
 <p>ROI是指Region Of Interest，即感兴趣区域，是R-CNN提取特征过程中圈定的重点区域，论文中的处理办法是，对于图像中的每个ROI，以一定的概率对其进行掩码操作并输入到模型中，而预训练时候的任务就是来预测被掩盖的这一块区域的所属分类。通过这种方式加强模型对图像信息的理解能力。</p>
-<p>同时论文还提出，在多模态模型中进行纯文本的预训练，这是因为多模态的预训练数据可以让模型建立对文本和图像的匹配能力，但是这类文本往往比较短，所以**模型对句子的理解能力还是不够，通过纯文本的预训练可以让模型对长难句的理解更加到位**。</p>
+<p>同时论文还提出，在多模态模型中进行纯文本的预训练，这是因为多模态的预训练数据可以让模型建立对文本和图像的匹配能力，但是这类文本往往比较短，所以<strong>模型对句子的理解能力还是不够，通过纯文本的预训练可以让模型对长难句的理解更加到位</strong>。</p>
 <p>VL-BERT在预训练过程中使用的数据集是Conceptual Captions，它提供了大量有caption的图片。</p>
 <h3 id="下游任务_1">下游任务<a class="headerlink" href="#下游任务_1" title="Permanent link">&para;</a></h3>
 <p>Vl-BERT的下游任务包括VCR/VQA和Referring Expression Comprehension，第三个任务是指给定一个指向图像中某个目标的短语，让模型标注出所指对象的位置。</p>
@@ -4106,15 +4106,14 @@
 </tr>
 </tbody>
 </table>
-<p>总的来说这些多模态BERT虽然看起来很nb，但好像仍然处于多模态表示学习的初级阶段。我之前一直想用多模态BERT做一些下游任务，但是现在看来理想和现实还有有比较大的GAP，也不知道事情究竟能不能成。多模态BERT在<code>transformers</code>这个库里有的也不多，只看到了一个VisualBERT
-<span id=busuanzi_container_page_pv>本文总阅读量<span id=busuanzi_value_page_pv></span>次</span></p>
+<p>总的来说这些多模态BERT虽然看起来很nb，但好像仍然处于多模态表示学习的初级阶段。我之前一直想用多模态BERT做一些下游任务，但是现在看来理想和现实还有有比较大的GAP，也不知道事情究竟能不能成。多模态BERT在<code>transformers</code>这个库里有的也不多，只看到了一个VisualBERT</p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月4日 10:57:21</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月8日 14:30:35</span>
       
         <br>
         创建日期:

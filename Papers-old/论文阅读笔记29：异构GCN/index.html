@@ -3805,7 +3805,7 @@
 <summary>本页统计信息</summary>
 <ul>
 <li>
-<p>本页约 1326 个字,  预计阅读时间 4 分钟。</p>
+<p>本页约 1319 个字,  预计阅读时间 4 分钟。</p>
 </li>
 <li>
 <p><span id="busuanzi_container_page_pv">本页总阅读量<span id="busuanzi_value_page_pv"></span>次</span></p>
@@ -3820,14 +3820,14 @@
 <div class="arithmatex">\[
 h_{i}^{(l+1)}=\sigma\left(\sum_{r \in \mathcal{R}} \sum_{j \in \mathcal{N}_{i}^{r}} \frac{1}{c_{i, r}} W_{r}^{(l)} h_{j}^{(l)}+W_{0}^{(l)} h_{i}^{(l)}\right)
 \]</div>
-<p>而这样的方法往往面临着过**参数化(Over-parameterization)**的问题，即设置了过多的参数，导致模型的学习效果反而下降，同时这些方法大多数只能学习到结点的表示，而不能学习边的表示，因此限制非常多。</p>
+<p>而这样的方法往往面临着过<strong>参数化(Over-parameterization)</strong>的问题，即设置了过多的参数，导致模型的学习效果反而下降，同时这些方法大多数只能学习到结点的表示，而不能学习边的表示，因此限制非常多。</p>
 <p>而本论文中提出的模型CompGCN就是为了解决为了解决这些问题，CompGCN从知识图谱嵌入中获得了灵感，采用了一系列机遇composition的操作对异构图进行建模，并在链接预测等任务上进行了实验，取得了非常不错的效果。</p>
 <h2 id="模型的细节">模型的细节<a class="headerlink" href="#模型的细节" title="Permanent link">&para;</a></h2>
 <p>一个异构图被定义为<span class="arithmatex">\(G=(V,R,E,X,Z)\)</span>，其中V和R分别表示所有结点和所有边，而E表示图中所有的路径信息(即点-边-点，对应到KG中就是三元组)，CompGCN使用了一个很常见的异构图trick对数据进行扩增——引入逆关系，即：</p>
 <div class="arithmatex">\[
 \left.\mathcal{E}^{\prime}=\mathcal{E} \cup\left\{\left(v, u, r^{-1}\right) \mid(u, v, r) \in \mathcal{E}\right\} \cup\{(u, u, \top) \mid u \in \mathcal{V})\right\}
 \]</div>
-<p>这么多可以丰富异构图的数据，同时可以让信息**在有向图中双向流通**。</p>
+<p>这么多可以丰富异构图的数据，同时可以让信息<strong>在有向图中双向流通</strong>。</p>
 <p><img alt="image-20211216163814664" src="../static/image-20211216163814664.png" /></p>
 <h3 id="基于关系的组合">基于关系的组合<a class="headerlink" href="#基于关系的组合" title="Permanent link">&para;</a></h3>
 <p>参考了知识图谱表示学习中的方法，CompGCN对一系列三元组<span class="arithmatex">\((s, r, o)\)</span>(即有向图中的一条边和头尾两个结点)进行建模，并且希望尾结点可以由头结点+关系通过某种函数的运算来得到：</p>
@@ -3869,14 +3869,13 @@ h_{i}^{(l+1)}=\sigma\left(\sum_{r \in \mathcal{R}} \sum_{j \in \mathcal{N}_{i}^{
 <h2 id="实验">实验<a class="headerlink" href="#实验" title="Permanent link">&para;</a></h2>
 <p>论文的实验主要做了链接预测和结点分类等等，值得注意的是GNN得到的结点和边表示并不能直接进行链接预测，而是作为知识图谱表示模型的初始化向量再进行进一步的训练才能进行链接预测，比如论文使用了CompGCN+TransE的方式进行链接预测实验：</p>
 <p><img alt="image-20211216170632266" src="../static/image-20211216170632266.png" /></p>
-<p><span id=busuanzi_container_page_pv>本文总阅读量<span id=busuanzi_value_page_pv></span>次</span></p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月4日 10:57:21</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月8日 14:30:35</span>
       
         <br>
         创建日期:

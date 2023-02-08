@@ -4116,7 +4116,7 @@
     <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">corpus_words</span><span class="p">),</span> <span class="n">num_corpus_words</span>
 </code></pre></div>
 <h4 id="构建co-occurence矩阵">构建Co-occurence矩阵<a class="headerlink" href="#构建co-occurence矩阵" title="Permanent link">&para;</a></h4>
-<p>首先探究词向量的第一步是构建语料库的共现矩阵，同时要构建一个单词-索引的映射关系，用**数字形式的索引**来表示单词，并将单词共同出现的情况统计到矩阵中，形成如下图所示的矩阵：</p>
+<p>首先探究词向量的第一步是构建语料库的共现矩阵，同时要构建一个单词-索引的映射关系，用<strong>数字形式的索引</strong>来表示单词，并将单词共同出现的情况统计到矩阵中，形成如下图所示的矩阵：</p>
 <p><img alt="image-20211017204701251" src="../static/image-20211017204701251.png" /></p>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">compute_co_occurrence_matrix</span><span class="p">(</span><span class="n">corpus</span><span class="p">,</span> <span class="n">window_size</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
     <span class="n">words</span><span class="p">,</span> <span class="n">num_words</span> <span class="o">=</span> <span class="n">distinct_words</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
@@ -4164,7 +4164,7 @@
 <li>分析可以发现类似的单词容易相聚在一起，即他们的词向量是相似的，比如油和能源，石油和工业，都是有一定内在逻辑联系的。</li>
 </ul>
 <h3 id="基于预测的词向量">基于预测的词向量<a class="headerlink" href="#基于预测的词向量" title="Permanent link">&para;</a></h3>
-<p>基于预测的词向量相比于基于计数的词向量更能够学到单词之间的逻辑联系，因为基于计数的方法只统计了指定中心单词的滑动窗口范围内出现的单词情况，而**没有具体考虑这个窗口内的单词相对于中心词的距离**，基于预测的词向量则是用中心单词来预测附近各个位置上可能出现的单词的概率分布(也可以用两遍出现的单词来预测中间词出现的情况)，这里我们依然选择了和上面一样的几个单词，并使用PCA对已经训练好的GLOVE词向量进行降维和可视化，得到的结果是：</p>
+<p>基于预测的词向量相比于基于计数的词向量更能够学到单词之间的逻辑联系，因为基于计数的方法只统计了指定中心单词的滑动窗口范围内出现的单词情况，而<strong>没有具体考虑这个窗口内的单词相对于中心词的距离</strong>，基于预测的词向量则是用中心单词来预测附近各个位置上可能出现的单词的概率分布(也可以用两遍出现的单词来预测中间词出现的情况)，这里我们依然选择了和上面一样的几个单词，并使用PCA对已经训练好的GLOVE词向量进行降维和可视化，得到的结果是：</p>
 <p><img alt="image-20211017212233547" src="../static/image-20211017212233547.png" /></p>
 <ul>
 <li>可以发现单词之间的相对位置和上面用共现矩阵+SVD分解得到的结果基本保持一致</li>
@@ -4183,7 +4183,7 @@ P(O=o \mid C=c)=\frac{\exp \left(\boldsymbol{u}_{o}^{\top} \boldsymbol{v}_{c}\ri
 <div class="arithmatex">\[
 \boldsymbol{J}_{\text {naive-softmax }}\left(\boldsymbol{v}_{c}, o, \boldsymbol{U}\right)=-\log P(O=o \mid C=c)
 \]</div>
-<p>这个形式的损失函数被称为Naive-Softmax形式的损失函数，我们用<span class="arithmatex">\(<span class="arithmatex">\(y, \hat y\)</span>\)</span>分别表示正确的结果和模型预测出的结果，其中正确的结果是一个**one-hot向量**，因为出现的单词是确定的，而预测出的结果是一个概率分布，概率大小表示每个单词在当前位置上出现的概率，两个向量的维度都和词汇表的大小一样。我们可以证明<span class="arithmatex">\(<span class="arithmatex">\(y, \hat y\)</span>\)</span>的交叉熵和Naive-Softmax损失函数是等价的。</p>
+<p>这个形式的损失函数被称为Naive-Softmax形式的损失函数，我们用<span class="arithmatex">\(<span class="arithmatex">\(y, \hat y\)</span>\)</span>分别表示正确的结果和模型预测出的结果，其中正确的结果是一个<strong>one-hot向量</strong>，因为出现的单词是确定的，而预测出的结果是一个概率分布，概率大小表示每个单词在当前位置上出现的概率，两个向量的维度都和词汇表的大小一样。我们可以证明<span class="arithmatex">\(<span class="arithmatex">\(y, \hat y\)</span>\)</span>的交叉熵和Naive-Softmax损失函数是等价的。</p>
 <h4 id="损失函数和交叉熵的等价性证明">损失函数和交叉熵的等价性证明<a class="headerlink" href="#损失函数和交叉熵的等价性证明" title="Permanent link">&para;</a></h4>
 <p>根据交叉熵和<span class="arithmatex">\(<span class="arithmatex">\(y, \hat y\)</span>\)</span>的定义，我们可以推算出：</p>
 <div class="arithmatex">\[
@@ -4234,7 +4234,7 @@ P(O=o \mid C=c)=\frac{\exp \left(\boldsymbol{u}_{o}^{\top} \boldsymbol{v}_{c}\ri
 <li>这个性质在下面的梯度计算中非常有用</li>
 </ul>
 <h4 id="损失函数与梯度计算">损失函数与梯度计算<a class="headerlink" href="#损失函数与梯度计算" title="Permanent link">&para;</a></h4>
-<p>基于负采样的模型将训练的目标变成了让模型具有**分辨某个词是不是应该出现在某个位置的能力**，为了学习到这种分辨能力，<strong>采用了负样本和正样本形成对比</strong>，增强模型的表达能力，负样本就是在语料库中随机选择的一个单词，大部分时候放在指定中心词的上下文中是不能构成具有实际意义的句子的，模型通过将正负样本进行对比学习出对单词的表示能力。</p>
+<p>基于负采样的模型将训练的目标变成了让模型具有<strong>分辨某个词是不是应该出现在某个位置的能力</strong>，为了学习到这种分辨能力，<strong>采用了负样本和正样本形成对比</strong>，增强模型的表达能力，负样本就是在语料库中随机选择的一个单词，大部分时候放在指定中心词的上下文中是不能构成具有实际意义的句子的，模型通过将正负样本进行对比学习出对单词的表示能力。</p>
 <ul>
 <li>当然这是我个人的理解</li>
 </ul>

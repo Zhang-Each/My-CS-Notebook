@@ -3846,17 +3846,17 @@
 <div class="arithmatex">\[
 (Y(1), Y(0)) \perp\!\!\!\perp T
 \]</div>
-<p>这个假设就像是在医学实验中忽略了人们**最终是如何选择他们所选择的治疗方法**的，而只是假设他们是被随机分配的治疗方法。用概率图来解释的话，就如下图所示：
+<p>这个假设就像是在医学实验中忽略了人们<strong>最终是如何选择他们所选择的治疗方法</strong>的，而只是假设他们是被随机分配的治疗方法。用概率图来解释的话，就如下图所示：
 <img alt="" src="../resources/Pasted%20image%2020230201102036.png" /></p>
 <p>可以理解为这一假设取消了混淆变量对治疗方案T的选取的影响，将医学实验变成了纯随机的选择，有了这样的假设之后，<span class="arithmatex">\(\mathbb{E}[Y_i(1)]-\mathbb{E}[Y_i(0)]=\mathbb{E}[Y|T=1]-\mathbb{E}[Y|T=0]\)</span>就成立了。
-这一假设的另一个视角是**可交换性**。可交换性意味着治疗组是可交换的，即如果它们被交换，新的治疗组将观察到与旧的治疗组相同的结果，而新的对照组与旧的对照组也可以观察到相同的结局，这其实也在说明，treatment的选择和其他因素无关，是完全随机进行的。这个视角实际上可以理解为这样两个等式：</p>
+这一假设的另一个视角是<strong>可交换性</strong>。可交换性意味着治疗组是可交换的，即如果它们被交换，新的治疗组将观察到与旧的治疗组相同的结果，而新的对照组与旧的对照组也可以观察到相同的结局，这其实也在说明，treatment的选择和其他因素无关，是完全随机进行的。这个视角实际上可以理解为这样两个等式：</p>
 <div class="arithmatex">\[
 \begin{aligned}
     \mathbb{E}[Y(1)|T=0]=E[Y(1)|T=1]\\
     \mathbb{E}[Y(0)|T=0]=E[Y(0)|T=1]
 \end{aligned}
 \]</div>
-<p>从这里我们可以进一步推出<span class="arithmatex">\(\mathbb{E}[Y(1)|T=t]=\mathbb{E}[Y(1)]\)</span>和<span class="arithmatex">\(\mathbb{E}[Y(0)|T=t]=\mathbb{E}[Y(0)]\)</span>，这意味着我们可以用**已经观察到的数据分布**<span class="arithmatex">\(P(X,T,Y)\)</span>来计算T对Y的因果效应。
+<p>从这里我们可以进一步推出<span class="arithmatex">\(\mathbb{E}[Y(1)|T=t]=\mathbb{E}[Y(1)]\)</span>和<span class="arithmatex">\(\mathbb{E}[Y(0)|T=t]=\mathbb{E}[Y(0)]\)</span>，这意味着我们可以用<strong>已经观察到的数据分布</strong><span class="arithmatex">\(P(X,T,Y)\)</span>来计算T对Y的因果效应。
 虽然可忽略性假设对我们很重要，也在很大程度上可以简化因果效应的计算，但是在绝大多数时候，这个假设实际上是不成立的，现实世界中待研究的问题往往会有一些混淆因素在里面，他们对结果的影响很多时候是不能忽略的，因此，我们需要一些更弱的假设，才能避免建模的失真。</p>
 <h2 id="2-conditional-exchangeability-and-unconfoundedness">2. Conditional Exchangeability and Unconfoundedness<a class="headerlink" href="#2-conditional-exchangeability-and-unconfoundedness" title="Permanent link">&para;</a></h2>
 <p>根据上文所述，我们在现实世界中很难找到完全满足Ignorability假设的场景，我们不能期望每个unit对应的混淆变量X对T和Y的影响都相同(因为是随机试验)，但是在给定了X的情况下，我们可以假设治疗方案T和结果Y之间是互相独立的，这就是条件可交换性(Conditional Exchangeability)，它可以用下面的公式来表示：</p>

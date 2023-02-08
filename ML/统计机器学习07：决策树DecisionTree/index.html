@@ -3987,7 +3987,7 @@
 <p>当所有的样本都属于同一类或者在这一层已经对所有的特征都进行了分类，决策树的建立就停止</p>
 </li>
 <li>
-<p>在决策树的每一层**选取一个最优的特征并用这个特征来进行分类**，这也是决策树算法最关键的地方</p>
+<p>在决策树的每一层<strong>选取一个最优的特征并用这个特征来进行分类</strong>，这也是决策树算法最关键的地方</p>
 </li>
 <li>
 <p>一般而言我们希望，随着划分过程的不断进行，决策树的分支节点所包含的样本尽可能属于同一类别，也就是节点的纯度越来越高</p>
@@ -3997,7 +3997,7 @@
 <h2 id="最优特征的选取">最优特征的选取<a class="headerlink" href="#最优特征的选取" title="Permanent link">&para;</a></h2>
 <p>上面已经说到决策树构建的最重要的部分就是在每一层选择合适的特征来进行划分，常见的算法有熵、信息增益等等。</p>
 <h3 id="信息熵entropy">信息熵Entropy<a class="headerlink" href="#信息熵entropy" title="Permanent link">&para;</a></h3>
-<p>熵可以用来表示随机变量的**不确定性**。如果X是一个取值个数为有限个值即<span class="arithmatex">\(P(X=x_i)=p_i\)</span>，那么随机变量X的熵的定义就是：
+<p>熵可以用来表示随机变量的<strong>不确定性</strong>。如果X是一个取值个数为有限个值即<span class="arithmatex">\(P(X=x_i)=p_i\)</span>，那么随机变量X的熵的定义就是：
 $$
 H(x)=-\sum_{i=1}^np_i \log p_i \in [0, \log n]
 $$
@@ -4008,11 +4008,11 @@ $$
 当用数据估计得到熵和条件熵的时候，他们又分别被称为经验熵和经验条件熵。</p>
 <h3 id="信息增益">信息增益<a class="headerlink" href="#信息增益" title="Permanent link">&para;</a></h3>
 <p>信息增益(information
-gain)表示**已经知道特征X的信息而使得类Y的信息的不确定度减少的程度**。特征A对于数据集D的信息增益<span class="arithmatex">\(g(D,A)\)</span>定义为D的经验熵和D在A给定条件下的经验条件熵的差值，即：
+gain)表示<strong>已经知道特征X的信息而使得类Y的信息的不确定度减少的程度</strong>。特征A对于数据集D的信息增益<span class="arithmatex">\(g(D,A)\)</span>定义为D的经验熵和D在A给定条件下的经验条件熵的差值，即：
 $$
 g(D,A)=H(D)-H(D|A)
 $$
-信息增益又叫做**互信息(mutualin formation)**，两个概念是等价的。基于信息增益的特征选择方法一般都是对于当前训练集D，计算其每个特征的信息增益，并比较大小，选择信息增益最大的特征来进行当前层的分类。</p>
+信息增益又叫做<strong>互信息(mutualin formation)</strong>，两个概念是等价的。基于信息增益的特征选择方法一般都是对于当前训练集D，计算其每个特征的信息增益，并比较大小，选择信息增益最大的特征来进行当前层的分类。</p>
 <p>假设训练的数据集是<span class="arithmatex">\(D\)</span>，有K个不同的分类<span class="arithmatex">\(C_i\)</span>满足<span class="arithmatex">\(\sum_{i=1}^K |C_k|=|D|\)</span>，其中特征A有n个不同的取值<span class="arithmatex">\(a_i\)</span>，根据特征的取值将<span class="arithmatex">\(D\)</span>划分成了n个不同的子集<span class="arithmatex">\(D_i\)</span>，而每个子集<span class="arithmatex">\(D_{ik}\)</span>中表示属于类别<span class="arithmatex">\(C_k\)</span>的样本，那么数据集<span class="arithmatex">\(D\)</span>的经验熵可以表示为：
 $$
 H(D)=-\sum_{k=1}^{K}\frac{|C_k|}{|D|}\log_2\frac{|C_k|}{|D|}
@@ -4051,7 +4051,7 @@ G(D)=1-\sum_{k=1}^K\left(\frac{|C_k|}{|D|}\right)^2
 <h3 id="c45算法">C4.5算法<a class="headerlink" href="#c45算法" title="Permanent link">&para;</a></h3>
 <p>和ID3算法类似，但是采用信息增益比作为选择的特征，其他的好像区别不是很大，但实际上决策树的代码实现应该是一系列统计学习的算法中难度比较大的，因为决策树需要使用树的数据结构，相比于其他算法的一系列矩阵计算在coding的过程中可能会有更大的麻烦。</p>
 <h3 id="决策树的剪枝pruning">决策树的剪枝Pruning<a class="headerlink" href="#决策树的剪枝pruning" title="Permanent link">&para;</a></h3>
-<p>我们要明白决策树实际上是一种**基于大量统计样本的贪心算法**(仅根据个人理解，不代表任何工人观点)，在选定了一个决策标准(信息熵，信息增益，信息增益比等等)之后，就需要根据训练集来构建一棵决策树，构建的策略就是在每一次作出决策的时候(对应到树中就是产生了一系列子节点)都会依照给定的标准，计算每种特征相对于给定标准的值，然后选择当前区分度最大，也就是最优的特征作为当前层的决策依据。</p>
+<p>我们要明白决策树实际上是一种<strong>基于大量统计样本的贪心算法</strong>(仅根据个人理解，不代表任何工人观点)，在选定了一个决策标准(信息熵，信息增益，信息增益比等等)之后，就需要根据训练集来构建一棵决策树，构建的策略就是在每一次作出决策的时候(对应到树中就是产生了一系列子节点)都会依照给定的标准，计算每种特征相对于给定标准的值，然后选择当前区分度最大，也就是最优的特征作为当前层的决策依据。</p>
 <p>但是这样一来，生成的决策树的复杂度可能是非常高的，因此我们应该想办法对这个决策树进行一定的简化，也就是进行剪枝，决策树的剪枝往往通过极小化决策树整体的损失函数或者代价函数来实现。设决策树T的每个叶节点t有<span class="arithmatex">\(N_{kt}\)</span>个样本点，其中属于类别k的有个，节点t的经验熵可以表示为：</p>
 <div class="arithmatex">\[
 H_t(T)=-\sum_{k=1}^{n}\frac{N_{tk}}{N_t}\log \frac{N_{tk}}{N_t}
@@ -4067,7 +4067,7 @@ C_{\alpha}(T)=\sum_{t=1}^{|T|}N_tH_t(T)+\alpha|T|=-\sum_{t=1}^{|T|}\sum_{k=1}^{n
 <p>剪枝过程是一个从底部向上的递归过程，首先需要计算每个节点的经验熵，如果剪掉某一段子树之后损失函数比剪掉之前更小，就进行剪枝，将父节点作为新的叶节点，重复下去直到不能继续为止。</p>
 <h2 id="cart算法">CART算法<a class="headerlink" href="#cart算法" title="Permanent link">&para;</a></h2>
 <h3 id="cart的定义">CART的定义<a class="headerlink" href="#cart的定义" title="Permanent link">&para;</a></h3>
-<p>CART算法是**Classification And Regression Tree(分类与回归树)**的简称，从字面意思就可以看出来这种决策树既可以用于分类，也可以用于回归。</p>
+<p>CART算法是<strong>Classification And Regression Tree(分类与回归树)</strong>的简称，从字面意思就可以看出来这种决策树既可以用于分类，也可以用于回归。</p>
 <ul>
 <li>
 <p>CART树的一个基本假设就是决策树都是二叉树，<strong>决策的结果只有是与否两种，这等价于递归地二分每个特征</strong>，
@@ -4078,7 +4078,7 @@ C_{\alpha}(T)=\sum_{t=1}^{|T|}N_tH_t(T)+\alpha|T|=-\sum_{t=1}^{|T|}\sum_{k=1}^{n
 </li>
 </ul>
 <h3 id="回归树的生成">回归树的生成<a class="headerlink" href="#回归树的生成" title="Permanent link">&para;</a></h3>
-<p>回归树对应的是**输入空间的一个划分和输出值的映射关系**，假如说输入的空间被划分成了M个单元<span class="arithmatex">\(R_i\)</span>，每个分别对应了固定的输出值<span class="arithmatex">\(c_i\)</span>，那么回归树模型可以表示为一个函数：
+<p>回归树对应的是<strong>输入空间的一个划分和输出值的映射关系</strong>，假如说输入的空间被划分成了M个单元<span class="arithmatex">\(R_i\)</span>，每个分别对应了固定的输出值<span class="arithmatex">\(c_i\)</span>，那么回归树模型可以表示为一个函数：
 $$
 f(x)=\sum_{m=1}^{M}c_m\mathbb I(x\in R_m)
 $$

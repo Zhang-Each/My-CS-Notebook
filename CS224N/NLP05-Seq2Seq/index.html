@@ -4005,12 +4005,12 @@
 <p>词向量和RNN解决的主要是单词预测和命名实体识别(Named Entity Recognization)的问题，而这一节内容主要研究翻译、回答和概括等NLP子问题，并且重点介绍Seq2Seq模型。</p>
 <h2 id="传统翻译模型">传统翻译模型<a class="headerlink" href="#传统翻译模型" title="Permanent link">&para;</a></h2>
 <p>机器翻译任务是将句子从一种语言翻译成另一种语言，1990年代到二十一世纪初的机器翻译主要运用的还是基于统计学习的机器翻译方法(SMT，Statical Machine Translation)，使用贝叶斯方法来构建模型，需要用大量的数据分别训练翻译模型和语言模型</p>
-<p>为了将大量数据用于模型的并行训练，需要引入一个对齐变量，使得原文和译文要是对应的，否则可能导致翻译结果的不准确。alignment是一种隐变量，没有显式地出现在数据中，因此**可以使用EM算法来进行优化**。</p>
+<p>为了将大量数据用于模型的并行训练，需要引入一个对齐变量，使得原文和译文要是对应的，否则可能导致翻译结果的不准确。alignment是一种隐变量，没有显式地出现在数据中，因此<strong>可以使用EM算法来进行优化</strong>。</p>
 <p>早起的翻译模型主要依赖于统计和概率的传统方法，这种模型分成两个部分，分别是一个翻译模型和一个语言模型，翻译模型用来预测文本中的一个句子最有可能翻译成什么，而语言模型来判断当前的句子是否对于全文而言是最合适的。</p>
 <p>这种系统的构建主要基于单词或者短语，但是基于单词的翻译系统难以捕捉到语句中单词位置导致的差异，比如否定词的位置，句子中主语和动词的关系，而基于短语的翻译系统可以看成是Seq2Seq的前身，这种模型将输入和输出都看成是一系列短语并且可以构建更复杂的语法，但是这种模型下，长依赖关系依然难以提取，</p>
 <h2 id="seq2seq模型">Seq2Seq模型<a class="headerlink" href="#seq2seq模型" title="Permanent link">&para;</a></h2>
 <h3 id="简介">简介<a class="headerlink" href="#简介" title="Permanent link">&para;</a></h3>
-<p>Sequence-to-sequence(简称为Seq2Seq，中文翻译是序列到序列)是一种相对比较新的**端到端的翻译模型**，Seq2Seq使用两个RNN模型构成的，分别是：</p>
+<p>Sequence-to-sequence(简称为Seq2Seq，中文翻译是序列到序列)是一种相对比较新的<strong>端到端的翻译模型</strong>，Seq2Seq使用两个RNN模型构成的，分别是：</p>
 <ul>
 <li>
 <p>编码器：将输入序列编码成一个上下文向量(context vector)</p>
@@ -4030,7 +4030,7 @@
 <p><img alt="image" src="../pictures/nlp14.png" width="50%" /></p>
 <ul>
 <li>
-<p>在训练阶段，解码器中输入的是**真实的目标文本**，并且第一步使用一个特殊的\&lt;start>标记表明这是句子的开头，每一步根据当前正确的输出词，上一步的隐状态来预测下一步的输出</p>
+<p>在训练阶段，解码器中输入的是<strong>真实的目标文本</strong>，并且第一步使用一个特殊的\&lt;start>标记表明这是句子的开头，每一步根据当前正确的输出词，上一步的隐状态来预测下一步的输出</p>
 </li>
 <li>
 <p>在训练的时候，因为没有"参考答案"了，所以只能把上一步的输出作为下一步的输入，一步步慢慢预测出最终结果</p>
@@ -4050,7 +4050,7 @@ $$</p>
 <h2 id="注意力机制">注意力机制<a class="headerlink" href="#注意力机制" title="Permanent link">&para;</a></h2>
 <h3 id="什么是注意力机制">什么是注意力机制<a class="headerlink" href="#什么是注意力机制" title="Permanent link">&para;</a></h3>
 <p>事实上当我们听到或者读写一个句子的时候，我们并不是平等的看待每一个单词，而是会把注意力集中在一些单词上，同样的，Seq2Seq模型中，不同的部分输入也可以有不同级别的重要性，而不同部分的输入也可以用不一样的重要程度来看待不同部分的输入，比如在翻译问题中，输出的第一个单词往往是基于前几个输入单词，但是最后一个输出的单词往往取决于最后几个输入的单词。</p>
-<p>注意力机制(Attention Mechanisms)可以给解码器网络在每个解码步骤中**提供查看整个输入序列的机会**，然后解码器可以决定哪部分输入单词是重要的，使得解码器可以了解到的原文信息不再局限于一个上下文向量。</p>
+<p>注意力机制(Attention Mechanisms)可以给解码器网络在每个解码步骤中<strong>提供查看整个输入序列的机会</strong>，然后解码器可以决定哪部分输入单词是重要的，使得解码器可以了解到的原文信息不再局限于一个上下文向量。</p>
 <h3 id="注意力机制的一种approach">注意力机制的一种approach<a class="headerlink" href="#注意力机制的一种approach" title="Permanent link">&para;</a></h3>
 <p>我们假设输入的序列是<span class="arithmatex">\((x_1,x_2,\dots,x_n)\)</span>，目标结果(也就是正确答案)是<span class="arithmatex">\((y_1,y_2,\dots,y_m)\)</span>，这样一来，实现注意力机制需要如下几个步骤：</p>
 <h4 id="编码器_1">编码器<a class="headerlink" href="#编码器_1" title="Permanent link">&para;</a></h4>
@@ -4060,7 +4060,7 @@ $$</p>
 $$
 s_i=f(s_{i-1},y_{i},c_i)
 $$
-其中<span class="arithmatex">\(c_i\)</span>表示一个**上下文向量**，这个向量提取了第i步解码过程中的相关信息(经典的Seq2Seq中只有一个上下文向量，而注意力机制中有若干个,实际上Seq2Seq模型中的**注意力机制就是为解码器中每个特定的位置，使用解码器中生成的所有隐状态向量生成了一个特定的上下文向量**)，我们需要计算的就是这个<span class="arithmatex">\(c_i\)</span>，首先需要对于每一个隐藏向量，计算一个\"分数\"：
+其中<span class="arithmatex">\(c_i\)</span>表示一个<strong>上下文向量</strong>，这个向量提取了第i步解码过程中的相关信息(经典的Seq2Seq中只有一个上下文向量，而注意力机制中有若干个,实际上Seq2Seq模型中的<strong>注意力机制就是为解码器中每个特定的位置，使用解码器中生成的所有隐状态向量生成了一个特定的上下文向量</strong>)，我们需要计算的就是这个<span class="arithmatex">\(c_i\)</span>，首先需要对于每一个隐藏向量，计算一个\"分数\"：
 $$
 e_{i,j}=a(s_{i-1},h_j)
 $$
@@ -4077,7 +4077,7 @@ $$
 <p>基于注意力机制的模型可以学习到不同部分的重要性，这在机器翻译问题中可以理解成是一种对齐(alignment)，注意力分数<span class="arithmatex">\(\alpha_{i,j}\)</span>起到了将原句子中的单词与目标句子中的单词I对齐的作用，这样一来我们可以用注意力分数<span class="arithmatex">\(\alpha_{i,j}\)</span>来构建一个对齐表，来表明原句子和翻译得到的句子的单词之间的对应关系。</p>
 <p>值得一提的是，基于注意力机制的Seq2Seq模型在长句子和文章的翻译中表现效果相比于传统统计翻译模型和无注意力的Seq2Seq有了很大的提高。</p>
 <h2 id="序列模型解码器">序列模型解码器<a class="headerlink" href="#序列模型解码器" title="Permanent link">&para;</a></h2>
-<p>除了Seq2Seq之外，还有一种从统计翻译方法演变而来的**序列模型解码器方法**，这种模型的通过最大化<span class="arithmatex">\(\mathbb{P}(\hat s | s)\)</span>来获得对于原句子s而言最好的翻译结果<span class="arithmatex">\(\hat s\)</span>，即：
+<p>除了Seq2Seq之外，还有一种从统计翻译方法演变而来的<strong>序列模型解码器方法</strong>，这种模型的通过最大化<span class="arithmatex">\(\mathbb{P}(\hat s | s)\)</span>来获得对于原句子s而言最好的翻译结果<span class="arithmatex">\(\hat s\)</span>，即：
 $$
 \bar{s} *=\operatorname{argmax}_{\bar{s}}(\mathbb{P}(\bar{s} \mid s))
 $$

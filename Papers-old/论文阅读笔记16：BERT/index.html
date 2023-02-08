@@ -3925,7 +3925,7 @@
 <summary>本页统计信息</summary>
 <ul>
 <li>
-<p>本页约 2063 个字,  预计阅读时间 7 分钟。</p>
+<p>本页约 2056 个字,  预计阅读时间 7 分钟。</p>
 </li>
 <li>
 <p><span id="busuanzi_container_page_pv">本页总阅读量<span id="busuanzi_value_page_pv"></span>次</span></p>
@@ -3940,12 +3940,12 @@
 <p>BERT的结构很简单但是效果很强大(<del>因为训练烧的钱也多</del>)，并且在十一种NLP子任务中都取得了非常好的表现。</p>
 <h3 id="语言模型和预训练">语言模型和预训练<a class="headerlink" href="#语言模型和预训练" title="Permanent link">&para;</a></h3>
 <p>语言模型的预训练已经被证明是非常有效的解决NLP任务的手段，预训练的语言模型在句子级的人物(自然语言推理，分段)和单词级的任务(命名实体识别，问答)中都表现的比较好。</p>
-<p>预训练模型的使用方式一般有两种，一种是基于特征的方法(<strong>feature-based</strong>)，另一种是微调(<strong>fine-tuning</strong>)，基于特征的方法是**将从预训练好的模型中得到的特征**作为额外的特征输入，比如ELMo，而微调则是在训练好的模型基础上加上若干层和参数并再针对下游任务进行训练，两种方式在预训练的时候采用的是同样的目标函数，主要的区别在于如何解决下游问题。</p>
+<p>预训练模型的使用方式一般有两种，一种是基于特征的方法(<strong>feature-based</strong>)，另一种是微调(<strong>fine-tuning</strong>)，基于特征的方法是<strong>将从预训练好的模型中得到的特征</strong>作为额外的特征输入，比如ELMo，而微调则是在训练好的模型基础上加上若干层和参数并再针对下游任务进行训练，两种方式在预训练的时候采用的是同样的目标函数，主要的区别在于如何解决下游问题。</p>
 <p>作者认为现有的预训练方法对微调的限制过大，因为标准的语言模型都是单向的，这就限制了预训练的时候能够使用的网络架构，比如GPT模型在训练的时候使用的就是从左到右单方向的架构，并且每个token在计算注意力的时候只能和在它前面的token之间进行计算，这就给微调的方式带来了非常糟糕的影响，因为模型无法从两个方向来感知上下文了。而BERT解决了这个问题，提出了一种双向的预训练方式，使得模型更加适合通过微调的方式来解决下游任务。</p>
 <h3 id="本文的贡献">本文的贡献<a class="headerlink" href="#本文的贡献" title="Permanent link">&para;</a></h3>
 <ul>
 <li>使用“Masked Language Model”训练方式进行预训练，使得模型可以学习到双向的上下文表示</li>
-<li>用实验证明了预训练得到的表示不需要再放到复杂的模型架构中来处理下游任务，而是直接通过微调就可以得到非常好的效果，BERT是**第一个基于微调的，并且在句子级别和单词级别的任务上取得SOTA的预训练模型**</li>
+<li>用实验证明了预训练得到的表示不需要再放到复杂的模型架构中来处理下游任务，而是直接通过微调就可以得到非常好的效果，BERT是<strong>第一个基于微调的，并且在句子级别和单词级别的任务上取得SOTA的预训练模型</strong></li>
 <li>BERT在十一项NLP子任务中取得了SOTA的效果</li>
 </ul>
 <h2 id="相关工作">相关工作<a class="headerlink" href="#相关工作" title="Permanent link">&para;</a></h2>
@@ -3957,7 +3957,7 @@
 <h3 id="模型的基本架构">模型的基本架构<a class="headerlink" href="#模型的基本架构" title="Permanent link">&para;</a></h3>
 <p>BERT模型的构建主要有预训练和微调两个步骤，预训练步骤中，BERT使用无标注的文本数据进行训练，而微调阶段的BERT模型首先要使用训练好的参数进行初始化，然后使用下游任务的有标注数据进行再训练，对参数进行一定的调整，每个不同的下游任务需要一个专门的微调模型，但是他们都是从BERT中统一初始化得到的。</p>
 <p><img alt="image-20210910110815168" src="../static/image-20210910110815168.png" /></p>
-<p>BERT的优势在于**统一的模型架构**，微调只需要在原有模型上面加入少量层和参数就可以使用。</p>
+<p>BERT的优势在于<strong>统一的模型架构</strong>，微调只需要在原有模型上面加入少量层和参数就可以使用。</p>
 <p>而BERT模型的基本架构实际上就是多层的双向Transformer编码器，也就是只使用了Transformer中的编码器部分构成深度网络，并且论文提供了两种预训练好的模型BERT-BASE和BERT-LARGE，BASE有12层总参数量在110M，而LARGE有24层总参数量在340M</p>
 <h3 id="预训练">预训练<a class="headerlink" href="#预训练" title="Permanent link">&para;</a></h3>
 <h4 id="输入和输出的格式">输入和输出的格式<a class="headerlink" href="#输入和输出的格式" title="Permanent link">&para;</a></h4>
@@ -3980,14 +3980,13 @@
 <p>BERT的微调只需要将BERT插入到下游任务指定的输入输出格式上就可以了，然后再使用下游任务对应的数据集进行训练，然后将BERT的输出结果导入到一些输出层中，相比于基于特征的方法，微调需要的计算更少，也更加廉价。</p>
 <p>对于不同的任务选用不同的架构：</p>
 <p><img alt="image-20210910205555916" src="../static/image-20210910205555916.png" /></p>
-<p><span id=busuanzi_container_page_pv>本文总阅读量<span id=busuanzi_value_page_pv></span>次</span></p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月4日 10:57:21</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月8日 14:30:35</span>
       
         <br>
         创建日期:

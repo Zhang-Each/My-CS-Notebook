@@ -3902,7 +3902,7 @@
 <p><img alt="image-20211026145411952" src="../static/image-20211026145411952.png" /></p>
 <p>很明显模型被分成了Encoder和Decoder两个部分，作业首先比较详细的介绍了模型的基本架构。</p>
 <h3 id="encoder部分">Encoder部分<a class="headerlink" href="#encoder部分" title="Permanent link">&para;</a></h3>
-<p>Encoder部分主要是一个双向的LSTM模型，我们假设输入的句子是一个长度为m的单词序列，每个单词的嵌入表示都是e维的，我们首先需要将这个输入序列送到**双向LSTM中**得到hidden和cell的状态：</p>
+<p>Encoder部分主要是一个双向的LSTM模型，我们假设输入的句子是一个长度为m的单词序列，每个单词的嵌入表示都是e维的，我们首先需要将这个输入序列送到<strong>双向LSTM中</strong>得到hidden和cell的状态：</p>
 <div class="arithmatex">\[
 \begin{aligned}
 \mathbf{h}_{i}^{\text {enc }} &amp;=\left[\overleftarrow{\mathbf{h}_{i}^{\text {enc }}} ; \overrightarrow{\mathbf{h}_{i}^{\text {enc }}}\right] \text { where } \mathbf{h}_{i}^{\text {enc }} \in \mathbb{R}^{2 h \times 1}, \overleftarrow{\mathbf{h}_{i}^{\text {enc }}}, \overrightarrow{\mathbf{h}_{i}^{\text {enc }}} \in \mathbb{R}^{h \times 1} \\
@@ -3917,7 +3917,7 @@
 \end{array}
 \]</div>
 <h3 id="decoder部分">Decoder部分<a class="headerlink" href="#decoder部分" title="Permanent link">&para;</a></h3>
-<p>当Decoder有了初始状态之后，我们需要给Decoder输入一个目标句子，在第t步的时候，我们会查阅嵌入向量表来找到第t个位置对应的单词<span class="arithmatex">\(<span class="arithmatex">\(y_t\)</span>\)</span> 并和**前面若干个步骤中的联合输出向量**(combined-output vector)<span class="arithmatex">\(<span class="arithmatex">\(o_{t-1}\)</span>\)</span>进行合并(这个向量初始化的时候是一个zero-vector)，得到一个维度为e+h的向量<span class="arithmatex">\(<span class="arithmatex">\(\bar y_t\)</span>\)</span>并输入到Decoder中，得到当前这一步的隐状态：</p>
+<p>当Decoder有了初始状态之后，我们需要给Decoder输入一个目标句子，在第t步的时候，我们会查阅嵌入向量表来找到第t个位置对应的单词<span class="arithmatex">\(<span class="arithmatex">\(y_t\)</span>\)</span> 并和<strong>前面若干个步骤中的联合输出向量</strong>(combined-output vector)<span class="arithmatex">\(<span class="arithmatex">\(o_{t-1}\)</span>\)</span>进行合并(这个向量初始化的时候是一个zero-vector)，得到一个维度为e+h的向量<span class="arithmatex">\(<span class="arithmatex">\(\bar y_t\)</span>\)</span>并输入到Decoder中，得到当前这一步的隐状态：</p>
 <div class="arithmatex">\[
 \mathbf{h}_{t}^{\mathrm{dec}}, \mathbf{c}_{t}^{\mathrm{dec}}=\operatorname{Decoder}\left(\overline{\mathbf{y}_{t}}, \mathbf{h}_{t-1}^{\mathrm{dec}}, \mathbf{c}_{t-1}^{\mathrm{dec}}\right) \text { where } \mathbf{h}_{t}^{\mathrm{dec}} \in \mathbb{R}^{h \times 1}, \mathbf{c}_{t}^{\mathrm{dec}} \in \mathbb{R}^{h \times 1}
 \]</div>
@@ -3937,7 +3937,7 @@
 \mathbf{o}_{t}=\operatorname{dropout}\left(\tanh \left(\mathbf{v}_{t}\right)\right) \text { where } \mathbf{o}_{t} \in \mathbb{R}^{h \times 1}
 \end{array}
 \]</div>
-<p>然后我们就可以得到一个第t个步骤的所有可能的单词结果的概率分布，我们对其做softmax并用**交叉熵计算**损失函数就可以了。</p>
+<p>然后我们就可以得到一个第t个步骤的所有可能的单词结果的概率分布，我们对其做softmax并用<strong>交叉熵计算</strong>损失函数就可以了。</p>
 <p>老实说看完之后我都惊呆了，我不知道是谁想出来的这么复杂的策略，但事实证明这一套好像确实有效。</p>
 <h2 id="代码实现">代码实现<a class="headerlink" href="#代码实现" title="Permanent link">&para;</a></h2>
 <p>虽然说总体的思路就和上面所说的内容差不太多了，但是具体的实现过程中还包含了一些trick</p>

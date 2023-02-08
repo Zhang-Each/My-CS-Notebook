@@ -3980,7 +3980,7 @@
 <p>有多个数据输入，只能有一个数据输出，通过控制信号决定哪个输入被连接到输出端</p>
 </li>
 <li>
-<p>通过控制信号，对输出进行筛选，信号是若干个0或1，通过**非门和与门的组合**使得恰好只有一个输入值会被原样输出，n位的信号刚好可以控制<span class="arithmatex">\(2^n\)</span>个输入数据</p>
+<p>通过控制信号，对输出进行筛选，信号是若干个0或1，通过<strong>非门和与门的组合</strong>使得恰好只有一个输入值会被原样输出，n位的信号刚好可以控制<span class="arithmatex">\(2^n\)</span>个输入数据</p>
 </li>
 </ul>
 <p><img alt="mux" src="../static/mux-0000.jpg" /></p>
@@ -3995,7 +3995,7 @@
 <p>移位器 Shift</p>
 <ul>
 <li>
-<p>使用**移位寄存器**或者**多路选择器**实现移位的操作，多路选择器的本质是**空间换时间**，利用复杂的设计提高位移速度</p>
+<p>使用<strong>移位寄存器</strong>或者<strong>多路选择器</strong>实现移位的操作，多路选择器的本质是<strong>空间换时间</strong>，利用复杂的设计提高位移速度</p>
 </li>
 <li>
 <p>固定的移位可以直接通过输入输出线的错位来实现</p>
@@ -4017,14 +4017,14 @@
 <p>状态元件和组合逻辑的区别</p>
 <ul>
 <li>组合逻辑的输出只和输入值有关</li>
-<li>状态原件的输出还**和状态元件自身的状态有关**，一般输入输出有一个时钟的延时</li>
+<li>状态原件的输出还<strong>和状态元件自身的状态有关</strong>，一般输入输出有一个时钟的延时</li>
 </ul>
 </li>
 <li>
 <p>寄存器单元</p>
 <ul>
 <li>
-<p>输入的值有：clk时钟，<strong>RegWrite 写入控制</strong>，idat **32位**的输入数据</p>
+<p>输入的值有：clk时钟，<strong>RegWrite 写入控制</strong>，idat <strong>32位</strong>的输入数据</p>
 </li>
 <li>
 <p>输出的值有：odat 32位的输出数据</p>
@@ -4064,7 +4064,7 @@
 <p>Result 32位的输出</p>
 </li>
 <li>zero零标志，这个值为1的时候表示结果为0，为0的时候表示结果不是0</li>
-<li>carryout **进位**标志</li>
+<li>carryout <strong>进位</strong>标志</li>
 <li>overflow 溢出标志</li>
 </ul>
 </li>
@@ -4075,7 +4075,7 @@
 <p>输入的内容：</p>
 </li>
 <li>
-<p>ALUop 两位的**控制信号**</p>
+<p>ALUop 两位的<strong>控制信号</strong></p>
 </li>
 <li>
 <p>Func 指令的功能字段</p>
@@ -4146,24 +4146,24 @@
 <p>存储器</p>
 </li>
 <li>
-<p>存储器是多个寄存器和集合，由**译码器**选择指定的寄存器单元(通过地址)</p>
+<p>存储器是多个寄存器和集合，由<strong>译码器</strong>选择指定的寄存器单元(通过地址)</p>
 </li>
 <li>
 <p>存储器分为只读存储器和读写存储器</p>
 <ul>
 <li>
-<p>指令存储器是**只读**存储器(Read Only Memory, ROM)</p>
+<p>指令存储器是<strong>只读</strong>存储器(Read Only Memory, ROM)</p>
 </li>
 <li>
 <p>数据存储器是读写存储器(RAM) 可以根据读写控制信号，一次读/写一个32位的数据</p>
 </li>
 <li>
-<p>读写**共用一个地址输入端**，读写数据分别和存储器连接</p>
+<p>读写<strong>共用一个地址输入端</strong>，读写数据分别和存储器连接</p>
 </li>
 </ul>
 <p><img alt="image-20200809235040985" src="../static/image-20200809235040985.jpg" /></p>
 <ul>
-<li>存储器按照字节编址，MIPS采用了32位的**地址线**，可寻址空间为<span class="arithmatex">\(2^{32}=4GB\)</span>， 数据线也是32位</li>
+<li>存储器按照字节编址，MIPS采用了32位的<strong>地址线</strong>，可寻址空间为<span class="arithmatex">\(2^{32}=4GB\)</span>， 数据线也是32位</li>
 </ul>
 </li>
 <li>
@@ -4283,7 +4283,7 @@
 <p>当有多个信号接入同一个输入端，不能直接合并，必须通过MUX选择性接入</p>
 </li>
 <li>
-<p>通过控制信号来决定**哪一个输入连接到输出**端</p>
+<p>通过控制信号来决定<strong>哪一个输入连接到输出</strong>端</p>
 </li>
 </ul>
 <p><img alt="mux3" src="../static/mux3-0000.jpg" /></p>
@@ -4299,7 +4299,7 @@
 <p><img alt="single1" src="../static/single1-0000.jpg" /></p>
 </li>
 <li>
-<p>新增control unit控制单元，可以发出一系列的**控制信号**，对不同的指令取不同的值</p>
+<p>新增control unit控制单元，可以发出一系列的<strong>控制信号</strong>，对不同的指令取不同的值</p>
 <p><img alt="sigctrl" src="../static/sigctrl-0000.jpg" /></p>
 <ul>
 <li>
@@ -4395,7 +4395,7 @@
 <li>内存以字节编址，32位的寻址范围</li>
 <li>寄存器组公有32个32位的寄存器(5-bit寻址)，其中<ul>
 <li>0号寄存器的值恒为0</li>
-<li>31号寄存器是指令的地址寄存器，用于存放**子程序的地址** </li>
+<li>31号寄存器是指令的地址寄存器，用于存放<strong>子程序的地址</strong> </li>
 <li>29号是堆栈指针寄存器</li>
 </ul>
 </li>
@@ -4513,10 +4513,10 @@
 <h3 id="351-dna里的图">3.5.1 DNA里的图<a class="headerlink" href="#351-dna里的图" title="Permanent link">&para;</a></h3>
 <ul>
 <li>
-<p>由于单时钟只能以耗时最长的指令为时钟，为了提高效率，可以考虑**缩短时钟**，以主要部件的执行时间为时钟，重新设置一遍控制信号</p>
+<p>由于单时钟只能以耗时最长的指令为时钟，为了提高效率，可以考虑<strong>缩短时钟</strong>，以主要部件的执行时间为时钟，重新设置一遍控制信号</p>
 </li>
 <li>
-<p>每个部件在每个时钟**分别执行各自的任务**，在各个主要部件之间用寄存器存放临时的结果</p>
+<p>每个部件在每个时钟<strong>分别执行各自的任务</strong>，在各个主要部件之间用寄存器存放临时的结果</p>
 </li>
 <li>
 <p>IR：指令寄存器，MDR：内存数据寄存器</p>
@@ -4532,14 +4532,14 @@
 </ul>
 </li>
 <li>
-<p>多周期CPU的数据通道(第二张需要**刻在DNA里的图**) </p>
+<p>多周期CPU的数据通道(第二张需要<strong>刻在DNA里的图</strong>) </p>
 <p><img alt="mulc" src="../static/mulc-0000.jpg" /></p>
 </li>
 </ul>
 <h3 id="352-基本指令的多周期运行过程">3.5.2 基本指令的多周期运行过程<a class="headerlink" href="#352-基本指令的多周期运行过程" title="Permanent link">&para;</a></h3>
 <ul>
 <li>
-<p>多时钟周期的五个执行阶段：每个指令需要**3-5个周期**</p>
+<p>多时钟周期的五个执行阶段：每个指令需要<strong>3-5个周期</strong></p>
 </li>
 <li>
 <p>IF阶段：Instruction Fetch 获取指令,具体的步骤如下</p>
@@ -4554,7 +4554,7 @@
 </code></pre></div>
 </li>
 <li>
-<p>ID：指令得而**译码**和register fetch</p>
+<p>ID：指令得而<strong>译码</strong>和register fetch</p>
 <ul>
 <li>在需要的时候，读取寄存器rs和rt中的内容</li>
 <li>如果是分支指令就需要计算分支的地址</li>
@@ -4575,7 +4575,7 @@
 </ul>
 </li>
 <li>
-<p>MEM(WB)：**内存访问**或者R型指令的完成</p>
+<p>MEM(WB)：<strong>内存访问</strong>或者R型指令的完成</p>
 <ul>
 <li>对于lw，<code>MDR = Memory[ALUOut];</code> </li>
 <li>对于sw，<code>Memory[ALUOut] = B;</code> </li>
@@ -4750,7 +4750,7 @@
 <ul>
 <li>在流水线中我们希望当前每个时钟周期都有一条指令进入流水线可以执行，但是某些情况下下一条指令无法按照预期的开始执行，这种情况就是冒险hazard</li>
 <li>冒险有三种：</li>
-<li>结构冒险：如果一条指令需要的**硬件**还在为之前的指令工作，而无法为这条指令提供服务</li>
+<li>结构冒险：如果一条指令需要的<strong>硬件</strong>还在为之前的指令工作，而无法为这条指令提供服务</li>
 <li>数据冒险：如果一条指令需要的数据正在被之前的指令操作，那么这条指令就无法执行<ul>
 <li>解决方法：Forward data if possible</li>
 </ul>

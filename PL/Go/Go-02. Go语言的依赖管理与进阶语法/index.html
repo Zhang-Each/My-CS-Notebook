@@ -3797,15 +3797,15 @@
 - 协程：用户态，轻量级的线程，栈是MB级别的
 - 线程：内核态，一个线程中有多个协程，栈的大小是KB级别的，创建和删除的系统开销比较大</p>
 <h2 id="goroutine的设计理念">GoRoutine的设计理念<a class="headerlink" href="#goroutine的设计理念" title="Permanent link">&para;</a></h2>
-<p>GoRoutine是Go语言中的一种**轻量级线程**，提倡通过通信来共享内存，而不是通过共享内存来实现通信。如下图所示：
+<p>GoRoutine是Go语言中的一种<strong>轻量级线程</strong>，提倡通过通信来共享内存，而不是通过共享内存来实现通信。如下图所示：
 <img alt="" src="../resources/Pasted%20image%2020230120214752.png" />
 GoRoutine在使用的时候直接用go func这样的形式就可以为一个函数创建一个GoRoutine并进行运行</p>
 <h2 id="channel的用法">Channel的用法<a class="headerlink" href="#channel的用法" title="Permanent link">&para;</a></h2>
-<p>**Channel**可以用于实现GoRoutine之间的通信，是一种引用类型，需要用make关键字来进行创建，分为两种：
+<p><strong>Channel</strong>可以用于实现GoRoutine之间的通信，是一种引用类型，需要用make关键字来进行创建，分为两种：
 - 无缓冲通道，没有缓冲空间，只能放下一条通信的消息
 - 有缓冲通道，有一定的缓冲空间，需要在定义的时候声明</p>
 <h2 id="并发安全lock">并发安全Lock<a class="headerlink" href="#并发安全lock" title="Permanent link">&para;</a></h2>
-<p>Go语言中其实也保留了通过共享内存来实现通信的方式，实际上就是**锁**，在<code>sync.Mutex</code>中定义了互斥锁的数据结构可以使用。锁可以一定程度上解决并发安全的问题。</p>
+<p>Go语言中其实也保留了通过共享内存来实现通信的方式，实际上就是<strong>锁</strong>，在<code>sync.Mutex</code>中定义了互斥锁的数据结构可以使用。锁可以一定程度上解决并发安全的问题。</p>
 <h2 id="waitgroup">WaitGroup<a class="headerlink" href="#waitgroup" title="Permanent link">&para;</a></h2>
 <p>相比于使用sleep来保证线程不会因为执行结束而被销毁，WaitGroup是一种优雅的实现方式，它实际上维护了一个计数器，并对外提供了三个可调用的方法，分别是：
 - <code>Add(delta int)</code> 计数器增加delta

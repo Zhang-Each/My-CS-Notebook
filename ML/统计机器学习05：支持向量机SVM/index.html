@@ -3843,7 +3843,7 @@ $$
 \]</div>
 <p>这个优化问题实际上就是支持向量机的基本形式。</p>
 <h2 id="松弛变量slack-variable">松弛变量slack variable<a class="headerlink" href="#松弛变量slack-variable" title="Permanent link">&para;</a></h2>
-<p>在SVM问题求解中我们一般选择整个数据集中最小的一组间隔作为整个数据集的间隔，而我们优化的目标就是让这个最小间隔最大化。但是现实往往没有这么美好，数据的分布不会像我们预想的那么完美，因此我们可以引入松弛变量(slack variable)，给间隔一个**上下浮动的空间**，即可以将问题转化成：</p>
+<p>在SVM问题求解中我们一般选择整个数据集中最小的一组间隔作为整个数据集的间隔，而我们优化的目标就是让这个最小间隔最大化。但是现实往往没有这么美好，数据的分布不会像我们预想的那么完美，因此我们可以引入松弛变量(slack variable)，给间隔一个<strong>上下浮动的空间</strong>，即可以将问题转化成：</p>
 <div class="arithmatex">\[
 \begin{aligned}
         &amp; \min\limits_{\omega,b} \frac{1}{2}||\omega||^2+C\sum\limits_{i=1}^n\xi_i\\
@@ -3860,7 +3860,7 @@ $$
 <div class="arithmatex">\[
 \min\limits_{\omega,b}(\sum\limits_{i=0}^{n}\max(1-y(\omega^Tx_i+b),0)+\frac{1}{2C}||\omega||^2)
 \]</div>
-<p>在求解SVM的过程中，可以将这个式子的**前半部分作为loss function，后半部分作为regularizer**</p>
+<p>在求解SVM的过程中，可以将这个式子的<strong>前半部分作为loss function，后半部分作为regularizer</strong></p>
 <h2 id="线性模型的统一性">线性模型的统一性<a class="headerlink" href="#线性模型的统一性" title="Permanent link">&para;</a></h2>
 <p>我们可以把上面的损失函数记作： <span class="arithmatex">\(<span class="arithmatex">\(l(f)=\max [1-yf, 0]\)</span>\)</span>，我们称这种类型的损失函数为hinge loss(铰链损失函数)，因为其函数图像是一个类似于折线的形状。则我们的优化目标可以写成：</p>
 <div class="arithmatex">\[

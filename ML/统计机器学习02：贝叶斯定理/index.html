@@ -3967,7 +3967,7 @@ P(\boldsymbol x|\mu,\Sigma)=\mathcal{N}(x|\mu,\Sigma^2)=\frac{1}{({2\pi})^{\frac
 <div class="arithmatex">\[
 \theta_{\mathrm{ML}}=\arg\max\mathbb E_{\mathbf x -p_{\mathrm {data}}}[\log p_{\mathrm{model}}(x,\theta)]
 \]</div>
-<p>一种解释最大似然估计的观点就是**将极大似然法看作最小化训练集上的经验分布和模型分布之间的差异**，而两者之间的差异可以根据KL散度进行度量，即：</p>
+<p>一种解释最大似然估计的观点就是<strong>将极大似然法看作最小化训练集上的经验分布和模型分布之间的差异</strong>，而两者之间的差异可以根据KL散度进行度量，即：</p>
 <div class="arithmatex">\[
 D_{KL}(\hat p_{\mathrm{data}}||p_{\mathrm{model}})=\mathbb E_{\mathbf x -p_{\mathrm {data}}}[\log \hat p_{\mathrm{data}}(x) - \log p_{\mathrm{model}}(x)]
 \]</div>
@@ -3981,7 +3981,7 @@ P(\omega_i|x)=P(x|\omega_i)P(\omega_i)=P(x|\omega_i,\theta_i)P(\omega_i), \theta
 P(D_i|\theta)=\prod\limits_{x_k\in D_i}P(x_k|\theta_i)
 \]</div>
 <p>极大似然法的基本思路就是让这个数据集的似然达到最大，而达到最大的时候的参数值就是我们要求的参数估计值，因为它使得数据集中
-可能属于这个类别的样本的概率达到了最大。而为了防止数值过小造成**下溢**，可以采用对数似然</p>
+可能属于这个类别的样本的概率达到了最大。而为了防止数值过小造成<strong>下溢</strong>，可以采用对数似然</p>
 <div class="arithmatex">\[
 l(\theta) = \ln P(D_i|\theta) = \sum\limits_{x_k\in D_i}\ln P(x_k|\theta_i)
 \]</div>

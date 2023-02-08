@@ -3885,7 +3885,7 @@
 <summary>本页统计信息</summary>
 <ul>
 <li>
-<p>本页约 2105 个字,  预计阅读时间 7 分钟。</p>
+<p>本页约 2098 个字,  预计阅读时间 7 分钟。</p>
 </li>
 <li>
 <p><span id="busuanzi_container_page_pv">本页总阅读量<span id="busuanzi_value_page_pv"></span>次</span></p>
@@ -3928,7 +3928,7 @@
 <li>METIS-CPS：VPS的划分是纯随机的划分，这可能会对KG的结构造成破坏，因此本论文提出了METIS-CPS的算法来进行KG的划分，其基本过程如图所示：</li>
 </ul>
 <p><img alt="image-20211228131810540" src="../static/image-20211228131810540.png" /></p>
-<p>METIS是一种基于模块度最大化原则提出的图分割算法，它认为图分割的过程中应该**让被切除的边的权重之和最小化**，以此来实现有关的节点被分割到同一个partition中，而不相关的节点被分到不同的partition中，因此图中的每一条边都会有一个权重w，而且所有边的权重都是相同的。</p>
+<p>METIS是一种基于模块度最大化原则提出的图分割算法，它认为图分割的过程中应该<strong>让被切除的边的权重之和最小化</strong>，以此来实现有关的节点被分割到同一个partition中，而不相关的节点被分到不同的partition中，因此图中的每一条边都会有一个权重w，而且所有边的权重都是相同的。</p>
 <p>而在本论文的structure channel中，会先对其中一个KG使用METIS算法进行分割，然后压力就来到了另一个KG这边，论文提出的CPS就是要根据图分割的情况来对第二个KG中的每一条边进行权重的调整，着调整的过程分成两个步骤：</p>
 <ul>
 <li>提高相关实体的权重</li>
@@ -3948,19 +3948,18 @@
 M_n=M_{se}+\gamma M_{st}
 \]</div>
 <p>论文中使用了BERT+Max Pooling进行语义特征的提取，同时对于得到的语义相似度矩阵，因为实体和实体之间是独立的，所以可以将其分成K个段来节约内存，在实体对齐的时候，可以通过在K个段的两两组合中，每次找到相似度最高的若干个段，只要判断它们是不是对齐的就可以了(因为相似度太低的情况下，两个实体大概率不会对齐)</p>
-<p>论文定义了一个STNS函数用来计算基于string的实体相似度，论文采用了计算Levenshtein距离来表示不同的字符串之间的相似度，并且通过**局部敏感Hash**的方式来快速找到相似的字符串对</p>
+<p>论文定义了一个STNS函数用来计算基于string的实体相似度，论文采用了计算Levenshtein距离来表示不同的字符串之间的相似度，并且通过<strong>局部敏感Hash</strong>的方式来快速找到相似的字符串对</p>
 <h4 id="基于name的数据增强">基于Name的数据增强<a class="headerlink" href="#基于name的数据增强" title="Permanent link">&para;</a></h4>
 <p>因为一些结构信息在分割的时候丢失了，所以论文使用实体的名字特征对数据进行增强，这是基于这样一种思路：如若两个不同语言的句子可以互相翻译，那么它们就拥有相同的意思。</p>
 <h4 id="channel融合">channel融合<a class="headerlink" href="#channel融合" title="Permanent link">&para;</a></h4>
-<p>论文里提出的channel融合策略就是非常简单的直接相加，把structure channel和name channel的两个相似度矩阵直接相加作为最后的相似度矩阵，并以此来进行实体对齐的判定。
-<span id=busuanzi_container_page_pv>本文总阅读量<span id=busuanzi_value_page_pv></span>次</span></p>
+<p>论文里提出的channel融合策略就是非常简单的直接相加，把structure channel和name channel的两个相似度矩阵直接相加作为最后的相似度矩阵，并以此来进行实体对齐的判定。</p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月4日 10:57:21</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月8日 14:30:35</span>
       
         <br>
         创建日期:

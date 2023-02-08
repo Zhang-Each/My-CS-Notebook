@@ -3871,7 +3871,7 @@
 <summary>本页统计信息</summary>
 <ul>
 <li>
-<p>本页约 1815 个字,  预计阅读时间 6 分钟。</p>
+<p>本页约 1808 个字,  预计阅读时间 6 分钟。</p>
 </li>
 <li>
 <p><span id="busuanzi_container_page_pv">本页总阅读量<span id="busuanzi_value_page_pv"></span>次</span></p>
@@ -3886,7 +3886,7 @@
 <p>两篇论文从不同的角度注入了逻辑规则进行知识图谱推理，第一篇文章使用的手段是在知识图谱嵌入模型的基础上，将逻辑规则作为约束条件，并将训练过程转化成一个整数线性规划(Integer Linear Programming)问题，而第二篇论文采用的是在矩阵分解的过程中加入逻辑规则得到知识表示进行推理的方法，两篇论文中提出的都是很经典的方法，下面具体来分析两种不同的方法的具体内容和表现效果。</p>
 <h2 id="规则注入方式1将规则作为约束">规则注入方式1：将规则作为约束<a class="headerlink" href="#规则注入方式1将规则作为约束" title="Permanent link">&para;</a></h2>
 <h3 id="知识图谱嵌入的局限性">知识图谱嵌入的局限性<a class="headerlink" href="#知识图谱嵌入的局限性" title="Permanent link">&para;</a></h3>
-<p>虽然说知识图谱嵌入从提出以来取得了不错的效果，但是知识图谱嵌入存在的一个问题就是，它是**完全数据驱动的**，也就是说**模型学习到的知识完全取决于训练数据中有什么数据**，而对训练集中没有出现或者很少出现的数据，模型在推理时的表现会非常差。</p>
+<p>虽然说知识图谱嵌入从提出以来取得了不错的效果，但是知识图谱嵌入存在的一个问题就是，它是<strong>完全数据驱动的</strong>，也就是说<strong>模型学习到的知识完全取决于训练数据中有什么数据</strong>，而对训练集中没有出现或者很少出现的数据，模型在推理时的表现会非常差。</p>
 <h3 id="论文提出的方法">论文提出的方法<a class="headerlink" href="#论文提出的方法" title="Permanent link">&para;</a></h3>
 <p>论文提出了一种将知识图谱嵌入和逻辑规则结合的方法，也就是在知识图谱嵌入模型中引入规则约束，将其转化成一个整数线性规划的问题。</p>
 <p><img alt="image-20210902234427680" src="../static/image-20210902234427680.png" /></p>
@@ -3899,7 +3899,7 @@ $$
 $$
 \min \sum_k\sum_i\sum_j\left(y_{ij}^{(k)}- f(e_i,r_k,e_j)\right)^2+\lambda R
 $$
-其中<span class="arithmatex">\(y_{ij}^{(k)}=1\)</span>表示这个三元组属于知识库，而R是模型所有的**参数的欧几里得范数之和**，这里用作正则项，很显然这个目标就是为了让打分函数做出尽可能符合真实情况(0或者1)的判断，而TransE的打分函数和目标函数分别是：
+其中<span class="arithmatex">\(y_{ij}^{(k)}=1\)</span>表示这个三元组属于知识库，而R是模型所有的<strong>参数的欧几里得范数之和</strong>，这里用作正则项，很显然这个目标就是为了让打分函数做出尽可能符合真实情况(0或者1)的判断，而TransE的打分函数和目标函数分别是：
 $$
 f(e_i,r_k,e_j)=||e_i+r_k-e_j||_1
 $$</p>
@@ -3912,7 +3912,7 @@ $$</p>
 <p>然后论文中提出了可以注入并增强约束的逻辑和物理规则：</p>
 <ul>
 <li>噪音发现：已经存在的事实更容易被模型认为是对的，但是模型也需要辨认出其中的错误的事实</li>
-<li>参数类型约束：一个关系对应的head和tail两个实体的参数应该是**具有确定的类型**的</li>
+<li>参数类型约束：一个关系对应的head和tail两个实体的参数应该是<strong>具有确定的类型</strong>的</li>
 <li>“最多一个”约束：对于一对多关系，那么给定一个tail，最多存在一个对应的head，而一对一，多对一等关系也遵循类似的约束</li>
 <li>包含关系：也就是说一个三元组中的小关系可以被替换成更大的关系(比如HasWife是小关系，HasSpouse是大关系)</li>
 </ul>
@@ -3939,17 +3939,16 @@ $$
 $$
 p(\mathbf{w} \mid \mathbf{V})=\prod_{r_{m}\left(e_{i}, e_{j}\right) \in w} \pi_{m}^{e_{i}, e_{j}} \prod_{r_{m}\left(e_{i}, e_{j}\right) \notin w}\left(1-\pi_{m}^{e_{i}, e_{j}}\right)
 $$
-这其实就是一个**极大似然估计**下的目标函数，我们可以用这样一个目标函数来评价学习到的嵌入向量的质量。</p>
+这其实就是一个<strong>极大似然估计</strong>下的目标函数，我们可以用这样一个目标函数来评价学习到的嵌入向量的质量。</p>
 <p>本论文就是在矩阵分解方法的基础之上，尝试加入逻辑规则在提升矩阵分解的效果。</p>
 <h3 id="规则的注入">规则的注入<a class="headerlink" href="#规则的注入" title="Permanent link">&para;</a></h3>
-<p><span id=busuanzi_container_page_pv>本文总阅读量<span id=busuanzi_value_page_pv></span>次</span></p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月4日 10:57:21</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月8日 14:30:35</span>
       
         <br>
         创建日期:

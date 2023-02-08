@@ -3903,7 +3903,7 @@ symbols，也就是原子符号，即不可拆分的最基本单位，我们的�
 <p>我们可以使用向量来表示一个单词，将单词的特征编码到向量的一系列维度中，这也就是词向量(Word Vector)</p>
 <p>词向量也就是用向量来表示一个单词，但是语言的单词数量可能是非常庞大的，比如英语就有各类单词词组约1300万个，我们需要将这些单词全部编码到一个N维度的向量中去，向量的每个维度可以编码一些语义或者单词的特征。词向量也可以叫做词嵌入Word Embedding​</p>
 <h2 id="one-hot词向量">one-hot词向量<a class="headerlink" href="#one-hot词向量" title="Permanent link">&para;</a></h2>
-<p>一种非常不负责任的编码方式就是one-hot向量，这种方法根据当前样本数据的词汇表的大小<span class="arithmatex">\(|V|\)</span>，用一系列维度为<span class="arithmatex">\(|V|\)</span>的0-1向量来代表单词，词汇表中出现的每个单词<span class="arithmatex">\(m\)</span>有一个对应的维度<span class="arithmatex">\(v_m\)</span>，每个单词对应的词向量中，该维度的值是1，其他的维度都是0，这种方式非常简单粗暴，但是问题也很明显，这样的编码是非常**稀疏**的，词向量中的大部分内容都是无效信息0，并且词向量的规模也非常大，是对计算资源的严重浪费。</p>
+<p>一种非常不负责任的编码方式就是one-hot向量，这种方法根据当前样本数据的词汇表的大小<span class="arithmatex">\(|V|\)</span>，用一系列维度为<span class="arithmatex">\(|V|\)</span>的0-1向量来代表单词，词汇表中出现的每个单词<span class="arithmatex">\(m\)</span>有一个对应的维度<span class="arithmatex">\(v_m\)</span>，每个单词对应的词向量中，该维度的值是1，其他的维度都是0，这种方式非常简单粗暴，但是问题也很明显，这样的编码是非常<strong>稀疏</strong>的，词向量中的大部分内容都是无效信息0，并且词向量的规模也非常大，是对计算资源的严重浪费。</p>
 <h2 id="基于奇异值分解svd的词向量">基于奇异值分解SVD的词向量<a class="headerlink" href="#基于奇异值分解svd的词向量" title="Permanent link">&para;</a></h2>
 <h3 id="奇异值分解svd">奇异值分解SVD<a class="headerlink" href="#奇异值分解svd" title="Permanent link">&para;</a></h3>
 <p>根据我们仅存的一点线性代数的知识，我们知道矩阵可以分解成一系列特征向量和特征值，但是除此之外矩阵还可以进行奇异值分解(Singular Value Decomposition, SVD)是将矩阵分解成一系列奇异向量和奇异值</p>

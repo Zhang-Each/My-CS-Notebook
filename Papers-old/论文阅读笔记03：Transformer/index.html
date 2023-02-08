@@ -3995,7 +3995,7 @@
 <summary>本页统计信息</summary>
 <ul>
 <li>
-<p>本页约 2983 个字,  预计阅读时间 10 分钟。</p>
+<p>本页约 2976 个字,  预计阅读时间 10 分钟。</p>
 </li>
 <li>
 <p><span id="busuanzi_container_page_pv">本页总阅读量<span id="busuanzi_value_page_pv"></span>次</span></p>
@@ -4006,10 +4006,10 @@
 <p>经典论文《Attention Is All You Need》阅读笔记，该论文中提出了自注意力机制和Transformer模型</p>
 </blockquote>
 <h2 id="introduce">Introduce<a class="headerlink" href="#introduce" title="Permanent link">&para;</a></h2>
-<p>​     主流的序列转换模型往往使用复杂的循环的卷积网络，并且是**编码器-解码器**的架构，而表现性能好的模型往往还使用注意力机制，这片论文中提供了一个简单的网络架构，被称为Transformer，这种网络架构只使用了注意力机制而放弃使用循环单元和卷积单元，通过注意力机制达到了对**序列中的全局依赖的刻画**。</p>
+<p>​     主流的序列转换模型往往使用复杂的循环的卷积网络，并且是<strong>编码器-解码器</strong>的架构，而表现性能好的模型往往还使用注意力机制，这片论文中提供了一个简单的网络架构，被称为Transformer，这种网络架构只使用了注意力机制而放弃使用循环单元和卷积单元，通过注意力机制达到了对<strong>序列中的全局依赖的刻画</strong>。</p>
 <h2 id="背景">背景<a class="headerlink" href="#背景" title="Permanent link">&para;</a></h2>
 <p>​     减少序列计算量和加速计算是序列处理模型中非常基本的想法，像ByteNet和ConvS2S就是使用卷积神经网络作为单元进行并行计算的，这些模型中，计算量和序列中位置的距离有很大的关系，对于ConvS2S中是线性的而在ByteNet是对数级别的，这使得长距离的关系学习变得尤为困难，而在Transformer中这个过程被减少到了一个常数的规模，尽管这降低了有效分分辨率，这得益于Transformer中提出的多头注意力机制。</p>
-<p>​     自注意力机制是一种对一个序列的**不同位置分配不同的权重**，并学习到一个表示向量的方式，自注意力机制已经被用到了很多任务中，比如阅读理解，文本摘要等等，并且取得了很好的效果。端到端的记忆力网络往往都基于循环注意力机制并且已经在简单语言翻译等任务中得到了使用。</p>
+<p>​     自注意力机制是一种对一个序列的<strong>不同位置分配不同的权重</strong>，并学习到一个表示向量的方式，自注意力机制已经被用到了很多任务中，比如阅读理解，文本摘要等等，并且取得了很好的效果。端到端的记忆力网络往往都基于循环注意力机制并且已经在简单语言翻译等任务中得到了使用。</p>
 <p>​     而Transformer模型中首次实现了仅依赖于注意力机制的网络架构而不是使用卷积单元和循环单元，这一部分的工作将在后面重点介绍。</p>
 <blockquote>
 <p>其实背景中扯了一大堆主要就是说Transformer的突破性在何处，没有什么别的阅读价值，反正我也没怎么看懂有些内容在说什么。</p>
@@ -4019,21 +4019,21 @@
 <p><img alt="image-20210605142817628" src="../static/image-20210605142817628.png" /></p>
 <h3 id="编码器和解码器">编码器和解码器<a class="headerlink" href="#编码器和解码器" title="Permanent link">&para;</a></h3>
 <h4 id="编码器">编码器<a class="headerlink" href="#编码器" title="Permanent link">&para;</a></h4>
-<p>​     Transformer模型中的编码器采取了层级化架构，一共使用了N=6个编码器，每个编码器包含两个子层，分别是多头注意力层和一个全连接层的前馈网络，同时每一个编码器的每一个子层中使用了**残差连接和标准化**，也就是说假设每一层的输入是x，那么每一层的输出结果可以表示为：
+<p>​     Transformer模型中的编码器采取了层级化架构，一共使用了N=6个编码器，每个编码器包含两个子层，分别是多头注意力层和一个全连接层的前馈网络，同时每一个编码器的每一个子层中使用了<strong>残差连接和标准化</strong>，也就是说假设每一层的输入是x，那么每一层的输出结果可以表示为：
 $$
 \mathrm{LayerNorm}(x+\mathrm{SubLayer}(x))
 $$</p>
 <ul>
 <li>SubLayer是当前子层的运算函数，比如注意力运算和全连接运算</li>
-<li>残差连接和标准化都是为了**防止模型过拟合**，提高模型的泛化性能</li>
+<li>残差连接和标准化都是为了<strong>防止模型过拟合</strong>，提高模型的泛化性能</li>
 <li>Transformer模型中所有的向量的维数都是512</li>
 </ul>
 <h4 id="解码器">解码器<a class="headerlink" href="#解码器" title="Permanent link">&para;</a></h4>
-<p>​     Transformer中的解码器也采用了层级化的架构，一共使用了N=6个解码器，并且每个解码器包含三个子层，其中的**新增的多头注意力层**会对**编码器层输入解码器的表示向量**进行注意力的计算，而原本的多头注意力层需要加上mask，因为在预测生成结果的过程中，不能让前面的东西感知到后面(还没生成)的东西的存在，这就是mask的作用，这样一来解码器层的注意力只能集中在已知的内容中。</p>
+<p>​     Transformer中的解码器也采用了层级化的架构，一共使用了N=6个解码器，并且每个解码器包含三个子层，其中的<strong>新增的多头注意力层</strong>会对<strong>编码器层输入解码器的表示向量</strong>进行注意力的计算，而原本的多头注意力层需要加上mask，因为在预测生成结果的过程中，不能让前面的东西感知到后面(还没生成)的东西的存在，这就是mask的作用，这样一来解码器层的注意力只能集中在已知的内容中。</p>
 <h3 id="注意力机制">注意力机制<a class="headerlink" href="#注意力机制" title="Permanent link">&para;</a></h3>
 <p>​     注意力机制总结下来就是对一系列的query和一系列的key-value对，我们需要确定对于每个query而言不同value的重要程度，而这个权重是根据query和key的相关度计算得到的。</p>
 <h4 id="按比例的点积注意力机制scaled-dot-product-attention">按比例的点积注意力机制Scaled Dot-product Attention<a class="headerlink" href="#按比例的点积注意力机制scaled-dot-product-attention" title="Permanent link">&para;</a></h4>
-<p>​     Transformer模型中使用的是按比例缩小的点积注意力机制，注意力计算需要维度<span class="arithmatex">\(d_k\)</span>的query和key以及维度<span class="arithmatex">\(d_v\)</span>的value，然后在传统的注意力机制运算方式基础上加上一个**规模参数**<span class="arithmatex">\(\sqrt {d_k}\)</span> ，我们用向量化的方式可以将这种注意力机制的计算过程表示成：
+<p>​     Transformer模型中使用的是按比例缩小的点积注意力机制，注意力计算需要维度<span class="arithmatex">\(d_k\)</span>的query和key以及维度<span class="arithmatex">\(d_v\)</span>的value，然后在传统的注意力机制运算方式基础上加上一个<strong>规模参数</strong><span class="arithmatex">\(\sqrt {d_k}\)</span> ，我们用向量化的方式可以将这种注意力机制的计算过程表示成：
 $$
 \operatorname{Attention}(Q, K, V)=\operatorname{softmax}\left(\frac{Q K^{T}}{\sqrt{d_{k}}}\right) V
 $$
@@ -4053,16 +4053,16 @@ $$
 <ul>
 <li>在解码器的“编码器-解码器注意力层”中，query是来自上一个解码器层的，而key和value是来自于编码器的输出，这使得解码器中的每一个位置可以可以参与到输入序列所有位置的注意力计算上面。</li>
 <li>在编码器中包含了自注意力层，这时候的key，value和query都是同源的</li>
-<li>解码器中的自注意力层的key，value和query也是同源的，但是需要**加上一个mask**防止序列前面的内容被后面的内容所影响</li>
+<li>解码器中的自注意力层的key，value和query也是同源的，但是需要<strong>加上一个mask</strong>防止序列前面的内容被后面的内容所影响</li>
 </ul>
 <h3 id="position-wise前馈神经网络">Position-wise前馈神经网络<a class="headerlink" href="#position-wise前馈神经网络" title="Permanent link">&para;</a></h3>
-<p>​     Transformer中的Position-wise全连接层包含**两个线性变换层**，并使用ReLU函数作为激活函数，其运算过程可以表示为：
+<p>​     Transformer中的Position-wise全连接层包含<strong>两个线性变换层</strong>，并使用ReLU函数作为激活函数，其运算过程可以表示为：
 $$
 FFN(x)=\max (0, xW_1+b_1)W_2+b_2
 $$
 每个层之间的参数是单独的，也可以看成是一种kernel size为1的卷积，输入的x维度是512而内层的维度是2048</p>
 <h3 id="嵌入和softmax">嵌入和softmax<a class="headerlink" href="#嵌入和softmax" title="Permanent link">&para;</a></h3>
-<p>​     和其他的序列转换模型一样，Transformer也对输入的token进行嵌入，并用<span class="arithmatex">\(d_{model}\)</span>嵌入向量，同时也会使用学习到的参数对解码器中的输出进行线性变换，并通过softmax函数生成一个概率分布，以此来预测下一个token的概率，在Transformer模型中**两个嵌入层和softmax层之前的的线性变换层的参数是共享的**，同时在嵌入层这些权重还要除以一个规模参数</p>
+<p>​     和其他的序列转换模型一样，Transformer也对输入的token进行嵌入，并用<span class="arithmatex">\(d_{model}\)</span>嵌入向量，同时也会使用学习到的参数对解码器中的输出进行线性变换，并通过softmax函数生成一个概率分布，以此来预测下一个token的概率，在Transformer模型中<strong>两个嵌入层和softmax层之前的的线性变换层的参数是共享的</strong>，同时在嵌入层这些权重还要除以一个规模参数</p>
 <h3 id="位置编码">位置编码<a class="headerlink" href="#位置编码" title="Permanent link">&para;</a></h3>
 <p>​     尽管Transformer模型中没有循环和卷积单元，为了充分利用序列的信息，我们必须在嵌入向量中注入一些和位置有关的信息，因此本论文提出了一种位置编码的idea，通过在嵌入向量中加入位置编码的方式来保留一些位置特征，在Transformer中的位置编码使用了sin函数和cos函数，即：
 $$
@@ -4075,7 +4075,7 @@ P E_{(p o s, 2 i+1)} =\cos \left(p o s / 10000^{2 i / d_{\text {model }}}\right)
 <h2 id="为什么使用self-attention">为什么使用self-attention<a class="headerlink" href="#为什么使用self-attention" title="Permanent link">&para;</a></h2>
 <p>​     论文中比较了使用自注意力，循环单元和卷积单元等多种不同方式下的计算量，时间复杂度和最大依赖路径长度，结果如下：</p>
 <p><img alt="image-20210606211911173" src="../static/image-20210606211911173.png" /></p>
-<p>​     可以说学习长距离的依赖关系是很多序列问题中的关键挑战，而影响长距离依赖的一个关键因素就是模型中单元的**信号能够在模型中传播的步长**(比如RNN中的隐层会在整个后面的序列中都进行传递)，而这个路径越短则学习到长距离依赖的能力越强，因此论文中也对任意两个输入输出位置中的最大路径长度进行了对比。</p>
+<p>​     可以说学习长距离的依赖关系是很多序列问题中的关键挑战，而影响长距离依赖的一个关键因素就是模型中单元的<strong>信号能够在模型中传播的步长</strong>(比如RNN中的隐层会在整个后面的序列中都进行传递)，而这个路径越短则学习到长距离依赖的能力越强，因此论文中也对任意两个输入输出位置中的最大路径长度进行了对比。</p>
 <ul>
 <li>我觉得这里的path可以理解为，为了捕获长距离的依赖而需要进行一个信息传递的过程，而两个位置之间的信息传递越直接(即消息传递的path越短)，能够捕捉到的长距离依赖就越多。</li>
 <li>而在RNN中，因为隐层之间的信息是逐渐向下传递的，所以从全局来看，两个位置之间的最长消息传递path的长度是n级别的，而Transformer中因为自注意力机制直接将每个位置和所有的位置进行了注意力的计算，这就省略了RNN中一步步向下传递的过程，因此可以捕捉到非常多的长距离依赖信息</li>
@@ -4092,14 +4092,13 @@ $$
 <h3 id="正则化">正则化<a class="headerlink" href="#正则化" title="Permanent link">&para;</a></h3>
 <p>​     Transformer中用到的正则化主要是使用了三种方式，分别是残差连接，dropout和标签平滑处理，残差连接前面已经提到过了，而dropout则是在嵌入向量和位置编码相加的那一层进行，这里选择的dropout概率是0.1</p>
 <p>​     而标签平滑处理可以让BLUE评价分数变高。</p>
-<p><span id=busuanzi_container_page_pv>本文总阅读量<span id=busuanzi_value_page_pv></span>次</span></p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月4日 10:57:21</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月8日 14:30:35</span>
       
         <br>
         创建日期:

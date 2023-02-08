@@ -4107,7 +4107,7 @@
 <p><img alt="image-20210704230851843" src="../static/image-20210704230851843.png" /></p>
 <h3 id="item-profiletf-idf">Item Profile&amp;TF-IDF<a class="headerlink" href="#item-profiletf-idf" title="Permanent link">&para;</a></h3>
 <p>​     对于每个商品，基于内容的推荐需要给它建立一个描述(profile，我认为翻译成画像更好)，包含了这个商品的一系列特征，而这些特征可以通过启发性的方法从文本中提取，这里可以用到一种方法叫做TF-IDF算法。</p>
-<p>​     <strong>TF-IDF（term frequency–inverse document frequency，词频-逆向文件频率）**是一种用于信息检索（information retrieval）与文本挖掘（text mining）的常用**加权方法</strong>。我们用<span class="arithmatex">\(f_{ij}\)</span>来表示单词i(代表了一定的特征)在文档j中出现的频率，那么就有：
+<p>​     <strong>TF-IDF（term frequency–inverse document frequency，词频-逆向文件频率）</strong>是一种用于信息检索（information retrieval）与文本挖掘（text mining）的常用<strong>加权方法</strong>。我们用<span class="arithmatex">\(f_{ij}\)</span>来表示单词i(代表了一定的特征)在文档j中出现的频率，那么就有：
 $$
 TF_{ij}=\frac{f_{ij}}{\max_kf_{kj}}
 $$
@@ -4234,7 +4234,7 @@ r_{x i}=b_{xi}+\frac{\sum_{j \in N(i ; x)} \mathrm{sim}_{i j} \cdot (r_{x j}-b_{
 <li>这里的<span class="arithmatex">\(N(i;x)\)</span>是用户x打分过的和i相似的商品(Netflix案例里就是电影)</li>
 <li><span class="arithmatex">\(w_{ij}\)</span>就是插值权重，并且允许其和不为1，用于表示不同两个电影之间的互相作用</li>
 </ul>
-<p>​     评估推荐系统效果(也就是损失函数)的一种方式是**和方差**SSE，而合适的权重<span class="arithmatex">\(w_{ij}\)</span>的选取方式需要让这个损失函数最小，而权重参数也可以根据输入的样本学习到，而SSE损失函数可以写成：</p>
+<p>​     评估推荐系统效果(也就是损失函数)的一种方式是<strong>和方差</strong>SSE，而合适的权重<span class="arithmatex">\(w_{ij}\)</span>的选取方式需要让这个损失函数最小，而权重参数也可以根据输入的样本学习到，而SSE损失函数可以写成：</p>
 <div class="arithmatex">\[
 J(w)=\sum_{x,i\in R}(\bar r_{xi}-r_{xi})^2=\sum_{x,i\in R}\left(\left[b_{x i}+\sum_{j \in N(i ; x)} w_{i j}\left(r_{x j}-b_{x j}\right)\right]-r_{xi}\right)^2
 \]</div>

@@ -3724,10 +3724,10 @@
 <p>上一个Project中，我们实现了Bustub中的Buffer Pool模块，实现了包括LRU置换算法，Buffer Manager和并行Buffer等内容，而这次的Project2需要我们自己实现Bustub中的Index模块</p>
 </blockquote>
 <h2 id="start">START<a class="headerlink" href="#start" title="Permanent link">&para;</a></h2>
-<p>Bustub中的索引采用的是Hash Index，并且今年的Project中采用了可扩展的**Extendable Hash**作为索引的核心组成部分，并要求实现并发的控制等操作。</p>
+<p>Bustub中的索引采用的是Hash Index，并且今年的Project中采用了可扩展的<strong>Extendable Hash</strong>作为索引的核心组成部分，并要求实现并发的控制等操作。</p>
 <p>整个实验分成了三个部分，分别是Page相关的数据结构的实现，Hash表本身的实现和并发控制的实现，下面进入正题。</p>
 <h2 id="page-layouts">PAGE LAYOUTS<a class="headerlink" href="#page-layouts" title="Permanent link">&para;</a></h2>
-<p>第一部分我们需要实现索引页的基本数据结构，前面我们已经提到过，Buffer Manager的功能是对页进行管理，里面集成了Disk Manager，LRU等多个组件，就是为了对各种各样的页的读写和置换进行有效的管理，而现在就轮到了我们真的实现其中的一些页的时候。可扩展Hash中，页分成了两种，一种是目录页(Directory page)，另一种是桶页面(Bucket Page)，目录页面主要保存的是**Hash的结果和桶的对应关系**(后面会详细说可扩展Hash在这方面的设计)，而桶主要用来保存key-value的数据对。</p>
+<p>第一部分我们需要实现索引页的基本数据结构，前面我们已经提到过，Buffer Manager的功能是对页进行管理，里面集成了Disk Manager，LRU等多个组件，就是为了对各种各样的页的读写和置换进行有效的管理，而现在就轮到了我们真的实现其中的一些页的时候。可扩展Hash中，页分成了两种，一种是目录页(Directory page)，另一种是桶页面(Bucket Page)，目录页面主要保存的是<strong>Hash的结果和桶的对应关系</strong>(后面会详细说可扩展Hash在这方面的设计)，而桶主要用来保存key-value的数据对。</p>
 <p>同时我们不能使用页以外的东西存储Hash表的信息，也就是说需要做到自包含，即可以只通过读入Hash表来复原整个可扩展Hash索引。</p>
 <h3 id="directory-page">Directory Page<a class="headerlink" href="#directory-page" title="Permanent link">&para;</a></h3>
 <p>首先是第一部分目录页的设计，目录页用来保存hash表中的元数据，并且被分成了以下几个部分：</p>
@@ -3830,7 +3830,7 @@ $$
 <span class="w">  </span><span class="n">MappingType</span><span class="w"> </span><span class="n">array_</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
 <span class="p">};</span>
 </code></pre></div>
-<p>值得注意的是这里的<code>occupied, readable</code>被定义成了char数组，而1个char的大小是1byte，也就是8bit，我们之前说两个数组用第i位表示key-value数组的第i个位置是否被占用/可读，而这几个标记数组中每8个位置就凑成一个char，所以我们在查询某个位置是否被占用/可读的时候，要先将其映射到对应的char中，然后**通过位运算对8个bit中指定的bit进行操作**。</p>
+<p>值得注意的是这里的<code>occupied, readable</code>被定义成了char数组，而1个char的大小是1byte，也就是8bit，我们之前说两个数组用第i位表示key-value数组的第i个位置是否被占用/可读，而这几个标记数组中每8个位置就凑成一个char，所以我们在查询某个位置是否被占用/可读的时候，要先将其映射到对应的char中，然后<strong>通过位运算对8个bit中指定的bit进行操作</strong>。</p>
 <p>事实上写代码的时候我真的用到了位运算的操作，包括and, or和shift等等，作业的要求是我们要实现这些内容：</p>
 <ul>
 <li><code>Insert</code> 插入新的Key-value对</li>
@@ -3840,7 +3840,7 @@ $$
 <li><code>KeyAt</code> 找到某个位置的Key</li>
 <li><code>ValueAt</code>找到某个位置的Value</li>
 </ul>
-<p>两个判断函数的实现方式如出一辙，就是将输入的index转化到对应的char和对应的位置上，然后通过位运算取出对应位置的数据进行操作，比如判断被占用，只要把那个位置上的bit拿出来，和1求一个and就可以判断那个位置是不是1，值得注意的是，虽然按道理说bit应该是从左往右数的，但是因为二进制表示是从右往左排列的，为了操作方便，我们在每个char里，bit和索引的对应关系就按照从右往左的方式排序了，即**从右往左，8个bit依次是当前char的0-7位**，输入的索引号先对应到某个具体的char上(<code>index / 8</code>)，然后用余数代表在一个char中的偏移量，也就是排位。不过好消息是这么做区别不大，甚至更方便了。</p>
+<p>两个判断函数的实现方式如出一辙，就是将输入的index转化到对应的char和对应的位置上，然后通过位运算取出对应位置的数据进行操作，比如判断被占用，只要把那个位置上的bit拿出来，和1求一个and就可以判断那个位置是不是1，值得注意的是，虽然按道理说bit应该是从左往右数的，但是因为二进制表示是从右往左排列的，为了操作方便，我们在每个char里，bit和索引的对应关系就按照从右往左的方式排序了，即<strong>从右往左，8个bit依次是当前char的0-7位</strong>，输入的索引号先对应到某个具体的char上(<code>index / 8</code>)，然后用余数代表在一个char中的偏移量，也就是排位。不过好消息是这么做区别不大，甚至更方便了。</p>
 <div class="highlight"><pre><span></span><code><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">KeyType</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">ValueType</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">KeyComparator</span><span class="o">&gt;</span>
 <span class="kt">bool</span><span class="w"> </span><span class="n">HASH_TABLE_BUCKET_TYPE</span><span class="o">::</span><span class="n">IsOccupied</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">bucket_idx</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">byte_idx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bucket_idx</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span>

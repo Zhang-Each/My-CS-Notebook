@@ -3918,7 +3918,7 @@
 <h2 id="rnn">RNN<a class="headerlink" href="#rnn" title="Permanent link">&para;</a></h2>
 <h3 id="rnn的结构">RNN的结构<a class="headerlink" href="#rnn的结构" title="Permanent link">&para;</a></h3>
 <ul>
-<li>RNN指的是循环神经网络，是一种设计出来用于**处理序列化数据(比如自然语言，时序数据)的神经网络**，RNN可以保留一定的上下文信息并将序列前面的信息不断向后面传递。</li>
+<li>RNN指的是循环神经网络，是一种设计出来用于<strong>处理序列化数据(比如自然语言，时序数据)的神经网络</strong>，RNN可以保留一定的上下文信息并将序列前面的信息不断向后面传递。</li>
 <li>RNN的架构如下图所示，主要包含一个输入层，一个隐层和一个输出层，隐层单元的隐状态<span class="arithmatex">\(h_t\)</span>也会不断向下一个隐层单元传递。</li>
 </ul>
 <p><img src="static/image-20211107234559502.png" alt="image-20211107234559502" style="zoom: 33%;" /></p>
@@ -3929,7 +3929,7 @@
 h_t=\sigma(W_xx_{t}+W_hh_{t-1}+b)
 \]</div>
 <ul>
-<li>这里的**可学习参数**包括<span class="arithmatex">\(W_x,W_h,b\)</span>，分别是两个权重矩阵和一个bias向量，而激活函数通常使用双曲正切tanh函数，而最终的输出结果的计算方式是：</li>
+<li>这里的<strong>可学习参数</strong>包括<span class="arithmatex">\(W_x,W_h,b\)</span>，分别是两个权重矩阵和一个bias向量，而激活函数通常使用双曲正切tanh函数，而最终的输出结果的计算方式是：</li>
 </ul>
 <div class="arithmatex">\[
 y_t=\mathrm{softmax}(W_sh_t)
@@ -3944,7 +3944,7 @@ y_t=\mathrm{softmax}(W_sh_t)
     <span class="k">return</span> <span class="n">next_h</span><span class="p">,</span> <span class="n">cache</span>
 </code></pre></div>
 <ul>
-<li>而整个序列的前向传播需要使用一个循环来完成，因此**RNN的训练不能并行化**，这也是RNN的一个重大缺点。我们使用一个函数来描述整个序列在RNN中的前向传播过程：</li>
+<li>而整个序列的前向传播需要使用一个循环来完成，因此<strong>RNN的训练不能并行化</strong>，这也是RNN的一个重大缺点。我们使用一个函数来描述整个序列在RNN中的前向传播过程：</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">rnn_forward</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">h0</span><span class="p">,</span> <span class="n">Wx</span><span class="p">,</span> <span class="n">Wh</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
     <span class="n">h</span><span class="p">,</span> <span class="n">cache</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="p">[]</span>
@@ -3966,7 +3966,7 @@ y_t=\mathrm{softmax}(W_sh_t)
 </ul>
 <h3 id="rnn的反向传播及实现">RNN的反向传播及实现<a class="headerlink" href="#rnn的反向传播及实现" title="Permanent link">&para;</a></h3>
 <ul>
-<li>RNN的反向传播和CNN等传统神经网络不同，是一种**“时间”上的反向传播**，也就是说在计算梯度并更新参数的时候，不仅要考虑从最上层的loss函数中传递下来的梯度，<strong>也要考虑从后面一个隐层单元(从前向传播的时间来看要更迟，所以被称为时间反向传播)传递下来的梯度</strong></li>
+<li>RNN的反向传播和CNN等传统神经网络不同，是一种<strong>“时间”上的反向传播</strong>，也就是说在计算梯度并更新参数的时候，不仅要考虑从最上层的loss函数中传递下来的梯度，<strong>也要考虑从后面一个隐层单元(从前向传播的时间来看要更迟，所以被称为时间反向传播)传递下来的梯度</strong></li>
 <li>而对于各个参数，其梯度的计算方式如下(注意tanh函数导数的特殊性)：</li>
 </ul>
 <div class="arithmatex">\[
@@ -4026,13 +4026,13 @@ s_t=W_xx_{t}+W_hh_{t-1}+b,\quad h_t=\tanh(s_t)
 </code></pre></div>
 <h3 id="rnn的缺点">RNN的缺点<a class="headerlink" href="#rnn的缺点" title="Permanent link">&para;</a></h3>
 <ul>
-<li>从上面的代码实现中可以看出，RNN一个很大的缺点就是对于一个序列必须串行化训练，不能并行训练，造成训练的速度非常缓慢，同时RNN也存在梯度爆炸和梯度消失的问题，对于**长距离的依赖关系也缺乏学习的能力**，这些问题的具体分析可以在CS224N的相关笔记中看到</li>
+<li>从上面的代码实现中可以看出，RNN一个很大的缺点就是对于一个序列必须串行化训练，不能并行训练，造成训练的速度非常缓慢，同时RNN也存在梯度爆炸和梯度消失的问题，对于<strong>长距离的依赖关系也缺乏学习的能力</strong>，这些问题的具体分析可以在CS224N的相关笔记中看到</li>
 <li>拥有门控单元的RNN可以在一定程度上解决这个问题，比如LSTM</li>
 </ul>
 <h2 id="lstm">LSTM<a class="headerlink" href="#lstm" title="Permanent link">&para;</a></h2>
 <h3 id="lstm的基本架构">LSTM的基本架构<a class="headerlink" href="#lstm的基本架构" title="Permanent link">&para;</a></h3>
 <ul>
-<li>LSTM是<code>Long Short Term Memory</code>(长短期记忆模型)，是一种加入了门控单元的RNN，具有更长的“记忆能力”，可以捕捉到序列化输入中的**长距离依赖关系**(比如一个文本中距离很远的两个单词的某种特定关系)</li>
+<li>LSTM是<code>Long Short Term Memory</code>(长短期记忆模型)，是一种加入了门控单元的RNN，具有更长的“记忆能力”，可以捕捉到序列化输入中的<strong>长距离依赖关系</strong>(比如一个文本中距离很远的两个单词的某种特定关系)</li>
 <li>LSTM的组成单元是在RNN的组成单元的基础上加上了若干个控制单元(也叫做门)对整个单元进行控制，有输入门，输出门，遗忘门等等，同时又有一系列<code>memory cell</code>作为“<strong>长期记忆单元</strong>”，这些cell也要传递到下一个隐层中，用于保存当前输入的长期记忆，其基本组成单元的架构如下图所示：</li>
 </ul>
 <p><img alt="image-20211107234908560" src="../static/image-20211107234908560.png" /></p>
@@ -4062,11 +4062,11 @@ c_{t} =f \odot c_{t-1}+i \odot g
 h_{t} =o \odot \tanh \left(c_{t}\right)
 \]</div>
 <ul>
-<li>这里的三个**门控单元和记忆单元**分别起到如下作用：</li>
+<li>这里的三个<strong>门控单元和记忆单元</strong>分别起到如下作用：</li>
 <li>记忆单元：暂时生成一个当前输入内容的记忆</li>
-<li>输入门：评估**当前的序列输入<span class="arithmatex">\(x_t\)</span>的重要程度**，将其加权反映到最终记忆单元中</li>
-<li>遗忘门：评估**上一个单元输入的记忆单元的重要程度**，将其加权反映到最终记忆单元中</li>
-<li>输出门：将最终的记忆单元和隐状态区分开，因为最终记忆单元中的很多序列信息是**没有必要暴露到隐藏状态**中的，输出门就是来评估**有多少信息可以从最终记忆单元传递到隐状态中**</li>
+<li>输入门：评估<strong>当前的序列输入<span class="arithmatex">\(x_t\)</span>的重要程度</strong>，将其加权反映到最终记忆单元中</li>
+<li>遗忘门：评估<strong>上一个单元输入的记忆单元的重要程度</strong>，将其加权反映到最终记忆单元中</li>
+<li>输出门：将最终的记忆单元和隐状态区分开，因为最终记忆单元中的很多序列信息是<strong>没有必要暴露到隐藏状态</strong>中的，输出门就是来评估<strong>有多少信息可以从最终记忆单元传递到隐状态中</strong></li>
 <li>整个计算过程可以用一张图来表示：</li>
 </ul>
 <p><img alt="image-20211107234925330" src="../static/image-20211107234925330.png" /></p>

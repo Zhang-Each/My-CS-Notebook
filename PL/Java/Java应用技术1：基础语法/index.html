@@ -4057,7 +4057,7 @@
 <li>可以用于开发服务端应用，比如Java Servlets</li>
 <li>Java Micro Edition (J2ME)</li>
 <li>开发手机应用</li>
-<li>本课程中的内容主要是**J2SE** </li>
+<li>本课程中的内容主要是<strong>J2SE</strong> </li>
 </ul>
 <h3 id="13-java程序的组成">1.3 Java程序的组成<a class="headerlink" href="#13-java程序的组成" title="Permanent link">&para;</a></h3>
 <ul>
@@ -4081,7 +4081,7 @@
 </ul>
 <h3 id="作业里一道莫名其妙的题目">⭐作业里一道莫名其妙的题目<a class="headerlink" href="#作业里一道莫名其妙的题目" title="Permanent link">&para;</a></h3>
 <ul>
-<li>对于下面的这样一个Java程序，它**可以通过编译**但是运行的时候会因为**没有入口main函数**而出现错误</li>
+<li>对于下面的这样一个Java程序，它<strong>可以通过编译</strong>但是运行的时候会因为<strong>没有入口main函数</strong>而出现错误</li>
 <li>这是因为Java的编译器会把类编译成class文件，下面这个类是一个合法的类，没有语法错误，因此可以通过编译</li>
 <li>但是在JVM中执行的时候会因为没有入口main函数而出现错误</li>
 </ul>
@@ -4104,13 +4104,13 @@
 <p>变量的定义和声明</p>
 </li>
 <li>
-<p>Java中**不区分变量的声明和定义**，这是和C/C++的最大不同</p>
+<p>Java中<strong>不区分变量的声明和定义</strong>，这是和C/C++的最大不同</p>
 <ul>
-<li>C/C++中的编译器**不会为基本类型赋予初始默认值**</li>
+<li>C/C++中的编译器<strong>不会为基本类型赋予初始默认值</strong></li>
 </ul>
 </li>
 <li>
-<p>Java对于方法的局部变量，Java以**编译时错误**来保证**变量在使用前都能得到恰当的初始化 ** </p>
+<p>Java对于方法的局部变量，Java以<strong>编译时错误</strong>来保证**变量在使用前都能得到恰当的初始化 ** </p>
 <ul>
 <li>但是Java对于方法内的单个变量不会赋予初始值，对于数组会赋予默认的值</li>
 </ul>
@@ -4119,7 +4119,7 @@
 <p>对于下面这样一段代码</p>
 </li>
 <li>
-<p>输出的结果是0，因为**变量进行了初始化但是没有赋予具体值**</p>
+<p>输出的结果是0，因为<strong>变量进行了初始化但是没有赋予具体值</strong></p>
 </li>
 <li>Java中int类型的默认值就是0</li>
 </ul>
@@ -4132,22 +4132,22 @@
 </code></pre></div>
 <ul>
 <li>
-<p>**常量**定义<code>final datatype CONSTANTNAME = VALUE;</code></p>
+<p><strong>常量</strong>定义<code>final datatype CONSTANTNAME = VALUE;</code></p>
 <ul>
 <li>final的主要用法有如下三种</li>
-<li>修饰变量，表示变量的值**不能改变**，但是可以进行任何合法形式的初始化，相当于C/C++中的const类型<ul>
+<li>修饰变量，表示变量的值<strong>不能改变</strong>，但是可以进行任何合法形式的初始化，相当于C/C++中的const类型<ul>
 <li>修饰类对象，表示这个变量不能再赋值成其他的对象，比如一个对象被new了之后，就不能再把它new成一个新的对象</li>
 </ul>
 </li>
 <li>修饰方法method，表示一个Java函数不可更改，<strong>不能被重载</strong> </li>
-<li>修饰类，表示这个类**不能被继承**，类中的所有方法也就变成了final类型的</li>
+<li>修饰类，表示这个类<strong>不能被继承</strong>，类中的所有方法也就变成了final类型的</li>
 </ul>
 </li>
 <li>
 <p>Java中的变量类型</p>
 </li>
 <li>
-<p>数值型变量：Java中整数类型的范围和**运行的机器无关**，这一点和C/C++不同</p>
+<p>数值型变量：Java中整数类型的范围和<strong>运行的机器无关</strong>，这一点和C/C++不同</p>
 <ul>
 <li>byte 8bit 有符号类型</li>
 <li>short 16bit 有符号类型</li>
@@ -4354,7 +4354,7 @@
 <li>body 方法的具体内容</li>
 <li>方法的重载：相同的方法名，不同的参数表构成重载关系</li>
 <li>只有返回值类型不相同的时候不构成重载，这种写法会引起编译错误，不能使用</li>
-<li>重载可以有返回值类型的区别，但是一定会有**参数表的区别** </li>
+<li>重载可以有返回值类型的区别，但是一定会有<strong>参数表的区别</strong> </li>
 <li>局部变量：定义在方法内部的变量叫做局部变量</li>
 <li>局部变量的可调用范围是从定义开始到不再包含这个变量的方法内部区域为止(比如for循环中定义的变量只能在for循环中调用) </li>
 </ul>
@@ -4365,9 +4365,9 @@
 <p>Java中数组的定义方式<code>datatype[ ] array</code>，中括号也可以放在后面，然后需要用<code>new datatype[size]</code>来声明数组的大小</p>
 </li>
 <li>
-<p>可以用length来获得数组的长度，但要注意这个和String类型的<code>length()</code> **方法**不一样，数组里的length是state</p>
+<p>可以用length来获得数组的长度，但要注意这个和String类型的<code>length()</code> <strong>方法</strong>不一样，数组里的length是state</p>
 </li>
-<li>数组的长度定义之后就**不能改变** </li>
+<li>数组的长度定义之后就<strong>不能改变</strong> </li>
 <li>数组的长度确定之后，里面所有元素的值会被设定为默认值<ul>
 <li>对于数值类型的数组，默认值是0</li>
 <li>对于char类型，默认值是<code>\u0000</code></li>
@@ -4380,10 +4380,10 @@
 <span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">};</span>
 </code></pre></div>
 <ul>
-<li>Java数组和C++数组的**区别** <ul>
-<li>Java的数组定义在**堆**上，C++中直接声明大小的数组分配在栈上，动态分配的数组在堆上</li>
+<li>Java数组和C++数组的<strong>区别</strong> <ul>
+<li>Java的数组定义在<strong>堆</strong>上，C++中直接声明大小的数组分配在栈上，动态分配的数组在堆上</li>
 <li>Java的[ ]运算符被会检查数组边界，防止下标溢出，并且没有指针运算</li>
-<li>Java中命令行参数是<code>String[] args</code>，其中<code>args[0]</code>是第一个参数，**程序名没有存储**在args中需要在启动Java程序的时候就输入</li>
+<li>Java中命令行参数是<code>String[] args</code>，其中<code>args[0]</code>是第一个参数，<strong>程序名没有存储</strong>在args中需要在启动Java程序的时候就输入</li>
 </ul>
 </li>
 <li>数组的遍历<ul>
@@ -4410,8 +4410,8 @@
 </ul>
 </li>
 <li>如何创建一个二维数组？以下四种写法中，只有第2行的是对的</li>
-<li>总结起来就是中括号可以放在前面也可以放在后面，但是**声明的时候不能直接指定数组的大小**</li>
-<li>数组的大小需要在new的时候指定，并且二维数组**一定要有行的数目** </li>
+<li>总结起来就是中括号可以放在前面也可以放在后面，但是<strong>声明的时候不能直接指定数组的大小</strong></li>
+<li>数组的大小需要在new的时候指定，并且二维数组<strong>一定要有行的数目</strong> </li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="o">[</span><span class="mi">3</span><span class="o">][</span><span class="mi">2</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">}};</span>
 <span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="o">[][]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="o">[</span><span class="mi">3</span><span class="o">][]</span><span class="p">;</span>

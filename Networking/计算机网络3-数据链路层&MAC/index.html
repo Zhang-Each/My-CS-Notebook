@@ -3974,7 +3974,7 @@
 <p>数据链路层：构建数据链路和逻辑链路，区别于物理层，物理层构建的是物理链路</p>
 </li>
 <li>
-<p>**物理层和数据链路层**的本质作用都是用来构建网络通信、访问通道</p>
+<p><strong>物理层和数据链路层</strong>的本质作用都是用来构建网络通信、访问通道</p>
 </li>
 <li>物理链路是真实存在的物理线路和设备，数据链路层是一些必要的硬件(比如网络适配器)和软件(传输协议)组成的</li>
 <li>数据链路层向上提供网络层的服务，处理传输的错误(因为物理层不能发现传输错误)，调节数据流，确保接收方不会被淹没</li>
@@ -3987,7 +3987,7 @@
 </li>
 </ul>
 <p><img alt="image-20201014114245291" src="../static/image-20201014114245291.png" />
-- Frame和Framing 帧：是数据链路层**发送数据的单位** </p>
+- Frame和Framing 帧：是数据链路层<strong>发送数据的单位</strong> </p>
 <ul>
 <li>Packet和Frame的关系</li>
 </ul>
@@ -4038,13 +4038,13 @@
 <p><strong>循环冗余校验 Cyclic Redundancy Check</strong>  </p>
 </li>
 <li>
-<p>基本思路：并在数据帧的末尾添加若干位作为校验码，<strong>要使所生成的新帧能与**发送端和接收端**共同选定的某个特定数整除</strong> </p>
+<p>基本思路：并在数据帧的末尾添加若干位作为校验码，<strong>要使所生成的新帧能与</strong>发送端和接收端<strong>共同选定的某个特定数整除</strong> </p>
 <ul>
 <li>
 <p>约定一个生成多项式<span class="arithmatex">\(G(x)\)</span> 需要首位和末尾的系数都是1</p>
 </li>
 <li>
-<p>所选定的除数二进制位数（假设为 k 位），然后在要发送的数据帧（假设为 m 位）后面加上 k- 1 位0，接着以这个加了 k-1 个0的新帧（一共是 m+k-1 位）**除**以上面这个除数</p>
+<p>所选定的除数二进制位数（假设为 k 位），然后在要发送的数据帧（假设为 m 位）后面加上 k- 1 位0，接着以这个加了 k-1 个0的新帧（一共是 m+k-1 位）<strong>除</strong>以上面这个除数</p>
 </li>
 <li>
 <p>所得到的余数（也是二进制的比特串）就是该帧的 CRC 校验码，又称 FCS（帧校验序列）</p>
@@ -4069,13 +4069,13 @@
 </li>
 </ul>
 <p><img alt="image-20201013112052219" src="../static/image-20201013112052219.png" />
-  - 基本思路：每次发送完毕，停止，等到接收方收到**表示发送成功的数据包(ACK)<strong>之后再进行下一次的发送
+  - 基本思路：每次发送完毕，停止，等到接收方收到<strong>表示发送成功的数据包(ACK)</strong>之后再进行下一次的发送
     - 如果收到了NAK包，表示不确认，此时需要发送方重新发送一次数据包
-    - 如果产生了数据丢失，就会Time Out，即发送方迟迟等不到接收方的回复，就会尝试**主动重发</strong> 
+    - 如果产生了数据丢失，就会Time Out，即发送方迟迟等不到接收方的回复，就会尝试<strong>主动重发</strong> 
     - 如果产生了ACK丢失，也会导致发送方重发，这时就会丢弃收到的数据，并再发送一个ACK提醒发送方已经收到
   - 对发送的数据包的标记方式可以只用1个bit来标记，01交替表示换了个新的数据包
   - 效率的衡量
-    - <span class="arithmatex">\(T_{frame}\)</span> 表示发送方**发出去完整的一个帧**需要的时间，<span class="arithmatex">\(T_{prop}\)</span> 表示传输到接收方需要的时间
+    - <span class="arithmatex">\(T_{frame}\)</span> 表示发送方<strong>发出去完整的一个帧</strong>需要的时间，<span class="arithmatex">\(T_{prop}\)</span> 表示传输到接收方需要的时间
       - <span class="arithmatex">\(T_{prop}=\frac{distance}{\mathcal {speed}}\)</span> 而且 <span class="arithmatex">\(T_{frame}=\frac{frame\_size}{bit\_rate}\)</span> 
       - 令<span class="arithmatex">\(\alpha = \frac{T_{prop}}{T_{frame}}\)</span> 则链路利用率 <span class="arithmatex">\(U=\frac 1 {2\alpha +1}\)</span> 
   - 停止等待协议的编程实现——重要的数据结构</p>
@@ -4096,7 +4096,7 @@
 <p>滑动窗口协议 <code>Sliding Window Protocols</code></p>
 </li>
 <li>
-<p>窗口就是一系列用于收发数据的**序列号的集合** </p>
+<p>窗口就是一系列用于收发数据的<strong>序列号的集合</strong> </p>
 <ul>
 <li>
 <p>发送方维持一组连续的允许发送帧的窗口，称为发送窗口</p>
@@ -4118,7 +4118,7 @@
 <p>滑动窗口协议的利用率<span class="arithmatex">\(U=\min (\frac{N}{2\alpha +1}, 1)\)</span> 但是仅存理论可能</p>
 </li>
 <li>
-<p>几种不同的**重新发送**的协议</p>
+<p>几种不同的<strong>重新发送</strong>的协议</p>
 <ul>
 <li>
 <p>Go-Back-N </p>
@@ -4126,7 +4126,7 @@
 <li>
 <p>回退到第一个出问题的窗口，对后面的所有内容都进行重新发送，因此接收端也必须丢弃所有相应的数据包</p>
 </li>
-<li>发送方窗口大小不超过 <code>MAX_SEQ</code>，即**最大的序列号** </li>
+<li>发送方窗口大小不超过 <code>MAX_SEQ</code>，即<strong>最大的序列号</strong> </li>
 <li>
 <p>接收方的窗口大小为1</p>
 </li>
@@ -4173,7 +4173,7 @@
 <p><img alt="image-20201019123740549" src="../static/image-20201019123740549.png" /></p>
 <h2 id="chapter4medium-access-sublayer">Chapter4：Medium Access Sublayer<a class="headerlink" href="#chapter4medium-access-sublayer" title="Permanent link">&para;</a></h2>
 <ul>
-<li>中译名：介质**访问控制**子层</li>
+<li>中译名：介质<strong>访问控制</strong>子层</li>
 </ul>
 <h3 id="41-回忆">4.1 回忆<a class="headerlink" href="#41-回忆" title="Permanent link">&para;</a></h3>
 <ul>
@@ -4273,7 +4273,7 @@
 <li>当A发送给B的时候，C在监听，但是监听不到A，因为在距离之外，因此错误地认为C可以向B发送数据，因此B处就造成了混乱，扰乱了A发送过来的数据帧</li>
 <li>因此我们需要一个MAC协议防止此类冲突的发生</li>
 <li>
-<p>冲突将导致宽带的浪费，由于竞争者离得太远而导致站点无法检测到潜在的竞争者，这个问题被称为**隐藏终端问题**(<code>hidden station problem</code>)</p>
+<p>冲突将导致宽带的浪费，由于竞争者离得太远而导致站点无法检测到潜在的竞争者，这个问题被称为<strong>隐藏终端问题</strong>(<code>hidden station problem</code>)</p>
 </li>
 <li>
 <p>MACA 冲突避免多路访问协议</p>
@@ -4343,7 +4343,7 @@
 <li>
 <p>集线器：在电气上简单地连接所有的连接线，比如用双绞线，但是集线器不能增加容量，逻辑上等于一根电缆组成的经典以太网</p>
 </li>
-<li>交换机：包含一块连接所有端口的**高速背板**，其他的略</li>
+<li>交换机：包含一块连接所有端口的<strong>高速背板</strong>，其他的略</li>
 </ul>
 <p><img alt="image-20201020233043714" src="../static/image-20201020233043714.png" /></p>
 

@@ -3847,7 +3847,7 @@
 <p><img alt="image-20220305205309367" src="../static/image-20220305205309367.png" />
 在这个lab中，我们首先要实现TableStats这个类来计算每个表的统计信息，然后进一步实现Join操作的查询估计和嵌套Join的优化这两个核心功能，下面就让我们进入正题。</p>
 <h2 id="数据表的统计信息">数据表的统计信息<a class="headerlink" href="#数据表的统计信息" title="Permanent link">&para;</a></h2>
-<p>我们首先要来实现统计一个直方图类**IntHistogram**和**StringHistogram**，用来统计一个表的一列的数据分布情况，然后用每个列对应的这个统计表来组成整个数据表的统计信息TableStats</p>
+<p>我们首先要来实现统计一个直方图类<strong>IntHistogram</strong>和<strong>StringHistogram</strong>，用来统计一个表的一列的数据分布情况，然后用每个列对应的这个统计表来组成整个数据表的统计信息TableStats</p>
 <h3 id="直方图类">直方图类<a class="headerlink" href="#直方图类" title="Permanent link">&para;</a></h3>
 <p>直方图类的实现方式其实非常朴素，我们首先假设一个数据表的某个属性(也可以叫做Field)的值是离散分布的，然后就可以统计出这个Field的每个值对应的元组个数，并形成下面这样一张直方图：</p>
 <p><img alt="image-20220306103851291" src="../static/image-20220306103851291.png" /></p>

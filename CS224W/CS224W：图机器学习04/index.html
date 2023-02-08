@@ -3985,7 +3985,7 @@
 <li>介绍了监督学习、损失函数、机器学习中的优化、梯度向量等基本概念，不过这些内容已经反复接触过了，因此也就不再专门整理记录</li>
 <li>随机梯度下降：</li>
 <li>一般的梯度下降需要求出整个损失函数的梯度，并结合设置好的学习率进行参数的更新，但是这样做的计算复杂度太高了</li>
-<li>随机梯度下降就是每一次选择一个**小批量(minibatch)的数据集B**对其求梯度并进行参数的更新</li>
+<li>随机梯度下降就是每一次选择一个<strong>小批量(minibatch)的数据集B</strong>对其求梯度并进行参数的更新</li>
 <li>深度学习中的函数往往更为复杂，并且在反向传播进行参数更新的过程中需要用链式法则来求梯度，但总的来讲，不管是传统的监督机器学习还是深度学习，我们的优化目标都是：</li>
 </ul>
 <div class="arithmatex">\[
@@ -3996,13 +3996,13 @@
 <ul>
 <li>我们把要研究的图记为G，图中所有节点构成集合V，A是图的接邻矩阵</li>
 <li>用X表示图节点的特征矩阵，每个节点具有m维的特征，节点的特征可以根据图的实际情况来选取</li>
-<li>一种很naive的方法是**将图G的接邻矩阵和特征矩阵进行合并**，然后放到一个深度神经网络中进行学习，但是这样一来就会有<span class="arithmatex">\(O(|V|)\)</span>数量级的参数，并且对于不同大小的图需要重新设计网络结构，这样的处理方式也使得结果对节点的顺序非常敏感</li>
+<li>一种很naive的方法是<strong>将图G的接邻矩阵和特征矩阵进行合并</strong>，然后放到一个深度神经网络中进行学习，但是这样一来就会有<span class="arithmatex">\(O(|V|)\)</span>数量级的参数，并且对于不同大小的图需要重新设计网络结构，这样的处理方式也使得结果对节点的顺序非常敏感</li>
 </ul>
 <p><img src="static/image-20210327161451806.png" alt="image-20210327161451806" style="zoom:33%;" /></p>
 <h4 id="图卷积神经网络的结构">图卷积神经网络的结构<a class="headerlink" href="#图卷积神经网络的结构" title="Permanent link">&para;</a></h4>
-<p>​       联想到CNN通过**卷积**的方式**来提取和融合邻近像素点的特征**，图结构中也可以聚合节点的邻近节点的特征，但是相比于图像，图结构往往不具有一个固定的子结构或者滑动窗口可以用来定义图中的卷积，并且是permutation invariant的，我们可以**使用局部的邻近节点的特征来生成图节点的嵌入向量**。</p>
+<p>​       联想到CNN通过<strong>卷积</strong>的方式<strong>来提取和融合邻近像素点的特征</strong>，图结构中也可以聚合节点的邻近节点的特征，但是相比于图像，图结构往往不具有一个固定的子结构或者滑动窗口可以用来定义图中的卷积，并且是permutation invariant的，我们可以<strong>使用局部的邻近节点的特征来生成图节点的嵌入向量</strong>。</p>
 <ul>
-<li>每个节点生成了一张**计算图**，来表示其特征融合的过程</li>
+<li>每个节点生成了一张<strong>计算图</strong>，来表示其特征融合的过程</li>
 </ul>
 <p><img alt="image-20210627185542095" src="../static/image-20210627185542095.png" /></p>
 <ul>
@@ -4010,9 +4010,9 @@
 <p>这种神经网络可以是任意深度，每一层有节点的嵌入：</p>
 </li>
 <li>
-<p>第0层**只用输入的特征表示节点的嵌入向量**</p>
+<p>第0层<strong>只用输入的特征表示节点的嵌入向量</strong></p>
 </li>
-<li>第k层使用从k个away之前**得到的信息来进行节点嵌入** </li>
+<li>第k层使用从k个away之前<strong>得到的信息来进行节点嵌入</strong> </li>
 </ul>
 <p><img src="static/image-20210327163538836.png" alt="image-20210327163538836" style="zoom:33%;" /></p>
 <ul>
@@ -4020,7 +4020,7 @@
 <p>上述结构只是一种最基本的框架，最主要的区别在于图中的box对应的内容，也就是信息聚合的方式和之后的一系列处理</p>
 </li>
 <li>
-<p>常见的方法：对得到的信息**求平均**并放到神经网络中</p>
+<p>常见的方法：对得到的信息<strong>求平均</strong>并放到神经网络中</p>
 </li>
 </ul>
 <p>$$
@@ -4029,10 +4029,10 @@
 <ul>
 <li>这里的<span class="arithmatex">\(\sigma\)</span>是一个非线性的激活函数</li>
 <li>
-<p>在得到了嵌入向量之后可以**使用损失函数和随机梯度下降的方式来训练权重参数W和B**</p>
+<p>在得到了嵌入向量之后可以<strong>使用损失函数和随机梯度下降的方式来训练权重参数W和B</strong></p>
 </li>
 <li>
-<p>我们可以将上面的表达式进行**向量化**来提高计算的效率，用对角矩阵D来表示<span class="arithmatex">\(D_{v,v}=|N(v)|\)</span>，这样一来就有<span class="arithmatex">\(D^{-1}_{v,v}=\frac 1 {N(v)}\)</span> 并且令<span class="arithmatex">\(H^{(l)}=[h_1^{(l)},\dots,h_{|V|}^{(l)}]^T\)</span>,这样一来上面的式子就可以表示为：</p>
+<p>我们可以将上面的表达式进行<strong>向量化</strong>来提高计算的效率，用对角矩阵D来表示<span class="arithmatex">\(D_{v,v}=|N(v)|\)</span>，这样一来就有<span class="arithmatex">\(D^{-1}_{v,v}=\frac 1 {N(v)}\)</span> 并且令<span class="arithmatex">\(H^{(l)}=[h_1^{(l)},\dots,h_{|V|}^{(l)}]^T\)</span>,这样一来上面的式子就可以表示为：</p>
 </li>
 </ul>
 <div class="arithmatex">\[
@@ -4068,7 +4068,7 @@
 <p>这里的y表示节点的标签，而z表示嵌入向量，<span class="arithmatex">\(\theta\)</span>表示分类的权重</p>
 </li>
 <li>
-<p>但是最终，我们学习到的一系列参数和模型是需要在新的图和新的节点上测试效果的，因此需要使模型**拥有更好的泛化能力** </p>
+<p>但是最终，我们学习到的一系列参数和模型是需要在新的图和新的节点上测试效果的，因此需要使模型<strong>拥有更好的泛化能力</strong> </p>
 </li>
 </ul>
 <h3 id="图神经网络模型的pipeline">图神经网络模型的Pipeline<a class="headerlink" href="#图神经网络模型的pipeline" title="Permanent link">&para;</a></h3>
@@ -4107,7 +4107,7 @@
 h_v^{(l)}=\mathrm{CONCAT}(\mathrm {ACG}^{(l)}(m_u^{(l)},u\in N(v)), m_v^{(l)})
 \]</div>
 <h5 id="gcn">GCN<a class="headerlink" href="#gcn" title="Permanent link">&para;</a></h5>
-<p>​       对于**图卷积网络**GCN的层结构，上面已经介绍过了它每一层的嵌入向量更新方式
+<p>​       对于<strong>图卷积网络</strong>GCN的层结构，上面已经介绍过了它每一层的嵌入向量更新方式
 $$
 h_v^{(l+1)}=\sigma (\sum_{u\in N(v)}W_l\frac{h_u^{(l)}}{|N(v)|})
 $$</p>
@@ -4125,7 +4125,7 @@ $$</p>
 <li>可以在每一层都可以进行一个l2标准化，即<span class="arithmatex">\(h_v^{(l)}=\frac {h_v^{(l)}}{||h_v^{(l)}||_2}\)</span> ，使用了标准化操作之后就会使得所有嵌入向量的L2范数统一，可以给性能带来比较大的提升。</li>
 </ul>
 <h5 id="gat与注意力机制">GAT与注意力机制<a class="headerlink" href="#gat与注意力机制" title="Permanent link">&para;</a></h5>
-<p>​       GAT是Graph Attention Network，即在图神经网络中加入了**注意力机制**，我们可以使用<span class="arithmatex">\(\alpha_{vu}\)</span>来表示节点v的邻居节点u的重要程度，这样的网络可以使网络在计算时将注意力集中到一些比较重要的节点上面去。
+<p>​       GAT是Graph Attention Network，即在图神经网络中加入了<strong>注意力机制</strong>，我们可以使用<span class="arithmatex">\(\alpha_{vu}\)</span>来表示节点v的邻居节点u的重要程度，这样的网络可以使网络在计算时将注意力集中到一些比较重要的节点上面去。
 $$
 h_v^{(l)}=\sigma(\sum_{u\in N(v)}\alpha_{vu}W<sup _l-1_="(l-1)">{(l)}h_u</sup>)
 $$</p>
@@ -4134,7 +4134,7 @@ $$</p>
 <p>一种<span class="arithmatex">\(\alpha_{vu}\)</span>的计算方式：</p>
 </li>
 <li>
-<p>首先定义一个计算重要性系数的函数a并计算两个**相邻节点的重要程度**
+<p>首先定义一个计算重要性系数的函数a并计算两个<strong>相邻节点的重要程度</strong>
     $$
     e_{vu}=a(W<sup _l-1_="(l-1)">{(l)}h_u</sup>,W<sup _l-1_="(l-1)">{(l)}h_v</sup>)
     $$
@@ -4161,7 +4161,7 @@ h_v^{(l)}[i]=\sigma(\sum_{u\in N(v)}\alpha_{vu}^iW^{(l)}h_u^{(l-1)})
 <ul>
 <li>注意力机制的优点：</li>
 <li>最主要的优点是允许对不同的邻居节点采取不同的权重来突出一些重要的邻居</li>
-<li>并且注意力权重的计算可以**并行**，提高了计算的效率</li>
+<li>并且注意力权重的计算可以<strong>并行</strong>，提高了计算的效率</li>
 <li>提高了存储的效率</li>
 </ul>
 <h4 id="通用的gnn层设计">通用的GNN层设计<a class="headerlink" href="#通用的gnn层设计" title="Permanent link">&para;</a></h4>
@@ -4169,7 +4169,7 @@ h_v^{(l)}[i]=\sigma(\sum_{u\in N(v)}\alpha_{vu}^iW^{(l)}h_u^{(l-1)})
 <ul>
 <li>批标准化：可以是的神经网络的训练更加稳定，做法就是求出每一层输出结果的平均值和方差，然后进行标准化处理，可以防止过大或者过小的数据出现而导致梯度消失或者梯度爆炸等问题</li>
 <li>Dropout：用来避免神经网络过你和，在训练的时候，以一定概率将一些神经元设置成0(即中途退出了计算)，在测试的时候使用所有的神经元参与到计算中</li>
-<li>在GNN中一般在**线性层**使用dropout</li>
+<li>在GNN中一般在<strong>线性层</strong>使用dropout</li>
 <li>激活：使用一些非线性的激活函数，将特征非线性化，常见的非线性激活函数有sigmoid，ReLU等等</li>
 </ul>
 <h4 id="gnn的层级架构">GNN的层级架构<a class="headerlink" href="#gnn的层级架构" title="Permanent link">&para;</a></h4>
@@ -4182,7 +4182,7 @@ h_v^{(l)}[i]=\sigma(\sum_{u\in N(v)}\alpha_{vu}^iW^{(l)}h_u^{(l-1)})
 <p>接受域Receptive Field：是决定一个节点的嵌入向量的节点集合，在一个K层的GNN中，每个节点的接受域包含了相距K-hop的邻居</p>
 </li>
 <li>
-<p>可以用**接受域来解释过平滑问题**出现的原因</p>
+<p>可以用<strong>接受域来解释过平滑问题</strong>出现的原因</p>
 </li>
 </ul>
 <p><img alt="image-20210627203154480" src="../static/image-20210627203154480.png" /></p>
@@ -4214,7 +4214,7 @@ h_v^{(l)}[i]=\sigma(\sum_{u\in N(v)}\alpha_{vu}^iW^{(l)}h_u^{(l-1)})
 <h4 id="gnn的图处理">GNN的图处理<a class="headerlink" href="#gnn的图处理" title="Permanent link">&para;</a></h4>
 <ul>
 <li>输入的图不一定就是最优的计算图，因为输入的图可能缺少特征，太稀疏或者太稠密，也有可能因为规模太大而无法在GPU上进行计算，因此可以对输入的图进行一定的处理，比如</li>
-<li>图中的特征太少的时候可以**增加特征**，比如：<ul>
+<li>图中的特征太少的时候可以<strong>增加特征</strong>，比如：<ul>
 <li>给图中的节点增加唯一ID标识，使用one-hot向量来表示特征</li>
 </ul>
 </li>

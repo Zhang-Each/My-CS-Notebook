@@ -3751,7 +3751,7 @@
 <summary>本页统计信息</summary>
 <ul>
 <li>
-<p>本页约 637 个字,  预计阅读时间 2 分钟。</p>
+<p>本页约 630 个字,  预计阅读时间 2 分钟。</p>
 </li>
 <li>
 <p><span id="busuanzi_container_page_pv">本页总阅读量<span id="busuanzi_value_page_pv"></span>次</span></p>
@@ -3763,7 +3763,7 @@
 </blockquote>
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
 <p>知识图谱由一系列主语-谓语-宾语(Subject-Predicate-Object)三元组组成的，这是和其他的文章中的提法稍微有些不同，以往的提法都是实体和关系，后面还是一律用实体和关系来代称。</p>
-<p>这篇论文认为我们之所以需要负样本是为了在学习的过程中和正样本形成对比，让模型具有更强的辨别能力，它同样也提到了随机的负采样只在训练刚开始的时候效果比较好，并且应该根据**知识图谱中的实体之间存在的亲密度/吸引力 "Affinity"** 来进行合适的负采样。</p>
+<p>这篇论文认为我们之所以需要负样本是为了在学习的过程中和正样本形成对比，让模型具有更强的辨别能力，它同样也提到了随机的负采样只在训练刚开始的时候效果比较好，并且应该根据<strong>知识图谱中的实体之间存在的亲密度/吸引力 "Affinity"</strong> 来进行合适的负采样。</p>
 <h2 id="contributionrelated-work">Contribution&amp;Related Work<a class="headerlink" href="#contributionrelated-work" title="Permanent link">&para;</a></h2>
 <p>本文的主要贡献是提出了一种通过计算不同实体之间的affinity来进行负采样的策略，这种策略在每次负采样的时候需要根据已有的实体嵌入计算不同实体之间的affinity来确定最合适的负采样样本，但很明显这种方式的计算量非常大，效率非常低，因此本论文也在关注如何在进行有效负采样的同时提高训练的效率。</p>
 <p>同时，本文的实验将各种各样的采样策略进行了对比，而选用的知识图谱嵌入模型有TransE和Distmult两个，分别是基于translation和基于语义相关性的代表算法。</p>
@@ -3775,8 +3775,7 @@ $$
 然后选出C个负样本用于KGE模型的训练，整个算法流程可以用下面的伪代码表示：</p>
 <p><img alt="image-20210806214431476" src="../static/image-20210806214431476.png" /></p>
 <ul>
-<li>读下来感觉整篇文章言之无物，主要就是讲了一个用cosine计算相似度然后进行负采样的故事
-<span id=busuanzi_container_page_pv>本文总阅读量<span id=busuanzi_value_page_pv></span>次</span></li>
+<li>读下来感觉整篇文章言之无物，主要就是讲了一个用cosine计算相似度然后进行负采样的故事</li>
 </ul>
 
   <hr>
@@ -3784,7 +3783,7 @@ $$
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月4日 10:57:21</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月8日 14:30:35</span>
       
         <br>
         创建日期:

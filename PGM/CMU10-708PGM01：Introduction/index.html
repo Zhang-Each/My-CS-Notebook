@@ -3915,7 +3915,7 @@
 <p>注：第一部分是2020Spring Eric Xing的课程的第一节课，而后面的第二部分是Matt的第一节课的内容，两个老师的第一节课内容差别很大，所以分别记录一下。</p>
 </blockquote>
 <h3 id="什么是图模型">什么是图模型<a class="headerlink" href="#什么是图模型" title="Permanent link">&para;</a></h3>
-<p>图模型(Graphical Model)实际上就是**用图结构来表示随机变量之间关系的模型**，随机变量构成图中的一个个结点，而随机变量之间的关系构成图中的边。这些关系可以是相关，独立，不独立，条件独立，因果等等。</p>
+<p>图模型(Graphical Model)实际上就是<strong>用图结构来表示随机变量之间关系的模型</strong>，随机变量构成图中的一个个结点，而随机变量之间的关系构成图中的边。这些关系可以是相关，独立，不独立，条件独立，因果等等。</p>
 <h3 id="随机变量相关性">随机变量相关性<a class="headerlink" href="#随机变量相关性" title="Permanent link">&para;</a></h3>
 <p>GM中一个基本的问题就是怎么表示随机变量之间的关系，也就是说变量之间的相关性，通常这一性质会用一个具体的数值指标来判断，常见的有：</p>
 <ul>
@@ -3930,7 +3930,7 @@
 $$
 \rho(X, Y)=\frac{\mathrm{Cov}(X, Y)}{\sqrt{\mathrm{Var}(X)} \sqrt{\mathrm{Var}(Y)}}=\frac{E[(X-\mu_X)(Y-\mu_Y)]}{\sqrt{\mathrm{Var}(X)} \sqrt{\mathrm{Var}(Y)}}\in [-1,1]
 $$
-实际上皮尔逊相关系数可以看成是一种标准化了的协方差，并且计算结果应该在-1到1之间，这种相关系数可以捕捉到随机变量X和Y的**线性相关性**，当X和Y无关的时候，皮尔逊系数的值就是0，但是皮尔逊系数为0的时候不能推出X和Y无关。</p>
+实际上皮尔逊相关系数可以看成是一种标准化了的协方差，并且计算结果应该在-1到1之间，这种相关系数可以捕捉到随机变量X和Y的<strong>线性相关性</strong>，当X和Y无关的时候，皮尔逊系数的值就是0，但是皮尔逊系数为0的时候不能推出X和Y无关。</p>
 <h4 id="互信息">互信息<a class="headerlink" href="#互信息" title="Permanent link">&para;</a></h4>
 <p>皮尔逊系数是用来描述两个随机变量之间的相关性的，那么有没有统计量是用来描述两个随机变量之间的独立性的呢？我们需要重点考虑的是两个随机变量的非线性相关性，一种常见的评价独立性的方法是：</p>
 <ul>
@@ -3942,7 +3942,7 @@ $$
 </li>
 <li>然后我们就可以使用距离作为判断两个变量相关性的标准</li>
 </ul>
-<p>KL散度(Kullback–Leibler divergence)就提供了这样一种**计算两个概率分布的独立性**的方式：
+<p>KL散度(Kullback–Leibler divergence)就提供了这样一种<strong>计算两个概率分布的独立性</strong>的方式：
 $$
 \mathrm{KL}(P, Q)=\int_{x \in \mathcal{X}} P(x) \log \frac{P(x)}{Q(x)} d x
 $$
@@ -3956,7 +3956,7 @@ $$
 <p>偏相关性(Partial correlation)可以计算在给定Z的情况下，X和Y的相关性，计算方式如下：</p>
 <p><img alt="image-20210907103423801" src="../static/image-20210907103423801.png" /></p>
 <p>实际上就是计算了X和Y在受到了Z的线性影响之后的相关度。我们在构建图模型的时候除了用相关性的信息来构建边际依赖图(Marginal correlation/dependency graph)之外，还可以加入偏相关信息构建偏相关图。</p>
-<p>偏相关指数等于0**当且仅当X和Y在给定Z的条件下互相独立**。</p>
+<p>偏相关指数等于0<strong>当且仅当X和Y在给定Z的条件下互相独立</strong>。</p>
 <h4 id="总结">总结<a class="headerlink" href="#总结" title="Permanent link">&para;</a></h4>
 <ul>
 <li>总结一下到目前为止提到过的关联性估计模型</li>
@@ -3979,7 +3979,7 @@ $$
 <li>在模型中引入贝叶斯学派的理论</li>
 </ul>
 <h2 id="结构化预测问题">结构化预测问题<a class="headerlink" href="#结构化预测问题" title="Permanent link">&para;</a></h2>
-<p>概率图模型想解决的一个问题叫做**结构化预测问题**。</p>
+<p>概率图模型想解决的一个问题叫做<strong>结构化预测问题</strong>。</p>
 <h3 id="结构化数据和非结构化数据">结构化数据和非结构化数据<a class="headerlink" href="#结构化数据和非结构化数据" title="Permanent link">&para;</a></h3>
 <p>首先要搞清楚的一个概念是，什么是结构化数据，常见的结构化数据包括：</p>
 <ul>
@@ -3991,7 +3991,7 @@ $$
 </ul>
 <p>他们都是按照一定的结构组织起来的，比如知识图谱就是遵循(head, relation, tail)这样的模式，而数据库中的条目则受到数据库Schema的制约。非结构化的数据就不具有这些特点，常见的文本，图像，视频，音频等等都是非结构化的数据。</p>
 <h3 id="结构化预测问题_1">结构化预测问题<a class="headerlink" href="#结构化预测问题_1" title="Permanent link">&para;</a></h3>
-<p>而结构化预测问题就是要预测一个结构，我们之前接触到的机器学习很多都是分类和回归问题，其范式就是对于给定的数据<span class="arithmatex">\(x=(x_1,x_2,\dots,x_n)\)</span>要预测结果y，对于分类问题，y是一个离散的值代表了x的标签，对于回归问题y就是是连续空间上的一个值，而在结构化预测问题中，我们**要预测的结果也是一个结构**<span class="arithmatex">\(y=(y_1,y_2,\dots,y_m)\)</span> </p>
+<p>而结构化预测问题就是要预测一个结构，我们之前接触到的机器学习很多都是分类和回归问题，其范式就是对于给定的数据<span class="arithmatex">\(x=(x_1,x_2,\dots,x_n)\)</span>要预测结果y，对于分类问题，y是一个离散的值代表了x的标签，对于回归问题y就是是连续空间上的一个值，而在结构化预测问题中，我们<strong>要预测的结果也是一个结构</strong><span class="arithmatex">\(y=(y_1,y_2,\dots,y_m)\)</span> </p>
 <ul>
 <li>很多分类和回归问题也可以从数据的隐式结构中受益</li>
 </ul>

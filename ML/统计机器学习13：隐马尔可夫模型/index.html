@@ -3912,7 +3912,7 @@
 <h2 id="模型的定义">模型的定义<a class="headerlink" href="#模型的定义" title="Permanent link">&para;</a></h2>
 <p>隐马尔可夫模型(<strong>Hidden Markov Model, HMM</strong>)是一种描述由隐藏的马尔可夫链生成观测序列的模型，这里的序列可以是时间序列，也可以文本序列等等，一个马尔可夫链可以生成一个随机状态的序列，而这些状态被隐藏不能直接观察(因此称为隐状态)，但是每个状态以一定的概率表现出若干种可能的观测结果，隐马尔可夫模型就是用来描述和建模这类问题的。</p>
 <p>我们假设所有可能的隐状态构成的集合是<span class="arithmatex">\(Q=(q_1,q_2,\dots,q_N)\)</span>，而所有可能观测到结果的集合是<span class="arithmatex">\(V=(v_1,v_2,\dots,v_M)\)</span>，即一共有N种隐状态和M种不同的观测结果。同时我们假设要研究的序列长度为T，其隐状态和观测结果序列分别是<span class="arithmatex">\(I=(i_1,i_2,\dots,i_T),O=(o_1,o_2,\dots,o_T)\)</span></p>
-<p>同时各个状态之间会以一定的概率进行转移(HMM假设一个状态只依赖于前一个状态，即隐马尔可夫模型中只存在**一阶马尔可夫链**)，而每个状态又以一定的概率生成各种不同的观测结果，我们假设状态转移矩阵<span class="arithmatex">\(A=[a_{ij}]_{N\times N}\)</span>，观测概率矩阵<span class="arithmatex">\(B=[b_j(k)]_{N\times M}\)</span>,其中：
+<p>同时各个状态之间会以一定的概率进行转移(HMM假设一个状态只依赖于前一个状态，即隐马尔可夫模型中只存在<strong>一阶马尔可夫链</strong>)，而每个状态又以一定的概率生成各种不同的观测结果，我们假设状态转移矩阵<span class="arithmatex">\(A=[a_{ij}]_{N\times N}\)</span>，观测概率矩阵<span class="arithmatex">\(B=[b_j(k)]_{N\times M}\)</span>,其中：
 $$
 a_{ij}=P(i_{i+1}=q_j|i_t=q_i),\quad b_j(k)=P(o_t=v_k|i_t=q_j)
 $$
@@ -3981,7 +3981,7 @@ $$
 \gamma_t(i)=P(i_t=q_i|O,\lambda)=\frac{P(i_t=q_i,O|\lambda)}{\sum_{j=1}^N P(i_t=q_j,O|\lambda)}=\frac{\alpha_t(i)\beta_t(i)}{\sum_{j=1}^N\alpha_t(j)\beta_t(j)}
 $$
 这也很好解释，因为在给定了模型的情况下，观测到序列O并且t时刻的状态是<span class="arithmatex">\(q_i\)</span>的概率等价于，t时刻是状态i并且前t个时刻观察到的序列是<span class="arithmatex">\(o_1,o_2,\dots,o_t\)</span>以及给定t时刻状态i后面观察到<span class="arithmatex">\(o_{t+1},\dots,o_T\)</span>两件事情同时发生的概率，也就是对应的前向后向概率的乘积。</p>
-<p>同样地我们可以来计算**给定模型<span class="arithmatex">\(\lambda\)</span>和观测序列O的条件下**，某个时刻t处于状态<span class="arithmatex">\(q_i\)</span>而t+1时刻处于状态<span class="arithmatex">\(q_j\)</span>的概率，记为：
+<p>同样地我们可以来计算<strong>给定模型<span class="arithmatex">\(\lambda\)</span>和观测序列O的条件下</strong>，某个时刻t处于状态<span class="arithmatex">\(q_i\)</span>而t+1时刻处于状态<span class="arithmatex">\(q_j\)</span>的概率，记为：
 $$
 \xi_t(i,j)=P(i_t=q_i,i_{t+1}=q_j|\lambda, O)
 $$
@@ -3996,7 +3996,7 @@ $$
 <p>这是因为在给定观测序列O的条件下t和t+1时刻状态分别是<span class="arithmatex">\(q_i,q_j\)</span>的概率等价于给定模型的条件下，t时刻状态为<span class="arithmatex">\(t_i\)</span>且观测序列为<span class="arithmatex">\(o_1,o_2,\dots,o_t\)</span>，之后状态转移到<span class="arithmatex">\(q_j\)</span>并观测到<span class="arithmatex">\(o_{t+1}\)</span>，然后在已知t+1时刻状态为<span class="arithmatex">\(q_j\)</span>的情况下观测到<span class="arithmatex">\(o_{t+1},\dots,o_T\)</span>这几件事情同时发生的概率。</p>
 <h2 id="模型学习算法">模型学习算法<a class="headerlink" href="#模型学习算法" title="Permanent link">&para;</a></h2>
 <h3 id="监督学习">监督学习<a class="headerlink" href="#监督学习" title="Permanent link">&para;</a></h3>
-<p>如果说我们观测到了一系列长度相同的观测序列<span class="arithmatex">\(O_1,O_2,\dots ,O_S\)</span>和对应的隐状态序列<span class="arithmatex">\(I_1,I_2,\dots,I_S\)</span>，那么这个时候问题就变成了一个**监督学习的问题**，就比较容易可以求解了，我们可以使用极大似然法直接估计出隐马尔可夫模型的参数<span class="arithmatex">\(\lambda =(A,B,\pi)\)</span></p>
+<p>如果说我们观测到了一系列长度相同的观测序列<span class="arithmatex">\(O_1,O_2,\dots ,O_S\)</span>和对应的隐状态序列<span class="arithmatex">\(I_1,I_2,\dots,I_S\)</span>，那么这个时候问题就变成了一个<strong>监督学习的问题</strong>，就比较容易可以求解了，我们可以使用极大似然法直接估计出隐马尔可夫模型的参数<span class="arithmatex">\(\lambda =(A,B,\pi)\)</span></p>
 <p>首先来估计状态转移概率，我们可以直接使用样本中所有从t时刻状态i转移到t+1时刻的状态j的频数<span class="arithmatex">\(A_{ij}\)</span>来估计所有的状态转移概率：
 $$
 a_{ij}=\frac{A_{ij}}{\sum_{j=1}^NA_{ij}}

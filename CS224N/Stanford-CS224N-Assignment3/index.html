@@ -3924,7 +3924,7 @@
 \end{aligned}
 \]</div>
 <h3 id="dropout">Dropout<a class="headerlink" href="#dropout" title="Permanent link">&para;</a></h3>
-<p>Dropout是一种模型训练时候的trick，其本质是一种正则化的技术，它的基本思路是在训练的过程中，在每一层只使用一部分参数进行前向传播，而将其他的暂时设置成0，而在测试的时候则使用所有的参数来完成预测，实际上这种trick实现的方式就是使用了一个**掩码向量**，里面的元素就是0或者1，并且0和1是按照一个特定的概率分布的，这个概率被记为<span class="arithmatex">\(<span class="arithmatex">\(p_{drop}\)</span>\)</span>，dropout机制下的训练过程可以表示为：</p>
+<p>Dropout是一种模型训练时候的trick，其本质是一种正则化的技术，它的基本思路是在训练的过程中，在每一层只使用一部分参数进行前向传播，而将其他的暂时设置成0，而在测试的时候则使用所有的参数来完成预测，实际上这种trick实现的方式就是使用了一个<strong>掩码向量</strong>，里面的元素就是0或者1，并且0和1是按照一个特定的概率分布的，这个概率被记为<span class="arithmatex">\(<span class="arithmatex">\(p_{drop}\)</span>\)</span>，dropout机制下的训练过程可以表示为：</p>
 <div class="arithmatex">\[
 \mathbf{h}_{\text {drop }}=\gamma \mathbf{d} \odot \mathbf{h}
 \]</div>
@@ -3946,7 +3946,7 @@
 <li>一个又还未处理的单词构成的缓冲区buffer</li>
 <li>一系列已经得到的依赖解析结果构成的表</li>
 </ul>
-<p>一开始栈中只有一个标志ROOT，而缓冲区包含句子的所有单词，表则是空的，然后每一个解析步骤中都会做**一次转变**直到stack的大小变成1而buffer的大小变成0，而一次转变有以下几种不同的操作方式：</p>
+<p>一开始栈中只有一个标志ROOT，而缓冲区包含句子的所有单词，表则是空的，然后每一个解析步骤中都会做<strong>一次转变</strong>直到stack的大小变成1而buffer的大小变成0，而一次转变有以下几种不同的操作方式：</p>
 <ul>
 <li>SHIFT：将buffer中的第一个单词拿出来放到栈的顶部</li>
 <li>LEFT-ARC：取出栈顶上两个元素，并构造关系first--second，然后将second从栈中移除</li>

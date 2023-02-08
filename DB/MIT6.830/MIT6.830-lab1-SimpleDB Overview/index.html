@@ -3871,7 +3871,7 @@
 <span class="w">    </span><span class="p">}</span>
 </code></pre></div>
 <h3 id="heapfile堆文件">HeapFile堆文件<a class="headerlink" href="#heapfile堆文件" title="Permanent link">&para;</a></h3>
-<p>SimpleDB中的数据有两种组织方式，一种是堆文件Heap File，即无序存放，另一种是B+树，是有序的索引，我们首先要来实现Heap File的存放方式，在SimpleDB中，一个Heap File包括了一系列页，称为Heap Page，而每个页能存储的数据量是**固定的**(默认设定为4096KB)，在磁盘中这些Heap File就以无顺序的方式存放，需要用的时候以页为单位读入内存中就行。</p>
+<p>SimpleDB中的数据有两种组织方式，一种是堆文件Heap File，即无序存放，另一种是B+树，是有序的索引，我们首先要来实现Heap File的存放方式，在SimpleDB中，一个Heap File包括了一系列页，称为Heap Page，而每个页能存储的数据量是<strong>固定的</strong>(默认设定为4096KB)，在磁盘中这些Heap File就以无顺序的方式存放，需要用的时候以页为单位读入内存中就行。</p>
 <p>同时Heap Page中除了要正常存放元组的数据，还要用一些位置来标注每一条记录是不是有效的，这种方式称为Bit Map，每个元组对应1bit的位置，因此1B的位置可以标注8个元组，因此每个Heap Page中能存放的页的数量需要通过下面的方式计算：</p>
 <ul>
 <li><code>tuples per page = floor((page size * 8) / (tuple size * 8 + 1))</code></li>
@@ -3883,9 +3883,9 @@
 <li>src/java/simpledb/storage/HeapPage.java</li>
 </ul>
 <p>其中HeapPage有个方法<code>isSlotUsed()</code>要根据给定的下标判断一个元组是否有效，这时候就要通过位运算取出页头中对应位置的标记，然后判断是不是1(通过和1作And操作可以实现)</p>
-<p>在实现了Heap Page的结构之后，我们进一步需要实现Heap File的结构，Heap File中直接保存了File形式的数据文件和元组的元信息TupleDesc，其中一个关键的方法就是根据给定的页号来读取File中对应的Page，这需要通过Java提供的**文件随机访问**API实现</p>
+<p>在实现了Heap Page的结构之后，我们进一步需要实现Heap File的结构，Heap File中直接保存了File形式的数据文件和元组的元信息TupleDesc，其中一个关键的方法就是根据给定的页号来读取File中对应的Page，这需要通过Java提供的<strong>文件随机访问</strong>API实现</p>
 <ul>
-<li>补充一点操作系统的知识，文件的两种访问方式是**随机访问和顺序访问**，随机访问就是可以从文件的任何一个字节开始向下读取，而顺序访问就是必须从文件头开始读</li>
+<li>补充一点操作系统的知识，文件的两种访问方式是<strong>随机访问和顺序访问</strong>，随机访问就是可以从文件的任何一个字节开始向下读取，而顺序访问就是必须从文件头开始读</li>
 <li>这里的readPage方法的实现代码如下：</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Page</span><span class="w"> </span><span class="nf">readPage</span><span class="p">(</span><span class="n">PageId</span><span class="w"> </span><span class="n">pid</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>

@@ -3765,7 +3765,7 @@
 <summary>本页统计信息</summary>
 <ul>
 <li>
-<p>本页约 2479 个字,  预计阅读时间 8 分钟。</p>
+<p>本页约 2472 个字,  预计阅读时间 8 分钟。</p>
 </li>
 <li>
 <p><span id="busuanzi_container_page_pv">本页总阅读量<span id="busuanzi_value_page_pv"></span>次</span></p>
@@ -3788,10 +3788,10 @@ $$
 其中s就是BERT输出的CLS标签，而Sigmoid函数将投影结果映射到了0-1区间中，用这个结果作为三元组合理性的分数，并通过负采样和交叉熵损失函数，让正样本的分数趋向于1，负样本的分数接近于0</p>
 <p>这就是KG-BERT模型的基本想法，论文在实验中主要进行了链接预测，三元组分类这样两个任务，但是论文中对于链接预测只提供了MR和Hit@10两个指标下的结果，从这两个指标来看，KG-BERT的表现并不能够令人满意。</p>
 <h2 id="mtl-kgc-对kg-bert的改进">MTL-KGC: 对KG-BERT的改进<a class="headerlink" href="#mtl-kgc-对kg-bert的改进" title="Permanent link">&para;</a></h2>
-<p>第二篇论文是《Multi-Task Learning for Knowledge Graph Completion with Pre-trained Language Models》，它发表在2020年COLING会议中，对KG-BERT做出了一点改进，主要就是在原本的三元组分类任务上**多加了几个任务**(论文中把这个本质上是三元组分类的任务称为链接预测任务，实际上也没有问题)——关系预测和相关度排序，这两个任务的介绍如下：</p>
+<p>第二篇论文是《Multi-Task Learning for Knowledge Graph Completion with Pre-trained Language Models》，它发表在2020年COLING会议中，对KG-BERT做出了一点改进，主要就是在原本的三元组分类任务上<strong>多加了几个任务</strong>(论文中把这个本质上是三元组分类的任务称为链接预测任务，实际上也没有问题)——关系预测和相关度排序，这两个任务的介绍如下：</p>
 <ul>
 <li>关系预测任务：将头尾实体输入模型中，让模型预测正确的关系</li>
-<li>相关度排序：将BERT输出结果中的CLS标签投影到1维空间中，并且让正确的三元组的得分比负样本更高，实际上就是将KGE中非常常见的**Margin-rank Loss**引入了基于BERT的模型中，这个任务的损失函数如下：</li>
+<li>相关度排序：将BERT输出结果中的CLS标签投影到1维空间中，并且让正确的三元组的得分比负样本更高，实际上就是将KGE中非常常见的<strong>Margin-rank Loss</strong>引入了基于BERT的模型中，这个任务的损失函数如下：</li>
 </ul>
 <div class="arithmatex">\[
 h(x)=\operatorname{sigmoid}\left(C W_{R R}^{T}\right), \quad \mathcal{L}_{R R}=\sum_{x \in S, x^{\prime} \in S^{\prime}} \max \left\{0, h\left(x^{\prime}\right)-h(x)+\lambda\right\}
@@ -3818,16 +3818,15 @@ $$
 <p>这篇论文对KG-BERT的改进在于，提出了对三元组进行不对称的孪生编码，并且提出将两个不对称的表示进行交互并进行正负样本的判断。</p>
 <h2 id="blp-bert用于inductive场景下的kgc">BLP: BERT用于Inductive场景下的KGC<a class="headerlink" href="#blp-bert用于inductive场景下的kgc" title="Permanent link">&para;</a></h2>
 <p>第四篇论文《Inductive Entity Representations from Text via Link Prediction》提出了如何在Inductive的场景下利用BERT来辅助KGC的方法，所谓的Inductive就是指KG中的一些实体在训练阶段没有出现过，但是在测试阶段会出现并且需要我们做出推理</p>
-<p>这个时候，给每个实体训练的Structure Embedding就不起作用了，因为新出现的实体根本没有学好的Structure Embedding，而本论文提出的方法就是使用BERT对KG中的实体表示进行一个初始化，并且在后面的训练过程中冻结BERT的参数(实际上就是提取出初始化向量之后就不管BERT了，计算的时候直接拿向量来用而不会通过BERT模型)，BERT的初始化包含了很多预训练过程中学习到的语义知识，然后我们只要训练一个投影矩阵将这个初始化表示投影到打分函数的空间中就可以。因为投影矩阵不会随着实体的变化而不同，所以训练好的投影矩阵可以直接迁移到未出现的实体中使用(并且由于BERT参数冻结，每个实体初始化向量是不会变的，因此学习的目标会专注在投影矩阵W上面，而这个**投影矩阵可以较好的适应Inductive的场景**)</p>
+<p>这个时候，给每个实体训练的Structure Embedding就不起作用了，因为新出现的实体根本没有学好的Structure Embedding，而本论文提出的方法就是使用BERT对KG中的实体表示进行一个初始化，并且在后面的训练过程中冻结BERT的参数(实际上就是提取出初始化向量之后就不管BERT了，计算的时候直接拿向量来用而不会通过BERT模型)，BERT的初始化包含了很多预训练过程中学习到的语义知识，然后我们只要训练一个投影矩阵将这个初始化表示投影到打分函数的空间中就可以。因为投影矩阵不会随着实体的变化而不同，所以训练好的投影矩阵可以直接迁移到未出现的实体中使用(并且由于BERT参数冻结，每个实体初始化向量是不会变的，因此学习的目标会专注在投影矩阵W上面，而这个<strong>投影矩阵可以较好的适应Inductive的场景</strong>)</p>
 <p>不过这篇论文对模型本身没什么新的贡献，用的还是以TransE为代表的老一套东西，只不过实体的表示改为由BERT初始化再投影，训练的对象也从每个实体各自的Embedding转变为投影矩阵。</p>
-<p><span id=busuanzi_container_page_pv>本文总阅读量<span id=busuanzi_value_page_pv></span>次</span></p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月4日 10:57:21</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月8日 14:30:35</span>
       
         <br>
         创建日期:

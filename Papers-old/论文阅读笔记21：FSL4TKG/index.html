@@ -3953,7 +3953,7 @@
 <summary>本页统计信息</summary>
 <ul>
 <li>
-<p>本页约 2613 个字,  预计阅读时间 9 分钟。</p>
+<p>本页约 2606 个字,  预计阅读时间 9 分钟。</p>
 </li>
 <li>
 <p><span id="busuanzi_container_page_pv">本页总阅读量<span id="busuanzi_value_page_pv"></span>次</span></p>
@@ -3971,7 +3971,7 @@
 <li>这些任务在少样本学习框架下的定义没有加入时间层面的约束</li>
 </ul>
 <p>也有一些时序知识图谱的表示方法将目标着眼于预测某个时间点的链接预测，适用面比较窄。时序知识图谱面临着更严重的数据缺失问题，是高度不稳定的(non-stationary.)，因为之前没有观测到的新的关系可能会在时序知识图谱的某个时间点出现</p>
-<p>本论文针对时序知识图谱的这些问题和短板，提出了一种**用于时序知识图谱的链接预测的单样本的学习框架**，这个框架使用了自注意力机制对时序数据进行有效编码，并用一个相似度网络来计算一个query和一个单样本数据实例的相似度。论文将这个模型命名为**Few- shot Temporal Attention Graph Learning (FTAG)**，因此本论文的贡献可以概括成以下几个方面：</p>
+<p>本论文针对时序知识图谱的这些问题和短板，提出了一种<strong>用于时序知识图谱的链接预测的单样本的学习框架</strong>，这个框架使用了自注意力机制对时序数据进行有效编码，并用一个相似度网络来计算一个query和一个单样本数据实例的相似度。论文将这个模型命名为<strong>Few- shot Temporal Attention Graph Learning (FTAG)</strong>，因此本论文的贡献可以概括成以下几个方面：</p>
 <ul>
 <li>提出一个用于时序知识图谱的少样本学习框架</li>
 <li>提出了一个使用自注意力机制的时序邻近编码器，用于提取时间维度上的邻居信息</li>
@@ -3986,7 +3986,7 @@ $$
 知识图谱中的预测和补全主要有尾实体预测和关系预测，即<span class="arithmatex">\(<span class="arithmatex">\((s,r,?),(s, ?,o)\)</span>\)</span> 而在时序场景下任务也变成了在特定时间节点t进行关系或者尾实体的预测，即<span class="arithmatex">\(<span class="arithmatex">\((s,r,?,t)\)</span>\)</span>，同时我们在预测过程中使用打分函数对可能的结果进行评估，模型的学习目标就是让真实的结果获得更高的分数。</p>
 <p>时序场景下对于问题的建模的关键是利用时间节点t之前的若干个时间节点的信息。</p>
 <h3 id="少样本学习和episodic-training">少样本学习和Episodic Training<a class="headerlink" href="#少样本学习和episodic-training" title="Permanent link">&para;</a></h3>
-<p>少样本学习(FSL)的目标就是在每种类别只有少量标注样本的情况下训练处有效的模型，元学习是一种处理FSL问题的方法，元学习在已有的条件下，加入一个任务集合，并且**每个任务是一个N-way K-shot(即N分类，每个类别提供K个样本进行训练)的分类问题**。元学习的目标就是利用不同任务之间共享的信息来以弥补由于标记的数据点很少而导致的关于每个任务的信息匮乏。</p>
+<p>少样本学习(FSL)的目标就是在每种类别只有少量标注样本的情况下训练处有效的模型，元学习是一种处理FSL问题的方法，元学习在已有的条件下，加入一个任务集合，并且<strong>每个任务是一个N-way K-shot(即N分类，每个类别提供K个样本进行训练)的分类问题</strong>。元学习的目标就是利用不同任务之间共享的信息来以弥补由于标记的数据点很少而导致的关于每个任务的信息匮乏。</p>
 <p>而Episodic Training是一种元学习的具体实现方式，假设我们有一个庞大的任务集合T，那么每个Episodic就会包含一个T的任务子集L，以及从L中采样出的支持集合S和批次数据B，并且S和B都是有标注的数据，现在的训练目标就变成了训练处可以将S中的样本映射到一个分类器中，并且将目标函数定为：
 $$
 \theta=\underset{\theta}{\arg \max } E_{L \sim \mathcal{T}}\left[E_{S \sim L, B \sim L}\left[\sum_{(x, y) \in B} \log P_{\theta}(y \mid x, S)\right]\right]
@@ -4006,7 +4006,7 @@ $$
 <p>而对于查询集合<span class="arithmatex">\(<span class="arithmatex">\(Q_r\)</span>\)</span>在每个Episodic中会随机选择一个关系和一个四元组来构建一个支持集合<span class="arithmatex">\(<span class="arithmatex">\(S_r\)</span>\)</span> ，四元组的选择方式有这样两种：</p>
 <ul>
 <li>完全随机选择m个四元组</li>
-<li>时间依赖的选择：选择的时候**受到时间距离上的约束**，<strong>只能选择和支持集合所在的时间点之后并且距离不超过w的数据</strong>：</li>
+<li>时间依赖的选择：选择的时候<strong>受到时间距离上的约束</strong>，<strong>只能选择和支持集合所在的时间点之后并且距离不超过w的数据</strong>：</li>
 </ul>
 <div class="arithmatex">\[
 Q_{r}^{t}=\left\{\left(s_{q}, r, o_{q}, t_{q}\right) \mid s_{q}, o_{q} \in \mathcal{E}, t_{q} \in\left[t_{0}, t_{0}+w\right]\right\}
@@ -4069,19 +4069,18 @@ $$
 <p>这篇论文中采用的数据集是ICEWS和GDELT，是两个之前从来没听说过的时序知识图谱用的数据集，这两个数据集的规模如下：</p>
 <p><img alt="image-20211025152614547" src="../static/image-20211025152614547.png" /></p>
 <ul>
-<li>总的来看规模比较小，但是实体和关系数量相对比较多，应该属于是非常**稀疏的数据集**</li>
+<li>总的来看规模比较小，但是实体和关系数量相对比较多，应该属于是非常<strong>稀疏的数据集</strong></li>
 </ul>
 <h3 id="实验结果">实验结果<a class="headerlink" href="#实验结果" title="Permanent link">&para;</a></h3>
 <p>实验结果如下，metric依然是经典的Hit和MRR，论文表明除了它这种方法其他的方法都基本p用没有</p>
 <p><img alt="image-20211025152838004" src="../static/image-20211025152838004.png" /></p>
-<p><span id=busuanzi_container_page_pv>本文总阅读量<span id=busuanzi_value_page_pv></span>次</span></p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月4日 10:57:21</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月8日 14:30:35</span>
       
         <br>
         创建日期:

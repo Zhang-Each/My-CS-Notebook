@@ -3883,7 +3883,7 @@
 <p>Filter操作是按照一定的条件对数据表中的元组进行过滤，这个判断的过程在SimpleDB中被抽象成了一个叫做Predicate的类，这个类在实现的时候，需要用以下三个信息进行初始化，分别是：</p>
 <ul>
 <li>需要判断的属性值的列号</li>
-<li>判断的类型(大于，小于，等于，不等于)，在SimpleDB中**被抽象成了一个枚举类Op**</li>
+<li>判断的类型(大于，小于，等于，不等于)，在SimpleDB中<strong>被抽象成了一个枚举类Op</strong></li>
 <li>判断的基准值，用之前说到过的Field类型来表示</li>
 </ul>
 <p>然后Predicate类会提供一个方法filter判断给定元组的某一列的属性值是否满足判断条件，并返回True或者False，然后我们在Filter Operator类中调用Predicate来帮助我们判断就可以。</p>

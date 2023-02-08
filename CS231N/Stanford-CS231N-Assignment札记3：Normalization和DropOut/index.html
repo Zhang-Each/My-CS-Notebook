@@ -4102,14 +4102,14 @@ y_i=\gamma f(x_i,\mu,\sigma^2)+\beta
 <p>层标准化是另一种标准化的方式，其core idea是将每个样本的d维特征的值进行标准化，实际上就是换了一个维度的批标准化，代码实现也比较容易，基本和上面的代码完全一致，只不过把axis改成1表示换了一个维度，其他的内容基本一致，这里代码就不放出来了。</p>
 <h2 id="dropout机制">DropOut机制<a class="headerlink" href="#dropout机制" title="Permanent link">&para;</a></h2>
 <h3 id="dropout层的概念">DropOut层的概念<a class="headerlink" href="#dropout层的概念" title="Permanent link">&para;</a></h3>
-<p>DropOut的原意为“退学”，是一种在神经网络的**训练中用的比较多的trick**，DropOut最早是在<a href="http://www.cs.toronto.edu/~hinton/absps/JMLRdropout.pdf">这篇论文</a>中提出的一个概念，用来解决神经网络训练过程中的过拟合问题</p>
+<p>DropOut的原意为“退学”，是一种在神经网络的<strong>训练中用的比较多的trick</strong>，DropOut最早是在<a href="http://www.cs.toronto.edu/~hinton/absps/JMLRdropout.pdf">这篇论文</a>中提出的一个概念，用来解决神经网络训练过程中的过拟合问题</p>
 <p>DropOut的基本想法就是设定一个DropOut的概率<span class="arithmatex">\(p\)</span>，当某一层的神经元被设定了这个概率<span class="arithmatex">\(p\)</span>之后，就会出现以下两种情况：
 - 训练的时候，对每个神经元而言，它有<span class="arithmatex">\(p\)</span>的概率保持正常的工作状态，而有<span class="arithmatex">\(1-p\)</span>的概率“休息”，也就是不参与到神经网络的前向传播和反向传播过程中
 - 测试的时候所有的神经元都参与到结果的预测中去</p>
 <p><img alt="image-20211106220026501" src="../static/image-20211106220026501.png" /></p>
 <h3 id="dropout为什么有效">DropOut为什么有效<a class="headerlink" href="#dropout为什么有效" title="Permanent link">&para;</a></h3>
 <ul>
-<li>论文中解释到，这是因为神经网络的训练本质上是将神经元训练出一种“协同作战”的能力，即神经元共同参与到最终的决策中，因此神经元之间的相互依赖性是比较强的，如果这个时候出现了一些表现不好的神经元，就会把所有的神经元**带偏**，并且随着放大效应逐渐累积。</li>
+<li>论文中解释到，这是因为神经网络的训练本质上是将神经元训练出一种“协同作战”的能力，即神经元共同参与到最终的决策中，因此神经元之间的相互依赖性是比较强的，如果这个时候出现了一些表现不好的神经元，就会把所有的神经元<strong>带偏</strong>，并且随着放大效应逐渐累积。</li>
 <li>而DropOut使得每次训练的过程中只有一部分神经元参与到训练中，并且每次参与的神经元的组合还很有可能不一样(因为设定了概率p)，这使得神经网络中的神经元形成了“小团队协作”的能力，<strong>增强了神经网络中单个神经元的预测能力</strong>(因为训练的时候神经元个数减少意味着一个神经元需要负责学习更多的知识)，这样一来预测的准确度也就随之提高了</li>
 <li>当然这样的说法并没有严格的数学证明，可是原论文在经过多种实验之后发现效果确实有所提升。</li>
 </ul>

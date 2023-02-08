@@ -3859,7 +3859,7 @@
 <summary>本页统计信息</summary>
 <ul>
 <li>
-<p>本页约 2153 个字,  预计阅读时间 7 分钟。</p>
+<p>本页约 2146 个字,  预计阅读时间 7 分钟。</p>
 </li>
 <li>
 <p><span id="busuanzi_container_page_pv">本页总阅读量<span id="busuanzi_value_page_pv"></span>次</span></p>
@@ -3881,7 +3881,7 @@
 <p>而另一篇论文<a href="https://arxiv.org/pdf/1504.06662.pdf">《Compositional Vector Space Models for Knowledge Base Completion》</a>则没有采用知识图谱嵌入模型，而是使用随机游走的方式从数据集中采样得到一系列知识路径，然后使用这些序列来训练一个RNN结构的模型，并用这个模型对知识图谱中的路径进行一定推理和补全。</p>
 <h2 id="推理方法1基于rnn">推理方法1：基于RNN<a class="headerlink" href="#推理方法1基于rnn" title="Permanent link">&para;</a></h2>
 <p>这是第三篇论文中提出的基于RNN+随机游走采样的推理方式，论文中提出的方法是，首先对于一个庞大的知识库采用Path Ranking算法进行随机游走，采样得到一系列路径，并以此来构建训练和测试数据集。</p>
-<p>同时该模型主要进行的是关系的推理，对于每个实体和每条路径都用一个d维度的向量来表示，这种模型实际上就是将知识图谱中的路径看成是一系列关系的**序列化组合**，因此将一系列关系的向量表示输入RNN中可以得到一整条路径的表示向量，同时采用极大似然法来定义目标函数就可以训练出一个模型。</p>
+<p>同时该模型主要进行的是关系的推理，对于每个实体和每条路径都用一个d维度的向量来表示，这种模型实际上就是将知识图谱中的路径看成是一系列关系的<strong>序列化组合</strong>，因此将一系列关系的向量表示输入RNN中可以得到一整条路径的表示向量，同时采用极大似然法来定义目标函数就可以训练出一个模型。</p>
 <p>这个方法虽然经典但是感觉逐渐跟不上时代了，因此也就不细说。</p>
 <h2 id="推理方法2使用嵌入表示">推理方法2：使用嵌入表示<a class="headerlink" href="#推理方法2使用嵌入表示" title="Permanent link">&para;</a></h2>
 <p>这是第二篇论文中提出的知识图谱补全和推理的总体框架。</p>
@@ -3899,7 +3899,7 @@ $$
 以上就是在知识图谱推理过程中要用到的一些符号，我们主要定义了组合查询，查询结果集合的形式。</p>
 <h3 id="总体框架">总体框架<a class="headerlink" href="#总体框架" title="Permanent link">&para;</a></h3>
 <h4 id="向量空间模型">向量空间模型<a class="headerlink" href="#向量空间模型" title="Permanent link">&para;</a></h4>
-<p>知识图谱领域的研究中出现过很多向量模型，用嵌入向量的形式来描述知识图谱中各个实体和关系的特征，常见的有双线性模型(Bilinear Model)和TransE等等，这类方法往往包含一个和向量空间表示形式相关的**打分函数来评价一个三元组在当前表示下的合理性**，比如双线性模型给每个关系r都定义了一个投影矩阵，其打分函数是：
+<p>知识图谱领域的研究中出现过很多向量模型，用嵌入向量的形式来描述知识图谱中各个实体和关系的特征，常见的有双线性模型(Bilinear Model)和TransE等等，这类方法往往包含一个和向量空间表示形式相关的<strong>打分函数来评价一个三元组在当前表示下的合理性</strong>，比如双线性模型给每个关系r都定义了一个投影矩阵，其打分函数是：
 $$
 score(s/r,t)=x_s^TW_rx_t
 $$
@@ -3940,15 +3940,14 @@ $$</p>
 </ul>
 <h4 id="训练和评估中的细节">训练和评估中的细节<a class="headerlink" href="#训练和评估中的细节" title="Permanent link">&para;</a></h4>
 <p>在实际的训练开始之前，我们可以从已有的知识图谱数据集中，<strong>通过随机游走生成一系列长度各异的知识路径作为训练用的数据集</strong>，事实上因为知识库比较大，这种构建数据集的方式可以构建出非常大的训练集。</p>
-<p>在训练完成之后，可以用平均分位数来对模型的性能进行评估，即对于一个查询q，用模型得到其所有结果，然后计算其中比正确结果的分数低错误结果(即**模型认为错误结果更合理**)所占的比例，就是当前查询q的分位数，对所有的q的分位数求平均值就可以得到平均分位数，很显然这个指标需要越小越好。</p>
-<p><span id=busuanzi_container_page_pv>本文总阅读量<span id=busuanzi_value_page_pv></span>次</span></p>
+<p>在训练完成之后，可以用平均分位数来对模型的性能进行评估，即对于一个查询q，用模型得到其所有结果，然后计算其中比正确结果的分数低错误结果(即<strong>模型认为错误结果更合理</strong>)所占的比例，就是当前查询q的分位数，对所有的q的分位数求平均值就可以得到平均分位数，很显然这个指标需要越小越好。</p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月4日 10:57:21</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月8日 14:30:35</span>
       
         <br>
         创建日期:

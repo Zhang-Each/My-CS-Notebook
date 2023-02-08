@@ -3953,7 +3953,7 @@
 <summary>本页统计信息</summary>
 <ul>
 <li>
-<p>本页约 2938 个字,  预计阅读时间 10 分钟。</p>
+<p>本页约 2931 个字,  预计阅读时间 10 分钟。</p>
 </li>
 <li>
 <p><span id="busuanzi_container_page_pv">本页总阅读量<span id="busuanzi_value_page_pv"></span>次</span></p>
@@ -3965,7 +3965,7 @@
 </blockquote>
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
 <p>对比学习contrastive learning是近几年来无监督学习领域非常热门的一个话题，对比学习的目标是在数据没有标注的情况下通过数据增强和正负样本对比的方式来学习数据的表示向量，并用于其他的任务中。</p>
-<p>对比学习的核心理念以一言蔽之，就是“一切都是相比较而言的”，对比学习往往通过**对数据通过各种手段进行扩增**，得到两个不相同但是相似的数据，称为一个对，然后和其他扩增后的数据一起放到编码器中去训练，再得到每个数据的表示向量之后，通过一个基于相似度的损失函数来评估学习到的表示的质量，而基于相似度的损失函数通过计算正样本和负样本，并将他们形成对比，通过这种方式来突出模型的学习效果，正样本就是通过扩增产生的数据对，他们之间应该是非常相似的，所以表示向量也应该比较相似，相似度应该比较高，而负样本则是不同的数据两两组合而成的，一般来说他们应该有所区别，通过这种方式，我们可以学到一个对数据之间的不同有所感知的编码器，进而可以得到好的表示。</p>
+<p>对比学习的核心理念以一言蔽之，就是“一切都是相比较而言的”，对比学习往往通过<strong>对数据通过各种手段进行扩增</strong>，得到两个不相同但是相似的数据，称为一个对，然后和其他扩增后的数据一起放到编码器中去训练，再得到每个数据的表示向量之后，通过一个基于相似度的损失函数来评估学习到的表示的质量，而基于相似度的损失函数通过计算正样本和负样本，并将他们形成对比，通过这种方式来突出模型的学习效果，正样本就是通过扩增产生的数据对，他们之间应该是非常相似的，所以表示向量也应该比较相似，相似度应该比较高，而负样本则是不同的数据两两组合而成的，一般来说他们应该有所区别，通过这种方式，我们可以学到一个对数据之间的不同有所感知的编码器，进而可以得到好的表示。</p>
 <p>而图对比学习是对比学习中比较热门的研究内容，相比于图像和文本，图数据的扩增似乎更难进行，图像可以通过各种基本的图像处理手段得到相似的图像对，文本可以通过掩码的方式生成训练数据，而图则比较麻烦，我们既要关注图的拓扑结构，又要关注图中结点和边的特征，而完全随机化的数据增强策略和负采样策略往往不能适应图的复杂结构，表现效果也不太好，因此这次读的两篇论文，分别从数据扩增和负采样两个角度，对图对比学习中的策略进行了探究，并分别提出了自己的方法。</p>
 <h2 id="图对比学习总体框架">图对比学习总体框架<a class="headerlink" href="#图对比学习总体框架" title="Permanent link">&para;</a></h2>
 <p>图对比学习中的关键就是相似度的定义和loss函数，我们对N个数据<span class="arithmatex">\(z_k\)</span> 分别进行扩增，然后通过编码器模型，得到了N对数据的表示向量<span class="arithmatex">\((z_i,z_j)\)</span> 并定义相似度函数来计算不同表示向量之间的相似度，然后对于每个正样本选择K个负样本与之形成对比，这样一来损失函数就变成了：
@@ -4034,7 +4034,7 @@ $$</p>
 <li>这些方法是否对超参数很敏感，超参数怎么影响模型的表现能力</li>
 </ul>
 <h2 id="cuco新的负采样策略">CuCo：新的负采样策略<a class="headerlink" href="#cuco新的负采样策略" title="Permanent link">&para;</a></h2>
-<p>第二篇文章《<a href="https://www.ijcai.org/proceedings/2021/0317.pdf">CuCo: Graph Representation with Curriculum Contrastive Learning</a>》则重点关注了另一个问题，即如何采集高质量的负样本，负样本相关的工作实际上在之前的研究中一直没有受到过重视，而这篇论文提出了一种**基于课程学习**的对比学习负采样策略，可以在训练过程中选择高质量的负样本。</p>
+<p>第二篇文章《<a href="https://www.ijcai.org/proceedings/2021/0317.pdf">CuCo: Graph Representation with Curriculum Contrastive Learning</a>》则重点关注了另一个问题，即如何采集高质量的负样本，负样本相关的工作实际上在之前的研究中一直没有受到过重视，而这篇论文提出了一种<strong>基于课程学习</strong>的对比学习负采样策略，可以在训练过程中选择高质量的负样本。</p>
 <ul>
 <li>课程学习也是一个比较花里胡哨的概念，它的基本思想是从简单的数据开始学，逐渐学到难的数据，通过这种方式来改进模型，提高学习能力</li>
 <li>本论文中指的课程学习其实是对于负样本的课程学习，即通过一定的策略，先学普通的负样本，然后学越来越难的负样本</li>
@@ -4070,14 +4070,13 @@ g(t)=(t / T)^{\lambda} \cdot K
 <p><img src="static/image-20211120132111696.png" alt="image-20211120132111696" style="zoom:50%;" /></p>
 <h3 id="实验_1">实验<a class="headerlink" href="#实验_1" title="Permanent link">&para;</a></h3>
 <p>这篇论文的实验采用了多个图数据集，并在图级别的任务上进行了比较。</p>
-<p><span id=busuanzi_container_page_pv>本文总阅读量<span id=busuanzi_value_page_pv></span>次</span></p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月4日 10:57:21</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月8日 14:30:35</span>
       
         <br>
         创建日期:
