@@ -8,20 +8,20 @@
       
       
       
-        <link rel="canonical" href="https://zhang-each.github.io/My-CS-notebook/CS224W/CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A001/">
+        <link rel="canonical" href="https://zhang-each.github.io/My-CS-notebook/CS224W/CS224W-%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A008/">
       
       
-        <link rel="prev" href="../">
+        <link rel="prev" href="../CS224W-%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A007/">
       
       
-        <link rel="next" href="../CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A002/">
+        <link rel="next" href="../CS224W-%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A009/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.11">
     
     
       
-        <title>01.导论，传统的图学习方法 - 小角龙的学习记录</title>
+        <title>08.社区检测 - 小角龙的学习记录</title>
       
     
     
@@ -73,7 +73,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#cs224w图机器学习1" class="md-skip">
+        <a href="#cs224w图机器学习8" class="md-skip">
           跳转至
         </a>
       
@@ -106,7 +106,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              01.导论，传统的图学习方法
+              08.社区检测
             
           </span>
         </div>
@@ -1436,6 +1436,104 @@
               
   
   
+  
+    <li class="md-nav__item">
+      <a href="../CS224W-%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A001/" class="md-nav__link">
+        01.导论，传统的图学习方法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CS224W-%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A002/" class="md-nav__link">
+        02.节点嵌入和PageRank
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CS224W-%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A003/" class="md-nav__link">
+        03.消息传递机制
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CS224W-%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A004/" class="md-nav__link">
+        04.图神经网络基础
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CS224W-%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A005/" class="md-nav__link">
+        05.图神经网络的训练和应用，表示能力分析
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CS224W-%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A006/" class="md-nav__link">
+        06.知识图谱，知识图谱推理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CS224W-%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A007/" class="md-nav__link">
+        07.频繁子图挖掘
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
     
   
   
@@ -1448,12 +1546,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          01.导论，传统的图学习方法
+          08.社区检测
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        01.导论，传统的图学习方法
+        08.社区检测
       </a>
       
         
@@ -1472,65 +1570,31 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#图机器学习导论" class="md-nav__link">
-    图机器学习导论
+  <a href="#社区检测community-detection" class="md-nav__link">
+    社区检测community detection
   </a>
   
-    <nav class="md-nav" aria-label="图机器学习导论">
+    <nav class="md-nav" aria-label="社区检测community detection">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#图机器学习研究的问题" class="md-nav__link">
-    图机器学习研究的问题
+  <a href="#edge-overlap" class="md-nav__link">
+    Edge Overlap
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#图的表示方式" class="md-nav__link">
-    图的表示方式
+  <a href="#网络社区检测" class="md-nav__link">
+    网络社区检测
   </a>
   
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#传统的图机器学习方法" class="md-nav__link">
-    传统的图机器学习方法
-  </a>
-  
-    <nav class="md-nav" aria-label="传统的图机器学习方法">
+    <nav class="md-nav" aria-label="网络社区检测">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#节点层面的机器学习任务" class="md-nav__link">
-    节点层面的机器学习任务
-  </a>
-  
-    <nav class="md-nav" aria-label="节点层面的机器学习任务">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#node-centrality" class="md-nav__link">
-    node centrality
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#聚类系数" class="md-nav__link">
-    聚类系数
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#graphlets" class="md-nav__link">
-    Graphlets
+  <a href="#modularity模块度" class="md-nav__link">
+    Modularity模块度
   </a>
   
 </li>
@@ -1541,63 +1605,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#边层面" class="md-nav__link">
-    边层面
+  <a href="#社区检测算法" class="md-nav__link">
+    社区检测算法
   </a>
-  
-    <nav class="md-nav" aria-label="边层面">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#基于距离的特征" class="md-nav__link">
-    基于距离的特征
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#local-neighborhood-overlap" class="md-nav__link">
-    Local Neighborhood Overlap
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#global-neighborhood-overlap" class="md-nav__link">
-    Global Neighborhood Overlap
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#图层面的特征和图kernel" class="md-nav__link">
-    图层面的特征和图kernel
-  </a>
-  
-    <nav class="md-nav" aria-label="图层面的特征和图kernel">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#bow" class="md-nav__link">
-    BoW
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#graphlet特征" class="md-nav__link">
-    Graphlet特征
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -1621,105 +1631,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A002/" class="md-nav__link">
-        02.节点嵌入和PageRank
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A003/" class="md-nav__link">
-        03.消息传递机制
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A004/" class="md-nav__link">
-        04.图神经网络基础
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A005/" class="md-nav__link">
-        05.图神经网络的训练和应用，表示能力分析
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A006/" class="md-nav__link">
-        06.知识图谱，知识图谱推理
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A007/" class="md-nav__link">
-        07.频繁子图挖掘
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A008/" class="md-nav__link">
-        08.社区检测
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A009/" class="md-nav__link">
+      <a href="../CS224W-%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A009/" class="md-nav__link">
         09.图生成模型
       </a>
     </li>
@@ -1733,7 +1645,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../CS224W%EF%BC%9A%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A010/" class="md-nav__link">
+      <a href="../CS224W-%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A010/" class="md-nav__link">
         10.图神经网络前沿话题
       </a>
     </li>
@@ -3821,65 +3733,31 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#图机器学习导论" class="md-nav__link">
-    图机器学习导论
+  <a href="#社区检测community-detection" class="md-nav__link">
+    社区检测community detection
   </a>
   
-    <nav class="md-nav" aria-label="图机器学习导论">
+    <nav class="md-nav" aria-label="社区检测community detection">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#图机器学习研究的问题" class="md-nav__link">
-    图机器学习研究的问题
+  <a href="#edge-overlap" class="md-nav__link">
+    Edge Overlap
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#图的表示方式" class="md-nav__link">
-    图的表示方式
+  <a href="#网络社区检测" class="md-nav__link">
+    网络社区检测
   </a>
   
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#传统的图机器学习方法" class="md-nav__link">
-    传统的图机器学习方法
-  </a>
-  
-    <nav class="md-nav" aria-label="传统的图机器学习方法">
+    <nav class="md-nav" aria-label="网络社区检测">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#节点层面的机器学习任务" class="md-nav__link">
-    节点层面的机器学习任务
-  </a>
-  
-    <nav class="md-nav" aria-label="节点层面的机器学习任务">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#node-centrality" class="md-nav__link">
-    node centrality
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#聚类系数" class="md-nav__link">
-    聚类系数
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#graphlets" class="md-nav__link">
-    Graphlets
+  <a href="#modularity模块度" class="md-nav__link">
+    Modularity模块度
   </a>
   
 </li>
@@ -3890,63 +3768,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#边层面" class="md-nav__link">
-    边层面
+  <a href="#社区检测算法" class="md-nav__link">
+    社区检测算法
   </a>
-  
-    <nav class="md-nav" aria-label="边层面">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#基于距离的特征" class="md-nav__link">
-    基于距离的特征
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#local-neighborhood-overlap" class="md-nav__link">
-    Local Neighborhood Overlap
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#global-neighborhood-overlap" class="md-nav__link">
-    Global Neighborhood Overlap
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#图层面的特征和图kernel" class="md-nav__link">
-    图层面的特征和图kernel
-  </a>
-  
-    <nav class="md-nav" aria-label="图层面的特征和图kernel">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#bow" class="md-nav__link">
-    BoW
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#graphlet特征" class="md-nav__link">
-    Graphlet特征
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -3974,193 +3798,65 @@
 
 
 
-<h1 id="cs224w图机器学习1">CS224W：图机器学习1<a class="headerlink" href="#cs224w图机器学习1" title="Permanent link">&para;</a></h1>
+<h1 id="cs224w图机器学习8">CS224W：图机器学习8<a class="headerlink" href="#cs224w图机器学习8" title="Permanent link">&para;</a></h1>
 <details class="abstract" open="open">
 <summary>本页统计信息</summary>
 <ul>
 <li>
-<p>本页约 2428 个字,  预计阅读时间 8 分钟。</p>
+<p>本页约 874 个字,  预计阅读时间 3 分钟。</p>
 </li>
 <li>
 <p><span id="busuanzi_container_page_pv">本页总阅读量<span id="busuanzi_value_page_pv"></span>次</span></p>
 </li>
 </ul>
 </details>
+<h2 id="社区检测community-detection">社区检测community detection<a class="headerlink" href="#社区检测community-detection" title="Permanent link">&para;</a></h2>
+<p>​     我们通常会有这样一种概念，认为一个网络结构应该长成这样：</p>
+<p><img alt="image-20210714130853543" src="../static/image-20210714130853543.png" /></p>
+<p>我们发现这样的网络结构呈现出一种“<strong>大杂居小聚居</strong>”的形态，会有一些点组成小集群，同时边也可以分成long和short两种形式，比如我们用下面这样一个社交网络作为例子：</p>
+<p><img alt="image-20210714133153558" src="../static/image-20210714133153558.png" /></p>
 <ul>
-<li>斯坦福大学公开课CS224W的学习笔记</li>
+<li>在这个图结构里面，人依照关系亲密进行了划分，形成了一些团簇。粗线表示的是亲密朋友关系，而细线表示的是熟人关系。</li>
+<li>一项研究发现在社交网络中，人们往往更喜欢去寻求熟人而不是朋友的帮助来找工作，这就说明在这个问题中细线边比粗线边更重要，在社交网络的信息传递中起到更重要的作用。</li>
+<li>因此科学家对社交网络中的各种边进行了结构和社会学双重意义上的分析，将边分成了强弱两种</li>
 </ul>
-<h2 id="图机器学习导论">图机器学习导论<a class="headerlink" href="#图机器学习导论" title="Permanent link">&para;</a></h2>
-<h3 id="图机器学习研究的问题">图机器学习研究的问题<a class="headerlink" href="#图机器学习研究的问题" title="Permanent link">&para;</a></h3>
-<ul>
-<li>图结构和网络结构是非常常见的数据结构，常见的事件图、计算机网络、事务网、社交网络和人际关系网等等都是图状结构</li>
-<li>网络也叫做自然图Natural Graphs</li>
-<li>图是对于一些关系的表示，可以表示信息和知识的联系，<strong>软件也可以表示为一张图</strong></li>
-<li>很多时候网络和图的区别是非常模糊的，通常可以将它们混为一谈，而该课程要研究的也就是如何利用图中的关系来进行更好的预测</li>
-<li>相比于图像和文本，图结构的大小比较随意，没有固定的节点顺序，并且通常是动态的</li>
-<li>图学习的任务可以有node level，edge level，community level和graph-level多个层次，常见的有</li>
-<li>节点分类：比如预测线上用户的类型</li>
-<li>链接预测：预测两个节点之间是否缺少了链接，比如知识图谱补全</li>
-<li>图分类：比如化学中的分子性质预测</li>
-<li>聚类：检测节点是否构成一个类别，比如社交圈检测</li>
-<li>其他的还有图生成，图进化等等</li>
-</ul>
-<h3 id="图的表示方式">图的表示方式<a class="headerlink" href="#图的表示方式" title="Permanent link">&para;</a></h3>
-<ul>
-<li>常见的表示方式使用节点集合N和边集合E构成一个图结构<span class="arithmatex">\(G(N, E)\)</span> </li>
-<li>图可以分为有向图和无向图，区别就在于边是否具有方向性，节点的degree表示包含这个节点的边的数量，而在有向图中又可以具体分为出度和入度</li>
-<li>二分图是一种特殊的图结构，可以将图中的<strong>节点</strong>分成两个不相交的集合U和V，使得图中的任意一条边的两个顶点分别属于U和V</li>
-<li>图也可以用<strong>接邻矩阵</strong>来表示，其中无向图的邻接矩阵是一个对称矩阵，通常邻接矩阵都比较稀疏，网络结构通常都是比较稀疏的图</li>
-<li>图可以用接邻表来表示，这种表示方式只保留了有边的节点的情况，而舍去了稀疏的大部分内容，节约了存储空间</li>
-<li>一些图中的基本概念：</li>
-<li>强连通有向图：任意两个节点U和V之间存在U到V以及V到U的路径</li>
-<li>弱连通有向图：任意两个节点U和V之间存在U到V或者V到U的路径</li>
-<li>强连通分量：有向图中的强连通子图</li>
-</ul>
-<h2 id="传统的图机器学习方法">传统的图机器学习方法<a class="headerlink" href="#传统的图机器学习方法" title="Permanent link">&para;</a></h2>
-<ul>
-<li>传统的机器学习通过手工提取特征来完成图机器学习中的node-level，link-level和graph-level的一些预测，目标是对于给定的图<span class="arithmatex">\(G=(V, E)\)</span>学习出一个从V映射到R上面的函数</li>
-</ul>
-<h3 id="节点层面的机器学习任务">节点层面的机器学习任务<a class="headerlink" href="#节点层面的机器学习任务" title="Permanent link">&para;</a></h3>
-<ul>
-<li>图机器学习在节点层面的主要任务是对节点进行分类和学习图的结构特征，主要有：</li>
-<li>节点的度数</li>
-<li>节点的中心(node centrality)</li>
-<li>聚类系数</li>
-<li>graphlets</li>
-</ul>
-<h4 id="node-centrality">node centrality<a class="headerlink" href="#node-centrality" title="Permanent link">&para;</a></h4>
-<p>​       节点中心node centrality是在在一个图中表示出不同节点的<strong>重要性</strong>，而不是简单的出入度数。一个节点v如果与一些很重要的节点相邻那么这个节点也很重要，一个节点的centrality可以这样计算：
+<h3 id="edge-overlap">Edge Overlap<a class="headerlink" href="#edge-overlap" title="Permanent link">&para;</a></h3>
+<p>​   edge overlap可以用来判断一条边是不是一个local bridge(即连通了两个不相交的节点集群的边)，被定义为：
 $$
-c_v=\frac{1}{\lambda}\sum_{u\in N(v)}c_u
+O_{ij}=\frac{|(N(i) \cap N(j))-{i, j} \mid}{|(N(i) \cup N(j))-{i, j} \mid}
 $$</p>
 <ul>
-<li>
-<p>问题在于上面的这个表达式其实是一种循环定义，需要用另一种方法来表示</p>
-</li>
-<li>
-<p>特征向量中心：我们可以用向量的相识来表示上面的centrality定义式：
-  $$
-  \lambda c=Ac
-  $$</p>
-</li>
-<li>
-<p>其中A是图G的邻接矩阵，如果两个点uv相邻，那么<span class="arithmatex">\(A_{uv}=1\)</span>否则就是0</p>
-</li>
-<li>
-<p>我们发现这时候由每个点的centrality组成的向量C实际上就是矩阵A的特征向量，其中最大的特征向量总是为正并且唯一的，因此可以用A矩阵的最大特征值作为图G的centrality</p>
-</li>
-<li>
-<p>中间性中心Betweenness Centrality</p>
-</li>
-<li>
-<p>该标准认为一个节点如果处于很多通往其他节点的最短路径上，那么这个节点就比较重要，因此定义：</p>
-</li>
+<li>如果一个edge overlap的计算结果是0，就说明这条边是local bridge</li>
 </ul>
-<p>$$
-  c_v=\sum_{s\not=t\not=v}\frac{N_{svt}}{N_{sv}}
-  $$</p>
-<ul>
-<li>
-<p>该标准下重要程度的计算方式就是对于图中的任意两个和v不同的节点s，t，计算其最短路径中包含v的比例并进行求和</p>
-</li>
-<li>
-<p>邻近中心Closeness Centrality</p>
-</li>
-<li>
-<p>该标准认为一个节点如果拥有比较小的到其他所有节点的最短路径长度，那么它就比较重要，用l表示图中两个节点的最短路径长，那么：</p>
-</li>
-</ul>
-<p>$$
-  c_v=\frac 1 {\sum_{u\not=v}l_{uv}}
-  $$</p>
-<h4 id="聚类系数">聚类系数<a class="headerlink" href="#聚类系数" title="Permanent link">&para;</a></h4>
-<p>​       聚类系数可以衡量一个节点的邻居节点的连接情况，假设一个节点v有k个邻居，这些<strong>k个邻居之间有n条边</strong>，那么聚类系数可以写作：
+<p><img alt="image-20210714141231057" src="../static/image-20210714141231057.png" /></p>
+<h3 id="网络社区检测">网络社区检测<a class="headerlink" href="#网络社区检测" title="Permanent link">&para;</a></h3>
+<p>​       网络社区(Network Community)被定义为是图结构中有较多内部连接和较少外部连接的点的集合，我们可以根据网络社群对节点进行聚类。</p>
+<h4 id="modularity模块度">Modularity模块度<a class="headerlink" href="#modularity模块度" title="Permanent link">&para;</a></h4>
+<p>​     可以用模块性Modularity这个量来表示一个图是否被很好地被分成几个社群，可以用来检测图分割的质量，如果将图G分割成了若干个部分构成集合S，那么Modularity的计算方法可以表示为：
 $$
-e_v=\frac{n}{C_k^2}=\frac{2n}{k(k-1)}
+\sum_{s\in S}[# e\in s-\mathrm{expected}#e\in s]
+$$
+也就是说对于一个分割中的每一个group，计算其边的数量和应有的边的数量之差并求和。而这里需要一个null model来作为对照，我们可以对一个有n个节点m条边的图G随机生成一个度数分布与之相同的图，并且假设每个节点的度数为<span class="arithmatex">\(k_i\)</span>，则有：
+$$
+\sum_{i=1}^nk_i=2m
+$$
+两个节点i和j之间期望的边的条数是<span class="arithmatex">\(\frac{k_i k_j}{2m}\)</span></p>
+<p>​     这种计算方式在加权图和不加权的图中都可以使用，这样一来就有了计算按照期望应有的边的数量的方式，modularity的计算方式可以表示为：
+$$
+Q(G, S)=\frac{1}{2 m} \sum_{s \in S} \sum_{i \in s} \sum_{j \in s}\left(A_{i j}-\frac{k_{i} k_{j}}{2 m}\right)\in [-1,1]
 $$</p>
 <ul>
-<li>聚类系数某种意义上也可以理解为记录了每个节点与其邻近节点构成的三角形的个数，即对于一个节点v，如果它的两个邻居u和w之间有一条边，那么uvw就构成了一个三角形，而这个三角形被统计到了聚类系数中去</li>
-</ul>
-<h4 id="graphlets">Graphlets<a class="headerlink" href="#graphlets" title="Permanent link">&para;</a></h4>
-<p>​       Graphlets是一种根连通的非同构子图，有如下几个衍生出的概念：</p>
-<p><img alt="image-20210321151423224" src="../static/image-20210321151423224.png" /></p>
-<ul>
-<li>Graphlet Degree Vector(GDV)：基于Graphlets的节点特征，记录了每个节点所能接触到的graphlets的个数，和度数以及聚类系数不同，度数衡量了一个节点能接触到的边的数量，而聚类系数衡量了一个节点能接触到的“三角形”的个数，而GDV记录了以一个节点v为root的所有的graphlet</li>
-</ul>
-<p><img src="static/image-20210321151615675.png" alt="image-20210321151615675" style="zoom:33%;" /></p>
-<ul>
-<li>GDV提供了一个节点的局部网络拓扑结构的衡量方式</li>
-</ul>
-<h3 id="边层面">边层面<a class="headerlink" href="#边层面" title="Permanent link">&para;</a></h3>
-<p>​       图机器学习在边层面的主要任务是基于已经存在的连接来<strong>预测新的连接</strong>，因此关键的问题在于如何设计和表示<strong>一对节点</strong>的特征，一般有两种边预测的场景：</p>
-<ul>
-<li>随机缺失了若干条边，要求将图补全</li>
-<li>随时间会变化的边关系：在时许数据的场景下节点和节点之间的边关系可能会随时间发生变化，这种情况叫做evaluation，一般来说可以用如下步骤来解决时序预测问题：</li>
-<li>对每一个节点对计算一个score C，即一个既定的标准</li>
-<li>根据这个标准来对节点对进行排序</li>
-<li>预测排序中的top-n作为新的边，并进行验证</li>
-</ul>
-<h4 id="基于距离的特征">基于距离的特征<a class="headerlink" href="#基于距离的特征" title="Permanent link">&para;</a></h4>
-<ul>
-<li>用两个节点之间的最短路径距离来表示节点对的特征，但是这种方式没有考虑到邻近点的重合度</li>
-</ul>
-<h4 id="local-neighborhood-overlap">Local Neighborhood Overlap<a class="headerlink" href="#local-neighborhood-overlap" title="Permanent link">&para;</a></h4>
-<p>​       用共同的邻近节点的个数作为一个节点对的特征，对于一个节点v，用<span class="arithmatex">\(N(v)\)</span>表示所有邻近节点构成的集合，那么有这样几种标准：</p>
-<ul>
-<li>共同邻居：</li>
+<li>这个计算方式可以等价地表示成：</li>
 </ul>
 <div class="arithmatex">\[
-｜N(u)\cap N(v)|
+Q=\frac{1}{2m}\sum_{ij}\left(A_{i j}-\frac{k_{i} k_{j}}{2 m}\right)\delta (c_i.c_j)
 \]</div>
 <ul>
-<li>Jaccard系数</li>
+<li>一般来说大于0.3-0.7就可以认为这是一个重要的社群结构，同时我们通过让Q最大化来寻找图中存在的社群。</li>
 </ul>
-<div class="arithmatex">\[
-\frac{｜N(u)\cap N(v)|}{｜N(u)\cup N(v)|}
-\]</div>
-<h4 id="global-neighborhood-overlap">Global Neighborhood Overlap<a class="headerlink" href="#global-neighborhood-overlap" title="Permanent link">&para;</a></h4>
-<p>​       局部的neighborhood overlap在两个节点没有共同邻居的时候始终为0，但这两个节点仍然有可能存在一定的关系，而Local Neighborhood Overlap这些关系的特征，因此就需要Global Neighborhood Overlap</p>
+<h3 id="社区检测算法">社区检测算法<a class="headerlink" href="#社区检测算法" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Katz index：记录两个节点之间所有的路径数，可以使用邻接矩阵来计算，假设临界矩阵为A，其中如果u和v相邻那么<span class="arithmatex">\(A_{uv}=1\)</span>，这样一来<span class="arithmatex">\(A_{uv}^{k}\)</span>就可以表示是否有连接uv的长度为K的路径，因此可以用下面的共识来计算这一特征量：</li>
-</ul>
-<div class="arithmatex">\[
-S_{uv}=\sum_{l=1}^{\inf}\beta ^lA_{uv}^l
-\]</div>
-<ul>
-<li>而Katz index矩阵可以用如下方式来计算：</li>
-</ul>
-<div class="arithmatex">\[
-S=\sum_{i=1}^{\inf}\beta^iA^i=(I-\beta A)^{-1}-I
-\]</div>
-<h3 id="图层面的特征和图kernel">图层面的特征和图kernel<a class="headerlink" href="#图层面的特征和图kernel" title="Permanent link">&para;</a></h3>
-<p>​       目标是提取整张图整体的特征，而传统机器学习中经常使用kernel来进行特征的提取，图也可以使用kernel来进行特征的提取，其核心是一个图特征向量<span class="arithmatex">\(\phi(G)\)</span> </p>
-<h4 id="bow">BoW<a class="headerlink" href="#bow" title="Permanent link">&para;</a></h4>
-<p>​       图kerbel的关键想法是<strong>基于Bag-of-Word(BoW)</strong>BoW原本是指使用单词出现的次数来作为文档的特征，而将其扩展到图上就可以将节点作为“单词”，即可以计算图中各种不同度数的节点的数量，并将结果作为一个多维的向量输出，向量的每一个维度d的值代表了图中度数为d的节点总数</p>
-<h4 id="graphlet特征">Graphlet特征<a class="headerlink" href="#graphlet特征" title="Permanent link">&para;</a></h4>
-<ul>
-<li>可以计算图中不同的graphlet的个数来表示图的特征，但是这里的graphlet和节点层面的不太一样，不需要完全连接，也没有根的概念</li>
-</ul>
-<p><img src="static/image-20210321170512352.png" alt="image-20210321170512352" style="zoom:33%;" /></p>
-<ul>
-<li>对于一个给定的图G，用一个graphlet表来定义graphlet计数向量<span class="arithmatex">\(f_G\in\mathbb R^{n_k}\)</span> ，则：</li>
-</ul>
-<div class="arithmatex">\[
-(f_G)_i=\#(g_i\subset G)
-\]</div>
-<ul>
-<li>graphlet kernel可以定义为：</li>
-</ul>
-<div class="arithmatex">\[
-K(G,G')=f_G^Tf_{G'}
-\]</div>
-<ul>
-<li>如果两张图的size不同会引起结果的失真，那么就可以进行正则化操作，令：</li>
-</ul>
-<div class="arithmatex">\[
-h_G=\frac{f_g}{\sum f_G}\rightarrow K(G,G')=h_G^Th_{G'}
-\]</div>
-<ul>
-<li>这种kernel的问题在于计算graphlet的个数的时间复杂度是非常高的，并且是NP-hard的</li>
+<li>这一部分主要讲了两种社区检测算法，一种是Louvain算法，基于贪心策略，时间复杂度达到了<span class="arithmatex">\(O(N\log N)\)</span>，另一种是可以发现网络结构中的overlapping community的BigCLAM算法，具体的就不深入了解了。</li>
 </ul>
 
   <hr>
@@ -4168,7 +3864,7 @@ h_G=\frac{f_g}{\sum f_G}\rightarrow K(G,G')=h_G^Th_{G'}
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月5日 00:05:13</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月8日 14:48:11</span>
       
         <br>
         创建日期:
