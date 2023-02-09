@@ -14,6 +14,7 @@ nav:
       - Causality01-因果推断与潜在结果框架: Causality/Causality01-PotentialOutcome.md
       - Causality02-潜在结果框架的基本假设: Causality/Causality02-Assumptions.md
       - Causality03-因果图模型: Causality/Causality03-CausalGraph.md
+      - Causality04-结构因果模型: Causality/Causality04-CausalModel.md
   - 🐯 机器学习与数据挖掘:
     - ML/index.md
     - 统计机器学习:
@@ -75,8 +76,9 @@ nav:
     - 数据结构基础: DS/ds.md
     - 高级数据结构与算法分析: DS/ads.md
   - 🐍 论文阅读:
+    - Papers-old/index.md
     - 早期论文阅读:
-      - Papers-old/index.md
+      # - Papers-old/index.md
       - Papers-old/论文阅读笔记01：知识图谱嵌入综述.md
       - Papers-old/论文阅读笔记02：关系抽取文献综述.md
       - Papers-old/论文阅读笔记03：Transformer.md
@@ -110,6 +112,7 @@ nav:
       - Papers-old/论文阅读笔记31：大规模知识图谱对齐LargeEA.md
       - Papers-old/论文阅读笔记32：Prompt.md
       - Papers-old/论文阅读笔记33：结合BERT的知识图谱补全.md
+    - 01-GAN与对比学习的设计: Papers/01-GAN与对比学习的设计.md
   - 🐎 编程语言:
     - PL/index.md
     - C++:
