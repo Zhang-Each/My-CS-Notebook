@@ -2,8 +2,7 @@ nav:
   - 🏡 主页: # 主页/
     - index.md
     - 关于我: about.md
-  # - 🐭 数学基础:
-  - 🐂 概率图模型与因果推断:
+  - 🦔 概率图/因果推断:
     - 概率图模型:
       - PGM/index.md
       - 01. Introduction: PGM/CMU10-708PGM01：Introduction.md
@@ -14,106 +13,108 @@ nav:
       - Causality01-因果推断与潜在结果框架: Causality/Causality01-PotentialOutcome.md
       - Causality02-潜在结果框架的基本假设: Causality/Causality02-Assumptions.md
       - Causality03-因果图模型: Causality/Causality03-CausalGraph.md
-      - Causality04-结构因果模型: Causality/Causality04-CausalModel.md
-  - 🐯 机器学习与数据挖掘:
-    - ML/index.md
-    - 统计机器学习:
-      - 01：机器学习中的基本概念: ML/统计机器学习01：机器学习中的基本概念.md 
-      - 02：贝叶斯定理: ML/统计机器学习02：贝叶斯定理.md
-      - 03：线性模型: ML/统计机器学习03：线性模型.md
-      - 04：感知机: ML/统计机器学习04：感知机.md
-      - 05：支持向量机SVM: ML/统计机器学习05：支持向量机SVM.md
-      - 06：kNN: ML/统计机器学习06：kNN.md
-      - 07：决策树DecisionTree: ML/统计机器学习07：决策树DecisionTree.md
-      - 08：聚类Clustering: ML/统计机器学习08：聚类Clustering.md
-      - 09：提升Boosting与Ensemble: ML/统计机器学习09：提升Boosting与Ensemble.md
-      - 10：EM算法和GMM: ML/统计机器学习10：EM算法和GMM.md
-      - 11：主成分分析PCA: ML/统计机器学习11：主成分分析PCA.md
-      - 12：线性判别分析LDA: ML/统计机器学习12：线性判别分析LDA.md
-      - 13：隐马尔可夫模型: ML/统计机器学习13：隐马尔可夫模型.md
-    - CS246-数据挖掘课程笔记:
-      - ML/CS246/Lecture001.频繁模式和关联规则挖掘.md
-      - ML/CS246/Lecture002.局部敏感性哈希.md
-      - ML/CS246/Lecture003.聚类和降维.md
-      - ML/CS246/Lecture004.推荐系统RecSys.md
-      - ML/CS246/Lecture005.数据流挖掘.md
-      - ML/CS246/Lecture006.计算广告学.md
-  - 🐰 深度学习:
-    - CS231N/index.md
-    - CS231N-神经网络与深度学习:
-      - 01.kNN和线性分类器: CS231N/Stanford-CS231N-Assignment札记1：kNN和线性分类器.md
-      - 02.多层全连接神经网络和优化器: CS231N/Stanford-CS231N-Assignment札记2：多层全连接神经网络和优化器.md
-      - 03.Normalization和DropOut: CS231N/Stanford-CS231N-Assignment札记3：Normalization和DropOut.md
-      - 04.卷积神经网络CNN: CS231N/Stanford-CS231N-Assignment札记4：卷积神经网络CNN.md
-      - 05.RNN&LSTM与图片描述: CS231N/Stanford-CS231N-Assignment札记5：RNN&LSTM与图片描述.md
-      - 06.Transformer与图片描述: CS231N/Stanford-CS231N-Assignment札记6：Transformer与图片描述.md
-      - 07.模型可视化，图像欺诈和GAN: CS231N/Stanford-CS231N-Assignment札记7：模型可视化，图像欺诈和GAN.md
-      - 08.自监督学习与课程总结: CS231N/Stanford-CS231N-Assignment札记8：自监督学习与课程总结.md
-    - CS224W-图机器学习与图神经网络:
-      - CS224W/index.md
-      - 01.导论，传统的图学习方法 : CS224W/CS224W-图机器学习01.md
-      - 02.节点嵌入和PageRank : CS224W/CS224W-图机器学习02.md
-      - 03.消息传递机制 : CS224W/CS224W-图机器学习03.md
-      - 04.图神经网络基础 : CS224W/CS224W-图机器学习04.md
-      - 05.图神经网络的训练和应用，表示能力分析 : CS224W/CS224W-图机器学习05.md
-      - 06.知识图谱，知识图谱推理 : CS224W/CS224W-图机器学习06.md
-      - 07.频繁子图挖掘 : CS224W/CS224W-图机器学习07.md
-      - 08.社区检测 : CS224W/CS224W-图机器学习08.md
-      - 09.图生成模型 : CS224W/CS224W-图机器学习09.md
-      - 10.图神经网络前沿话题 : CS224W/CS224W-图机器学习10.md
-    - CS224N-基于深度学习的自然语言处理:
-      - CS224N/index.md
-      - 01-Introduction&WordVector: CS224N/NLP01-Introduction&WordVector.md
-      - 02-Word2Vec: CS224N/NLP02-Word2Vec.md
-      - 03-DependenceParsing: CS224N/NLP03-DependenceParsing.md
-      - 04-LM&RNN&LSTM: CS224N/NLP04-LM&RNN&LSTM.md
-      - 05-Seq2Seq: CS224N/NLP05-Seq2Seq.md
-      - Assignment1&2: CS224N/Stanford-CS224N-Assignment1&2.md
-      - Assignment3: CS224N/Stanford-CS224N-Assignment3.md
-      - Assignment4: CS224N/Stanford-CS224N-Assignment4.md
-  - 🐲 数据结构与算法:
+      - Causality04-后门调整: Causality/Causality04-Intervention&BackdoorAdjustment.md
+      - Causality05-结构因果模型: Causality/Causality05-StructuralCausalModel.md
+  - 🕊️ 机器学习/深度学习:
+    - 🐯 机器学习与数据挖掘:
+      - ML/index.md
+      - 统计机器学习:
+        - 01：机器学习中的基本概念: ML/统计机器学习01：机器学习中的基本概念.md 
+        - 02：贝叶斯定理: ML/统计机器学习02：贝叶斯定理.md
+        - 03：线性模型: ML/统计机器学习03：线性模型.md
+        - 04：感知机: ML/统计机器学习04：感知机.md
+        - 05：支持向量机SVM: ML/统计机器学习05：支持向量机SVM.md
+        - 06：kNN: ML/统计机器学习06：kNN.md
+        - 07：决策树DecisionTree: ML/统计机器学习07：决策树DecisionTree.md
+        - 08：聚类Clustering: ML/统计机器学习08：聚类Clustering.md
+        - 09：提升Boosting与Ensemble: ML/统计机器学习09：提升Boosting与Ensemble.md
+        - 10：EM算法和GMM: ML/统计机器学习10：EM算法和GMM.md
+        - 11：主成分分析PCA: ML/统计机器学习11：主成分分析PCA.md
+        - 12：线性判别分析LDA: ML/统计机器学习12：线性判别分析LDA.md
+        - 13：隐马尔可夫模型: ML/统计机器学习13：隐马尔可夫模型.md
+      - CS246-数据挖掘课程笔记:
+        - ML/CS246/Lecture001.频繁模式和关联规则挖掘.md
+        - ML/CS246/Lecture002.局部敏感性哈希.md
+        - ML/CS246/Lecture003.聚类和降维.md
+        - ML/CS246/Lecture004.推荐系统RecSys.md
+        - ML/CS246/Lecture005.数据流挖掘.md
+        - ML/CS246/Lecture006.计算广告学.md
+    - 🐰 深度学习:
+      - CS231N/index.md
+      - CS231N-神经网络与深度学习:
+        - 01.kNN和线性分类器: CS231N/Stanford-CS231N-Assignment札记1：kNN和线性分类器.md
+        - 02.多层全连接神经网络和优化器: CS231N/Stanford-CS231N-Assignment札记2：多层全连接神经网络和优化器.md
+        - 03.Normalization和DropOut: CS231N/Stanford-CS231N-Assignment札记3：Normalization和DropOut.md
+        - 04.卷积神经网络CNN: CS231N/Stanford-CS231N-Assignment札记4：卷积神经网络CNN.md
+        - 05.RNN&LSTM与图片描述: CS231N/Stanford-CS231N-Assignment札记5：RNN&LSTM与图片描述.md
+        - 06.Transformer与图片描述: CS231N/Stanford-CS231N-Assignment札记6：Transformer与图片描述.md
+        - 07.模型可视化，图像欺诈和GAN: CS231N/Stanford-CS231N-Assignment札记7：模型可视化，图像欺诈和GAN.md
+        - 08.自监督学习与课程总结: CS231N/Stanford-CS231N-Assignment札记8：自监督学习与课程总结.md
+      - CS224W-图机器学习与图神经网络:
+        - CS224W/index.md
+        - 01.导论，传统的图学习方法 : CS224W/CS224W-图机器学习01.md
+        - 02.节点嵌入和PageRank : CS224W/CS224W-图机器学习02.md
+        - 03.消息传递机制 : CS224W/CS224W-图机器学习03.md
+        - 04.图神经网络基础 : CS224W/CS224W-图机器学习04.md
+        - 05.图神经网络的训练和应用，表示能力分析 : CS224W/CS224W-图机器学习05.md
+        - 06.知识图谱，知识图谱推理 : CS224W/CS224W-图机器学习06.md
+        - 07.频繁子图挖掘 : CS224W/CS224W-图机器学习07.md
+        - 08.社区检测 : CS224W/CS224W-图机器学习08.md
+        - 09.图生成模型 : CS224W/CS224W-图机器学习09.md
+        - 10.图神经网络前沿话题 : CS224W/CS224W-图机器学习10.md
+      - CS224N-基于深度学习的自然语言处理:
+        - CS224N/index.md
+        - 01-Introduction&WordVector: CS224N/NLP01-Introduction&WordVector.md
+        - 02-Word2Vec: CS224N/NLP02-Word2Vec.md
+        - 03-DependenceParsing: CS224N/NLP03-DependenceParsing.md
+        - 04-LM&RNN&LSTM: CS224N/NLP04-LM&RNN&LSTM.md
+        - 05-Seq2Seq: CS224N/NLP05-Seq2Seq.md
+        - Assignment1&2: CS224N/Stanford-CS224N-Assignment1&2.md
+        - Assignment3: CS224N/Stanford-CS224N-Assignment3.md
+        - Assignment4: CS224N/Stanford-CS224N-Assignment4.md
+    - 🐍 论文阅读:
+      - Papers-old/index.md
+      - 早期论文阅读:
+        # - Papers-old/index.md
+        - Papers-old/论文阅读笔记01：知识图谱嵌入综述.md
+        - Papers-old/论文阅读笔记02：关系抽取文献综述.md
+        - Papers-old/论文阅读笔记03：Transformer.md
+        - Papers-old/论文阅读笔记04：Node2Vec.md
+        - Papers-old/论文阅读笔记05：TransE.md
+        - Papers-old/论文阅读笔记06：TransH.md
+        - Papers-old/论文阅读笔记07：GraphVQA.md
+        - Papers-old/论文阅读笔记08：RotatE.md
+        - Papers-old/论文阅读笔记09：GAN4KGE&KBGAN.md
+        - Papers-old/论文阅读笔记10：AffinityDependentNS.md
+        - Papers-old/论文阅读笔记11：StructureAwareNS.md
+        - Papers-old/论文阅读笔记12：PNS.md
+        - Papers-old/论文阅读笔记13：NSCaching.md
+        - Papers-old/论文阅读笔记14：知识图谱路径推理.md
+        - Papers-old/论文阅读笔记15：GraphTransformer.md
+        - Papers-old/论文阅读笔记16：BERT.md
+        - Papers-old/论文阅读笔记17：Rule-Based-KGE.md
+        - Papers-old/论文阅读笔记18：神经符号推理和知识图谱.md
+        - Papers-old/论文阅读笔记19：电商知识图谱预训练.md
+        - Papers-old/论文阅读笔记20：PathCon.md
+        - Papers-old/论文阅读笔记21：FSL4TKG.md
+        - Papers-old/论文阅读笔记22：KG-BERT&K-BERT.md
+        - Papers-old/论文阅读笔记23：Graphformer.md
+        - Papers-old/论文阅读笔记24：多模态知识图谱表示学习.md
+        - Papers-old/论文阅读笔记25：SMORE大规模知识图谱系统.md
+        - Papers-old/论文阅读笔记26：K3M多模态商品知识图谱预训练.md
+        - Papers-old/论文阅读笔记27：图对比学习.md
+        - Papers-old/论文阅读笔记28：多模态BERT.md
+        - Papers-old/论文阅读笔记29：异构GCN.md
+        - Papers-old/论文阅读笔记30：异构分布式机器学习Partial Reduce.md
+        - Papers-old/论文阅读笔记31：大规模知识图谱对齐LargeEA.md
+        - Papers-old/论文阅读笔记32：Prompt.md
+        - Papers-old/论文阅读笔记33：结合BERT的知识图谱补全.md
+      - 01-GAN与对比学习的设计: Papers/01-GAN与对比学习的设计.md
+  - 🦃️ 数据结构/算法:
     - DS/index.md
     - 数据结构基础: DS/ds.md
     - 高级数据结构与算法分析: DS/ads.md
-  - 🐍 论文阅读:
-    - Papers-old/index.md
-    - 早期论文阅读:
-      # - Papers-old/index.md
-      - Papers-old/论文阅读笔记01：知识图谱嵌入综述.md
-      - Papers-old/论文阅读笔记02：关系抽取文献综述.md
-      - Papers-old/论文阅读笔记03：Transformer.md
-      - Papers-old/论文阅读笔记04：Node2Vec.md
-      - Papers-old/论文阅读笔记05：TransE.md
-      - Papers-old/论文阅读笔记06：TransH.md
-      - Papers-old/论文阅读笔记07：GraphVQA.md
-      - Papers-old/论文阅读笔记08：RotatE.md
-      - Papers-old/论文阅读笔记09：GAN4KGE&KBGAN.md
-      - Papers-old/论文阅读笔记10：AffinityDependentNS.md
-      - Papers-old/论文阅读笔记11：StructureAwareNS.md
-      - Papers-old/论文阅读笔记12：PNS.md
-      - Papers-old/论文阅读笔记13：NSCaching.md
-      - Papers-old/论文阅读笔记14：知识图谱路径推理.md
-      - Papers-old/论文阅读笔记15：GraphTransformer.md
-      - Papers-old/论文阅读笔记16：BERT.md
-      - Papers-old/论文阅读笔记17：Rule-Based-KGE.md
-      - Papers-old/论文阅读笔记18：神经符号推理和知识图谱.md
-      - Papers-old/论文阅读笔记19：电商知识图谱预训练.md
-      - Papers-old/论文阅读笔记20：PathCon.md
-      - Papers-old/论文阅读笔记21：FSL4TKG.md
-      - Papers-old/论文阅读笔记22：KG-BERT&K-BERT.md
-      - Papers-old/论文阅读笔记23：Graphformer.md
-      - Papers-old/论文阅读笔记24：多模态知识图谱表示学习.md
-      - Papers-old/论文阅读笔记25：SMORE大规模知识图谱系统.md
-      - Papers-old/论文阅读笔记26：K3M多模态商品知识图谱预训练.md
-      - Papers-old/论文阅读笔记27：图对比学习.md
-      - Papers-old/论文阅读笔记28：多模态BERT.md
-      - Papers-old/论文阅读笔记29：异构GCN.md
-      - Papers-old/论文阅读笔记30：异构分布式机器学习Partial Reduce.md
-      - Papers-old/论文阅读笔记31：大规模知识图谱对齐LargeEA.md
-      - Papers-old/论文阅读笔记32：Prompt.md
-      - Papers-old/论文阅读笔记33：结合BERT的知识图谱补全.md
-    - 01-GAN与对比学习的设计: Papers/01-GAN与对比学习的设计.md
-  - 🐎 编程语言:
+  - 🐊 编程语言:
     - PL/index.md
     - C++:
       - OOP课程笔记: PL/CPP/OOP-Review.md
@@ -125,54 +126,67 @@ nav:
     - Go:
       - PL/Go/Go-01. Go语言的基础语法.md
       - PL/Go/Go-02. Go语言的依赖管理与进阶语法.md
-  - 🐑 计算机系统:
-    - System/index.md
-    - System/00-intro.md
-    - System/01-mips.md
-    - System/02-calculation.md
-    - System/03-cpu.md
-    - System/04-memory.md
-    - System/05-io.md
-  - 🐒 操作系统:
-    - OS/index.md
-    - OS/操作系统0-Linux内核.md
-    - OS/操作系统1-导论.md
-    - OS/操作系统2-进程&线程.md
-    - OS/操作系统3-CPU调度&同步.md
-    - OS/操作系统4-同步和死锁.md
-    - OS/操作系统5-存储.md
-    - OS/操作系统6-文件.md
-    - OS/操作系统7-磁盘和IO.md
-  - 🐓 计算机网络:
-    - Networking/index.md
-    - 计算机网络1-OSI模型: Networking/计算机网络1-OSI模型.md
-    - 计算机网络2-物理层:  Networking/计算机网络2-物理层.md
-    - 计算机网络3-数据链路层&MAC: Networking/计算机网络3-数据链路层&MAC.md
-    - 计算机网络4-网络层: Networking/计算机网络4-网络层.md
-    - 计算机网络5-运输层: Networking/计算机网络5-运输层.md
-    - 计算机网络6-应用层: Networking/计算机网络6-应用层.md
-    - 计算机网络7-网络安全: Networking/计算机网络7-网络安全.md
-  - 🐶 数据库系统:
-    - DB/index.md
-    - ZJU数据库系统课程复习笔记: DB/db.md
-    - CMU15-445 Database Systems:
-      - DB/CMU15-445/index.md
-      - DB/CMU15-445/CMU15-445-01-数据存储.md
-      - DB/CMU15-445/CMU15-445-02-索引.md
-      - DB/CMU15-445/CMU15-445-03-查询处理.md
-      - DB/CMU15-445/CMU15-445-04-查询优化.md
-      - DB/CMU15-445/CMU15-445-05-事务与并发控制.md
-    - MIT6.830 Database Systems Project:
-      - DB/MIT6.830/MIT6.830-lab1-SimpleDB Overview.md
-      - DB/MIT6.830/MIT6.830-lab2-SimpleDB Operators.md
-      - DB/MIT6.830/MIT6.830-lab3-Query Optimizer.md
-      - DB/MIT6.830/MIT6.830-lab4-Transaction.md
-  - 🐷 杂谈与总结:
-    - 杂谈与总结/index.md
-    - I. 2021年度总结: 杂谈与总结/2021年度总结.md
-    - II. 本科前三年的总结: 杂谈与总结/本科前三年的总结.md
-    - III. 对软工专业的课程评价和修改意见: 杂谈与总结/对软工专业的课程评价和修改意见.md
-    - IV. 2022年度总结: 杂谈与总结/2022年度总结.md
+  - 🦖 计算机系统:
+    - 🐑计算机系统原理:
+      - System/index.md
+      - System/00-intro.md
+      - System/01-mips.md
+      - System/02-calculation.md
+      - System/03-cpu.md
+      - System/04-memory.md
+      - System/05-io.md
+    - 🐒 操作系统:
+      - OS/index.md
+      - OS/操作系统0-Linux内核.md
+      - OS/操作系统1-导论.md
+      - OS/操作系统2-进程&线程.md
+      - OS/操作系统3-CPU调度&同步.md
+      - OS/操作系统4-同步和死锁.md
+      - OS/操作系统5-存储.md
+      - OS/操作系统6-文件.md
+      - OS/操作系统7-磁盘和IO.md
+    - 🐓 计算机网络:
+      - Networking/index.md
+      - 计算机网络1-OSI模型: Networking/计算机网络1-OSI模型.md
+      - 计算机网络2-物理层:  Networking/计算机网络2-物理层.md
+      - 计算机网络3-数据链路层&MAC: Networking/计算机网络3-数据链路层&MAC.md
+      - 计算机网络4-网络层: Networking/计算机网络4-网络层.md
+      - 计算机网络5-运输层: Networking/计算机网络5-运输层.md
+      - 计算机网络6-应用层: Networking/计算机网络6-应用层.md
+      - 计算机网络7-网络安全: Networking/计算机网络7-网络安全.md
+    - 🐶 数据库系统:
+      - DB/index.md
+      - ZJU数据库系统课程复习笔记: DB/db.md
+      - CMU15-445 Database Systems:
+        - DB/CMU15-445/index.md
+        - DB/CMU15-445/CMU15-445-01-数据存储.md
+        - DB/CMU15-445/CMU15-445-02-索引.md
+        - DB/CMU15-445/CMU15-445-03-查询处理.md
+        - DB/CMU15-445/CMU15-445-04-查询优化.md
+        - DB/CMU15-445/CMU15-445-05-事务与并发控制.md
+      - MIT6.830 Database Systems Project:
+        - DB/MIT6.830/MIT6.830-lab1-SimpleDB Overview.md
+        - DB/MIT6.830/MIT6.830-lab2-SimpleDB Operators.md
+        - DB/MIT6.830/MIT6.830-lab3-Query Optimizer.md
+        - DB/MIT6.830/MIT6.830-lab4-Transaction.md
+  - 🐳 杂谈与总结:
+    - Gossip/index.md
+    - I. 2021年度总结: Gossip/2021年度总结.md
+    - II. 本科前三年的总结: Gossip/本科前三年的总结.md
+    - III. 对软工专业的课程评价和修改意见: Gossip/对软工专业的课程评价和修改意见.md
+    - IV. Python助教体验: Gossip/Python助教体验.md
+    - V. 2022年度总结: Gossip/2022年度总结.md
+  - 🌾 实习与找工:
+    - Jobs/index.md
+    - 2021春招:
+      - 2021春招阿里云与字节教育部门面经: Jobs/2021spring/intern.md
+      - 面试准备:
+        - MySQL知识整理: Jobs/2021spring/intern1.md
+        - 设计模式: Jobs/2021spring/intern2.md
+        - Java语法: Jobs/2021spring/intern3.md
+        - 操作系统与计算机网络: Jobs/2021spring/intern4.md
+
+    #  Leetcode
 
 site_name: 小角龙的学习记录
 site_url: https://zhang-each.github.io/My-CS-notebook/
