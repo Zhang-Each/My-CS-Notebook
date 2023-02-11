@@ -8,18 +8,20 @@
       
       
       
-        <link rel="canonical" href="https://zhang-each.github.io/My-CS-notebook/%E6%9D%82%E8%B0%88%E4%B8%8E%E6%80%BB%E7%BB%93/2022%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/">
+        <link rel="canonical" href="https://zhang-each.github.io/My-CS-notebook/Causality/Causality05-StructuralCausalModel/">
       
       
-        <link rel="prev" href="../%E5%AF%B9%E8%BD%AF%E5%B7%A5%E4%B8%93%E4%B8%9A%E7%9A%84%E8%AF%BE%E7%A8%8B%E8%AF%84%E4%BB%B7%E5%92%8C%E4%BF%AE%E6%94%B9%E6%84%8F%E8%A7%81/">
+        <link rel="prev" href="../Causality04-Intervention%26BackdoorAdjustment/">
       
+      
+        <link rel="next" href="../../ML/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.11">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.12">
     
     
       
-        <title>IV. 2022年度总结 - 小角龙的学习记录</title>
+        <title>Causality05-结构因果模型 - 小角龙的学习记录</title>
       
     
     
@@ -71,7 +73,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#2022年度总结" class="md-skip">
+        <a href="#causality05-structuralcausalmodel" class="md-skip">
           跳转至
         </a>
       
@@ -104,7 +106,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              IV. 2022年度总结
+              Causality05-结构因果模型
             
           </span>
         </div>
@@ -192,6 +194,8 @@
         
   
   
+    
+  
 
 
   
@@ -203,8 +207,8 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../PGM/" class="md-tabs__link">
-        🐂 概率图模型与因果推断
+      <a href="../../PGM/" class="md-tabs__link md-tabs__link--active">
+        🦔 概率图/因果推断
       </a>
     </li>
   
@@ -216,31 +220,22 @@
   
   
 
+
+  
+  
+  
+    
 
   
   
   
     <li class="md-tabs__item">
       <a href="../../ML/" class="md-tabs__link">
-        🐯 机器学习与数据挖掘
+        🕊️ 机器学习/深度学习
       </a>
     </li>
   
 
-      
-        
-  
-  
-
-
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="../../CS231N/" class="md-tabs__link">
-        🐰 深度学习
-      </a>
-    </li>
   
 
       
@@ -254,23 +249,7 @@
   
     <li class="md-tabs__item">
       <a href="../../DS/" class="md-tabs__link">
-        🐲 数据结构与算法
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-
-
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="../../Papers-old/" class="md-tabs__link">
-        🐍 论文阅读
+        🦃️ 数据结构/算法
       </a>
     </li>
   
@@ -286,7 +265,7 @@
   
     <li class="md-tabs__item">
       <a href="../../PL/" class="md-tabs__link">
-        🐎 编程语言
+        🐊 编程语言
       </a>
     </li>
   
@@ -296,13 +275,36 @@
   
   
 
+
+  
+  
+  
+    
 
   
   
   
     <li class="md-tabs__item">
       <a href="../../System/" class="md-tabs__link">
-        🐑 计算机系统
+        🦖 计算机系统
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Gossip/" class="md-tabs__link">
+        🐳 杂谈与总结
       </a>
     </li>
   
@@ -317,58 +319,8 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../OS/" class="md-tabs__link">
-        🐒 操作系统
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-
-
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="../../Networking/" class="md-tabs__link">
-        🐓 计算机网络
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-
-
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="../../DB/" class="md-tabs__link">
-        🐶 数据库系统
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-    
-  
-
-
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="../" class="md-tabs__link md-tabs__link--active">
-        🐷 杂谈与总结
+      <a href="../../Jobs/" class="md-tabs__link">
+        🌾 实习与找工
       </a>
     </li>
   
@@ -489,14 +441,16 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
       
       
         
@@ -507,14 +461,14 @@
       
       
         <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
-          🐂 概率图模型与因果推断
+          🦔 概率图/因果推断
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_2">
           <span class="md-nav__icon md-icon"></span>
-          🐂 概率图模型与因果推断
+          🦔 概率图/因果推断
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -618,19 +572,23 @@
               
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
       
       
         
           
             
+          
+        
           
         
           
@@ -646,7 +604,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../Causality/">因果推断</a>
+          <a href="../">因果推断</a>
           
             <label for="__nav_2_2">
               <span class="md-nav__icon md-icon"></span>
@@ -654,7 +612,7 @@
           
         </div>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_2_2">
           <span class="md-nav__icon md-icon"></span>
           因果推断
@@ -669,7 +627,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Causality/Causality01-PotentialOutcome/" class="md-nav__link">
+      <a href="../Causality01-PotentialOutcome/" class="md-nav__link">
         Causality01-因果推断与潜在结果框架
       </a>
     </li>
@@ -683,7 +641,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Causality/Causality02-Assumptions/" class="md-nav__link">
+      <a href="../Causality02-Assumptions/" class="md-nav__link">
         Causality02-潜在结果框架的基本假设
       </a>
     </li>
@@ -697,7 +655,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Causality/Causality03-CausalGraph/" class="md-nav__link">
+      <a href="../Causality03-CausalGraph/" class="md-nav__link">
         Causality03-因果图模型
       </a>
     </li>
@@ -711,9 +669,78 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Causality/Causality04-CausalModel/" class="md-nav__link">
-        Causality04-结构因果模型
+      <a href="../Causality04-Intervention%26BackdoorAdjustment/" class="md-nav__link">
+        Causality04-后门调整
       </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Causality05-结构因果模型
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Causality05-结构因果模型
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-structural-equations" class="md-nav__link">
+    1. Structural Equations
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-interventions" class="md-nav__link">
+    2. Interventions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-collider-bias" class="md-nav__link">
+    3. Collider Bias
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -750,6 +777,41 @@
       
         
           
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          🕊️ 机器学习/深度学习
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          🕊️ 机器学习/深度学习
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+      
+      
+        
+          
             
           
         
@@ -764,14 +826,14 @@
         <div class="md-nav__link md-nav__link--index ">
           <a href="../../ML/">🐯 机器学习与数据挖掘</a>
           
-            <label for="__nav_3">
+            <label for="__nav_3_1">
               <span class="md-nav__icon md-icon"></span>
             </label>
           
         </div>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_3">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_1">
           <span class="md-nav__icon md-icon"></span>
           🐯 机器学习与数据挖掘
         </label>
@@ -790,7 +852,7 @@
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_2" >
       
       
         
@@ -822,13 +884,13 @@
         
       
       
-        <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+        <label class="md-nav__link" for="__nav_3_1_2" id="__nav_3_1_2_label" tabindex="0">
           统计机器学习
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_3_2">
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_1_2">
           <span class="md-nav__icon md-icon"></span>
           统计机器学习
         </label>
@@ -1034,7 +1096,7 @@
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_3" >
       
       
         
@@ -1052,13 +1114,13 @@
         
       
       
-        <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+        <label class="md-nav__link" for="__nav_3_1_3" id="__nav_3_1_3_label" tabindex="0">
           CS246-数据挖掘课程笔记
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_3_3">
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_1_3">
           <span class="md-nav__icon md-icon"></span>
           CS246-数据挖掘课程笔记
         </label>
@@ -1160,11 +1222,10 @@
     </li>
   
 
-    
-      
-      
-      
-
+            
+          
+            
+              
   
   
   
@@ -1174,7 +1235,7 @@
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
       
       
         
@@ -1195,14 +1256,14 @@
         <div class="md-nav__link md-nav__link--index ">
           <a href="../../CS231N/">🐰 深度学习</a>
           
-            <label for="__nav_4">
+            <label for="__nav_3_2">
               <span class="md-nav__icon md-icon"></span>
             </label>
           
         </div>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_4">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_2">
           <span class="md-nav__icon md-icon"></span>
           🐰 深度学习
         </label>
@@ -1221,7 +1282,7 @@
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_2" >
       
       
         
@@ -1243,13 +1304,13 @@
         
       
       
-        <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+        <label class="md-nav__link" for="__nav_3_2_2" id="__nav_3_2_2_label" tabindex="0">
           CS231N-神经网络与深度学习
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_4_2">
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_2_2">
           <span class="md-nav__icon md-icon"></span>
           CS231N-神经网络与深度学习
         </label>
@@ -1385,7 +1446,7 @@
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_3" >
       
       
         
@@ -1420,14 +1481,14 @@
         <div class="md-nav__link md-nav__link--index ">
           <a href="../../CS224W/">CS224W-图机器学习与图神经网络</a>
           
-            <label for="__nav_4_3">
+            <label for="__nav_3_2_3">
               <span class="md-nav__icon md-icon"></span>
             </label>
           
         </div>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_4_3">
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_2_3">
           <span class="md-nav__icon md-icon"></span>
           CS224W-图机器学习与图神经网络
         </label>
@@ -1593,7 +1654,7 @@
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_4" >
       
       
         
@@ -1624,14 +1685,14 @@
         <div class="md-nav__link md-nav__link--index ">
           <a href="../../CS224N/">CS224N-基于深度学习的自然语言处理</a>
           
-            <label for="__nav_4_4">
+            <label for="__nav_3_2_4">
               <span class="md-nav__icon md-icon"></span>
             </label>
           
         </div>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_4_4">
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_2_4">
           <span class="md-nav__icon md-icon"></span>
           CS224N-基于深度学习的自然语言处理
         </label>
@@ -1763,11 +1824,10 @@
     </li>
   
 
-    
-      
-      
-      
-
+            
+          
+            
+              
   
   
   
@@ -1777,88 +1837,7 @@
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
-      
-      
-        
-          
-            
-          
-        
-          
-        
-          
-        
-      
-      
-        
-        
-        <div class="md-nav__link md-nav__link--index ">
-          <a href="../../DS/">🐲 数据结构与算法</a>
-          
-            <label for="__nav_5">
-              <span class="md-nav__icon md-icon"></span>
-            </label>
-          
-        </div>
-      
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_5">
-          <span class="md-nav__icon md-icon"></span>
-          🐲 数据结构与算法
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../DS/ds/" class="md-nav__link">
-        数据结构基础
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../DS/ads/" class="md-nav__link">
-        高级数据结构与算法分析
-      </a>
-    </li>
-  
-
-            
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-      
-      
-      
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
       
       
         
@@ -1877,14 +1856,14 @@
         <div class="md-nav__link md-nav__link--index ">
           <a href="../../Papers-old/">🐍 论文阅读</a>
           
-            <label for="__nav_6">
+            <label for="__nav_3_3">
               <span class="md-nav__icon md-icon"></span>
             </label>
           
         </div>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_6">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_3">
           <span class="md-nav__icon md-icon"></span>
           🐍 论文阅读
         </label>
@@ -1903,7 +1882,7 @@
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_2" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_2" >
       
       
         
@@ -1975,13 +1954,13 @@
         
       
       
-        <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
+        <label class="md-nav__link" for="__nav_3_3_2" id="__nav_3_3_2_label" tabindex="0">
           早期论文阅读
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_6_2">
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_3_2">
           <span class="md-nav__icon md-icon"></span>
           早期论文阅读
         </label>
@@ -2475,6 +2454,13 @@
     </li>
   
 
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
     
       
       
@@ -2489,7 +2475,88 @@
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../DS/">🦃️ 数据结构/算法</a>
+          
+            <label for="__nav_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          🦃️ 数据结构/算法
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../DS/ds/" class="md-nav__link">
+        数据结构基础
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../DS/ads/" class="md-nav__link">
+        高级数据结构与算法分析
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
       
       
         
@@ -2508,18 +2575,18 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../PL/">🐎 编程语言</a>
+          <a href="../../PL/">🐊 编程语言</a>
           
-            <label for="__nav_7">
+            <label for="__nav_5">
               <span class="md-nav__icon md-icon"></span>
             </label>
           
         </div>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_7">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5">
           <span class="md-nav__icon md-icon"></span>
-          🐎 编程语言
+          🐊 编程语言
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -2536,7 +2603,7 @@
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
       
       
         
@@ -2544,13 +2611,13 @@
         
       
       
-        <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+        <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
           C++
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_7_2">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5_2">
           <span class="md-nav__icon md-icon"></span>
           C++
         </label>
@@ -2588,7 +2655,7 @@
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_3" >
       
       
         
@@ -2602,13 +2669,13 @@
         
       
       
-        <label class="md-nav__link" for="__nav_7_3" id="__nav_7_3_label" tabindex="0">
+        <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
           Java
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_7_3">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5_3">
           <span class="md-nav__icon md-icon"></span>
           Java
         </label>
@@ -2688,7 +2755,7 @@
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_4" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_4" >
       
       
         
@@ -2698,13 +2765,13 @@
         
       
       
-        <label class="md-nav__link" for="__nav_7_4" id="__nav_7_4_label" tabindex="0">
+        <label class="md-nav__link" for="__nav_5_4" id="__nav_5_4_label" tabindex="0">
           Go
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_4_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_7_4">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5_4">
           <span class="md-nav__icon md-icon"></span>
           Go
         </label>
@@ -2764,7 +2831,44 @@
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+          🦖 计算机系统
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          🦖 计算机系统
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1" >
       
       
         
@@ -2789,18 +2893,18 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../System/">🐑 计算机系统</a>
+          <a href="../../System/">🐑计算机系统原理</a>
           
-            <label for="__nav_8">
+            <label for="__nav_6_1">
               <span class="md-nav__icon md-icon"></span>
             </label>
           
         </div>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_8">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6_1">
           <span class="md-nav__icon md-icon"></span>
-          🐑 计算机系统
+          🐑计算机系统原理
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -2895,11 +2999,10 @@
     </li>
   
 
-    
-      
-      
-      
-
+            
+          
+            
+              
   
   
   
@@ -2909,7 +3012,7 @@
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_2" >
       
       
         
@@ -2940,14 +3043,14 @@
         <div class="md-nav__link md-nav__link--index ">
           <a href="../../OS/">🐒 操作系统</a>
           
-            <label for="__nav_9">
+            <label for="__nav_6_2">
               <span class="md-nav__icon md-icon"></span>
             </label>
           
         </div>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_9">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6_2">
           <span class="md-nav__icon md-icon"></span>
           🐒 操作系统
         </label>
@@ -3072,11 +3175,10 @@
     </li>
   
 
-    
-      
-      
-      
-
+            
+          
+            
+              
   
   
   
@@ -3086,7 +3188,7 @@
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_3" >
       
       
         
@@ -3115,14 +3217,14 @@
         <div class="md-nav__link md-nav__link--index ">
           <a href="../../Networking/">🐓 计算机网络</a>
           
-            <label for="__nav_10">
+            <label for="__nav_6_3">
               <span class="md-nav__icon md-icon"></span>
             </label>
           
         </div>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_10">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6_3">
           <span class="md-nav__icon md-icon"></span>
           🐓 计算机网络
         </label>
@@ -3233,11 +3335,10 @@
     </li>
   
 
-    
-      
-      
-      
-
+            
+          
+            
+              
   
   
   
@@ -3247,7 +3348,7 @@
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_4" >
       
       
         
@@ -3268,14 +3369,14 @@
         <div class="md-nav__link md-nav__link--index ">
           <a href="../../DB/">🐶 数据库系统</a>
           
-            <label for="__nav_11">
+            <label for="__nav_6_4">
               <span class="md-nav__icon md-icon"></span>
             </label>
           
         </div>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_11">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6_4">
           <span class="md-nav__icon md-icon"></span>
           🐶 数据库系统
         </label>
@@ -3308,7 +3409,7 @@
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11_3" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_4_3" >
       
       
         
@@ -3333,14 +3434,14 @@
         <div class="md-nav__link md-nav__link--index ">
           <a href="../../DB/CMU15-445/">CMU15-445 Database Systems</a>
           
-            <label for="__nav_11_3">
+            <label for="__nav_6_4_3">
               <span class="md-nav__icon md-icon"></span>
             </label>
           
         </div>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_11_3_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_11_3">
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_6_4_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6_4_3">
           <span class="md-nav__icon md-icon"></span>
           CMU15-445 Database Systems
         </label>
@@ -3436,7 +3537,7 @@
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11_4" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_4_4" >
       
       
         
@@ -3450,13 +3551,13 @@
         
       
       
-        <label class="md-nav__link" for="__nav_11_4" id="__nav_11_4_label" tabindex="0">
+        <label class="md-nav__link" for="__nav_6_4_4" id="__nav_6_4_4_label" tabindex="0">
           MIT6.830 Database Systems Project
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_11_4_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_11_4">
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_6_4_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6_4_4">
           <span class="md-nav__icon md-icon"></span>
           MIT6.830 Database Systems Project
         </label>
@@ -3530,6 +3631,13 @@
     </li>
   
 
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
     
       
       
@@ -3537,21 +3645,21 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12" checked>
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
       
       
         
           
             
+          
+        
           
         
           
@@ -3567,18 +3675,18 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../">🐷 杂谈与总结</a>
+          <a href="../../Gossip/">🐳 杂谈与总结</a>
           
-            <label for="__nav_12">
+            <label for="__nav_7">
               <span class="md-nav__icon md-icon"></span>
             </label>
           
         </div>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="true">
-        <label class="md-nav__title" for="__nav_12">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_7">
           <span class="md-nav__icon md-icon"></span>
-          🐷 杂谈与总结
+          🐳 杂谈与总结
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -3590,7 +3698,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../2021%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/" class="md-nav__link">
+      <a href="../../Gossip/2021%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/" class="md-nav__link">
         I. 2021年度总结
       </a>
     </li>
@@ -3604,7 +3712,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../%E6%9C%AC%E7%A7%91%E5%89%8D%E4%B8%89%E5%B9%B4%E7%9A%84%E6%80%BB%E7%BB%93/" class="md-nav__link">
+      <a href="../../Gossip/%E6%9C%AC%E7%A7%91%E5%89%8D%E4%B8%89%E5%B9%B4%E7%9A%84%E6%80%BB%E7%BB%93/" class="md-nav__link">
         II. 本科前三年的总结
       </a>
     </li>
@@ -3618,7 +3726,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../%E5%AF%B9%E8%BD%AF%E5%B7%A5%E4%B8%93%E4%B8%9A%E7%9A%84%E8%AF%BE%E7%A8%8B%E8%AF%84%E4%BB%B7%E5%92%8C%E4%BF%AE%E6%94%B9%E6%84%8F%E8%A7%81/" class="md-nav__link">
+      <a href="../../Gossip/%E5%AF%B9%E8%BD%AF%E5%B7%A5%E4%B8%93%E4%B8%9A%E7%9A%84%E8%AF%BE%E7%A8%8B%E8%AF%84%E4%BB%B7%E5%92%8C%E4%BF%AE%E6%94%B9%E6%84%8F%E8%A7%81/" class="md-nav__link">
         III. 对软工专业的课程评价和修改意见
       </a>
     </li>
@@ -3630,21 +3738,230 @@
               
   
   
+  
+    <li class="md-nav__item">
+      <a href="../../Gossip/Python%E5%8A%A9%E6%95%99%E4%BD%93%E9%AA%8C/" class="md-nav__link">
+        IV. Python助教体验
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Gossip/2022%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/" class="md-nav__link">
+        V. 2022年度总结
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
     
-  
-  
-    <li class="md-nav__item md-nav__item--active">
       
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
       
       
         
+          
+            
+          
+        
+          
+        
       
       
-      <a href="./" class="md-nav__link md-nav__link--active">
-        IV. 2022年度总结
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../Jobs/">🌾 实习与找工</a>
+          
+            <label for="__nav_8">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          🌾 实习与找工
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8_2" >
+      
+      
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_8_2" id="__nav_8_2_label" tabindex="0">
+          2021春招
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_8_2">
+          <span class="md-nav__icon md-icon"></span>
+          2021春招
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Jobs/2021spring/intern/" class="md-nav__link">
+        2021春招阿里云与字节教育部门面经
       </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
       
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8_2_2" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_8_2_2" id="__nav_8_2_2_label" tabindex="0">
+          面试准备
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_8_2_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_8_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          面试准备
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Jobs/2021spring/intern1/" class="md-nav__link">
+        MySQL知识整理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Jobs/2021spring/intern2/" class="md-nav__link">
+        设计模式
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Jobs/2021spring/intern3/" class="md-nav__link">
+        Java语法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Jobs/2021spring/intern4/" class="md-nav__link">
+        操作系统与计算机网络
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -3676,6 +3993,35 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-structural-equations" class="md-nav__link">
+    1. Structural Equations
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-interventions" class="md-nav__link">
+    2. Interventions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-collider-bias" class="md-nav__link">
+    3. Collider Bias
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -3693,40 +4039,33 @@
 
 
 
-<h1 id="2022年度总结">2022年度总结<a class="headerlink" href="#2022年度总结" title="Permanent link">&para;</a></h1>
+<h1 id="causality05-structuralcausalmodel">Causality05-StructuralCausalModel<a class="headerlink" href="#causality05-structuralcausalmodel" title="Permanent link">&para;</a></h1>
 <details class="abstract" open="open">
 <summary>本页统计信息</summary>
 <ul>
 <li>
-<p>本页约 1732 个字,  预计阅读时间 6 分钟。</p>
+<p>本页约 80 个字,  预计阅读时间不到 1 分钟。</p>
 </li>
 <li>
 <p><span id="busuanzi_container_page_pv">本页总阅读量<span id="busuanzi_value_page_pv"></span>次</span></p>
 </li>
 </ul>
 </details>
-<p>今天是2022年12月31日，据说这是2022年的最后一天，我坐在寝室的座位上，开始写下对这一年的总结。</p>
-<p>2018年和2019年的12月31日，我在紫云篮球场的跨年晚会中迎来新的一年，而2020年的12月31日则是在寝室度过了百无聊赖的一晚，我记得那天还顺便复习了计算机网络，因为平时没咋学，但是这门课的期末考试又特别的烦人，2021年的12月31日，这时候我已经大四了，刚结束保研没几个月，这一天我也是坐在寝室的电脑前写了一小篇年度总结，没想到2022年的最后一天，我依然在用这种莫名其妙的方式来度过。</p>
-<p>先说好，我不喜欢做什么年终总结。如果说这一年我做出了什么有意义的事情，那总结就有向朋友圈邀功请赏之嫌；如果这一年啥也没干，那我假惺惺地做个总结，故作痛心疾首地感叹为什么这一年啥也没干，第二天醒来依旧继续摆烂，那这样的总结似乎也就没甚意义了。</p>
-<p>我的2022年，以六月底为分界线，被分成了两个部分。前半年主要在忙毕业的事情，说是忙，其实也没有在毕业论文中投入太多的精力，用一个随便的选题加上随便跑的实验结果，再加上随便的行文组织，没想到最后还混了个优秀毕设，反而是毕业前各种麻烦的手续，花了我不少时间。毕业了以后经历了差不多一个暑假的空档期，这期间没干啥正事，天天摸鱼。在研究生开学之后，各种事情又陆陆续续忙了起来。</p>
-<p>本科毕业那段时间，整个人被一种伤春悲秋的氛围笼罩着，特别是到了六月份的时候，前几个月还偶尔花时间写几句毕业论文，六月初的答辩一结束，本科基本就宣告结束了，这时候，我又想起了那个困扰了我三年的问题，我上大学究竟是为了什么？前三年一路战战兢兢过来，是为了保个研，现在保研早已经结束了，我却也找不回上大学的意义和学习的意义了。最后都到本科毕业了，我还是不知道自己为何而学，说起来，也有点可悲。</p>
-<p>最后的离别也略显仓促，虽然六月底大家就已经拿了证书毕业了，但是寝室一直到七月初，还是满员的状态，大家各有各的安排，于是都推迟了离开的时间。最先走的是准备出国留学的腾少，他走的时候已经是半夜了，说是去机场旁边住一晚，第二天一大早就赶飞机回北京，下个月出发赴美，一开始大家都很平静，互相说了一些勉励的话之后目送腾少拖着大包小包的行李走出了寝室门，就可是还没过二十分钟，他又突然破门而入，说是舍不得我们。第二个离校的是琛少，他收拾好东西便踏上了去北京入职的路。第三个走的是我，虽然剩下这两人要本校读研，但我去了别的寝室，也就简单收拾了一下东西，从一舍的三楼搬到了四楼，整理了一下寝室就回家放假了，这意味着我的本科彻底结束了。</p>
-<p>后来九月份，我就正式入学了，研究生的入学无非也是要走一套繁文缛节的流程，先是新生开学典礼，再是各种领导讲话和始业教育，接着开个班会认识一下接下来几年都不一定见得到一次的同班同学，然后选几门莫名其妙的研究生课，研究生的学习生活就正式开始了。但是经过本科四年的洗礼之后，我已经完全变成了老油条，而且由于本校本院读研，实在是缺乏新鲜感，所以我对各种迎新活动完全没有任何兴趣，各种炒冷饭式的研究生课程也只想水水过，毕竟本科阶段的烂课已经品鉴的足够多了，研究生阶段的绩点也不能保研，那就let it go好了。</p>
-<p>真正的学习方面，2022年几乎没怎么像样地学成什么外国公开课，主要是年初的时候花了一些时间学了不少，后面随着毕业设计、正式读研之后，各种繁杂的事务也逐渐忙了起来，学公开课的经历也就大大减少了。</p>
-<p>实验室的工作也在按部就班的进行，主要还是自己想idea，自己写代码跑实验，顺便有空去应付一下华为项目那边的几个傻逼甲方。虽然2022年经历了多次投稿，但是大部分时候投出去的文章都被狠狠拒绝，这当然和我写作水平差，idea的创新度低有关系，但从收到的一些审稿意见来看，他们也确实没有好好看我的论文。到头来只有一片本科毕业论文改的文章中了KDD的Undergraduate Consortium，不过从事后收录的文章来看，这个track基本属于投稿了就会中的水平，因此也就没有什么意义，虽然中了稿，但是因为众所周知的原因，我也没法去线下开会。其他几篇自认为花费了不少心思的文章，依然处于遥遥无期的投稿路上。</p>
-<p>今年开始zyc还开通了学业咨询的业务，主要就是回答一些学弟学妹们提的关于怎么保研、怎么选导师之类的问题，不知道为啥，每过一段时间就会有人来加我QQ问这些问题，特别是九月份的保研技，总的来说还是用心解答了学弟学妹提出的各种问题，但说实话，很多问题我觉得自己也没资格回答，毕竟自己的学业其实也还是一团糟的状态。我不知道自己的回答对他们而言有无益处，不过每次问完过段时间他们也就不再联系我了，想必这就是他们的答复。</p>
-<p>本来以为年终总结能写出什么来，没想到狗嘴里吐不出象牙，写完之后发现还是一滩流水账。</p>
+<p>虽然前面我们使用因果图模型来编码我们提出的因果假设，但事实上我们还是没解释清楚究竟什么是干预，什么是因果机制。这一节我们将介绍结构因果模型，用来解答这些问题。</p>
+<h2 id="1-structural-equations">1. Structural Equations<a class="headerlink" href="#1-structural-equations" title="Permanent link">&para;</a></h2>
+<h2 id="2-interventions">2. Interventions<a class="headerlink" href="#2-interventions" title="Permanent link">&para;</a></h2>
+<h2 id="3-collider-bias">3. Collider Bias<a class="headerlink" href="#3-collider-bias" title="Permanent link">&para;</a></h2>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月5日 00:05:13</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月11日 17:12:20</span>
       
         <br>
         创建日期:
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年1月23日 13:18:04</span>
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月11日 17:12:20</span>
       
     
   </small>
@@ -3867,7 +4206,7 @@
     <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "content.code.annotate", "navigation.tracking", "navigation.indexes", "navigation.top", "toc.follow"], "search": "../../assets/javascripts/workers/search.db81ec45.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.6df46069.min.js"></script>
+      <script src="../../assets/javascripts/bundle.4b2c34cd.min.js"></script>
       
         <script src="../../from_oi_wiki/js/extra.js"></script>
       
