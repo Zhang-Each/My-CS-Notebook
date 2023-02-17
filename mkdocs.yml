@@ -110,6 +110,7 @@ nav:
         - Papers-old/论文阅读笔记32：Prompt.md
         - Papers-old/论文阅读笔记33：结合BERT的知识图谱补全.md
       - 01-GAN与对比学习的设计: Papers/01-GAN与对比学习的设计.md
+      - 02-VAE与CVAE的基本架构: Papers/02-VAE与CVAE的基本架构.md
   - 🦃️ 数据结构/算法:
     - DS/index.md
     - 数据结构基础: DS/ds.md

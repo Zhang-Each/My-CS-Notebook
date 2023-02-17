@@ -12,16 +12,20 @@
 
 ## Skill & Interest
 
-- Languages：C/C++, Java, Python, Go, Rust LaTeX, Markdown, PPT
+- Languages：C/C++, Java, Python, Go, Rust, LaTeX, Markdown, PPT
 - Frameworks: PyTorch, DGL, React, SpringBoot
 - Tools: Linux, VSCode, PyCharm, Obsidian
 - Interest areas: Knowledge Graphs, Natural Language Processing, Multi-modal Machine Learning, Causal Inference, Machine Learning Systems
 
 ## Publication
-- Knowledge Graph Completion with Pre-trained Multimodal Transformer and Twins Negative Sampling. (Accepted by [KDD-2022 Undergraduate consortium](https://kdd.org/kdd2022/), [Arxiv](https://arxiv.org/abs/2209.07084))
+- Knowledge Graph Completion with Pre-trained Multimodal Transformer and Twins Negative Sampling. (First Author, [KDD-2022 Undergraduate consortium](https://kdd.org/kdd2022/), [paper](https://arxiv.org/abs/2209.07084))
+- Tele-Knowledge Pre-training for Fault Analysis. (ICDE-2023 Industry Track, [paper](https://arxiv.org/abs/2210.11298))
 
 ## Projects
 - NeuralKG: An Open Source Library for Diverse Representation Learning of Knowledge Graphs. [Github](https://github.com/zjukg/NeuralKG)
+
+## Internship
+- TBD
 
 ## Stats
 
