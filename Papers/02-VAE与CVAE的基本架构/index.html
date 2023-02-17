@@ -8,27 +8,27 @@
       
       
       
-        <link rel="canonical" href="https://zhang-each.github.io/My-CS-notebook/Networking/">
+        <link rel="canonical" href="https://zhang-each.github.io/My-CS-notebook/Papers/02-VAE%E4%B8%8ECVAE%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%9E%B6%E6%9E%84/">
       
       
-        <link rel="prev" href="../OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F7-%E7%A3%81%E7%9B%98%E5%92%8CIO/">
+        <link rel="prev" href="../01-GAN%E4%B8%8E%E5%AF%B9%E6%AF%94%E5%AD%A6%E4%B9%A0%E7%9A%84%E8%AE%BE%E8%AE%A1/">
       
       
-        <link rel="next" href="%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C1-OSI%E6%A8%A1%E5%9E%8B/">
+        <link rel="next" href="../../DS/">
       
-      <link rel="icon" href="../assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.12">
     
     
       
-        <title>计算机网络 - 小角龙的学习记录</title>
+        <title>02-VAE与CVAE的基本架构 - 小角龙的学习记录</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.0d440cfe.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.0d440cfe.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.2505c338.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.2505c338.min.css">
       
       
 
@@ -44,11 +44,11 @@
       
     
     
-      <link rel="stylesheet" href="../from_oi_wiki/css/extra.css?v=13">
+      <link rel="stylesheet" href="../../from_oi_wiki/css/extra.css?v=13">
     
-      <link rel="stylesheet" href="../css/status.css">
+      <link rel="stylesheet" href="../../css/status.css">
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -73,7 +73,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#计算机网络" class="md-skip">
+        <a href="#vae与cvae的基本架构" class="md-skip">
           跳转至
         </a>
       
@@ -87,7 +87,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="页眉">
-    <a href=".." title="小角龙的学习记录" class="md-header__button md-logo" aria-label="小角龙的学习记录" data-md-component="logo">
+    <a href="../.." title="小角龙的学习记录" class="md-header__button md-logo" aria-label="小角龙的学习记录" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -106,7 +106,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              计算机网络
+              02-VAE与CVAE的基本架构
             
           </span>
         </div>
@@ -184,7 +184,7 @@
   
   
     <li class="md-tabs__item">
-      <a href=".." class="md-tabs__link">
+      <a href="../.." class="md-tabs__link">
         🏡 主页
       </a>
     </li>
@@ -205,7 +205,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../PGM/" class="md-tabs__link">
+      <a href="../../PGM/" class="md-tabs__link">
         🦔 概率图/因果推断
       </a>
     </li>
@@ -216,6 +216,8 @@
       
         
   
+  
+    
   
 
 
@@ -228,7 +230,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../ML/" class="md-tabs__link">
+      <a href="../../ML/" class="md-tabs__link md-tabs__link--active">
         🕊️ 机器学习/深度学习
       </a>
     </li>
@@ -246,7 +248,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../DS/" class="md-tabs__link">
+      <a href="../../DS/" class="md-tabs__link">
         🦃️ 数据结构/算法
       </a>
     </li>
@@ -262,7 +264,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../PL/" class="md-tabs__link">
+      <a href="../../PL/" class="md-tabs__link">
         🐊 编程语言
       </a>
     </li>
@@ -271,8 +273,6 @@
       
         
   
-  
-    
   
 
 
@@ -285,7 +285,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../System/" class="md-tabs__link md-tabs__link--active">
+      <a href="../../System/" class="md-tabs__link">
         🦖 计算机系统
       </a>
     </li>
@@ -303,7 +303,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../Gossip/" class="md-tabs__link">
+      <a href="../../Gossip/" class="md-tabs__link">
         🐳 杂谈与总结
       </a>
     </li>
@@ -319,7 +319,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../Jobs/" class="md-tabs__link">
+      <a href="../../Jobs/" class="md-tabs__link">
         🌾 实习与找工
       </a>
     </li>
@@ -347,7 +347,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="小角龙的学习记录" class="md-nav__button md-logo" aria-label="小角龙的学习记录" data-md-component="logo">
+    <a href="../.." title="小角龙的学习记录" class="md-nav__button md-logo" aria-label="小角龙的学习记录" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -398,7 +398,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="..">🏡 主页</a>
+          <a href="../..">🏡 主页</a>
           
             <label for="__nav_1">
               <span class="md-nav__icon md-icon"></span>
@@ -421,7 +421,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../about/" class="md-nav__link">
+      <a href="../../about/" class="md-nav__link">
         关于我
       </a>
     </li>
@@ -500,7 +500,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../PGM/">概率图模型</a>
+          <a href="../../PGM/">概率图模型</a>
           
             <label for="__nav_2_1">
               <span class="md-nav__icon md-icon"></span>
@@ -523,7 +523,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../PGM/CMU10-708PGM01%EF%BC%9AIntroduction/" class="md-nav__link">
+      <a href="../../PGM/CMU10-708PGM01%EF%BC%9AIntroduction/" class="md-nav__link">
         01. Introduction
       </a>
     </li>
@@ -537,7 +537,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../PGM/CMU10-708PGM02%EF%BC%9AGM/" class="md-nav__link">
+      <a href="../../PGM/CMU10-708PGM02%EF%BC%9AGM/" class="md-nav__link">
         02. Directed Graph Model
       </a>
     </li>
@@ -551,7 +551,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../PGM/CMU10-708PGM03%EF%BC%9AExact%20Inference/" class="md-nav__link">
+      <a href="../../PGM/CMU10-708PGM03%EF%BC%9AExact%20Inference/" class="md-nav__link">
         03. Exact Inference
       </a>
     </li>
@@ -600,7 +600,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../Causality/">因果推断</a>
+          <a href="../../Causality/">因果推断</a>
           
             <label for="__nav_2_2">
               <span class="md-nav__icon md-icon"></span>
@@ -623,7 +623,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Causality/Causality01-PotentialOutcome/" class="md-nav__link">
+      <a href="../../Causality/Causality01-PotentialOutcome/" class="md-nav__link">
         Causality01-因果推断与潜在结果框架
       </a>
     </li>
@@ -637,7 +637,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Causality/Causality02-Assumptions/" class="md-nav__link">
+      <a href="../../Causality/Causality02-Assumptions/" class="md-nav__link">
         Causality02-潜在结果框架的基本假设
       </a>
     </li>
@@ -651,7 +651,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Causality/Causality03-CausalGraph/" class="md-nav__link">
+      <a href="../../Causality/Causality03-CausalGraph/" class="md-nav__link">
         Causality03-因果图模型
       </a>
     </li>
@@ -665,7 +665,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Causality/Causality04-Intervention%26BackdoorAdjustment/" class="md-nav__link">
+      <a href="../../Causality/Causality04-Intervention%26BackdoorAdjustment/" class="md-nav__link">
         Causality04-后门调整
       </a>
     </li>
@@ -679,7 +679,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Causality/Causality05-StructuralCausalModel/" class="md-nav__link">
+      <a href="../../Causality/Causality05-StructuralCausalModel/" class="md-nav__link">
         Causality05-结构因果模型
       </a>
     </li>
@@ -706,14 +706,16 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
       
       
         
@@ -730,7 +732,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_3">
           <span class="md-nav__icon md-icon"></span>
           🕊️ 机器学习/深度学习
@@ -765,7 +767,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../ML/">🐯 机器学习与数据挖掘</a>
+          <a href="../../ML/">🐯 机器学习与数据挖掘</a>
           
             <label for="__nav_3_1">
               <span class="md-nav__icon md-icon"></span>
@@ -843,7 +845,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A001%EF%BC%9A%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" class="md-nav__link">
+      <a href="../../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A001%EF%BC%9A%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" class="md-nav__link">
         01：机器学习中的基本概念
       </a>
     </li>
@@ -857,7 +859,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A002%EF%BC%9A%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%AE%9A%E7%90%86/" class="md-nav__link">
+      <a href="../../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A002%EF%BC%9A%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%AE%9A%E7%90%86/" class="md-nav__link">
         02：贝叶斯定理
       </a>
     </li>
@@ -871,7 +873,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A003%EF%BC%9A%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/" class="md-nav__link">
+      <a href="../../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A003%EF%BC%9A%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/" class="md-nav__link">
         03：线性模型
       </a>
     </li>
@@ -885,7 +887,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A004%EF%BC%9A%E6%84%9F%E7%9F%A5%E6%9C%BA/" class="md-nav__link">
+      <a href="../../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A004%EF%BC%9A%E6%84%9F%E7%9F%A5%E6%9C%BA/" class="md-nav__link">
         04：感知机
       </a>
     </li>
@@ -899,7 +901,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A005%EF%BC%9A%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BASVM/" class="md-nav__link">
+      <a href="../../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A005%EF%BC%9A%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BASVM/" class="md-nav__link">
         05：支持向量机SVM
       </a>
     </li>
@@ -913,7 +915,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A006%EF%BC%9AkNN/" class="md-nav__link">
+      <a href="../../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A006%EF%BC%9AkNN/" class="md-nav__link">
         06：kNN
       </a>
     </li>
@@ -927,7 +929,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A007%EF%BC%9A%E5%86%B3%E7%AD%96%E6%A0%91DecisionTree/" class="md-nav__link">
+      <a href="../../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A007%EF%BC%9A%E5%86%B3%E7%AD%96%E6%A0%91DecisionTree/" class="md-nav__link">
         07：决策树DecisionTree
       </a>
     </li>
@@ -941,7 +943,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A008%EF%BC%9A%E8%81%9A%E7%B1%BBClustering/" class="md-nav__link">
+      <a href="../../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A008%EF%BC%9A%E8%81%9A%E7%B1%BBClustering/" class="md-nav__link">
         08：聚类Clustering
       </a>
     </li>
@@ -955,7 +957,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A009%EF%BC%9A%E6%8F%90%E5%8D%87Boosting%E4%B8%8EEnsemble/" class="md-nav__link">
+      <a href="../../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A009%EF%BC%9A%E6%8F%90%E5%8D%87Boosting%E4%B8%8EEnsemble/" class="md-nav__link">
         09：提升Boosting与Ensemble
       </a>
     </li>
@@ -969,7 +971,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A010%EF%BC%9AEM%E7%AE%97%E6%B3%95%E5%92%8CGMM/" class="md-nav__link">
+      <a href="../../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A010%EF%BC%9AEM%E7%AE%97%E6%B3%95%E5%92%8CGMM/" class="md-nav__link">
         10：EM算法和GMM
       </a>
     </li>
@@ -983,7 +985,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A011%EF%BC%9A%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90PCA/" class="md-nav__link">
+      <a href="../../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A011%EF%BC%9A%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90PCA/" class="md-nav__link">
         11：主成分分析PCA
       </a>
     </li>
@@ -997,7 +999,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A012%EF%BC%9A%E7%BA%BF%E6%80%A7%E5%88%A4%E5%88%AB%E5%88%86%E6%9E%90LDA/" class="md-nav__link">
+      <a href="../../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A012%EF%BC%9A%E7%BA%BF%E6%80%A7%E5%88%A4%E5%88%AB%E5%88%86%E6%9E%90LDA/" class="md-nav__link">
         12：线性判别分析LDA
       </a>
     </li>
@@ -1011,7 +1013,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A013%EF%BC%9A%E9%9A%90%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E6%A8%A1%E5%9E%8B/" class="md-nav__link">
+      <a href="../../ML/%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A013%EF%BC%9A%E9%9A%90%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E6%A8%A1%E5%9E%8B/" class="md-nav__link">
         13：隐马尔可夫模型
       </a>
     </li>
@@ -1073,7 +1075,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ML/CS246/Lecture001.%E9%A2%91%E7%B9%81%E6%A8%A1%E5%BC%8F%E5%92%8C%E5%85%B3%E8%81%94%E8%A7%84%E5%88%99%E6%8C%96%E6%8E%98/" class="md-nav__link">
+      <a href="../../ML/CS246/Lecture001.%E9%A2%91%E7%B9%81%E6%A8%A1%E5%BC%8F%E5%92%8C%E5%85%B3%E8%81%94%E8%A7%84%E5%88%99%E6%8C%96%E6%8E%98/" class="md-nav__link">
         Introduction: MapReduce and Spark
       </a>
     </li>
@@ -1087,7 +1089,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ML/CS246/Lecture002.%E5%B1%80%E9%83%A8%E6%95%8F%E6%84%9F%E6%80%A7%E5%93%88%E5%B8%8C/" class="md-nav__link">
+      <a href="../../ML/CS246/Lecture002.%E5%B1%80%E9%83%A8%E6%95%8F%E6%84%9F%E6%80%A7%E5%93%88%E5%B8%8C/" class="md-nav__link">
         局部敏感哈希
       </a>
     </li>
@@ -1101,7 +1103,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ML/CS246/Lecture003.%E8%81%9A%E7%B1%BB%E5%92%8C%E9%99%8D%E7%BB%B4/" class="md-nav__link">
+      <a href="../../ML/CS246/Lecture003.%E8%81%9A%E7%B1%BB%E5%92%8C%E9%99%8D%E7%BB%B4/" class="md-nav__link">
         聚类和降维
       </a>
     </li>
@@ -1115,7 +1117,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ML/CS246/Lecture004.%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9FRecSys/" class="md-nav__link">
+      <a href="../../ML/CS246/Lecture004.%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9FRecSys/" class="md-nav__link">
         推荐系统RecSys
       </a>
     </li>
@@ -1129,7 +1131,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ML/CS246/Lecture005.%E6%95%B0%E6%8D%AE%E6%B5%81%E6%8C%96%E6%8E%98/" class="md-nav__link">
+      <a href="../../ML/CS246/Lecture005.%E6%95%B0%E6%8D%AE%E6%B5%81%E6%8C%96%E6%8E%98/" class="md-nav__link">
         数据流挖掘
       </a>
     </li>
@@ -1143,7 +1145,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ML/CS246/Lecture006.%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E5%AD%A6/" class="md-nav__link">
+      <a href="../../ML/CS246/Lecture006.%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E5%AD%A6/" class="md-nav__link">
         计算广告学
       </a>
     </li>
@@ -1195,7 +1197,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../CS231N/">🐰 深度学习</a>
+          <a href="../../CS231N/">🐰 深度学习</a>
           
             <label for="__nav_3_2">
               <span class="md-nav__icon md-icon"></span>
@@ -1263,7 +1265,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B01%EF%BC%9AkNN%E5%92%8C%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB%E5%99%A8/" class="md-nav__link">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B01%EF%BC%9AkNN%E5%92%8C%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB%E5%99%A8/" class="md-nav__link">
         01.kNN和线性分类器
       </a>
     </li>
@@ -1277,7 +1279,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B02%EF%BC%9A%E5%A4%9A%E5%B1%82%E5%85%A8%E8%BF%9E%E6%8E%A5%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%92%8C%E4%BC%98%E5%8C%96%E5%99%A8/" class="md-nav__link">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B02%EF%BC%9A%E5%A4%9A%E5%B1%82%E5%85%A8%E8%BF%9E%E6%8E%A5%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%92%8C%E4%BC%98%E5%8C%96%E5%99%A8/" class="md-nav__link">
         02.多层全连接神经网络和优化器
       </a>
     </li>
@@ -1291,7 +1293,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B03%EF%BC%9ANormalization%E5%92%8CDropOut/" class="md-nav__link">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B03%EF%BC%9ANormalization%E5%92%8CDropOut/" class="md-nav__link">
         03.Normalization和DropOut
       </a>
     </li>
@@ -1305,7 +1307,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B04%EF%BC%9A%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9CCNN/" class="md-nav__link">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B04%EF%BC%9A%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9CCNN/" class="md-nav__link">
         04.卷积神经网络CNN
       </a>
     </li>
@@ -1319,7 +1321,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B05%EF%BC%9ARNN%26LSTM%E4%B8%8E%E5%9B%BE%E7%89%87%E6%8F%8F%E8%BF%B0/" class="md-nav__link">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B05%EF%BC%9ARNN%26LSTM%E4%B8%8E%E5%9B%BE%E7%89%87%E6%8F%8F%E8%BF%B0/" class="md-nav__link">
         05.RNN&LSTM与图片描述
       </a>
     </li>
@@ -1333,7 +1335,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B06%EF%BC%9ATransformer%E4%B8%8E%E5%9B%BE%E7%89%87%E6%8F%8F%E8%BF%B0/" class="md-nav__link">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B06%EF%BC%9ATransformer%E4%B8%8E%E5%9B%BE%E7%89%87%E6%8F%8F%E8%BF%B0/" class="md-nav__link">
         06.Transformer与图片描述
       </a>
     </li>
@@ -1347,7 +1349,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B07%EF%BC%9A%E6%A8%A1%E5%9E%8B%E5%8F%AF%E8%A7%86%E5%8C%96%EF%BC%8C%E5%9B%BE%E5%83%8F%E6%AC%BA%E8%AF%88%E5%92%8CGAN/" class="md-nav__link">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B07%EF%BC%9A%E6%A8%A1%E5%9E%8B%E5%8F%AF%E8%A7%86%E5%8C%96%EF%BC%8C%E5%9B%BE%E5%83%8F%E6%AC%BA%E8%AF%88%E5%92%8CGAN/" class="md-nav__link">
         07.模型可视化，图像欺诈和GAN
       </a>
     </li>
@@ -1361,7 +1363,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B08%EF%BC%9A%E8%87%AA%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%E4%B8%8E%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/" class="md-nav__link">
+      <a href="../../CS231N/Stanford-CS231N-Assignment%E6%9C%AD%E8%AE%B08%EF%BC%9A%E8%87%AA%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%E4%B8%8E%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/" class="md-nav__link">
         08.自监督学习与课程总结
       </a>
     </li>
@@ -1420,7 +1422,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../CS224W/">CS224W-图机器学习与图神经网络</a>
+          <a href="../../CS224W/">CS224W-图机器学习与图神经网络</a>
           
             <label for="__nav_3_2_3">
               <span class="md-nav__icon md-icon"></span>
@@ -1443,7 +1445,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../CS224W/CS224W-%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A001/" class="md-nav__link">
+      <a href="../../CS224W/CS224W-%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A001/" class="md-nav__link">
         01.导论，传统的图学习方法
       </a>
     </li>
@@ -1457,7 +1459,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../CS224W/CS224W-%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A002/" class="md-nav__link">
+      <a href="../../CS224W/CS224W-%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A002/" class="md-nav__link">
         02.节点嵌入和PageRank
       </a>
     </li>
@@ -1471,7 +1473,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../CS224W/CS224W-%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A003/" class="md-nav__link">
+      <a href="../../CS224W/CS224W-%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A003/" class="md-nav__link">
         03.消息传递机制
       </a>
     </li>
@@ -1485,7 +1487,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../CS224W/CS224W-%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A004/" class="md-nav__link">
+      <a href="../../CS224W/CS224W-%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A004/" class="md-nav__link">
         04.图神经网络基础
       </a>
     </li>
@@ -1499,7 +1501,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../CS224W/CS224W-%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A005/" class="md-nav__link">
+      <a href="../../CS224W/CS224W-%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A005/" class="md-nav__link">
         05.图神经网络的训练和应用，表示能力分析
       </a>
     </li>
@@ -1513,7 +1515,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../CS224W/CS224W-%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A006/" class="md-nav__link">
+      <a href="../../CS224W/CS224W-%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A006/" class="md-nav__link">
         06.知识图谱，知识图谱推理
       </a>
     </li>
@@ -1527,7 +1529,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../CS224W/CS224W-%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A007/" class="md-nav__link">
+      <a href="../../CS224W/CS224W-%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A007/" class="md-nav__link">
         07.频繁子图挖掘
       </a>
     </li>
@@ -1541,7 +1543,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../CS224W/CS224W-%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A008/" class="md-nav__link">
+      <a href="../../CS224W/CS224W-%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A008/" class="md-nav__link">
         08.社区检测
       </a>
     </li>
@@ -1555,7 +1557,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../CS224W/CS224W-%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A009/" class="md-nav__link">
+      <a href="../../CS224W/CS224W-%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A009/" class="md-nav__link">
         09.图生成模型
       </a>
     </li>
@@ -1569,7 +1571,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../CS224W/CS224W-%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A010/" class="md-nav__link">
+      <a href="../../CS224W/CS224W-%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A010/" class="md-nav__link">
         10.图神经网络前沿话题
       </a>
     </li>
@@ -1624,7 +1626,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../CS224N/">CS224N-基于深度学习的自然语言处理</a>
+          <a href="../../CS224N/">CS224N-基于深度学习的自然语言处理</a>
           
             <label for="__nav_3_2_4">
               <span class="md-nav__icon md-icon"></span>
@@ -1647,7 +1649,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../CS224N/NLP01-Introduction%26WordVector/" class="md-nav__link">
+      <a href="../../CS224N/NLP01-Introduction%26WordVector/" class="md-nav__link">
         01-Introduction&WordVector
       </a>
     </li>
@@ -1661,7 +1663,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../CS224N/NLP02-Word2Vec/" class="md-nav__link">
+      <a href="../../CS224N/NLP02-Word2Vec/" class="md-nav__link">
         02-Word2Vec
       </a>
     </li>
@@ -1675,7 +1677,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../CS224N/NLP03-DependenceParsing/" class="md-nav__link">
+      <a href="../../CS224N/NLP03-DependenceParsing/" class="md-nav__link">
         03-DependenceParsing
       </a>
     </li>
@@ -1689,7 +1691,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../CS224N/NLP04-LM%26RNN%26LSTM/" class="md-nav__link">
+      <a href="../../CS224N/NLP04-LM%26RNN%26LSTM/" class="md-nav__link">
         04-LM&RNN&LSTM
       </a>
     </li>
@@ -1703,7 +1705,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../CS224N/NLP05-Seq2Seq/" class="md-nav__link">
+      <a href="../../CS224N/NLP05-Seq2Seq/" class="md-nav__link">
         05-Seq2Seq
       </a>
     </li>
@@ -1717,7 +1719,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../CS224N/Stanford-CS224N-Assignment1%262/" class="md-nav__link">
+      <a href="../../CS224N/Stanford-CS224N-Assignment1%262/" class="md-nav__link">
         Assignment1&2
       </a>
     </li>
@@ -1731,7 +1733,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../CS224N/Stanford-CS224N-Assignment3/" class="md-nav__link">
+      <a href="../../CS224N/Stanford-CS224N-Assignment3/" class="md-nav__link">
         Assignment3
       </a>
     </li>
@@ -1745,7 +1747,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../CS224N/Stanford-CS224N-Assignment4/" class="md-nav__link">
+      <a href="../../CS224N/Stanford-CS224N-Assignment4/" class="md-nav__link">
         Assignment4
       </a>
     </li>
@@ -1771,14 +1773,16 @@
               
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" checked>
       
       
         
@@ -1797,7 +1801,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../Papers-old/">🐍 论文阅读</a>
+          <a href="../../Papers-old/">🐍 论文阅读</a>
           
             <label for="__nav_3_3">
               <span class="md-nav__icon md-icon"></span>
@@ -1805,7 +1809,7 @@
           
         </div>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_3_3">
           <span class="md-nav__icon md-icon"></span>
           🐍 论文阅读
@@ -1915,7 +1919,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B001%EF%BC%9A%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%B5%8C%E5%85%A5%E7%BB%BC%E8%BF%B0/" class="md-nav__link">
+      <a href="../../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B001%EF%BC%9A%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%B5%8C%E5%85%A5%E7%BB%BC%E8%BF%B0/" class="md-nav__link">
         论文阅读笔记1：知识图谱嵌入综述
       </a>
     </li>
@@ -1929,7 +1933,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B002%EF%BC%9A%E5%85%B3%E7%B3%BB%E6%8A%BD%E5%8F%96%E6%96%87%E7%8C%AE%E7%BB%BC%E8%BF%B0/" class="md-nav__link">
+      <a href="../../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B002%EF%BC%9A%E5%85%B3%E7%B3%BB%E6%8A%BD%E5%8F%96%E6%96%87%E7%8C%AE%E7%BB%BC%E8%BF%B0/" class="md-nav__link">
         论文阅读笔记2：关系抽取文献综述
       </a>
     </li>
@@ -1943,7 +1947,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B003%EF%BC%9ATransformer/" class="md-nav__link">
+      <a href="../../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B003%EF%BC%9ATransformer/" class="md-nav__link">
         论文阅读笔记3：Transformer
       </a>
     </li>
@@ -1957,7 +1961,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B004%EF%BC%9ANode2Vec/" class="md-nav__link">
+      <a href="../../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B004%EF%BC%9ANode2Vec/" class="md-nav__link">
         论文阅读笔记4：Node2Vec
       </a>
     </li>
@@ -1971,7 +1975,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B005%EF%BC%9ATransE/" class="md-nav__link">
+      <a href="../../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B005%EF%BC%9ATransE/" class="md-nav__link">
         论文阅读笔记5：TransE
       </a>
     </li>
@@ -1985,7 +1989,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B006%EF%BC%9ATransH/" class="md-nav__link">
+      <a href="../../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B006%EF%BC%9ATransH/" class="md-nav__link">
         论文阅读笔记6：TransH
       </a>
     </li>
@@ -1999,7 +2003,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B007%EF%BC%9AGraphVQA/" class="md-nav__link">
+      <a href="../../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B007%EF%BC%9AGraphVQA/" class="md-nav__link">
         论文阅读笔记7：GraphVQA
       </a>
     </li>
@@ -2013,7 +2017,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B008%EF%BC%9ARotatE/" class="md-nav__link">
+      <a href="../../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B008%EF%BC%9ARotatE/" class="md-nav__link">
         论文阅读笔记8：RotatE
       </a>
     </li>
@@ -2027,7 +2031,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B009%EF%BC%9AGAN4KGE%26KBGAN/" class="md-nav__link">
+      <a href="../../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B009%EF%BC%9AGAN4KGE%26KBGAN/" class="md-nav__link">
         论文阅读笔记9：GAN4KGE&KBGAN
       </a>
     </li>
@@ -2041,7 +2045,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B010%EF%BC%9AAffinityDependentNS/" class="md-nav__link">
+      <a href="../../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B010%EF%BC%9AAffinityDependentNS/" class="md-nav__link">
         论文阅读笔记10：AffinityDependentNS
       </a>
     </li>
@@ -2055,7 +2059,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B011%EF%BC%9AStructureAwareNS/" class="md-nav__link">
+      <a href="../../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B011%EF%BC%9AStructureAwareNS/" class="md-nav__link">
         论文阅读笔记11：StructureAwareNS
       </a>
     </li>
@@ -2069,7 +2073,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B012%EF%BC%9APNS/" class="md-nav__link">
+      <a href="../../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B012%EF%BC%9APNS/" class="md-nav__link">
         论文阅读笔记12：PNS
       </a>
     </li>
@@ -2083,7 +2087,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B013%EF%BC%9ANSCaching/" class="md-nav__link">
+      <a href="../../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B013%EF%BC%9ANSCaching/" class="md-nav__link">
         论文阅读笔记13：NSCaching
       </a>
     </li>
@@ -2097,7 +2101,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B014%EF%BC%9A%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E8%B7%AF%E5%BE%84%E6%8E%A8%E7%90%86/" class="md-nav__link">
+      <a href="../../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B014%EF%BC%9A%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E8%B7%AF%E5%BE%84%E6%8E%A8%E7%90%86/" class="md-nav__link">
         论文阅读笔记14：知识图谱路径推理
       </a>
     </li>
@@ -2111,7 +2115,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B015%EF%BC%9AGraphTransformer/" class="md-nav__link">
+      <a href="../../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B015%EF%BC%9AGraphTransformer/" class="md-nav__link">
         论文阅读笔记15：GraphTransformer
       </a>
     </li>
@@ -2125,7 +2129,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B016%EF%BC%9ABERT/" class="md-nav__link">
+      <a href="../../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B016%EF%BC%9ABERT/" class="md-nav__link">
         论文阅读笔记16：BERT
       </a>
     </li>
@@ -2139,7 +2143,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B017%EF%BC%9ARule-Based-KGE/" class="md-nav__link">
+      <a href="../../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B017%EF%BC%9ARule-Based-KGE/" class="md-nav__link">
         论文阅读笔记17：Rule-Based-KGE
       </a>
     </li>
@@ -2153,7 +2157,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B018%EF%BC%9A%E7%A5%9E%E7%BB%8F%E7%AC%A6%E5%8F%B7%E6%8E%A8%E7%90%86%E5%92%8C%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/" class="md-nav__link">
+      <a href="../../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B018%EF%BC%9A%E7%A5%9E%E7%BB%8F%E7%AC%A6%E5%8F%B7%E6%8E%A8%E7%90%86%E5%92%8C%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/" class="md-nav__link">
         论文阅读笔记18：神经符号推理和知识图谱
       </a>
     </li>
@@ -2167,7 +2171,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B019%EF%BC%9A%E7%94%B5%E5%95%86%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E9%A2%84%E8%AE%AD%E7%BB%83/" class="md-nav__link">
+      <a href="../../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B019%EF%BC%9A%E7%94%B5%E5%95%86%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E9%A2%84%E8%AE%AD%E7%BB%83/" class="md-nav__link">
         论文阅读笔记19：电商知识图谱预训练
       </a>
     </li>
@@ -2181,7 +2185,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B020%EF%BC%9APathCon/" class="md-nav__link">
+      <a href="../../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B020%EF%BC%9APathCon/" class="md-nav__link">
         论文阅读笔记20：PathCon
       </a>
     </li>
@@ -2195,7 +2199,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B021%EF%BC%9AFSL4TKG/" class="md-nav__link">
+      <a href="../../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B021%EF%BC%9AFSL4TKG/" class="md-nav__link">
         论文阅读笔记22：FSL4TKG
       </a>
     </li>
@@ -2209,7 +2213,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B022%EF%BC%9AKG-BERT%26K-BERT/" class="md-nav__link">
+      <a href="../../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B022%EF%BC%9AKG-BERT%26K-BERT/" class="md-nav__link">
         论文阅读笔记22：KG-BERT&K-BERT
       </a>
     </li>
@@ -2223,7 +2227,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B023%EF%BC%9AGraphformer/" class="md-nav__link">
+      <a href="../../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B023%EF%BC%9AGraphformer/" class="md-nav__link">
         论文阅读笔记23：Graphformer
       </a>
     </li>
@@ -2237,7 +2241,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B024%EF%BC%9A%E5%A4%9A%E6%A8%A1%E6%80%81%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E8%A1%A8%E7%A4%BA%E5%AD%A6%E4%B9%A0/" class="md-nav__link">
+      <a href="../../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B024%EF%BC%9A%E5%A4%9A%E6%A8%A1%E6%80%81%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E8%A1%A8%E7%A4%BA%E5%AD%A6%E4%B9%A0/" class="md-nav__link">
         论文阅读笔记24：MMKG多模态知识图谱表示学习
       </a>
     </li>
@@ -2251,7 +2255,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B025%EF%BC%9ASMORE%E5%A4%A7%E8%A7%84%E6%A8%A1%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+      <a href="../../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B025%EF%BC%9ASMORE%E5%A4%A7%E8%A7%84%E6%A8%A1%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
         论文阅读笔记24：SMORE大规模知识图谱系统
       </a>
     </li>
@@ -2265,7 +2269,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B026%EF%BC%9AK3M%E5%A4%9A%E6%A8%A1%E6%80%81%E5%95%86%E5%93%81%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E9%A2%84%E8%AE%AD%E7%BB%83/" class="md-nav__link">
+      <a href="../../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B026%EF%BC%9AK3M%E5%A4%9A%E6%A8%A1%E6%80%81%E5%95%86%E5%93%81%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E9%A2%84%E8%AE%AD%E7%BB%83/" class="md-nav__link">
         论文阅读笔记25：K3M多模态商品知识图谱预训练
       </a>
     </li>
@@ -2279,7 +2283,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B027%EF%BC%9A%E5%9B%BE%E5%AF%B9%E6%AF%94%E5%AD%A6%E4%B9%A0/" class="md-nav__link">
+      <a href="../../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B027%EF%BC%9A%E5%9B%BE%E5%AF%B9%E6%AF%94%E5%AD%A6%E4%B9%A0/" class="md-nav__link">
         论文阅读笔记26：图对比学习
       </a>
     </li>
@@ -2293,7 +2297,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B028%EF%BC%9A%E5%A4%9A%E6%A8%A1%E6%80%81BERT/" class="md-nav__link">
+      <a href="../../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B028%EF%BC%9A%E5%A4%9A%E6%A8%A1%E6%80%81BERT/" class="md-nav__link">
         论文阅读笔记28：多模态BERT
       </a>
     </li>
@@ -2307,7 +2311,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B029%EF%BC%9A%E5%BC%82%E6%9E%84GCN/" class="md-nav__link">
+      <a href="../../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B029%EF%BC%9A%E5%BC%82%E6%9E%84GCN/" class="md-nav__link">
         论文阅读笔记29：异构GCN
       </a>
     </li>
@@ -2321,7 +2325,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B030%EF%BC%9A%E5%BC%82%E6%9E%84%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0Partial%20Reduce/" class="md-nav__link">
+      <a href="../../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B030%EF%BC%9A%E5%BC%82%E6%9E%84%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0Partial%20Reduce/" class="md-nav__link">
         论文阅读笔记30：异构分布式机器学习Partial Reduce
       </a>
     </li>
@@ -2335,7 +2339,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B031%EF%BC%9A%E5%A4%A7%E8%A7%84%E6%A8%A1%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%AF%B9%E9%BD%90LargeEA/" class="md-nav__link">
+      <a href="../../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B031%EF%BC%9A%E5%A4%A7%E8%A7%84%E6%A8%A1%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%AF%B9%E9%BD%90LargeEA/" class="md-nav__link">
         论文阅读笔记31：大规模知识图谱对齐LargeEA
       </a>
     </li>
@@ -2349,7 +2353,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B032%EF%BC%9APrompt/" class="md-nav__link">
+      <a href="../../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B032%EF%BC%9APrompt/" class="md-nav__link">
         论文阅读笔记32：提示学习Prompt
       </a>
     </li>
@@ -2363,7 +2367,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B033%EF%BC%9A%E7%BB%93%E5%90%88BERT%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E8%A1%A5%E5%85%A8/" class="md-nav__link">
+      <a href="../../Papers-old/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B033%EF%BC%9A%E7%BB%93%E5%90%88BERT%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E8%A1%A5%E5%85%A8/" class="md-nav__link">
         论文阅读笔记33：结合BERT的知识图谱补全(KGC)
       </a>
     </li>
@@ -2384,7 +2388,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Papers/01-GAN%E4%B8%8E%E5%AF%B9%E6%AF%94%E5%AD%A6%E4%B9%A0%E7%9A%84%E8%AE%BE%E8%AE%A1/" class="md-nav__link">
+      <a href="../01-GAN%E4%B8%8E%E5%AF%B9%E6%AF%94%E5%AD%A6%E4%B9%A0%E7%9A%84%E8%AE%BE%E8%AE%A1/" class="md-nav__link">
         01-GAN与对比学习的设计
       </a>
     </li>
@@ -2396,11 +2400,106 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../Papers/02-VAE%E4%B8%8ECVAE%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%9E%B6%E6%9E%84/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          02-VAE与CVAE的基本架构
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         02-VAE与CVAE的基本架构
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#vae与cvae的基本架构_1" class="md-nav__link">
+    VAE与CVAE的基本架构
+  </a>
+  
+    <nav class="md-nav" aria-label="VAE与CVAE的基本架构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-一些概率论的基本常识" class="md-nav__link">
+    1. 一些概率论的基本常识
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 一些概率论的基本常识">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-后验概率" class="md-nav__link">
+    1.1 后验概率
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-极大似然估计" class="md-nav__link">
+    1.2 极大似然估计
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-后验概率最大化估计" class="md-nav__link">
+    1.3 后验概率最大化估计
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-vae" class="md-nav__link">
+    2. VAE
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-conditional-vae" class="md-nav__link">
+    3. Conditional-VAE
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -2449,7 +2548,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../DS/">🦃️ 数据结构/算法</a>
+          <a href="../../DS/">🦃️ 数据结构/算法</a>
           
             <label for="__nav_4">
               <span class="md-nav__icon md-icon"></span>
@@ -2472,7 +2571,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../DS/ds/" class="md-nav__link">
+      <a href="../../DS/ds/" class="md-nav__link">
         数据结构基础
       </a>
     </li>
@@ -2486,7 +2585,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../DS/ads/" class="md-nav__link">
+      <a href="../../DS/ads/" class="md-nav__link">
         高级数据结构与算法分析
       </a>
     </li>
@@ -2532,7 +2631,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../PL/">🐊 编程语言</a>
+          <a href="../../PL/">🐊 编程语言</a>
           
             <label for="__nav_5">
               <span class="md-nav__icon md-icon"></span>
@@ -2586,7 +2685,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../PL/CPP/OOP-Review/" class="md-nav__link">
+      <a href="../../PL/CPP/OOP-Review/" class="md-nav__link">
         OOP课程笔记
       </a>
     </li>
@@ -2644,7 +2743,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../PL/Java/Java%E5%BA%94%E7%94%A8%E6%8A%80%E6%9C%AF1%EF%BC%9A%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" class="md-nav__link">
+      <a href="../../PL/Java/Java%E5%BA%94%E7%94%A8%E6%8A%80%E6%9C%AF1%EF%BC%9A%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" class="md-nav__link">
         Java应用技术1：基础语法
       </a>
     </li>
@@ -2658,7 +2757,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../PL/Java/Java%E5%BA%94%E7%94%A8%E6%8A%80%E6%9C%AF2%EF%BC%9A%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1/" class="md-nav__link">
+      <a href="../../PL/Java/Java%E5%BA%94%E7%94%A8%E6%8A%80%E6%9C%AF2%EF%BC%9A%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1/" class="md-nav__link">
         Java应用技术2：类和对象
       </a>
     </li>
@@ -2672,7 +2771,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../PL/Java/Java%E5%BA%94%E7%94%A8%E6%8A%80%E6%9C%AF3%EF%BC%9A%E9%AB%98%E7%BA%A7%E8%AF%AD%E6%B3%95%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      <a href="../../PL/Java/Java%E5%BA%94%E7%94%A8%E6%8A%80%E6%9C%AF3%EF%BC%9A%E9%AB%98%E7%BA%A7%E8%AF%AD%E6%B3%95%E7%89%B9%E6%80%A7/" class="md-nav__link">
         Java应用技术3：高级语法特性
       </a>
     </li>
@@ -2686,7 +2785,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../PL/Java/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3JVM-1/" class="md-nav__link">
+      <a href="../../PL/Java/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3JVM-1/" class="md-nav__link">
         深入理解JVM-1
       </a>
     </li>
@@ -2740,7 +2839,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../PL/Go/Go-01.%20Go%E8%AF%AD%E8%A8%80%E7%9A%84%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" class="md-nav__link">
+      <a href="../../PL/Go/Go-01.%20Go%E8%AF%AD%E8%A8%80%E7%9A%84%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" class="md-nav__link">
         Go 01. Go语言的基础语法
       </a>
     </li>
@@ -2754,7 +2853,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../PL/Go/Go-02.%20Go%E8%AF%AD%E8%A8%80%E7%9A%84%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86%E4%B8%8E%E8%BF%9B%E9%98%B6%E8%AF%AD%E6%B3%95/" class="md-nav__link">
+      <a href="../../PL/Go/Go-02.%20Go%E8%AF%AD%E8%A8%80%E7%9A%84%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86%E4%B8%8E%E8%BF%9B%E9%98%B6%E8%AF%AD%E6%B3%95/" class="md-nav__link">
         Go 02. Go语言的依赖管理与进阶语法
       </a>
     </li>
@@ -2781,16 +2880,14 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
       
       
         
@@ -2809,7 +2906,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_6">
           <span class="md-nav__icon md-icon"></span>
           🦖 计算机系统
@@ -2852,7 +2949,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../System/">🐑计算机系统原理</a>
+          <a href="../../System/">🐑计算机系统原理</a>
           
             <label for="__nav_6_1">
               <span class="md-nav__icon md-icon"></span>
@@ -2875,7 +2972,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../System/00-intro/" class="md-nav__link">
+      <a href="../../System/00-intro/" class="md-nav__link">
         0.计算机基本知识
       </a>
     </li>
@@ -2889,7 +2986,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../System/01-mips/" class="md-nav__link">
+      <a href="../../System/01-mips/" class="md-nav__link">
         1. MIPS 指令系统
       </a>
     </li>
@@ -2903,7 +3000,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../System/02-calculation/" class="md-nav__link">
+      <a href="../../System/02-calculation/" class="md-nav__link">
         2.  Arithmetic for computer 计算机运算
       </a>
     </li>
@@ -2917,7 +3014,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../System/03-cpu/" class="md-nav__link">
+      <a href="../../System/03-cpu/" class="md-nav__link">
         3. CPU结构
       </a>
     </li>
@@ -2931,7 +3028,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../System/04-memory/" class="md-nav__link">
+      <a href="../../System/04-memory/" class="md-nav__link">
         4. 存储器
       </a>
     </li>
@@ -2945,7 +3042,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../System/05-io/" class="md-nav__link">
+      <a href="../../System/05-io/" class="md-nav__link">
         5. I/O系统
       </a>
     </li>
@@ -3000,7 +3097,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../OS/">🐒 操作系统</a>
+          <a href="../../OS/">🐒 操作系统</a>
           
             <label for="__nav_6_2">
               <span class="md-nav__icon md-icon"></span>
@@ -3023,7 +3120,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F0-Linux%E5%86%85%E6%A0%B8/" class="md-nav__link">
+      <a href="../../OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F0-Linux%E5%86%85%E6%A0%B8/" class="md-nav__link">
         操作系统0 Linux内核
       </a>
     </li>
@@ -3037,7 +3134,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F1-%E5%AF%BC%E8%AE%BA/" class="md-nav__link">
+      <a href="../../OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F1-%E5%AF%BC%E8%AE%BA/" class="md-nav__link">
         操作系统1：导论和操作系统结构
       </a>
     </li>
@@ -3051,7 +3148,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F2-%E8%BF%9B%E7%A8%8B%26%E7%BA%BF%E7%A8%8B/" class="md-nav__link">
+      <a href="../../OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F2-%E8%BF%9B%E7%A8%8B%26%E7%BA%BF%E7%A8%8B/" class="md-nav__link">
         操作系统2：进程/线程
       </a>
     </li>
@@ -3065,7 +3162,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F3-CPU%E8%B0%83%E5%BA%A6%26%E5%90%8C%E6%AD%A5/" class="md-nav__link">
+      <a href="../../OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F3-CPU%E8%B0%83%E5%BA%A6%26%E5%90%8C%E6%AD%A5/" class="md-nav__link">
         操作系统3：CPU调度
       </a>
     </li>
@@ -3079,7 +3176,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F4-%E5%90%8C%E6%AD%A5%E5%92%8C%E6%AD%BB%E9%94%81/" class="md-nav__link">
+      <a href="../../OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F4-%E5%90%8C%E6%AD%A5%E5%92%8C%E6%AD%BB%E9%94%81/" class="md-nav__link">
         操作系统4：同步和死锁
       </a>
     </li>
@@ -3093,7 +3190,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F5-%E5%AD%98%E5%82%A8/" class="md-nav__link">
+      <a href="../../OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F5-%E5%AD%98%E5%82%A8/" class="md-nav__link">
         操作系统5：存储管理
       </a>
     </li>
@@ -3107,7 +3204,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F6-%E6%96%87%E4%BB%B6/" class="md-nav__link">
+      <a href="../../OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F6-%E6%96%87%E4%BB%B6/" class="md-nav__link">
         操作系统6：文件
       </a>
     </li>
@@ -3121,7 +3218,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F7-%E7%A3%81%E7%9B%98%E5%92%8CIO/" class="md-nav__link">
+      <a href="../../OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F7-%E7%A3%81%E7%9B%98%E5%92%8CIO/" class="md-nav__link">
         操作系统7：磁盘和I/O
       </a>
     </li>
@@ -3140,16 +3237,14 @@
               
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_3" checked>
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_3" >
       
       
         
@@ -3175,8 +3270,8 @@
       
         
         
-        <div class="md-nav__link md-nav__link--index md-nav__link--active">
-          <a href="./">🐓 计算机网络</a>
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../Networking/">🐓 计算机网络</a>
           
             <label for="__nav_6_3">
               <span class="md-nav__icon md-icon"></span>
@@ -3184,7 +3279,7 @@
           
         </div>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_3_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_3_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_6_3">
           <span class="md-nav__icon md-icon"></span>
           🐓 计算机网络
@@ -3199,7 +3294,7 @@
   
   
     <li class="md-nav__item">
-      <a href="%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C1-OSI%E6%A8%A1%E5%9E%8B/" class="md-nav__link">
+      <a href="../../Networking/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C1-OSI%E6%A8%A1%E5%9E%8B/" class="md-nav__link">
         计算机网络1-OSI模型
       </a>
     </li>
@@ -3213,7 +3308,7 @@
   
   
     <li class="md-nav__item">
-      <a href="%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C2-%E7%89%A9%E7%90%86%E5%B1%82/" class="md-nav__link">
+      <a href="../../Networking/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C2-%E7%89%A9%E7%90%86%E5%B1%82/" class="md-nav__link">
         计算机网络2-物理层
       </a>
     </li>
@@ -3227,7 +3322,7 @@
   
   
     <li class="md-nav__item">
-      <a href="%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C3-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%26MAC/" class="md-nav__link">
+      <a href="../../Networking/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C3-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%26MAC/" class="md-nav__link">
         计算机网络3-数据链路层&MAC
       </a>
     </li>
@@ -3241,7 +3336,7 @@
   
   
     <li class="md-nav__item">
-      <a href="%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C4-%E7%BD%91%E7%BB%9C%E5%B1%82/" class="md-nav__link">
+      <a href="../../Networking/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C4-%E7%BD%91%E7%BB%9C%E5%B1%82/" class="md-nav__link">
         计算机网络4-网络层
       </a>
     </li>
@@ -3255,7 +3350,7 @@
   
   
     <li class="md-nav__item">
-      <a href="%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C5-%E8%BF%90%E8%BE%93%E5%B1%82/" class="md-nav__link">
+      <a href="../../Networking/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C5-%E8%BF%90%E8%BE%93%E5%B1%82/" class="md-nav__link">
         计算机网络5-运输层
       </a>
     </li>
@@ -3269,7 +3364,7 @@
   
   
     <li class="md-nav__item">
-      <a href="%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C6-%E5%BA%94%E7%94%A8%E5%B1%82/" class="md-nav__link">
+      <a href="../../Networking/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C6-%E5%BA%94%E7%94%A8%E5%B1%82/" class="md-nav__link">
         计算机网络6-应用层
       </a>
     </li>
@@ -3283,7 +3378,7 @@
   
   
     <li class="md-nav__item">
-      <a href="%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C7-%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" class="md-nav__link">
+      <a href="../../Networking/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C7-%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" class="md-nav__link">
         计算机网络7-网络安全
       </a>
     </li>
@@ -3328,7 +3423,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../DB/">🐶 数据库系统</a>
+          <a href="../../DB/">🐶 数据库系统</a>
           
             <label for="__nav_6_4">
               <span class="md-nav__icon md-icon"></span>
@@ -3351,7 +3446,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../DB/db/" class="md-nav__link">
+      <a href="../../DB/db/" class="md-nav__link">
         ZJU数据库系统课程复习笔记
       </a>
     </li>
@@ -3393,7 +3488,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../DB/CMU15-445/">CMU15-445 Database Systems</a>
+          <a href="../../DB/CMU15-445/">CMU15-445 Database Systems</a>
           
             <label for="__nav_6_4_3">
               <span class="md-nav__icon md-icon"></span>
@@ -3416,7 +3511,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../DB/CMU15-445/CMU15-445-01-%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/" class="md-nav__link">
+      <a href="../../DB/CMU15-445/CMU15-445-01-%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/" class="md-nav__link">
         CMU15-445-01：数据存储
       </a>
     </li>
@@ -3430,7 +3525,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../DB/CMU15-445/CMU15-445-02-%E7%B4%A2%E5%BC%95/" class="md-nav__link">
+      <a href="../../DB/CMU15-445/CMU15-445-02-%E7%B4%A2%E5%BC%95/" class="md-nav__link">
         CMU15-445-02：索引
       </a>
     </li>
@@ -3444,7 +3539,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../DB/CMU15-445/CMU15-445-03-%E6%9F%A5%E8%AF%A2%E5%A4%84%E7%90%86/" class="md-nav__link">
+      <a href="../../DB/CMU15-445/CMU15-445-03-%E6%9F%A5%E8%AF%A2%E5%A4%84%E7%90%86/" class="md-nav__link">
         CMU15-445-03：查询处理
       </a>
     </li>
@@ -3458,7 +3553,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../DB/CMU15-445/CMU15-445-04-%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96/" class="md-nav__link">
+      <a href="../../DB/CMU15-445/CMU15-445-04-%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96/" class="md-nav__link">
         CMU15-445-04：查询优化
       </a>
     </li>
@@ -3472,7 +3567,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../DB/CMU15-445/CMU15-445-05-%E4%BA%8B%E5%8A%A1%E4%B8%8E%E5%B9%B6%E5%8F%91%E6%8E%A7%E5%88%B6/" class="md-nav__link">
+      <a href="../../DB/CMU15-445/CMU15-445-05-%E4%BA%8B%E5%8A%A1%E4%B8%8E%E5%B9%B6%E5%8F%91%E6%8E%A7%E5%88%B6/" class="md-nav__link">
         CMU15-445-05：事务与并发控制
       </a>
     </li>
@@ -3530,7 +3625,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../DB/MIT6.830/MIT6.830-lab1-SimpleDB%20Overview/" class="md-nav__link">
+      <a href="../../DB/MIT6.830/MIT6.830-lab1-SimpleDB%20Overview/" class="md-nav__link">
         MIT6.830-lab1：SimpleDB Overview
       </a>
     </li>
@@ -3544,7 +3639,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../DB/MIT6.830/MIT6.830-lab2-SimpleDB%20Operators/" class="md-nav__link">
+      <a href="../../DB/MIT6.830/MIT6.830-lab2-SimpleDB%20Operators/" class="md-nav__link">
         MIT6.830-lab2：SimpleDB Operators
       </a>
     </li>
@@ -3558,7 +3653,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../DB/MIT6.830/MIT6.830-lab3-Query%20Optimizer/" class="md-nav__link">
+      <a href="../../DB/MIT6.830/MIT6.830-lab3-Query%20Optimizer/" class="md-nav__link">
         MIT6.830-lab3：Query Optimizer
       </a>
     </li>
@@ -3572,7 +3667,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../DB/MIT6.830/MIT6.830-lab4-Transaction/" class="md-nav__link">
+      <a href="../../DB/MIT6.830/MIT6.830-lab4-Transaction/" class="md-nav__link">
         MIT6.830-lab4：Transaction
       </a>
     </li>
@@ -3636,7 +3731,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../Gossip/">🐳 杂谈与总结</a>
+          <a href="../../Gossip/">🐳 杂谈与总结</a>
           
             <label for="__nav_7">
               <span class="md-nav__icon md-icon"></span>
@@ -3659,7 +3754,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Gossip/2021%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/" class="md-nav__link">
+      <a href="../../Gossip/2021%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/" class="md-nav__link">
         I. 2021年度总结
       </a>
     </li>
@@ -3673,7 +3768,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Gossip/%E6%9C%AC%E7%A7%91%E5%89%8D%E4%B8%89%E5%B9%B4%E7%9A%84%E6%80%BB%E7%BB%93/" class="md-nav__link">
+      <a href="../../Gossip/%E6%9C%AC%E7%A7%91%E5%89%8D%E4%B8%89%E5%B9%B4%E7%9A%84%E6%80%BB%E7%BB%93/" class="md-nav__link">
         II. 本科前三年的总结
       </a>
     </li>
@@ -3687,7 +3782,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Gossip/%E5%AF%B9%E8%BD%AF%E5%B7%A5%E4%B8%93%E4%B8%9A%E7%9A%84%E8%AF%BE%E7%A8%8B%E8%AF%84%E4%BB%B7%E5%92%8C%E4%BF%AE%E6%94%B9%E6%84%8F%E8%A7%81/" class="md-nav__link">
+      <a href="../../Gossip/%E5%AF%B9%E8%BD%AF%E5%B7%A5%E4%B8%93%E4%B8%9A%E7%9A%84%E8%AF%BE%E7%A8%8B%E8%AF%84%E4%BB%B7%E5%92%8C%E4%BF%AE%E6%94%B9%E6%84%8F%E8%A7%81/" class="md-nav__link">
         III. 对软工专业的课程评价和修改意见
       </a>
     </li>
@@ -3701,7 +3796,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Gossip/Python%E5%8A%A9%E6%95%99%E4%BD%93%E9%AA%8C/" class="md-nav__link">
+      <a href="../../Gossip/Python%E5%8A%A9%E6%95%99%E4%BD%93%E9%AA%8C/" class="md-nav__link">
         IV. Python助教体验
       </a>
     </li>
@@ -3715,7 +3810,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Gossip/2022%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/" class="md-nav__link">
+      <a href="../../Gossip/2022%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/" class="md-nav__link">
         V. 2022年度总结
       </a>
     </li>
@@ -3757,7 +3852,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../Jobs/">🌾 实习与找工</a>
+          <a href="../../Jobs/">🌾 实习与找工</a>
           
             <label for="__nav_8">
               <span class="md-nav__icon md-icon"></span>
@@ -3813,7 +3908,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Jobs/2021spring/intern/" class="md-nav__link">
+      <a href="../../Jobs/2021spring/intern/" class="md-nav__link">
         2021春招阿里云与字节教育部门面经
       </a>
     </li>
@@ -3864,7 +3959,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Jobs/2021spring/intern1/" class="md-nav__link">
+      <a href="../../Jobs/2021spring/intern1/" class="md-nav__link">
         MySQL知识整理
       </a>
     </li>
@@ -3878,7 +3973,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Jobs/2021spring/intern2/" class="md-nav__link">
+      <a href="../../Jobs/2021spring/intern2/" class="md-nav__link">
         设计模式
       </a>
     </li>
@@ -3892,7 +3987,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Jobs/2021spring/intern3/" class="md-nav__link">
+      <a href="../../Jobs/2021spring/intern3/" class="md-nav__link">
         Java语法
       </a>
     </li>
@@ -3906,7 +4001,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Jobs/2021spring/intern4/" class="md-nav__link">
+      <a href="../../Jobs/2021spring/intern4/" class="md-nav__link">
         操作系统与计算机网络
       </a>
     </li>
@@ -3954,6 +4049,75 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#vae与cvae的基本架构_1" class="md-nav__link">
+    VAE与CVAE的基本架构
+  </a>
+  
+    <nav class="md-nav" aria-label="VAE与CVAE的基本架构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-一些概率论的基本常识" class="md-nav__link">
+    1. 一些概率论的基本常识
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 一些概率论的基本常识">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-后验概率" class="md-nav__link">
+    1.1 后验概率
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-极大似然估计" class="md-nav__link">
+    1.2 极大似然估计
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-后验概率最大化估计" class="md-nav__link">
+    1.3 后验概率最大化估计
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-vae" class="md-nav__link">
+    2. VAE
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-conditional-vae" class="md-nav__link">
+    3. Conditional-VAE
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -3971,32 +4135,139 @@
 
 
 
-<h1 id="计算机网络">计算机网络<a class="headerlink" href="#计算机网络" title="Permanent link">&para;</a></h1>
+<h1 id="vae与cvae的基本架构">VAE与CVAE的基本架构<a class="headerlink" href="#vae与cvae的基本架构" title="Permanent link">&para;</a></h1>
 <details class="abstract" open="open">
 <summary>本页统计信息</summary>
 <ul>
 <li>
-<p>本页约 20 个字,  预计阅读时间不到 1 分钟。</p>
+<p>本页约 3129 个字,  预计阅读时间 10 分钟。</p>
 </li>
 <li>
 <p><span id="busuanzi_container_page_pv">本页总阅读量<span id="busuanzi_value_page_pv"></span>次</span></p>
 </li>
 </ul>
 </details>
-<ul>
-<li>ZJU本科阶段计算机网络的课程笔记</li>
-</ul>
+<h2 id="vae与cvae的基本架构_1">VAE与CVAE的基本架构<a class="headerlink" href="#vae与cvae的基本架构_1" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>简单了解一下VAE的设计思路，首先补充一些熟悉的概率论知识，然后记录一下VAE的原论文中涉及到的一些关键的推导和结论。</p>
+</blockquote>
+<h3 id="1-一些概率论的基本常识">1. 一些概率论的基本常识<a class="headerlink" href="#1-一些概率论的基本常识" title="Permanent link">&para;</a></h3>
+<h4 id="11-后验概率">1.1 后验概率<a class="headerlink" href="#11-后验概率" title="Permanent link">&para;</a></h4>
+<p>后验概率是在观察到一些数据或证据之后，对于一个模型参数或假设的概率分布。换句话说，后验概率是给定数据或证据的条件下，模型参数或假设的不确定性的度量。在贝叶斯统计学中，我们通常将参数或假设视为随机变量，因此它们的分布可以表示为概率分布。当我们观察到新的数据时，我们可以使用贝叶斯定理来更新我们对模型参数或假设的先验信念，从而获得后验概率分布。</p>
+<blockquote>
+<p>注：这段话来自于ChatGPT，更简单地说，后验概率就是给定数据x时候它的标签y的条件分布，而先验概率则是给定标签y的时候x的条件分布。</p>
+</blockquote>
+<h4 id="12-极大似然估计">1.2 极大似然估计<a class="headerlink" href="#12-极大似然估计" title="Permanent link">&para;</a></h4>
+<p>极大似然估计（Maximum Likelihood Estimation，简称MLE）是一种常用的参数估计方法，它的基本思想是寻找最有可能导致观测数据出现的模型参数值。
+当假设数据样本独立同分布时，极大似然估计可以表示为最大化似然函数的形式。假设我们有一个参数化的概率分布 <span class="arithmatex">\(p(x;\theta)\)</span>，其中 <span class="arithmatex">\(x\)</span> 是观测数据，<span class="arithmatex">\(\theta\)</span> 是模型参数。给定一个样本集合 <span class="arithmatex">\(\mathcal{D}={x_1,x_2,...,x_n}\)</span>，样本独立同分布于分布 <span class="arithmatex">\(p(x;\theta)\)</span>。则似然函数可以表示为：</p>
+<div class="arithmatex">\[
+L(\theta \mid \mathcal{D})=p(\mathcal{D} \mid \theta)=\prod_{i=1}^n p\left(x_i ; \theta\right)
+\]</div>
+<p>极大似然估计的目标是最大化似然函数，即找到最优的参数 <span class="arithmatex">\(\theta\)</span> 使得似然函数取得最大值，这个目标可以表示为：</p>
+<div class="arithmatex">\[
+\theta_{MLE}=\arg\max L(\theta \mid \mathcal{D})=\arg\max \prod_{i=1}^n p\left(x_i ; \theta\right)
+\]</div>
+<p>通常为了避免出现下溢的问题，会对似然函数取对数，这样极大化对数似然函数等价于极大化似然函数，也就是说：</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\theta_{MLE}&amp;=\arg\max \log L(\theta \mid \mathcal{D})
+\\&amp;=\arg\max \sum_{i=1}^n \log p\left(x_i ; \theta\right)
+\end{aligned}
+\]</div>
+<h3 id="13-后验概率最大化估计">1.3 后验概率最大化估计<a class="headerlink" href="#13-后验概率最大化估计" title="Permanent link">&para;</a></h3>
+<p>Maximum a posteriori (MAP)算法是一种用于估计参数的统计方法，它结合了先验概率和似然函数来计算后验概率。在贝叶斯推断中，MAP算法用于估计最有可能的参数值，即在给定观测数据的情况下，使得后验概率最大的参数值。</p>
+<p>和最大似然估计一样，MAP算法也是一种参数估计方法，但不同的是，它引入了先验概率。先验概率是参数在观测数据之前的概率分布，它反映了我们对参数的先前知识。通过引入先验概率，我们可以<strong>避免在数据样本较小的情况下过拟合</strong>，同时也可以对参数进行正则化。MAP公式可以表示为：</p>
+<p>$$
+\theta_{MAP} = \underset{\theta}{\arg\max} p(\theta | D) = \underset{\theta}{\arg\max} p(D|\theta)p(\theta)
+$$
+其中，<span class="arithmatex">\(\theta_{\text{MAP}}\)</span> 是最大化后验概率 <span class="arithmatex">\(p(\theta | D)\)</span> 时对应的参数值，<span class="arithmatex">\(D\)</span> 是观测数据，<span class="arithmatex">\(p(D|\theta)\)</span> 是似然函数，<span class="arithmatex">\(p(\theta)\)</span> 是先验概率。<strong>最大后验概率估计是最大似然和贝叶斯估计的结合</strong>，相比于极大似然估计，它在目标中加入了对参数的先验。</p>
+<h2 id="2-vae">2. VAE<a class="headerlink" href="#2-vae" title="Permanent link">&para;</a></h2>
+<p>VAE的原论文🔗：<a href="https://arxiv.org/abs/1312.6114">Auto-Encoding Variational Bayes</a>
+论文对生成任务的场景做了这样的定义，首先给定一个独立同分布的数据集<span class="arithmatex">\(\mathbf{X}=\left\{\mathbf{x}^{(i)}\right\}_{i=1}^N\)</span> 并且其中的每一条数据<span class="arithmatex">\(\mathbf{x}^{(i)}\)</span>是一个从随机过程中产生的连续或者离散的数据，并且生成的过程中包含了一个未观测到的随机变量<span class="arithmatex">\(\mathbf{z}\)</span>，我们进一步假设，这个生成的过程可以分成这样两个步骤：
+1. 从概率分布<span class="arithmatex">\(p_{\boldsymbol{\theta}^*}(\mathbf{z})\)</span>中生成一个值<span class="arithmatex">\(\mathbf{z}^{i}\)</span>
+2. 根据给定的值<span class="arithmatex">\(\mathbf{z}^{i}\)</span>生成条件概率<span class="arithmatex">\(P(\mathbf{x}^{(i)}|\mathbf{z}^{(i)})\)</span> 
+现在的问题在于，我们既不知道<span class="arithmatex">\(\mathbf{z}\)</span>的分布情况，也不知道参数<span class="arithmatex">\(\theta^*\)</span>，这是一个通用的生成算法框架，我们没有对变量的分布情况作出任何假设，但是，这个算法会碰到这样两个问题：
+1. Intractability，有的时候计算似然<span class="arithmatex">\(P(\mathbf{x})\)</span>的分布会非常麻烦，甚至无法计算(比如图像生成中，我们很难计算这个似然)，这就导致我们不能用贝叶斯公式计算后验概率，所以EM算法也无法使用，各种变分贝叶斯算法也无法使用(虽然我不知道变分贝叶斯是什么东西)
+2. Scalability，当数据集非常大的时候，我们不能进行full-batch的优化，只能用一些mini-batch来不断更新参数，像是蒙特卡洛EM这样的基于采样的算法这就对算法的可靠性提出了挑战。
+这篇论文提出的变分自编码器(VAE)框架，就是为了解决这样几个问题：
+1. 对参数<span class="arithmatex">\(\mathbf{\theta}\)</span>进行有效的近似ML或MAP估计。
+2. 对于给定的数据点<span class="arithmatex">\(\mathbf{x}^{(i)}\)</span>生成合适的隐变量<span class="arithmatex">\(\mathbf{z}\)</span>，这可以用于数据表示和压缩编码
+3. 对变量<span class="arithmatex">\(\mathbf{x}\)</span>进行有效的近似边际推断</p>
+<p>为了达到这样的目的，VAE引入一个识别模型<span class="arithmatex">\(q_{\phi}(\mathbf{z}|\mathbf{x})\)</span>作为概率编码器，对输入的数据x进行编码，用<span class="arithmatex">\(\mathbf{z}\)</span>来作为x的编码表示，然后使用一个概率解码器<span class="arithmatex">\(p_{\theta}(\mathbf{z}|\mathbf{x})\)</span>将编码表示转换为原本的值。我们只要学到了一个足够好的解码器，就可以从<span class="arithmatex">\(\mathbf{z}\)</span>的分布中随机采样出合适的一个值，然后就可以生成合适的<span class="arithmatex">\(\mathbf{x}\)</span>，这样一来，我们就得到了一个可以使用的生成器。</p>
+<p>同时，数据集上的边际似然可以表示为：</p>
+<div class="arithmatex">\[
+\log p_{\boldsymbol{\theta}}\left(\mathbf{x}^{(1)}, \cdots, \mathbf{x}^{(N)}\right)=\sum_{i=1}^N \log p_{\boldsymbol{\theta}}\left(\mathbf{x}^{(i)}\right)
+\]</div>
+<p>对于每一个单独的数据点<span class="arithmatex">\(\mathbf{x}\)</span>，我们有：</p>
+<div class="arithmatex">\[
+\log p_{\boldsymbol{\theta}}\left(\mathbf{x}\right)=D_{K L}\left(q_{\boldsymbol{\phi}}\left(\mathbf{z} \mid \mathbf{x}\right) \| p_{\boldsymbol{\theta}}\left(\mathbf{z} \mid \mathbf{x}\right)\right)+\mathcal{L}\left(\boldsymbol{\theta}, \boldsymbol{\phi} ; \mathbf{x}\right)
+\]</div>
+<p>这一步的推导过程如下，对于一个数据点<span class="arithmatex">\(\mathbf{x}\)</span>，我们有：</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\log p_{\theta}(\mathbf{x})&amp;=\int_{z}q_{\phi}(\mathbf{z}|\mathbf{x})\log p_{\theta}(\mathbf{x}) \mathrm{d}z
+\\&amp;=\int_{z}q_{\phi}(\mathbf{z}|\mathbf{x})\log \frac{p_{\theta}(\mathbf{x}|\mathbf{z})p_{\theta}(\mathbf{z})q_{\phi}(\mathbf{z}|\mathbf{x})}{p_{\theta}(\mathbf{z}|\mathbf{x})q_{\phi}(\mathbf{z}|\mathbf{x})} \mathrm{d}z
+\\&amp;=\int_{z}q_{\phi}(\mathbf{z}|\mathbf{x})\log \frac{p_{\theta}(\mathbf{x}|\mathbf{z})p_{\theta}(\mathbf{z})}{q_{\phi}(\mathbf{z}|\mathbf{x})} \mathrm{d}z+\int_{z}q_{\phi}(\mathbf{z}|\mathbf{x})\log \frac{q_{\phi}(\mathbf{z}|\mathbf{x})}{p_{\theta}(\mathbf{z}|\mathbf{x})} \mathrm{d}z
+\\&amp;=\mathcal{L}(\theta,\phi,\mathbf{x})+D_{KL}(q_{\phi}\left(\mathbf{z}|\mathbf{x})||p_{\theta}(\mathbf{z}|\mathbf{x})\right)
+\end{aligned}
+\]</div>
+<p>这里面的<span class="arithmatex">\(\mathcal{L}(\theta,\phi,\mathbf{x})\)</span>就是变分下界(variationallower bound)，它还可以做进一步的变形：</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\mathcal{L}(\theta,\phi,\mathbf{x})&amp;=\int_{z}q_{\phi}(\mathbf{z}|\mathbf{x})\log \frac{p_{\theta}(\mathbf{x}|\mathbf{z})p_{\theta}(\mathbf{z})}{q_{\phi}(\mathbf{z}|\mathbf{x})} \mathrm{d}z\\
+&amp;=\mathbb{E}_{q_{\boldsymbol{\phi}}(\mathbf{z} \mid \mathbf{x})}\left[-\log q_{\boldsymbol{\phi}}(\mathbf{z} \mid \mathbf{x})+\log p_{\boldsymbol{\theta}}(\mathbf{x}, \mathbf{z})\right]
+\end{aligned}
+\]</div>
+<p>也可以写成是：</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\mathcal{L}(\theta,\phi,\mathbf{x})&amp;=\int_{z}q_{\phi}(\mathbf{z}|\mathbf{x})\log \frac{p_{\theta}(\mathbf{x}|\mathbf{z})p_{\theta}(\mathbf{z})}{q_{\phi}(\mathbf{z}|\mathbf{x})} \mathrm{d}z\\&amp;=
+-D_{K L}\left(q_{\boldsymbol{\phi}}\left(\mathbf{z} \mid \mathbf{x}^{(i)}\right) \| p_{\boldsymbol{\theta}}(\mathbf{z})\right)+\mathbb{E}_{q_{\boldsymbol{\phi}}\left(\mathbf{z} \mid \mathbf{x}^{(i)}\right)}\left[\log p_{\boldsymbol{\theta}}\left(\mathbf{x}^{(i)} \mid \mathbf{z}\right)\right]
+\end{aligned}
+\]</div>
+<p>两种变形方式其实是等价的，我们的优化目标就变成了这个lower bound，自习观察可以发现，这个lower bound的第一项是一个<strong>KL散度</strong>(让编码器生成的z的条件分布和解码器中z的分布尽可能相似)，其实可以看成是一个正则项。而第二项则是一个<strong>重构损失</strong>(将x编码成z后再还原回x)，这两者一结合，其实就是VAE的设计目标对上了。论文中给出了两种方法来优化这个lower bound：
+第一种方法Stochastic Gradient Variational Bayes (SGVB)通过蒙特卡洛方法来估计这个下界，具体的操作是：</p>
+<div class="arithmatex">\[
+\begin{array}{l}
+\widetilde{\mathcal{L}}^A\left(\boldsymbol{\theta}, \boldsymbol{\phi} ; \mathbf{x}^{(i)}\right)=\frac{1}{L} \sum_{l=1}^L \log p_{\boldsymbol{\theta}}\left(\mathbf{x}^{(i)}, \mathbf{z}^{(i, l)}\right)-\log q_{\boldsymbol{\phi}}\left(\mathbf{z}^{(i, l)} \mid \mathbf{x}^{(i)}\right) \\
+\text { where } \quad \mathbf{z}^{(i, l)}=g_{\boldsymbol{\phi}}\left(\boldsymbol{\epsilon}^{(i, l)}, \mathbf{x}^{(i)}\right) \quad \text { and } \quad \boldsymbol{\epsilon}^{(l)} \sim p(\boldsymbol{\epsilon})
+\end{array}
+\]</div>
+<p>第二种估计方法把KL散度保留了下来，因为这个项可以通过假设化简出来，而后面的这个重构期望才是需要估计的，具体的估计方法是：</p>
+<div class="arithmatex">\[
+\widetilde{\mathcal{L}}^B\left(\boldsymbol{\theta}, \boldsymbol{\phi} ; \mathbf{x}^{(i)}\right)=-D_{K L}\left(q_{\boldsymbol{\phi}}\left(\mathbf{z} \mid \mathbf{x}^{(i)}\right) \| p_{\boldsymbol{\theta}}(\mathbf{z})\right)+\frac{1}{L} \sum_{l=1}^L\left(\log p_{\boldsymbol{\theta}}\left(\mathbf{x}^{(i)} \mid \mathbf{z}^{(i, l)}\right)\right)
+\]</div>
+<p>VAE模型在训练的过程中，我们需要先把输入的x编码成条件分布<span class="arithmatex">\(P(\mathbf{z}|\mathbf{x})\)</span>然后从里面采样一个<span class="arithmatex">\(\mathbf{z}\)</span>出来进行解码，但是这个采样的过程会导致梯度无法回传，因此论文中使用了一个重参数化技巧： </p>
+<blockquote>
+<p>从一个正态分布<span class="arithmatex">\(\mathcal{N}(\mu, \sigma^2)\)</span>中采样一个<span class="arithmatex">\(z\)</span>，相当于从标准正态分布<span class="arithmatex">\(\mathcal{N}(0, 1)\)</span>中采样一个<span class="arithmatex">\(\epsilon\)</span>然后计算出<span class="arithmatex">\(z=\mu+\epsilon\sigma\)</span></p>
+</blockquote>
+<p>而在具体实现的时候，作者使用了MLP作为编码器，来预测每个数据点<span class="arithmatex">\(\mathbf{x}\)</span>对应的正态的期望和方差，并假设<span class="arithmatex">\(p_{\theta}(\mathbf{z})\)</span>是一个标准正态分布，编码器对每个数据点<span class="arithmatex">\(\mathbf{x}\)</span>的编码结果<span class="arithmatex">\(\mathbf{z}\)</span>的分布也是正态分布，所以我们有：</p>
+<div class="arithmatex">\[
+\log q_{\boldsymbol{\phi}}\left(\mathbf{z} \mid \mathbf{x}^{(i)}\right)=\log \mathcal{N}\left(\mathbf{z} ; \boldsymbol{\mu}^{(i)}, \boldsymbol{\sigma}^{2(i)} \mathbf{I}\right)
+\]</div>
+<p>这样一来，训练目标中的KL散度也就可以计算了，因为KL散度中的两个分布都是高斯分布，反正最终计算的结果变成了：</p>
+<div class="arithmatex">\[
+\mathcal{L}\left(\boldsymbol{\theta}, \boldsymbol{\phi} ; \mathbf{x}^{(i)}\right)=\frac {1}{2}\sum_{i=1}^{J}\left(1+\log (\sigma_j^{(i)})^2-(\mu_{j}^{(i)})^2-(\sigma_j^{(i)})^2\right)+\frac{1}{L} \sum_{l=1}^L\left(\log p_{\boldsymbol{\theta}}\left(\mathbf{x}^{(i)} \mid \mathbf{z}^{(i, l)}\right)\right)
+\]</div>
+<p>其中<span class="arithmatex">\(\mathbf{z}^{(i, l)}=\boldsymbol{\mu}^{(i)}+\boldsymbol{\sigma}^{(i)} \odot \boldsymbol{\epsilon}^{(l)}\)</span>是重参数化后采样得到的噪声。这样一来，整个模型的基本架构就介绍完了，我们就可以训练VAE模型了。同时，VAE作为一个通用的框架，给我们留下了很多设计空间，比如编码器和解码器的具体选择，以及噪声z所服从的分布的假设等等，我们可以根据实际需要，设计出多种多样的VAE模型。</p>
+<h2 id="3-conditional-vae">3. Conditional-VAE<a class="headerlink" href="#3-conditional-vae" title="Permanent link">&para;</a></h2>
+<p>原论文🔗：<a href="https://papers.nips.cc/paper/2015/file/8d55a249e6baa5c06772297520da2051-Paper.pdf">Learning Structured Output Representation using Deep Conditional Generative Models</a>
+Conditional-VAE是VAE的一个改进，它可以实现可控的生成，不过总的改进其实不多，我们假设<span class="arithmatex">\(\mathbf{x},\mathbf{y},\mathbf{z}\)</span>分别是生成器的输入变量(也就是数据的某种特征)，待生成的变量和中间隐层变量，那么C-VAE的训练目标可以表示为：</p>
+<div class="arithmatex">\[
+\widetilde{\mathcal{L}}_{\mathrm{CVAE}}(\mathbf{x}, \mathbf{y} ; \theta, \phi)=-K L\left(q_\phi(\mathbf{z} \mid \mathbf{x}, \mathbf{y}) \| p_\theta(\mathbf{z} \mid \mathbf{x})\right)+\frac{1}{L} \sum_{l=1}^L \log p_\theta\left(\mathbf{y} \mid \mathbf{x}, \mathbf{z}^{(l)}\right)
+\]</div>
+<p>简单来说，就是我们输入<span class="arithmatex">\(\mathbf{x},\mathbf{y}\)</span>并编码得到<span class="arithmatex">\(\mathbf{z}\)</span>，然后通过<span class="arithmatex">\(\mathbf{x},\mathbf{z}\)</span>来重构<span class="arithmatex">\(\mathbf{y}\)</span>，同时我们希望编码器得到的噪声分布，<del>其实就是改了一下编码器和解码器的网络架构</del>。</p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年1月25日 13:15:37</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月17日 23:14:47</span>
       
         <br>
         创建日期:
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年1月25日 13:15:37</span>
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月17日 23:14:47</span>
       
     
   </small>
@@ -4134,12 +4405,12 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "content.code.annotate", "navigation.tracking", "navigation.indexes", "navigation.top", "toc.follow"], "search": "../assets/javascripts/workers/search.db81ec45.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "content.code.annotate", "navigation.tracking", "navigation.indexes", "navigation.top", "toc.follow"], "search": "../../assets/javascripts/workers/search.db81ec45.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.4b2c34cd.min.js"></script>
+      <script src="../../assets/javascripts/bundle.4b2c34cd.min.js"></script>
       
-        <script src="../from_oi_wiki/js/extra.js"></script>
+        <script src="../../from_oi_wiki/js/extra.js"></script>
       
         <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
       
