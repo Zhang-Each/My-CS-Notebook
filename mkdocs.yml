@@ -111,10 +111,24 @@ nav:
         - Papers-old/论文阅读笔记33：结合BERT的知识图谱补全.md
       - 01-GAN与对比学习的设计: Papers/01-GAN与对比学习的设计.md
       - 02-VAE与CVAE的基本架构: Papers/02-VAE与CVAE的基本架构.md
+      - 03-多模态特征的融合与提取: Papers/03-多模态特征的融合与提取.md
   - 🦃️ 数据结构/算法:
     - DS/index.md
     - 数据结构基础: DS/ds.md
     - 高级数据结构与算法分析: DS/ads.md
+    - 🐝LeetCode刷题记录:
+      - 数组: Leetcode/Array.md
+      - 栈: Leetcode/Stack.md
+      - 链表: Leetcode/Linklist.md
+      - 堆: Leetcode/Heap.md
+      - 动态规划: Leetcode/DP.md
+      - 深度优先搜索: Leetcode/DFS.md
+      - 双指针: Leetcode/TwoPointers.md
+      - 贪心: Leetcode/DFS.md
+      - 树: Leetcode/Tree.md
+      - 滑动窗口: Leetcode/Windows.md
+      - 位运算: Leetcode/Bit.md
+      - 脑筋急转弯: Leetcode/Trick.md
   - 🐊 编程语言:
     - PL/index.md
     - C++:
