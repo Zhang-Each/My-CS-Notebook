@@ -17,7 +17,7 @@
         <link rel="next" href="../Causality02-Assumptions/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.13">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.15">
     
     
       
@@ -25,7 +25,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.ffa9267a.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.113286f1.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.a0c5b2b5.min.css">
@@ -4380,7 +4380,7 @@
 <summary>本页统计信息</summary>
 <ul>
 <li>
-<p>本页约 1792 个字,  预计阅读时间 6 分钟。</p>
+<p>本页约 1820 个字,  预计阅读时间 6 分钟。</p>
 </li>
 <li>
 <p><span id="busuanzi_container_page_pv">本页总阅读量<span id="busuanzi_value_page_pv"></span>次</span></p>
@@ -4394,8 +4394,12 @@
 <p>在正式学习因果推断和其相关理论之前，我们需要首先知道这样几个基本概念：</p>
 <h3 id="01-相关性和因果性">0.1 相关性和因果性<a class="headerlink" href="#01-相关性和因果性" title="Permanent link">&para;</a></h3>
 <p>相关性代表了事物之前存在的关联，而因果性代表了事物之间的内在联系，在机器学习中，我们很多时候学到的都是数据与标签之间的相关性(当然这里说的是监督学习)，模型在训练过程中可能会学习到数据中存在的一些shortcut feature，这就会导致模型依据shortcut feature做出判断，而不是根据数据和标签之间最本质的关系来做出判断。</p>
+<blockquote>
+<p>两个变量X和Y之间如果有相关性，还无法判断它们之间的因果性</p>
+</blockquote>
 <h3 id="02-如何判断因果性">0.2 如何判断因果性<a class="headerlink" href="#02-如何判断因果性" title="Permanent link">&para;</a></h3>
-<p>我们如何判断事物的因果性？这需要我们控制变量并且做随机对照试验(randomized controlled trial)来完成。我们要研究两个变量X和Y之间的因果性，那么就要控制其他所有无关因素不变，然后改变X，根据Y的变化情况来判断X和Y之间的因果性。但是，随机对照试验是一种非常理想的情况，因为控制变量实际上是一件非常麻烦的事情，有很多现实的因素需要考虑(比如科学伦理)，这导致随机对照试验的代价非常大。
+<p>我们如何判断事物的因果性？这需要我们控制变量并且做随机对照试验(randomized controlled trial)来完成。我们要研究两个变量X和Y之间的因果性，那么就要控制其他所有无关因素不变，然后改变X，根据Y的变化情况来判断X和Y之间的因果性。
+但是，随机对照试验是一种非常理想的情况，因为控制变量实际上是一件非常麻烦的事情，有很多现实的因素需要考虑(比如科学伦理)，这导致随机对照试验的代价非常大。
 因此，代替随机对照试验，使用观察数据是一个诱人的捷径。观察性数据是由研究者在没有任何干扰的情况下简单地观察受试者获得的。这意味着，研究者对处理方式(treatment)和受试者没有控制权，他们只是观察受试者并根据观察结果记录数据。从观察数据中，我们可以找到其行动、结果，以及已经发生的信息，但无法弄清他们采取具体行动的机制。
 对于观察到的数据，核心问题是如何获得反事实的结果。例如，我们考虑"如果这个病人接受了不同的药物治疗，会不会有不同的结果？" ，回答这样的反事实问题具有挑战性，原因有两点：
 - 第一，我们只观察到事实的结果，而没有观察到如果他们选择了不同的治疗方案可能发生的反事实的结果。
@@ -4441,7 +4445,7 @@
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月5日 00:05:13</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月26日 23:31:36</span>
       
         <br>
         创建日期:
