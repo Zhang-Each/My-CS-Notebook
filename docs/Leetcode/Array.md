@@ -1,25 +1,123 @@
 # 数组操作题
 
-## 6368. 找出字符串的可整除数组
-> 给你一个下标从 0 开始的字符串 word ，长度为 n ，由从 0 到 9 的数字组成。另给你一个正整数 m 。word 的 可整除数组 div  是一个长度为 n 的整数数组，并满足：如果 word[0,...,i] 所表示的 数值 能被 m 整除，div[i] = 1否则，div[i] = 0 返回 word 的可整除数组。
+## 0982. 按位与为零的三元组
+>给你一个整数数组 nums ，返回其中 按位与三元组 的数目。按位与三元组 是由下标 (i, j, k) 组成的三元组，并满足下述全部条件：0 <= i < nums.length, 0 <= j < nums.length, 0 <= k < nums.length, nums[i] & nums[j] & nums[k] == 0 ，其中 & 表示按位与运算符。
 
-这道题的最大问题在于`word[0: i]` 可能非常大，导致直接去计算除以m的结果会很麻烦，我们可以用`word[0: i-1]`的余数乘以10再加上`word[i]`的值来计算第i次的余数，这样时间复杂度就降下来了，具体的代码如下：
+- 直接三层循环暴力计算会超时，可以先对nums[i]&nums[j]的结果进行预处理，这样可以把时间复杂度降低成$O(N^2)$
 
 ```python
 class Solution:
-    def divisibilityArray(self, word: str, m: int) -> List[int]:
-        n = len(word)
-        div = [0 for i in range(n)]
-        remain = 0
-        for i in range(n):
-            remain = remain * 10 + int(word[i])
-            if remain % m == 0:
-                div[i] = 1
-            else:
-                div[i] = 0
-            remain = remain % m
-        return div
+    def countTriplets(self, nums: List[int]) -> int:
+        bits = defaultdict(int)
+        n = range(len(nums))
+        for i in n:
+            for j in n:
+                bits[nums[i] & nums[j]] += 1
+        # 先进行预处理，然后再遍历一轮
+        result = 0
+        for bit in bits:
+            for num in nums:
+                if bit & num == 0:
+                    result += bits[bit]
+        return result
 ```
+
+
+## 1144. 递减元素使数组呈锯齿状
+> 给你一个整数数组 nums，每次 操作 会从中选择一个元素并 将该元素的值减少 1。如果符合下列情况之一，则数组 A 就是 锯齿数组：每个偶数索引对应的元素都大于相邻的元素，即 A[0] > A[1] < A[2] > A[3] < A[4] > ...或者，每个奇数索引对应的元素都大于相邻的元素，即 A[0] < A[1] > A[2] < A[3] > A[4] < ...
+> 返回将数组 nums 转换为锯齿数组所需的最小操作次数。
+
+这道题的关键就在于要发现，数组其实只要调整偶数位或者奇数位置上的那些数字就可以了。比如说，我们要调整使得偶数索引对应的元素都大于相邻的元素，那么我们对每个偶数索引对应的元素，都要把它们调整到max(a, b) + 1(其中a和b是它左右两个相邻的数字)才能满足条件，如果我们对a和b也进行调整，我们可以分情况讨论，如果调整后max(a, b)的值没有变或者变大了，那么显然是做了无用功，如果max(a, b)变小了，那么虽然我们对偶数索引的数的调整可能变少了，但是总体来看，我们还是多调整了a或者b，导致实际的操作次数没有发生变化，所以我们只需要调整每一个偶数索引即可，而不需要调整奇数索引上的数字。如果要把数组调整成另一种情况也是同理，所以我们只要比较一下两种情况下分别需要的最小操作次数就可以了。
+
+```cpp
+class Solution {
+public:
+    int movesToMakeZigzag(vector<int>& nums) {
+        // 只调整奇数部分或者只调整偶数部分，不然工作量肯定会增大
+        int a = 0, b = 0;
+        for (int i = 0; i < nums.size(); i += 2) {
+            // 让偶数部分更大
+            int s = 0;
+            if (i - 1 >= 0) {
+                s = max(s, nums[i] - nums[i - 1] + 1);
+            }
+            if (i + 1 < nums.size()) {
+                s = max(s, nums[i] - nums[i + 1] + 1);
+            }
+            a += s;
+        }
+        for (int i = 1; i < nums.size(); i += 2) {
+            int s = 0;
+            if (i - 1 >= 0) {
+                s = max(s, nums[i] - nums[i - 1] + 1);
+            }
+            if (i + 1 < nums.size()) {
+                s = max(s, nums[i] - nums[i + 1] + 1);
+            }
+            b += s;
+        }
+        return min(a, b);
+    }
+};
+```
+
+
+## 6309. 分割数组使乘积互质
+> 给你一个长度为 n 的整数数组 nums ，下标从 0 开始。如果在下标 i 处 分割 数组，其中 0 <= i <= n - 2 ，使前 i + 1 个元素的乘积和剩余元素的乘积互质，则认为该分割 有效 。返回可以有效分割数组的最小下标 i ，如果不存在有效分割，则返回 -1 。
+
+这道题的关键在于：分割后的左右两部分，**左边的任意一个数和右边的任意一个数应该是互质的**，如果不是，那么这个分割就是无效的，因为左右两边的乘积也不会互质。我们可以设置一个offset代表最合适的分割点，并且这个分割点会不断更新。
+我们从最左边开始遍历数组，对于每个nums[i]，从数组最后开始找到第一个与它不互斥的数nums[j]，这样一来，offset就不会小于j，否则无法满足上面的条件，这样一来我们可以确保，对于当前的i，offset后面的所有数字都和0-i之间的所有数字互斥，当i和offset重合的时候，就说明我们找到了最合适的分割点。
+
+```python
+import math
+
+
+class Solution:
+    def findValidSplit(self, nums: List[int]) -> int:
+        # 核心是让左右两边的数组都互质
+        if len(nums) == 1:
+            return -1
+        offset = 0
+        n = len(nums)
+        for i in range(n):
+            for j in range(n - 1, offset, -1):
+                gcd = math.gcd(nums[i], nums[j])
+                if gcd != 1:
+                    if j == n - 1:
+                        return -1
+                    offset = j
+                    break
+            if i == offset:
+                return offset
+        return -1
+```
+
+
+## 6313. 统计将重叠区间合并成组的方案数
+> 给你一个二维整数数组 ranges ，其中 ranges[i] = [starti, endi] 表示 starti 到 endi 之间（包括二者）的所有整数都包含在第 i 个区间中。你需要将 ranges 分成 两个 组（可以为空），满足：每个区间只属于一个组。两个有交集的区间必须在 同一个组内。如果两个区间有至少 一个 公共整数，那么这两个区间是有交集的。
+> 比方说，区间 [1, 3] 和 [2, 5] 有交集，因为 2 和 3 在两个区间中都被包含。请你返回将 ranges 划分成两个组的总方案数 。
+
+由于两个有交集的区间必须要分在一起，我们可以把整个ranges数组划分成K个集合，每个集合包含了若干区间，集合内的区间互有交集，集合间互相没有交集，这样一来，每个集合里的range必须出现在同一个组里，但是不同集合之间没有硬性的约束，这样一来，总的方案数量实际就是$2^K$，因为K个集合可以分到任意一个组中。
+剩下的问题就在于如何计算K的数量，我们可以先对ranges数组先排序，然后遍历一次就可以计算出不相交的区间集合K的总数，具体的代码如下：
+
+```python
+class Solution:
+    def countWays(self, ranges: List[List[int]]) -> int:
+        count = 1
+        ranges = sorted(ranges, key=lambda x: (x[0], x[1]))
+        left, right = ranges[0]
+        # 主要是统计有多少组必须分到一起的区间，假设这个数是n，那最后的结果就是2**n
+        for i in range(1, len(ranges)):
+            b = ranges[i]
+            if b[0] > right:
+                left, right = b[0], b[1]
+                count += 1
+            else:
+                right = max(right, b[1])
+        return 2 ** count % (10 ** 9 + 7)
+
+```
+
 
 
 ## 6367. 求出最多标记下标
@@ -47,3 +145,27 @@ class Solution:
                 break
         return result * 2
 ```
+
+
+## 6368. 找出字符串的可整除数组
+> 给你一个下标从 0 开始的字符串 word ，长度为 n ，由从 0 到 9 的数字组成。另给你一个正整数 m 。word 的 可整除数组 div  是一个长度为 n 的整数数组，并满足：如果 word[0,...,i] 所表示的 数值 能被 m 整除，div[i] = 1否则，div[i] = 0 返回 word 的可整除数组。
+
+这道题的最大问题在于`word[0: i]` 可能非常大，导致直接去计算除以m的结果会很麻烦，我们可以用`word[0: i-1]`的余数乘以10再加上`word[i]`的值来计算第i次的余数，这样时间复杂度就降下来了，具体的代码如下：
+
+```python
+class Solution:
+    def divisibilityArray(self, word: str, m: int) -> List[int]:
+        n = len(word)
+        div = [0 for i in range(n)]
+        remain = 0
+        for i in range(n):
+            remain = remain * 10 + int(word[i])
+            if remain % m == 0:
+                div[i] = 1
+            else:
+                div[i] = 0
+            remain = remain % m
+        return div
+```
+
+

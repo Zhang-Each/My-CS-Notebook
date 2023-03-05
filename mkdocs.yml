@@ -118,6 +118,7 @@ nav:
     - 高级数据结构与算法分析: DS/ads.md
     - 🐝LeetCode刷题记录:
       - 数组: Leetcode/Array.md
+      - 字符串: Leetcode/String.md
       - 栈: Leetcode/Stack.md
       - 链表: Leetcode/Linklist.md
       - 堆: Leetcode/Heap.md
