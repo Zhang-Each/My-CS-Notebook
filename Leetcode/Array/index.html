@@ -14,10 +14,10 @@
         <link rel="prev" href="../../DS/ads/">
       
       
-        <link rel="next" href="../Stack/">
+        <link rel="next" href="../String/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.15">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.0">
     
     
       
@@ -25,7 +25,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.113286f1.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.402914a4.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.a0c5b2b5.min.css">
@@ -2555,6 +2555,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
@@ -2609,8 +2611,29 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#6368-找出字符串的可整除数组" class="md-nav__link">
-    6368. 找出字符串的可整除数组
+  <a href="#0982-按位与为零的三元组" class="md-nav__link">
+    0982. 按位与为零的三元组
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1144-递减元素使数组呈锯齿状" class="md-nav__link">
+    1144. 递减元素使数组呈锯齿状
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6309-分割数组使乘积互质" class="md-nav__link">
+    6309. 分割数组使乘积互质
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6313-统计将重叠区间合并成组的方案数" class="md-nav__link">
+    6313. 统计将重叠区间合并成组的方案数
   </a>
   
 </li>
@@ -2622,10 +2645,31 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#6368-找出字符串的可整除数组" class="md-nav__link">
+    6368. 找出字符串的可整除数组
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
       
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../String/" class="md-nav__link">
+        字符串
+      </a>
     </li>
   
 
@@ -4255,8 +4299,29 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#6368-找出字符串的可整除数组" class="md-nav__link">
-    6368. 找出字符串的可整除数组
+  <a href="#0982-按位与为零的三元组" class="md-nav__link">
+    0982. 按位与为零的三元组
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1144-递减元素使数组呈锯齿状" class="md-nav__link">
+    1144. 递减元素使数组呈锯齿状
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6309-分割数组使乘积互质" class="md-nav__link">
+    6309. 分割数组使乘积互质
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6313-统计将重叠区间合并成组的方案数" class="md-nav__link">
+    6313. 统计将重叠区间合并成组的方案数
   </a>
   
 </li>
@@ -4264,6 +4329,13 @@
         <li class="md-nav__item">
   <a href="#6367-求出最多标记下标" class="md-nav__link">
     6367. 求出最多标记下标
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6368-找出字符串的可整除数组" class="md-nav__link">
+    6368. 找出字符串的可整除数组
   </a>
   
 </li>
@@ -4291,31 +4363,120 @@
 <summary>本页统计信息</summary>
 <ul>
 <li>
-<p>本页约 451 个字,  30 行代码,  预计阅读时间 2 分钟。</p>
+<p>本页约 1135 个字,  109 行代码,  预计阅读时间 5 分钟。</p>
 </li>
 <li>
 <p><span id="busuanzi_container_page_pv">本页总阅读量<span id="busuanzi_value_page_pv"></span>次</span></p>
 </li>
 </ul>
 </details>
-<h2 id="6368-找出字符串的可整除数组">6368. 找出字符串的可整除数组<a class="headerlink" href="#6368-找出字符串的可整除数组" title="Permanent link">&para;</a></h2>
+<h2 id="0982-按位与为零的三元组">0982. 按位与为零的三元组<a class="headerlink" href="#0982-按位与为零的三元组" title="Permanent link">&para;</a></h2>
 <blockquote>
-<p>给你一个下标从 0 开始的字符串 word ，长度为 n ，由从 0 到 9 的数字组成。另给你一个正整数 m 。word 的 可整除数组 div  是一个长度为 n 的整数数组，并满足：如果 word[0,...,i] 所表示的 数值 能被 m 整除，div[i] = 1否则，div[i] = 0 返回 word 的可整除数组。</p>
+<p>给你一个整数数组 nums ，返回其中 按位与三元组 的数目。按位与三元组 是由下标 (i, j, k) 组成的三元组，并满足下述全部条件：0 &lt;= i &lt; nums.length, 0 &lt;= j &lt; nums.length, 0 &lt;= k &lt; nums.length, nums[i] &amp; nums[j] &amp; nums[k] == 0 ，其中 &amp; 表示按位与运算符。</p>
 </blockquote>
-<p>这道题的最大问题在于<code>word[0: i]</code> 可能非常大，导致直接去计算除以m的结果会很麻烦，我们可以用<code>word[0: i-1]</code>的余数乘以10再加上<code>word[i]</code>的值来计算第i次的余数，这样时间复杂度就降下来了，具体的代码如下：</p>
+<ul>
+<li>直接三层循环暴力计算会超时，可以先对nums[i]&amp;nums[j]的结果进行预处理，这样可以把时间复杂度降低成<span class="arithmatex">\(O(N^2)\)</span></li>
+</ul>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">divisibilityArray</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">m</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
-        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
-        <span class="n">div</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
-        <span class="n">remain</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">def</span> <span class="nf">countTriplets</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">bits</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">n</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">n</span><span class="p">:</span>
+                <span class="n">bits</span><span class="p">[</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&amp;</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="c1"># 先进行预处理，然后再遍历一轮</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">bit</span> <span class="ow">in</span> <span class="n">bits</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">bit</span> <span class="o">&amp;</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">result</span> <span class="o">+=</span> <span class="n">bits</span><span class="p">[</span><span class="n">bit</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">result</span>
+</code></pre></div>
+<h2 id="1144-递减元素使数组呈锯齿状">1144. 递减元素使数组呈锯齿状<a class="headerlink" href="#1144-递减元素使数组呈锯齿状" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>给你一个整数数组 nums，每次 操作 会从中选择一个元素并 将该元素的值减少 1。如果符合下列情况之一，则数组 A 就是 锯齿数组：每个偶数索引对应的元素都大于相邻的元素，即 A[0] &gt; A[1] &lt; A[2] &gt; A[3] &lt; A[4] &gt; ...或者，每个奇数索引对应的元素都大于相邻的元素，即 A[0] &lt; A[1] &gt; A[2] &lt; A[3] &gt; A[4] &lt; ...
+返回将数组 nums 转换为锯齿数组所需的最小操作次数。</p>
+</blockquote>
+<p>这道题的关键就在于要发现，数组其实只要调整偶数位或者奇数位置上的那些数字就可以了。比如说，我们要调整使得偶数索引对应的元素都大于相邻的元素，那么我们对每个偶数索引对应的元素，都要把它们调整到max(a, b) + 1(其中a和b是它左右两个相邻的数字)才能满足条件，如果我们对a和b也进行调整，我们可以分情况讨论，如果调整后max(a, b)的值没有变或者变大了，那么显然是做了无用功，如果max(a, b)变小了，那么虽然我们对偶数索引的数的调整可能变少了，但是总体来看，我们还是多调整了a或者b，导致实际的操作次数没有发生变化，所以我们只需要调整每一个偶数索引即可，而不需要调整奇数索引上的数字。如果要把数组调整成另一种情况也是同理，所以我们只要比较一下两种情况下分别需要的最小操作次数就可以了。</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="w"> </span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">movesToMakeZigzag</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">nums</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// 只调整奇数部分或者只调整偶数部分，不然工作量肯定会增大</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// 让偶数部分更大</span>
+<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">max</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">max</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="n">a</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">s</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">max</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">max</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="n">b</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">s</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">min</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div>
+<h2 id="6309-分割数组使乘积互质">6309. 分割数组使乘积互质<a class="headerlink" href="#6309-分割数组使乘积互质" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>给你一个长度为 n 的整数数组 nums ，下标从 0 开始。如果在下标 i 处 分割 数组，其中 0 &lt;= i &lt;= n - 2 ，使前 i + 1 个元素的乘积和剩余元素的乘积互质，则认为该分割 有效 。返回可以有效分割数组的最小下标 i ，如果不存在有效分割，则返回 -1 。</p>
+</blockquote>
+<p>这道题的关键在于：分割后的左右两部分，<strong>左边的任意一个数和右边的任意一个数应该是互质的</strong>，如果不是，那么这个分割就是无效的，因为左右两边的乘积也不会互质。我们可以设置一个offset代表最合适的分割点，并且这个分割点会不断更新。
+我们从最左边开始遍历数组，对于每个nums[i]，从数组最后开始找到第一个与它不互斥的数nums[j]，这样一来，offset就不会小于j，否则无法满足上面的条件，这样一来我们可以确保，对于当前的i，offset后面的所有数字都和0-i之间的所有数字互斥，当i和offset重合的时候，就说明我们找到了最合适的分割点。</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">math</span>
+
+
+<span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">findValidSplit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="c1"># 核心是让左右两边的数组都互质</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="n">offset</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-            <span class="n">remain</span> <span class="o">=</span> <span class="n">remain</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">word</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-            <span class="k">if</span> <span class="n">remain</span> <span class="o">%</span> <span class="n">m</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">div</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">offset</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                <span class="n">gcd</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">gcd</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+                <span class="k">if</span> <span class="n">gcd</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+                    <span class="n">offset</span> <span class="o">=</span> <span class="n">j</span>
+                    <span class="k">break</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">offset</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">offset</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+</code></pre></div>
+<h2 id="6313-统计将重叠区间合并成组的方案数">6313. 统计将重叠区间合并成组的方案数<a class="headerlink" href="#6313-统计将重叠区间合并成组的方案数" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>给你一个二维整数数组 ranges ，其中 ranges[i] = [starti, endi] 表示 starti 到 endi 之间（包括二者）的所有整数都包含在第 i 个区间中。你需要将 ranges 分成 两个 组（可以为空），满足：每个区间只属于一个组。两个有交集的区间必须在 同一个组内。如果两个区间有至少 一个 公共整数，那么这两个区间是有交集的。
+比方说，区间 [1, 3] 和 [2, 5] 有交集，因为 2 和 3 在两个区间中都被包含。请你返回将 ranges 划分成两个组的总方案数 。</p>
+</blockquote>
+<p>由于两个有交集的区间必须要分在一起，我们可以把整个ranges数组划分成K个集合，每个集合包含了若干区间，集合内的区间互有交集，集合间互相没有交集，这样一来，每个集合里的range必须出现在同一个组里，但是不同集合之间没有硬性的约束，这样一来，总的方案数量实际就是<span class="arithmatex">\(2^K\)</span>，因为K个集合可以分到任意一个组中。
+剩下的问题就在于如何计算K的数量，我们可以先对ranges数组先排序，然后遍历一次就可以计算出不相交的区间集合K的总数，具体的代码如下：</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">countWays</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ranges</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">ranges</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">ranges</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+        <span class="n">left</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="n">ranges</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="c1"># 主要是统计有多少组必须分到一起的区间，假设这个数是n，那最后的结果就是2**n</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">ranges</span><span class="p">)):</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="n">ranges</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">right</span><span class="p">:</span>
+                <span class="n">left</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">div</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="n">remain</span> <span class="o">=</span> <span class="n">remain</span> <span class="o">%</span> <span class="n">m</span>
-        <span class="k">return</span> <span class="n">div</span>
+                <span class="n">right</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">right</span><span class="p">,</span> <span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">return</span> <span class="mi">2</span> <span class="o">**</span> <span class="n">count</span> <span class="o">%</span> <span class="p">(</span><span class="mi">10</span> <span class="o">**</span> <span class="mi">9</span> <span class="o">+</span> <span class="mi">7</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="6367-求出最多标记下标">6367. 求出最多标记下标<a class="headerlink" href="#6367-求出最多标记下标" title="Permanent link">&para;</a></h2>
 <blockquote>
@@ -4340,13 +4501,32 @@
                 <span class="k">break</span>
         <span class="k">return</span> <span class="n">result</span> <span class="o">*</span> <span class="mi">2</span>
 </code></pre></div>
+<h2 id="6368-找出字符串的可整除数组">6368. 找出字符串的可整除数组<a class="headerlink" href="#6368-找出字符串的可整除数组" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>给你一个下标从 0 开始的字符串 word ，长度为 n ，由从 0 到 9 的数字组成。另给你一个正整数 m 。word 的 可整除数组 div  是一个长度为 n 的整数数组，并满足：如果 word[0,...,i] 所表示的 数值 能被 m 整除，div[i] = 1否则，div[i] = 0 返回 word 的可整除数组。</p>
+</blockquote>
+<p>这道题的最大问题在于<code>word[0: i]</code> 可能非常大，导致直接去计算除以m的结果会很麻烦，我们可以用<code>word[0: i-1]</code>的余数乘以10再加上<code>word[i]</code>的值来计算第i次的余数，这样时间复杂度就降下来了，具体的代码如下：</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">divisibilityArray</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">m</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+        <span class="n">div</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+        <span class="n">remain</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">remain</span> <span class="o">=</span> <span class="n">remain</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">word</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">remain</span> <span class="o">%</span> <span class="n">m</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">div</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">div</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">remain</span> <span class="o">=</span> <span class="n">remain</span> <span class="o">%</span> <span class="n">m</span>
+        <span class="k">return</span> <span class="n">div</span>
+</code></pre></div>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月26日 23:31:36</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年3月5日 14:51:21</span>
       
         <br>
         创建日期:
@@ -4491,7 +4671,7 @@
     <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "content.code.annotate", "navigation.tracking", "navigation.indexes", "navigation.top", "toc.follow"], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.2a6f1dda.min.js"></script>
+      <script src="../../assets/javascripts/bundle.ce72ebac.min.js"></script>
       
         <script src="../../from_oi_wiki/js/extra.js"></script>
       
