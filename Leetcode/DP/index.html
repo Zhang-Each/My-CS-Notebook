@@ -14,10 +14,10 @@
         <link rel="prev" href="../Heap/">
       
       
-        <link rel="next" href="../DFS/">
+        <link rel="next" href="../Prefix/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.0">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.2">
     
     
       
@@ -25,7 +25,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.402914a4.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7bf56d0a.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.a0c5b2b5.min.css">
@@ -2557,6 +2557,10 @@
         
           
         
+          
+        
+          
+        
       
       
         <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
@@ -2681,6 +2685,20 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#0005-最长回文子串" class="md-nav__link">
+    0005. 最长回文子串
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1653-使字符串平衡的最少删除次数" class="md-nav__link">
+    1653. 使字符串平衡的最少删除次数
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#6310-获得分数的方法数" class="md-nav__link">
     6310. 获得分数的方法数
   </a>
@@ -2691,6 +2709,34 @@
   
 </nav>
       
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Prefix/" class="md-nav__link">
+        前缀和
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Backtrack/" class="md-nav__link">
+        回溯
+      </a>
     </li>
   
 
@@ -4264,6 +4310,20 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#0005-最长回文子串" class="md-nav__link">
+    0005. 最长回文子串
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1653-使字符串平衡的最少删除次数" class="md-nav__link">
+    1653. 使字符串平衡的最少删除次数
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#6310-获得分数的方法数" class="md-nav__link">
     6310. 获得分数的方法数
   </a>
@@ -4293,13 +4353,67 @@
 <summary>本页统计信息</summary>
 <ul>
 <li>
-<p>本页约 182 个字,  12 行代码,  预计阅读时间 1 分钟。</p>
+<p>本页约 676 个字,  46 行代码,  预计阅读时间 3 分钟。</p>
 </li>
 <li>
 <p><span id="busuanzi_container_page_pv">本页总阅读量<span id="busuanzi_value_page_pv"></span>次</span></p>
 </li>
 </ul>
 </details>
+<h2 id="0005-最长回文子串">0005. 最长回文子串<a class="headerlink" href="#0005-最长回文子串" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>给你一个字符串 s，找到 s 中最长的回文子串。如果字符串的反序与原始字符串相同，则该字符串称为回文字符串。</p>
+</blockquote>
+<p>经典的动态规划问题，用一个数组<code>dp[i][j]</code>表示s从i到j这一段是不是回文字符串，dp的情况可以分成下面几种：
+- 如果<code>i == j</code> 那么很明显是的
+- 如果<code>i + 1 == j</code> 那么就看<code>s[i + 1] == s[j]</code>是否成立
+- 其他情况，要先判断<code>s[i + 1] == s[j - 1]</code>是否成立，然后再根据<code>dp[i + 1][j - 1]</code>是不是1来决定<code>dp[i][j]</code>的结果
+同时，因为遍历过程中，需要知道i+1的情况，所以第一层关于i的循环要倒着进行，保证<code>dp[i + 1][j - 1]</code>是一个有效值。具体的代码如下：</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">longestPalindrome</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+        <span class="n">dp</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+        <span class="n">maxl</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="c1"># 经典dp，经典中的经典</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="k">else</span> <span class="mi">0</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+                        <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">][</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="k">if</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="ow">and</span> <span class="n">j</span> <span class="o">-</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&gt;</span> <span class="n">maxl</span><span class="p">:</span>
+                    <span class="n">maxl</span> <span class="o">=</span> <span class="n">j</span> <span class="o">-</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+                    <span class="n">res</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">:</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">res</span>
+</code></pre></div>
+<h2 id="1653-使字符串平衡的最少删除次数">1653. 使字符串平衡的最少删除次数<a class="headerlink" href="#1653-使字符串平衡的最少删除次数" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>给你一个字符串 s ，它仅包含字符 'a' 和 'b'​​​​ 。你可以删除 s 中任意数目的字符，使得 s 平衡 。当不存在下标对 (i,j) 满足 i &lt; j ，且 s[i] = 'b' 的同时 s[j]= 'a' ，此时认为 s 是 平衡 的。
+请你返回使 s 平衡 的 最少 删除次数。</p>
+</blockquote>
+<p>这道题目的意思非常明确，就是要把字符串s处理成前面全是a后面全是b的形式(当然a和b可以没有)
+我们可以将这个问题转化成一个DP问题，用dp表示字符串s的最少删除次数，如果我们在s尾部新增一个字符，那么dp的更新可以分成两种情况讨论：
+- 如果新增了一个a，我们可以把这个a删除，或者把前面的b全部删除，我们需要记录前面b的个数
+- 如果新增了一个b，因为前面的字符串已经平衡了，所以可以先记录b的数量，不需要进行删除操作
+最终的代码如下：</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">minimumDeletions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="c1"># 所有的a必须出现在所有的b前面，当然a也可以没有</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">dp</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
+            <span class="c1"># 简单动态规划，如果最后是a，要不就删除，要不就把前面的b全部删除</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="s1">&#39;a&#39;</span><span class="p">:</span>
+                <span class="n">dp</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">dp</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">count</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">dp</span>
+</code></pre></div>
 <h2 id="6310-获得分数的方法数">6310. 获得分数的方法数<a class="headerlink" href="#6310-获得分数的方法数" title="Permanent link">&para;</a></h2>
 <blockquote>
 <p>考试中有 n 种类型的题目。给你一个整数 target 和一个下标从 0 开始的二维整数数组 types ，其中 types[i] = [counti, marksi] 表示第 i 种类型的题目有 counti 道，每道题目对应 marksi 分。
@@ -4325,7 +4439,7 @@
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年3月5日 14:51:21</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年3月12日 21:44:08</span>
       
         <br>
         创建日期:
@@ -4470,7 +4584,7 @@
     <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "content.code.annotate", "navigation.tracking", "navigation.indexes", "navigation.top", "toc.follow"], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.ce72ebac.min.js"></script>
+      <script src="../../assets/javascripts/bundle.fc8c2696.min.js"></script>
       
         <script src="../../from_oi_wiki/js/extra.js"></script>
       
