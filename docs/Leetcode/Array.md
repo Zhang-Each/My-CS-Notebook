@@ -1,5 +1,28 @@
 # 数组操作题
 
+## 0152. 乘积最大子数组
+
+> 给你一个整数数组 nums ，请你找出数组中乘积最大的非空连续子数组（该子数组中至少包含一个数字），并返回该子数组所对应的乘积。
+> 测试用例的答案是一个 32-位 整数。子数组 是数组的连续子序列。
+
+找到连续子数组的最大乘积的关键在于怎么处理负数，因为如果前面几个数字乘出来非常大，但是紧接着来了一个负数，那么这个结果可能就非常小了，但是如果后面再有一个负数，这个乘积可能又会非常大，所以我们要在记录最大值的同时也记录其中的最小值，并且在适当的时候将他们对换，这样遍历一次就可以获得乘积最大的结果。
+
+```python
+class Solution:
+    def maxProduct(self, nums: List[int]) -> int:
+        result = nums[0]
+        # 分别记录最小的和最大的，涉及到负数的时候就可以转换
+        maxp, minp = 1, 1
+        for num in nums:
+            if num < 0:
+                maxp, minp = minp, maxp
+            maxp = max(maxp * num, num)
+            minp = min(minp * num, num)
+            result = max(result, maxp)
+        return result
+```
+
+
 ## 0982. 按位与为零的三元组
 >给你一个整数数组 nums ，返回其中 按位与三元组 的数目。按位与三元组 是由下标 (i, j, k) 组成的三元组，并满足下述全部条件：0 <= i < nums.length, 0 <= j < nums.length, 0 <= k < nums.length, nums[i] & nums[j] & nums[k] == 0 ，其中 & 表示按位与运算符。
 
@@ -60,6 +83,43 @@ public:
     }
 };
 ```
+
+
+## 1590. 使数组和能被 P 整除
+> 给你一个正整数数组 nums，请你移除 最短 子数组（可以为 空），使得剩余元素的 和 能被 p 整除。 不允许 将整个数组都移除。
+> 请你返回你需要移除的最短子数组的长度，如果无法满足题目要求，返回 -1 。
+
+剩下元素的和能被p整除说明子数组除以p的余数应该和整个数组相同，我们可以先求出这个余数，然后使用hash+一次循环来找出最短的子数组，感觉是非常经典的题目。
+
+```python
+class Solution {
+public:
+    int minSubarray(vector<int>& nums, int p) {
+        int target = 0, result = nums.size(), sum = 0;
+        for (int i = 0; i < nums.size(); i ++) {
+            target = (target + nums[i]) % p;
+        }
+        if (target == 0) {
+            return 0;
+        }
+        unordered_map<int, int> pos;
+        pos[0] = -1;
+        for (int i = 0; i < nums.size(); i ++) {
+            sum = (sum + nums[i]) % p;
+            int mod = (sum - target + p) % p;
+            pos[sum] = i;
+            if (pos.find(mod) != pos.end()) {
+                result = min(result, i - pos[mod]);
+            }
+        }
+        if (result == nums.size()) {
+            return -1;
+        }
+        return result;
+    }
+};
+```
+
 
 
 ## 6309. 分割数组使乘积互质

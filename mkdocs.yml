@@ -123,6 +123,8 @@ nav:
       - 链表: Leetcode/Linklist.md
       - 堆: Leetcode/Heap.md
       - 动态规划: Leetcode/DP.md
+      - 前缀和: Leetcode/Prefix.md
+      - 回溯: Leetcode/Backtrack.md
       - 深度优先搜索: Leetcode/DFS.md
       - 双指针: Leetcode/TwoPointers.md
       - 贪心: Leetcode/DFS.md
