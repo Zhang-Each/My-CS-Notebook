@@ -25,6 +25,37 @@ class Solution:
 ```
 
 
+## 0142.环形链表II
+> 给定一个链表的头节点  head ，返回链表开始入环的第一个节点。 如果链表无环，则返回 null
+
+这道题是上一道题的拓展，我们要进一步找到环的起点，实际上这可以分成两个步骤。第一步，先判断有没有环，还是用快慢指针的方法，并且两个节点相遇的时候，他们的路程差实际上就是环的长度L。第二步，我们知道了环的长度，要找到环的起点，可以让一个节点先走L步，然后两个节点匀速前进，当它们相遇的时候，那个位置就是环的起点，因为这时两个点的路程差才是L
+
+```python
+class Solution:
+    def detectCycle(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if head is None or head.next is None:
+            return None
+        p, q = head, head
+        ring = 0
+        while p is not None and q is not None:
+            p, q = p.next, q.next
+            # 没有环的情况
+            if q is None or q.next is None:
+                return None
+            q = q.next
+            ring += 1
+            if p == q:
+                break
+        # 此时的ring是环的长度，让p先走ring步，等p和q再次相遇的时候，那个位置就是环的起点
+        p, q = head, head
+        while ring > 0:
+            ring -= 1
+            q = q.next
+        while p != q:
+            p, q = p.next, q.next
+        return p
+```
+
 ## 0148. 排序链表
 > 给你链表的头结点 head ，请将其按 升序 排列并返回 排序后的链表 。
 

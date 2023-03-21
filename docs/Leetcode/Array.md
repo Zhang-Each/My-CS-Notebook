@@ -178,6 +178,20 @@ class Solution:
 
 ```
 
+## 6325. 修车的最少时间
+> 给你一个整数数组 ranks ，表示一些机械工的 能力值 。ranksi 是第 i 位机械工的能力值。能力值为 r 的机械工可以在 r * n2 分钟内修好 n 辆车。
+> 同时给你一个整数 cars ，表示总共需要修理的汽车数目。
+> 请你返回修理所有汽车 最少 需要多少时间。
+> 注意：所有机械工可以同时修理汽车。
+
+这道题的解法居然是对时间进行二分然后判断这个时间能不能修完，大受震撼。
+```python
+class Solution:
+    def repairCars(self, ranks: List[int], cars: int) -> int:
+        # 居然是二分法，两眼一黑
+        s = lambda t: sum(floor((t // r) ** 0.5) for r in ranks)
+        return bisect_left(range(min(ranks) * cars * cars), cars, key=s)
+```
 
 
 ## 6367. 求出最多标记下标

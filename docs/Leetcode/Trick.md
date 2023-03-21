@@ -1,5 +1,51 @@
 # 脑筋急转弯
 
+## 0031. 下一个排列
+> 给你一个整数数组 nums ，找出 nums 的下一个排列。
+
+这道题的关键在于，要找到那个该变的位置，然后从后面找到一个比这个位置大的数进行交换，交换之后，把那个位置后面的数组从新排序，保证结果是最小的。
+
+```python
+class Solution:
+    def nextPermutation(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        if len(nums) <= 1:
+            return
+        i, j, k = len(nums) - 2, len(nums) - 1, len(nums) - 1
+        # 找到要换的位置
+        while i >= 0 and nums[i] >= nums[j]:
+            i -= 1
+            j -= 1
+        # 找到一个比nums[i]大的换到前面来
+        if i >= 0:
+            while nums[i] >= nums[k]:
+                k -= 1
+            nums[i], nums[k] = nums[k], nums[i]
+        # 对后面的这一段进行排序，保证结果最小
+        nums[j:] = sorted(nums[j:])  
+```
+
+
+## 0448. 找到所有数组中消失的数字 
+> 给你一个含 n 个整数的数组 nums ，其中 nums[i] 在区间 [1, n] 内。请你找出所有在 [1, n] 范围内但没有出现在 nums 中的数字，并以数组的形式返回结果。要求不使用除答案以外的额外空间。
+
+不能用额外的空间，可以直接在原本的数字上进行标记，简单有效。
+
+```python
+class Solution:
+    def findDisappearedNumbers(self, nums: List[int]) -> List[int]:
+        # 直接在原地进行标记
+        for i in range(len(nums)):
+            nums[abs(nums[i]) - 1] = -abs(nums[abs(nums[i]) - 1])
+        result = []
+        for i in range(len(nums)):
+            if nums[i] > 0:
+                result.append(i + 1)
+        return result
+```
+
 ## 1247. 交换字符使得字符串相同
 > 有两个长度相同的字符串 s1 和 s2，且它们其中 只含有 字符 "x" 和 "y"，你需要通过「交换字符」的方式使这两个字符串相同。每次「交换字符」的时候，你都可以在两个字符串中各选一个字符进行交换。
 > 交换只能发生在两个不同的字符串之间，绝对不能发生在同一个字符串内部。也就是说，我们可以交换 s1[i] 和 s2[j]，但不能交换 s1[i] 和 s1[j]。
