@@ -17,7 +17,7 @@
         <link rel="next" href="../Stack/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.2">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.3">
     
     
       
@@ -25,7 +25,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.7bf56d0a.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.c4a75a56.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.a0c5b2b5.min.css">
@@ -2631,6 +2631,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#1616-分割两个字符串得到回文串" class="md-nav__link">
+    1616. 分割两个字符串得到回文串
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4296,6 +4303,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#1616-分割两个字符串得到回文串" class="md-nav__link">
+    1616. 分割两个字符串得到回文串
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4330,7 +4344,7 @@
             <span class="n">s</span> <span class="o">=</span> <span class="n">name</span>
             <span class="c1"># 直接开始搜索就行</span>
 <span class="err">???</span><span class="o">+</span> <span class="n">abstract</span> <span class="s2">&quot;本页统计信息&quot;</span>
-    <span class="o">-</span> <span class="n">本页约</span> <span class="mi">200</span> <span class="n">个字</span><span class="p">,</span>  <span class="mi">12</span> <span class="n">行代码</span><span class="p">,</span>  <span class="n">预计阅读时间</span> <span class="mi">1</span> <span class="n">分钟</span><span class="err">。</span>
+    <span class="o">-</span> <span class="n">本页约</span> <span class="mi">593</span> <span class="n">个字</span><span class="p">,</span>  <span class="mi">27</span> <span class="n">行代码</span><span class="p">,</span>  <span class="n">预计阅读时间</span> <span class="mi">2</span> <span class="n">分钟</span><span class="err">。</span>
 
     <span class="o">-</span> <span class="o">&lt;</span><span class="n">span</span> <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;busuanzi_container_page_pv&quot;</span><span class="o">&gt;</span><span class="n">本页总阅读量</span><span class="o">&lt;</span><span class="n">span</span> <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;busuanzi_value_page_pv&quot;</span><span class="o">&gt;&lt;/</span><span class="n">span</span><span class="o">&gt;</span><span class="n">次</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span>
             <span class="k">while</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">mp</span><span class="p">:</span>
@@ -4340,13 +4354,37 @@
             <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">result</span>
 </code></pre></div>
+<h2 id="1616-分割两个字符串得到回文串">1616. 分割两个字符串得到回文串<a class="headerlink" href="#1616-分割两个字符串得到回文串" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>给你两个字符串 a 和 b ，它们长度相同。请你选择一个下标，将两个字符串都在 相同的下标 分割开。由 a 可以得到两个字符串： aprefix 和 asuffix ，满足 a = aprefix + asuffix ，同理，由 b 可以得到两个字符串 bprefix 和 bsuffix ，满足 b = bprefix + bsuffix 。请你判断 aprefix + bsuffix 或者 bprefix + asuffix 能否构成回文串。
+当你将一个字符串 s 分割成 sprefix 和 ssuffix 时， ssuffix 或者 sprefix 可以为空。比方说， s = "abc" 那么 "" + "abc" ， "a" + "bc" ， "ab" + "c" 和 "abc" + "" 都是合法分割。</p>
+</blockquote>
+<p>这道题的关键在于发现这样两点：
+1. aprefix + bsuffix和bprefix + asuffix实际上是等价的，我们只要调换一下a和b的顺序就可以将这两者互相进行转换，所以我们只要判断aprefix + bsuffix是不是回文就可以了
+2. aprefix + bsuffix的左端必定在a的左端，而右端必定在b的右端，所以我们可以从a和b的两端分别开始遍历，把能够成回文的先找出来，假设a[0: i]和b[j+1:]构成回文字符串，如果i不小于j，那么我们已经找到了符合条件的(要注意两个字符串都只能在同一个位置切开)，否则，我们就要判断a[i: j + 1]或者b[i: j + 1]是否有可能构成回文字符串，因为这时候从a和b各选一个已经不行了，所以只能从一个字符串那里选。</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">checkPalindromeFormation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkPalidrome</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkPalidrome</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">checkPalidrome</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+        <span class="n">left</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">while</span> <span class="n">left</span> <span class="o">&lt;</span> <span class="n">right</span> <span class="ow">and</span> <span class="n">a</span><span class="p">[</span><span class="n">left</span><span class="p">]</span> <span class="o">==</span> <span class="n">b</span><span class="p">[</span><span class="n">right</span><span class="p">]:</span>
+            <span class="n">left</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">right</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">left</span> <span class="o">&gt;=</span> <span class="n">right</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">left</span><span class="p">:</span> <span class="n">right</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="n">left</span><span class="p">:</span> <span class="n">right</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">x</span> <span class="o">==</span> <span class="n">x</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="ow">or</span> <span class="n">y</span> <span class="o">==</span> <span class="n">y</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</code></pre></div>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年3月5日 14:51:21</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年3月21日 22:58:22</span>
       
         <br>
         创建日期:
@@ -4454,10 +4492,10 @@
           
         </div>
         
-          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
             回到页面顶部
-          </a>
+          </button>
         
       </main>
       
@@ -4491,7 +4529,7 @@
     <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "content.code.annotate", "navigation.tracking", "navigation.indexes", "navigation.top", "toc.follow"], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.fc8c2696.min.js"></script>
+      <script src="../../assets/javascripts/bundle.efa0ade1.min.js"></script>
       
         <script src="../../from_oi_wiki/js/extra.js"></script>
       

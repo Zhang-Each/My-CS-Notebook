@@ -17,7 +17,7 @@
         <link rel="next" href="../String/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.2">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.3">
     
     
       
@@ -25,7 +25,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.7bf56d0a.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.c4a75a56.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.a0c5b2b5.min.css">
@@ -2657,6 +2657,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#6325-修车的最少时间" class="md-nav__link">
+    6325. 修车的最少时间
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#6367-求出最多标记下标" class="md-nav__link">
     6367. 求出最多标记下标
   </a>
@@ -4387,6 +4394,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#6325-修车的最少时间" class="md-nav__link">
+    6325. 修车的最少时间
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#6367-求出最多标记下标" class="md-nav__link">
     6367. 求出最多标记下标
   </a>
@@ -4423,7 +4437,7 @@
 <summary>本页统计信息</summary>
 <ul>
 <li>
-<p>本页约 1519 个字,  147 行代码,  预计阅读时间 7 分钟。</p>
+<p>本页约 1668 个字,  152 行代码,  预计阅读时间 7 分钟。</p>
 </li>
 <li>
 <p><span id="busuanzi_container_page_pv">本页总阅读量<span id="busuanzi_value_page_pv"></span>次</span></p>
@@ -4590,6 +4604,20 @@
                 <span class="n">right</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">right</span><span class="p">,</span> <span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
         <span class="k">return</span> <span class="mi">2</span> <span class="o">**</span> <span class="n">count</span> <span class="o">%</span> <span class="p">(</span><span class="mi">10</span> <span class="o">**</span> <span class="mi">9</span> <span class="o">+</span> <span class="mi">7</span><span class="p">)</span>
 </code></pre></div>
+<h2 id="6325-修车的最少时间">6325. 修车的最少时间<a class="headerlink" href="#6325-修车的最少时间" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>给你一个整数数组 ranks ，表示一些机械工的 能力值 。ranksi 是第 i 位机械工的能力值。能力值为 r 的机械工可以在 r * n2 分钟内修好 n 辆车。
+同时给你一个整数 cars ，表示总共需要修理的汽车数目。
+请你返回修理所有汽车 最少 需要多少时间。
+注意：所有机械工可以同时修理汽车。</p>
+</blockquote>
+<p>这道题的解法居然是对时间进行二分然后判断这个时间能不能修完，大受震撼。
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">repairCars</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ranks</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">cars</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="c1"># 居然是二分法，两眼一黑</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">floor</span><span class="p">((</span><span class="n">t</span> <span class="o">//</span> <span class="n">r</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">ranks</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">bisect_left</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">ranks</span><span class="p">)</span> <span class="o">*</span> <span class="n">cars</span> <span class="o">*</span> <span class="n">cars</span><span class="p">),</span> <span class="n">cars</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">s</span><span class="p">)</span>
+</code></pre></div></p>
 <h2 id="6367-求出最多标记下标">6367. 求出最多标记下标<a class="headerlink" href="#6367-求出最多标记下标" title="Permanent link">&para;</a></h2>
 <blockquote>
 <p>给你一个下标从 0 开始的整数数组 nums 。一开始，所有下标都没有被标记。你可以执行以下操作任意次：选择两个 互不相同且未标记 的下标 i 和 j ，满足 2 * nums[i] &lt;= nums[j] ，标记下标 i 和 j 。请你执行上述操作任意次，返回 nums 中最多可以标记的下标数目。</p>
@@ -4638,7 +4666,7 @@
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年3月12日 21:44:08</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年3月21日 22:58:22</span>
       
         <br>
         创建日期:
@@ -4746,10 +4774,10 @@
           
         </div>
         
-          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
             回到页面顶部
-          </a>
+          </button>
         
       </main>
       
@@ -4783,7 +4811,7 @@
     <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "content.code.annotate", "navigation.tracking", "navigation.indexes", "navigation.top", "toc.follow"], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.fc8c2696.min.js"></script>
+      <script src="../../assets/javascripts/bundle.efa0ade1.min.js"></script>
       
         <script src="../../from_oi_wiki/js/extra.js"></script>
       

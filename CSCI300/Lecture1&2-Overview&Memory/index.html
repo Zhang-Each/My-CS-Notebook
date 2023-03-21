@@ -8,12 +8,12 @@
       
       
       
-        <link rel="canonical" href="https://zhang-each.github.io/My-CS-notebook/CSCI300/Lecture%201-Overview/">
+        <link rel="canonical" href="https://zhang-each.github.io/My-CS-notebook/CSCI300/Lecture1%262-Overview%26Memory/">
       
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.2">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.3">
     
     
       
@@ -21,7 +21,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.7bf56d0a.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.c4a75a56.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.a0c5b2b5.min.css">
@@ -4258,6 +4258,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#3-如何解释内存中的字节" class="md-nav__link">
+    3. 如何解释内存中的字节
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4281,7 +4288,7 @@
 <summary>本页统计信息</summary>
 <ul>
 <li>
-<p>本页约 798 个字,  预计阅读时间 3 分钟。</p>
+<p>本页约 1155 个字,  11 行代码,  预计阅读时间 4 分钟。</p>
 </li>
 <li>
 <p><span id="busuanzi_container_page_pv">本页总阅读量<span id="busuanzi_value_page_pv"></span>次</span></p>
@@ -4308,13 +4315,33 @@ A：在现实世界中，处理器时间和内存是有开销的。像Facebook�
 <img alt="" src="../resources/Pasted%20image%2020230311171941.png" />
 我们在程序中使用的所有变量和数据结构，以及在计算机上运行的所有代码，都需要存储在这些字节大小的内存中。如何使用内存，将对代码和数据的安全已经性能产生非常大的影响。
 那么计算机如何表示更大的数字(超过255)呢？计算机通过将若干个相邻位置上的bytes解释为一个数字来实现，比如2个相邻的字节是一个short类型的值，4个相邻的字节是一个int类型的值。这样一来内存能表示的数字就远远不止0-255了。</p>
+<h2 id="3-如何解释内存中的字节">3. 如何解释内存中的字节<a class="headerlink" href="#3-如何解释内存中的字节" title="Permanent link">&para;</a></h2>
+<p>内存是计算机中唯一可以存储信息的地方，内存中的信息以字节的形式存储。根据软件程序的需要，这些字节可以被解释为程序代码，数据(整数，字符串，图像等等)，或者元数据(Meta-data),了解复杂的程序如何归结为字节，将有助于调试程序，并理解它们的行为方式。
+那么计算机是如何知道内存中的哪些字节是排在一起，可以一起被解释为某种数据的呢？答案是计算机并不知道，同一个字节可能意味着不同的东西，这取决于<strong>程序如何选择来解释</strong>这几个字节。
+而计算机程序，实际上也是存放在内存中的字节，这时候，CPU会把代码对应的这些字节解释为机器码。</p>
+<blockquote>
+<p>这里课程一个例子展示了C语言代码编译成.o文件后的机器码，具体如下：</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code>addf.o:     file format elf64-x86-64
+
+Disassembly of section .text:
+
+0000000000000000 :
+   0:   8d 04 37                lea    (%rdi,%rsi,1),%eax
+   3:   c3                      retq
+        ^                       ^
+        | bytes in file         | their human-readable meaning
+        | in hexadecimal        | (not stored in the file; objdump generated this)
+        | notation
+</code></pre></div>
+<p><code>addf.c</code>里面的函数被编译成了<code>addf.o</code>文件，这个二进制文件就包含了四个byte，分别是<code>8d 04 37 c3</code>，当这个函数被运行起来的时候，这些字节会被存放在内存的某处，处理器(即一块芯片)会读取这些字节并将其解释为下一步要做的指令。</p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年3月12日 21:44:08</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年3月21日 22:58:22</span>
       
         <br>
         创建日期:
@@ -4422,10 +4449,10 @@ A：在现实世界中，处理器时间和内存是有开销的。像Facebook�
           
         </div>
         
-          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
             回到页面顶部
-          </a>
+          </button>
         
       </main>
       
@@ -4459,7 +4486,7 @@ A：在现实世界中，处理器时间和内存是有开销的。像Facebook�
     <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "content.code.annotate", "navigation.tracking", "navigation.indexes", "navigation.top", "toc.follow"], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.fc8c2696.min.js"></script>
+      <script src="../../assets/javascripts/bundle.efa0ade1.min.js"></script>
       
         <script src="../../from_oi_wiki/js/extra.js"></script>
       
