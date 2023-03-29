@@ -112,6 +112,7 @@ nav:
       - 01-GAN与对比学习的设计: Papers/01-GAN与对比学习的设计.md
       - 02-VAE与CVAE的基本架构: Papers/02-VAE与CVAE的基本架构.md
       - 03-多模态特征的融合与提取: Papers/03-多模态特征的融合与提取.md
+      - 04-因果注意力机制: Papers/04-因果注意力机制.md
   - 🦃️ 数据结构/算法:
     - DS/index.md
     - 数据结构基础: DS/ds.md
