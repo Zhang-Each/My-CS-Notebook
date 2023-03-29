@@ -8,7 +8,7 @@ statistics: true
     - 平时会更新一些学习CS各方向内容的笔记，欢迎关注我的[GitHub账号](https://github.com/Zhang-Each)和[个人博客](https://zhang-each.github.io/)!
 
 ??? tip "更新日志"
-    - 2023/03/29 更新论文阅读笔记和
+    - 2023/03/29 更新论文阅读笔记和Leetcode的刷题记录
     - 2023/02/22 更新论文阅读笔记和Leetcode
     - 2023/02/15 更新Causality笔记
     - 2023/02/11 对笔记本的目录作出较大调整
