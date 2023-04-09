@@ -194,6 +194,48 @@ class Solution:
 ```
 
 
+## 6329. 使子数组元素和相等
+> 给你一个下标从 0 开始的整数数组 arr 和一个整数 k 。数组 arr 是一个循环数组。换句话说，数组中的最后一个元素的下一个元素是数组中的第一个元素，数组中第一个元素的前一个元素是数组中的最后一个元素。
+> 你可以执行下述运算任意次：
+> 选中 arr 中任意一个元素，并使其值加上 1 或减去 1 。
+> 执行运算使每个长度为 k 的 子数组 的元素总和都相等，返回所需要的最少运算次数。
+> 子数组 是数组的一个连续部分。
+
+要长度为k的子数组相等，就必须让数组里所有相距k个位置两两相等，然后一圈轮下来会有很多重合的地方，至于哪些位置会重合，这个跟k和len(arr)的最大公约数有关，在我们把arr划分成若干个组后，每个组内的每个数字就必须相等，这个可以先中位数然后计算最小的操作次数，最终的代码如下：
+
+```python
+class Solution:
+    def makeSubKSumEqual(self, arr: List[int], k: int) -> int:
+        n = len(arr)
+        def gcd(a, b):
+            if b == 0:
+                return a
+            return gcd(b, a % b)
+        
+        g = gcd(n, k)
+        nums = [[] for i in range(g)]
+        result = 0
+        for i in range(n):
+            nums[i % g].append(arr[i])
+        for i in range(g):
+            result += self.find(nums[i])
+        return result
+    
+    def find(self, nums):
+        nums = sorted(nums)
+        n = len(nums)
+        if n % 2 == 1:
+            median = nums[n // 2]
+            return sum(abs(num - median) for num in nums)
+        else:
+            median1, median2 = nums[n // 2 - 1], nums[n // 2]
+            return min(sum(abs(num - median1) for num in nums), sum(abs(num - median2) for num in nums))
+        
+        
+```
+
+
+
 ## 6367. 求出最多标记下标
 > 给你一个下标从 0 开始的整数数组 nums 。一开始，所有下标都没有被标记。你可以执行以下操作任意次：选择两个 互不相同且未标记 的下标 i 和 j ，满足 2 * nums[i] <= nums[j] ，标记下标 i 和 j 。请你执行上述操作任意次，返回 nums 中最多可以标记的下标数目。
 

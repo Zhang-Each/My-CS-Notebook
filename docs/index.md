@@ -28,7 +28,7 @@ statistics: true
     - 笔记总数：{{pages}}篇
     - 总字数：{{words}}字
     - <span id="busuanzi_container_site_uv">访客总人数：<span id="busuanzi_value_site_uv"></span>人
-    - </span><span id="busuanzi_container_site_pv">总访问次数：<span id="busuanzi_value_site_pv"></span>次
+    - <span id="busuanzi_container_site_pv">总访问次数：<span id="busuanzi_value_site_pv"></span>次
     
 ???+ example "推荐阅读"
     - [深度学习与神经网络入门](https://zhang-each.github.io/My-CS-Notebook/CS231N/)

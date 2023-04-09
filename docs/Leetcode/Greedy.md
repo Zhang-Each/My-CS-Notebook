@@ -77,3 +77,32 @@ class Solution:
                 d[pos] = num
         return len(d)
 ```
+
+
+## 6364. 老鼠和奶酪
+
+> 有两只老鼠和 n 块不同类型的奶酪，每块奶酪都只能被其中一只老鼠吃掉。
+> 下标为 i 处的奶酪被吃掉的得分为：
+> 如果第一只老鼠吃掉，则得分为 reward1[i] 。
+> 如果第二只老鼠吃掉，则得分为 reward2[i] 。
+> 给你一个正整数数组 reward1 ，一个正整数数组 reward2 ，和一个非负整数 k 。请你返回第一只老鼠恰好吃掉 k 块奶酪的情况下，最大 得分为多少。
+
+这道题用一个很简单的贪心就可以保证得分最大，就是让每块奶酪分别给reward最高的那只老鼠吃，同时因为必须保证第一只老鼠恰好吃K块奶酪，所以我们只要以reward1[i]-reward2[i]的值的标准选出最大的K快给老鼠1吃就可以了，剩下的必须都给老鼠2吃，这很容易通过排序来实现：
+
+```python
+class Solution:
+    def miceAndCheese(self, reward1: List[int], reward2: List[int], k: int) -> int:
+        # 依然是贪心
+        n = len(reward1)
+        pairs = [(reward1[i], reward2[i], reward1[i] - reward2[i]) for i in range(n)]
+        pairs = sorted(pairs, reverse=True, key=lambda x: x[2])
+        # print(pairs)
+        result = 0
+        for i in range(n):
+            if k > 0:
+                k -= 1
+                result += pairs[i][0]
+            else:
+                result += pairs[i][1]
+        return result
+```

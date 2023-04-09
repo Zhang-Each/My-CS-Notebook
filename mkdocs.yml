@@ -189,7 +189,8 @@ nav:
         - DB/MIT6.830/MIT6.830-lab3-Query Optimizer.md
         - DB/MIT6.830/MIT6.830-lab4-Transaction.md
     - CSCI300:
-      - CSCI300/Lecture123-Overview.md
+      - CSCI300/Lecture1-Overview.md
+      - CSCI300/Lecture2-DataInMemory.md
   - 🐳 杂谈与总结:
     - Gossip/index.md
     - I. 2021年度总结: Gossip/2021年度总结.md
