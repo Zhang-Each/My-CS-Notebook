@@ -34,6 +34,66 @@ class Solution:
 
 ```
 
+
+## 1105.填充书架
+> 给定一个数组 books ，其中 books[i] = [thicknessi, heighti] 表示第 i 本书的厚度和高度。你也会得到一个整数 shelfWidth 。按顺序 将这些书摆放到总宽度为 shelfWidth 的书架上。先选几本书放在书架上（它们的厚度之和小于等于书架的宽度 shelfWidth ），然后再建一层书架。重复这个过程，直到把所有的书都放在书架上。
+> 需要注意的是，在上述过程的每个步骤中，摆放书的顺序与你整理好的顺序相同。
+> 以这种方式布置书架，返回书架整体可能的最小高度。
+
+很经典的dp问题，首先books必须按顺序摆放，这才使得我们可以使用dp，然后dp的具体方式就是对于每一个下标i，我们找到一个小于i的下标j，使得前j-1本书摆好之后，第j到第i本书另外放置一层，然后更新dp数组，这样就可以完成dp，具体的代码如下：
+
+```python
+class Solution:
+    def minHeightShelves(self, books: List[List[int]], shelfWidth: int) -> int:
+        # dp[i] 来表示放下前i本书所用的最小高度
+        n = len(books)
+        dp = [999999999] * (n + 1)
+        dp[0] = 0
+        for i in range(n):
+            b = books[i]
+            width = 0
+            height = 0
+            j = i
+            # 向前进行调整
+            while j >= 0:
+                width += books[j][0]
+                if width > shelfWidth:
+                    break
+                height = max(height, books[j][1])
+                # 前j-1个的结果加上j-i个放成一排后的结果
+                dp[i + 1] = min(dp[i + 1], dp[j] + height)
+                j -= 1
+        return dp[-1]
+```
+
+
+## 1335.工作计划的最低难度
+> 你需要制定一份 d 天的工作计划表。工作之间存在依赖，要想执行第 i 项工作，你必须完成全部 j 项工作（ 0 <= j < i）。你每天 至少 需要完成一项任务。工作计划的总难度是这 d 天每一天的难度之和，而一天的工作难度是当天应该完成工作的最大难度。
+> 给你一个整数数组 jobDifficulty 和一个整数 d，分别代表工作难度和需要计划的天数。第 i 项工作的难度是 jobDifficulty[i]。
+> 返回整个工作计划的 最小难度 。如果无法制定工作计划，则返回 -1 
+
+首先每天至少要完成一项工作，所以如果jobDifficulty的长度小于d那就无法制定工作计划。然后我们仔细分析题意就会发现，实际上我们是需要将jobDifficulty分成d份，然后求出这d份的每一份中元素最大值的最小值(即难度)，所以我们可以考虑用dp或者记忆化搜索，用`dfs(i, day)`表示从第i天开始，将剩余工作安排在day日完成的最小难度，实现记忆化搜索的代码如下：
+
+```python
+class Solution:
+    def minDifficulty(self, jobDifficulty: List[int], d: int) -> int:
+        n = len(jobDifficulty)
+        if n < d:
+            return -1
+        
+        # dfs(i, day)表示从第i个工作开始做day天的最小工作量
+        @cache
+        def dfs(i, day):
+            if day == 1:
+                return max(jobDifficulty[i:])
+            # 把i-j的固定为一天然后开始搜索
+            return min(max(jobDifficulty[i: j]) + dfs(j, day - 1) for j in range(i + 1, n - day + 2))
+        
+        return dfs(0, d)
+
+```
+
+
 ## 1653. 使字符串平衡的最少删除次数
 > 给你一个字符串 s ，它仅包含字符 'a' 和 'b'​​​​ 。你可以删除 s 中任意数目的字符，使得 s 平衡 。当不存在下标对 (i,j) 满足 i < j ，且 s[i] = 'b' 的同时 s[j]= 'a' ，此时认为 s 是 平衡 的。
 > 请你返回使 s 平衡 的 最少 删除次数。
@@ -80,4 +140,48 @@ class Solution:
                 for j in range(1, min(c, i // m) + 1):
                     dp[i] = (dp[i] + dp[i - j * m]) % mod
         return dp[-1]
+```
+
+
+## 6433. 矩阵中移动的最大次数
+> 给你一个下标从 0 开始、大小为 m x n 的矩阵 grid ，矩阵由若干 正 整数组成。你可以从矩阵第一列中的 任一 单元格出发，按以下方式遍历 grid ：
+> 从单元格 (row, col) 可以移动到 (row - 1, col + 1)、(row, col + 1) 和 (row + 1, col + 1) 三个单元格中任一满足值 严格 大于当前单元格的单元格。
+> 返回你在矩阵中能够 移动 的 最大 次数。
+
+很明显的dp，但是要注意必须要从第一列出发，所以后面的每一列不仅要看前一列是否严格限于，还要看前面一列dp过来的位置是否有效。
+
+```python
+class Solution:
+    def countCompleteComponents(self, n: int, edges: List[List[int]]) -> int:
+        g = [[0 for i in range(n)] for j in range(n)]
+        for edge in edges:
+            a, b = edge
+            g[a][b] = 1
+            g[b][a] = 1
+        visit = set()
+        count = 0
+        comps = []
+        
+        def dfs(i, comp):
+            visit.add(i)
+            comp.append(i)
+            for j in range(len(g[i])):
+                if j not in visit and g[i][j] == 1:
+                    dfs(j, comp)
+            
+            
+        for i in range(n):
+            if i not in visit:
+                comp = []
+                dfs(i, comp)
+                comps.append(comp)
+        for comp in comps:
+            l = len(comp)
+            flag = 1
+            for i in range(l):
+                for j in range(i + 1, l):
+                    if g[comp[i]][comp[j]] == 0:
+                        flag = 0
+            count += flag
+        return count
 ```
