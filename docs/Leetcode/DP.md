@@ -185,3 +185,127 @@ class Solution:
             count += flag
         return count
 ```
+
+
+
+## 6449. 收集巧克力
+> 给你一个长度为 n 、下标从 0 开始的整数数组 nums ，表示收集不同巧克力的成本。每个巧克力都对应一个不同的类型，最初，位于下标 i 的巧克力就对应第 i 个类型。在一步操作中，你可以用成本 x 执行下述行为：
+> 同时对于所有下标 0 <= i < n - 1 进行以下操作， 将下标 i 处的巧克力的类型更改为下标 (i + 1) 处的巧克力对应的类型。如果 i == n - 1 ，则该巧克力的类型将会变更为下标 0 处巧克力对应的类型。
+> 假设你可以执行任意次操作，请返回收集所有类型巧克力所需的最小成本。
+
+可以发现我们最多进行n次下标转移的操作，就一定能找到最合适的方法，假设进行的转移次数是i，那么我们转移需要的成本就是x乘以i，我们接下来只要对每个巧克力j，选出右边i步以内最小的成本，再求和，就是移动i次最少的成本和，为了减小时间复杂度，我们可以用`dp[i][j]`来记录巧克力i距离j以内的最小成本，最终的代码如下：
+
+```python
+class Solution:
+    def minCost(self, nums: List[int], x: int) -> int:
+        n = len(nums)
+        dp = [[0 for i in range(n)] for j in range(n)]
+        for i in range(n):
+            dp[i][0] = nums[i]
+            for j in range(1, n):
+                k = (i + j) % n
+                dp[i][j] = min(dp[i][j - 1], nums[k])
+        result = sum(nums)
+        # 调整1-n-1次，找出最小的结果
+        for i in range(1, n):
+            temp = i * x
+            for j in range(n):
+                temp += dp[j][i]
+            result = min(result, temp)
+        return result
+                
+```
+
+
+## 6898.字符串连接删减字母
+> 给你一个下标从 0 开始的数组 words ，它包含 n 个字符串。
+> 定义 连接 操作 join(x, y) 表示将字符串 x 和 y 连在一起，得到 xy 。如果 x 的最后一个字符与 y 的第一个字符相等，连接后两个字符中的一个会被 删除 。
+> 比方说 join("ab", "ba") = "aba" ， join("ab", "cde") = "abcde" 。
+> 你需要执行 n - 1 次 连接 操作。令 str0 = words[0] ，从 i = 1 直到 i = n - 1 ，对于第 i 个操作，你可以执行以下操作之一：
+> 令 stri = join(stri - 1, words[i])
+> 令 stri = join(words[i], stri - 1)
+> 你的任务是使 strn - 1 的长度 最小 。
+> 请你返回一个整数，表示 str n - 1 的最小长度。
+
+这道题乍一看回溯就可以解决，但是由于搜索空间很大，所以会超时。我们可以发现，这个join操作，不管是正向还是反向，最终能否触发合并长度-1，都只和每个words[i]的第一个字母和最后一个字母有关，我们可以考虑对首尾字母进行dp，假设`dp[i][j][k]` 表示words前i个单词进行join之后，首位为j而且末尾为k的字符串最小长度，这样一来，对于下一个新的单词，我们考察它能否和`dp[i][j][k]` 合并并发生缩短操作就可以，具体的实现方式有下面两种，一种是递归DFS，一种是dp
+
+```python
+class Solution:
+    def minimizeConcatenatedLength(self, words: List[str]) -> int:
+        @cache
+        def dfs(i: int, s: str, e: str) -> int:
+            if i == n:
+                return 0
+            t = words[i]
+            # 两种情况，分别讨论
+            choice1 = dfs(i + 1, s, t[-1]) + len(t) - int(t[0] == e)
+            choice2 = dfs(i + 1, t[0], e) + len(t) - int(t[-1] == s)
+            result = min(choice1, choice2)
+            return result
+
+        n = len(words)
+        return dfs(1, words[0][0], words[0][-1]) + len(words[0])
+
+
+# 另一个dp的做法
+class Solution:
+    def minimizeConcatenatedLength(self, words: List[str]) -> int:
+        n = len(words)
+        dp = [[[10 ** 9 for i in range(26)] for j in range(26)] for k in range(n)]
+        x0, y0 = ord(words[0][0]) - ord('a'), ord(words[0][-1]) - ord('a')
+        dp[0][x0][y0] = len(words[0])
+        for i in range(1, n):
+            l = len(words[i])
+            xi, yi = ord(words[i][0]) - ord('a'), ord(words[i][-1]) - ord('a')
+            for j in range(26):
+                for k in range(26):
+                    if yi == j:
+                        dp[i][xi][k] = min(dp[i][xi][k], dp[i - 1][j][k] + l - 1)
+                    else:
+                        dp[i][xi][k] = min(dp[i][xi][k], dp[i - 1][j][k] + l)
+                    if xi == k:
+                        dp[i][j][yi] = min(dp[i][j][yi], dp[i - 1][j][k] + l - 1)
+                    else:
+                        dp[i][j][yi] = min(dp[i][j][yi], dp[i - 1][j][k] + l)
+        result = 10 ** 9
+        for i in range(26):
+            for j in range(26):
+                result = min(result, dp[n - 1][i][j])
+        return result
+
+
+```
+
+
+## 6931.访问数组中的位置使分数最大
+> 给你一个下标从 0 开始的整数数组 nums 和一个正整数 x 。你 一开始 在数组的位置 0 处，你可以按照下述规则访问数组中的其他位置：
+> 如果你当前在位置 i ，那么你可以移动到满足 i < j 的 任意 位置 j 。
+> 对于你访问的位置 i ，你可以获得分数 nums[i] 。
+> 如果你从位置 i 移动到位置 j 且 nums[i] 和 nums[j] 的 奇偶性 不同，那么你将失去分数 x 。请你返回你能得到的 最大 得分之和。
+> 注意 ，你一开始的分数为 nums[0] 。
+
+乍一看这道题很简单，我们只要用dp+两层循环就能很轻松解决，但实际上这道题数据量比较大，所以有时间复杂度上的要求，我们可以想办法把时间复杂度降低成线性的。具体来说，我们用s[i]表示nums前i项以偶数结尾的最大得分和，用t[i]表示nums前i项以奇数结尾的最大得分和，然后遍历一次nums，根据nums[i]的奇偶性，分别来更新s[i]和t[i]
+
+
+```python
+class Solution:
+    def maxScore(self, nums: List[int], x: int) -> int:
+        # 分奇偶的动态规划题
+        n = len(nums)
+        s = [0 for i in range(n)]
+        t = [0 for i in range(n)]
+        if nums[0] % 2 == 0:
+            s[0] = nums[0]
+            t[0] = -x
+        else:
+            s[0] = -x
+            t[0] = nums[0]
+        for i in range(1, n):
+            if nums[i] % 2 == 0:
+                s[i] = max(s[i - 1] + nums[i], t[i - 1] + nums[i] - x)
+                t[i] = t[i - 1]
+            else:
+                s[i] = s[i - 1]
+                t[i] = max(t[i - 1] + nums[i], s[i - 1] + nums[i] - x)
+        return max(max(s), max(t))
+```
