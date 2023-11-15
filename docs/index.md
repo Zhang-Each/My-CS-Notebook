@@ -7,19 +7,9 @@ statistics: true
 ???+ info "欢迎光临"
     - 平时会更新一些学习CS各方向内容的笔记，欢迎关注我的[GitHub账号](https://github.com/Zhang-Each)和[个人博客](https://zhang-each.github.io/)!
 
-??? tip "更新日志"
-    - 2023/03/29 更新论文阅读笔记和Leetcode的刷题记录
-    - 2023/02/22 更新论文阅读笔记和Leetcode
-    - 2023/02/15 更新Causality笔记
-    - 2023/02/11 对笔记本的目录作出较大调整
-    - 2023/02/08 新增文章元信息统计，更新了因果推断的部分笔记
-    - 2023/02/02 迁移了部分概率图模型的学习笔记和因果推断的学习笔记
-    - 2023/01/31 迁移了部分之前的学习笔记，包括Stanford的CS246数据挖掘课程，CMU的15-445数据库系统课程和MIT的6.830数据库系统课程。
-    - 2023/01/27 完成了[数据结构和高级数据结构](https://zhang-each.github.io/My-CS-Notebook/DS/)的笔记迁移
-    - 2023/01/26 完成了[编程语言学习笔记](https://zhang-each.github.io/My-CS-Notebook/PL/)和[论文阅读笔记](https://zhang-each.github.io/My-CS-Notebook/Papers/)的迁移
-    - 2023/01/25 完成了[操作系统](https://zhang-each.github.io/My-CS-Notebook/OS/)、[计算机网络](https://zhang-each.github.io/My-CS-Notebook/Networking/)、[数据库系统](https://zhang-each.github.io/My-CS-Notebook/DB/)、[计算机系统原理](https://zhang-each.github.io/My-CS-Notebook/System/)笔记的迁移
-    - 2023/01/24 添加了一些插件和功能，比如评论区、文章时间戳、访客和字数统计，完成了[基于深度学习的自然语言处理](https://zhang-each.github.io/My-CS-Notebook/CS224N/)以及[统计机器学习](https://zhang-each.github.io/My-CS-Notebook/ML/)的笔记的迁移
-    - 2023/01/23 创建该项目，制作了首页并迁移了[CS231N深度学习课程](https://zhang-each.github.io/My-CS-Notebook/CS231N/)的笔记和一部分[杂谈与总结](https://zhang-each.github.io/My-CS-Notebook/%E6%9D%82%E8%B0%88%E4%B8%8E%E6%80%BB%E7%BB%93/)，感谢🙏[XYX](https://xuan-insr.github.io/)提供的简单好抄的笔记本模版！
+???+ tip "新文章预印本"
+    - Making Large Language Models Perform Better in Knowledge Graph Completion. [ArXiv](https://arxiv.org/abs/2310.07579)
+    - Knowledgeable Preference Alignment for LLMs in Domain-specific Question Answering. [ArXiv](https://arxiv.org/abs/2311.06503)
 
 ???+ Warning "施工中！" 
     <center>正在从 [个人博客](https://zhang-each.github.io/) 将内容逐渐转移到现在的这个笔记本上来。后续会不断更新之前的内容。</center>

@@ -1,4 +1,5 @@
-# 大预言模型Alignment
+# 大语言模型的Alignment
+> 我们发布了新的大模型对齐论文 Knowledgeable Preference Alignment for LLMs in Domain-specific Question Answering，ArXiv链接是[https://arxiv.org/abs/2311.06503](https://arxiv.org/abs/2311.06503) 
 
 ## 1. 什么是Alignment
 大语言模型中的Alignment实际上指的就是让大模型的输出结果和人类的需求能够对齐，一方面，LLM的输出需要符合人类输入的指令，这可以算是**功能性需求**，另一方面，模型输出的内容也应该能满足人类的偏好，比如语言风格与人类相近，对于政治敏感话题和非法内容实现过滤，从而保证输出的内容对于普通用户来说事可接受的。

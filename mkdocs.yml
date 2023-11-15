@@ -114,6 +114,7 @@ nav:
       - 03-多模态特征的融合与提取: Papers/03-多模态特征的融合与提取.md
       - 04-因果注意力机制: Papers/04-因果注意力机制.md
       - 05-大语言模型: Papers/05-大语言模型LLM.md
+      - 06-大语言模型对齐: Papers/06-大模型Alignment.md
   - 🦃️ 数据结构/算法:
     - DS/index.md
     - 数据结构基础: DS/ds.md
@@ -234,7 +235,7 @@ theme:
     primary: black
     scheme: default
   font:
-    text: Hiragino Sans GB # Palatino
+    text: Comic Sans MS # Palatino
     code: Roboto Mono
   custom_dir: overrides # 用来搞评论的，参考 https://squidfunk.github.io/mkdocs-material/setup/adding-a-comment-system/
 
