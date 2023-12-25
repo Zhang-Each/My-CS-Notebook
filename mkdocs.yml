@@ -118,6 +118,8 @@ nav:
       - 04-因果注意力机制: Papers/04-因果注意力机制.md
       - 05-大语言模型: Papers/05-大语言模型LLM.md
       - 06-大语言模型对齐: Papers/06-大模型Alignment.md
+      - 07-以数据为中心的AI: Papers/07-以数据为中心的AI.md
+      - 08-知识图谱预训练: Papers/08-知识图谱预训练.md
   - 🦃️ 数据结构/算法:
     - DS/index.md
     - 数据结构基础: DS/ds.md
@@ -204,6 +206,7 @@ nav:
     - IV. Python助教体验: Gossip/Python助教体验.md
     - V. 2022年度总结: Gossip/2022年度总结.md
     - VI. 写在读研一年之际: Gossip/写在读研一年之际.md
+    - VII. 2023年度总结: Gossip/2023年度总结.md
   - 🌾 实习与找工:
     - Jobs/index.md
     - 2021春招:
