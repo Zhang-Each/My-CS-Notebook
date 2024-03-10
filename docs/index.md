@@ -10,6 +10,8 @@ statistics: true
 ???+ tip "新文章预印本"
     - Making Large Language Models Perform Better in Knowledge Graph Completion. [ArXiv](https://arxiv.org/abs/2310.07579)
     - Knowledgeable Preference Alignment for LLMs in Domain-specific Question Answering. [ArXiv](https://arxiv.org/abs/2311.06503)
+    - Knowledge Graphs Meet Multi-Modal Learning: A Comprehensive Survey. [ArXiv](https://arxiv.org/abs/2402.05391)
+    - Unleashing the Power of Imbalanced Modality Information for Multi-modal Knowledge Graph Completion . [COLING 2024](https://arxiv.org/abs/2402.15444)
 
 ???+ Warning "施工中！" 
     <center>正在从 [个人博客](https://zhang-each.github.io/) 将内容逐渐转移到现在的这个笔记本上来。后续会不断更新之前的内容。</center>

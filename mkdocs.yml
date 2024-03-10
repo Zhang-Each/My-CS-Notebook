@@ -241,7 +241,7 @@ theme:
     primary: black
     scheme: default
   font:
-    text: Comic Sans MS # Palatino
+    text: Noto Serif SC # Comic Sans MS # Palatino
     code: Roboto Mono
   custom_dir: overrides # 用来搞评论的，参考 https://squidfunk.github.io/mkdocs-material/setup/adding-a-comment-system/
 
