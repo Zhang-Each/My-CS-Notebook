@@ -36,6 +36,7 @@ BERT的预训练方式
 ![](resources/Pasted%20image%2020240308133636.png)
 - Llama中用的是pre-norm，方便模型的训练
 
+
 ## RMS-Norm
 RMS Norm全称是**Root Mean Square Layer Normalization**，与RMS Norm是基于LN的一种变体，主要是去掉了减去均值的部分，计算公式如下：
 ![](resources/Pasted%20image%2020240308134016.png)
@@ -51,6 +52,31 @@ RMS Norm全称是**Root Mean Square Layer Normalization**，与RMS Norm是基于
 # 4. 大语言模型
 
 BERT和GPT的区别
+
+## MHA/MQA/GQA
+
+MHA（Multi-head Attention）是标准的多头注意力机制，h个Query、Key 和 Value 矩阵。
+MQA（Multi-Query Attention，Fast Transformer Decoding: One Write-Head is All You Need）是多查询注意力的一种变体，也是用于自回归解码的一种注意力机制。与MHA不同的是，MQA 让所有的头之间共享同一份 Key 和 Value 矩阵，每个头只单独保留了一份 Query 参数，从而大大减少 Key 和 Value 矩阵的参数量。
+GQA（Grouped-Query Attention，GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints）是分组查询注意力，GQA将查询头分成G组，每个组共享一个Key 和 Value 矩阵。GQA-G是指具有G组的grouped-query attention。GQA-1具有单个组，因此具有单个Key 和 Value，等效于MQA。而GQA-H具有与头数相等的组，等效于MHA。
+
+## ZeRO的三个阶段
+
+> 部分内容来源于知乎https://zhuanlan.zhihu.com/p/394064174
+
+模型在训练过程中 Model States 是由什么组成的：
+1. Optimizer States: Optimizer States 是 Optimizer 在进行梯度更新时所需要用到的数据，例如 Adam 中的Momentum以及使用混合精度训练时的Float32 Master Parameters。 
+2. Gradient： 在反向传播后所产生的梯度信息，其决定了参数的更新方向。 
+3. Model Parameter: 模型参数，也就是我们在整个过程中通过数据“学习”的信息。
+当通过数据并行在训练模型的时候，这些重复的Model States会在N个GPU上复制N份。ZeRO 则在数据并行的基础上，引入了对冗余Model States的优化。使用 ZeRO 后，各个进程之后只保存完整状态的1/GPUs，互不重叠，不再存在冗余。在本文中，我们就以这个 7.5B 参数量的模型为例，量化各个级别的 ZeRO 对于内存的优化表现。
+
+ZeRO 有三个不同级别，分别对应对 Model States 不同程度的分割 (Paritition)： 
+- ZeRO-1：分割Optimizer States；在进行梯度更新时，会使用参数与Optimizer States计算新的参数。而在正向或反向传播中，Optimizer States并不会参与其中的计算。 因此，我们完全可以让每个进程只持有一小段Optimizer States，利用这一小段Optimizer States更新完与之对应的一小段参数后，再把各个小段拼起来合为完整的模型参数。
+- ZeRO-2：分割Optimizer States与Gradients；进一步对梯度进行切片处理
+- ZeRO-3：分割Optimizer States、Gradients与Parameters，在ZeRO-2的基础上将模型的参数也进行切片，通过精细化的通讯，在只存储一份完整的Model States的情况下，所有进程共协作完成训练
+
+
+
+
 
 ## 什么是MoE(Mix-of-Experts)?
 
